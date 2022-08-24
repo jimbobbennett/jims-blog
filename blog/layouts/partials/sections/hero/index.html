@@ -15,32 +15,28 @@
                 <p class="hero-content">
                     {{ .Site.Params.hero.content | markdownify }}
                 </p>
-                <div class="row">
-                    <div class="col-auto h-100">
-                        {{ if .Site.Params.hero.button.enable }}
-                        <a href="{{ .Site.Params.hero.button.url }}" class="btn" {{ cond .Site.Params.hero.button.download "download" "" }}>
-                            {{ .Site.Params.hero.button.name }}
-                        </a>
-                        {{ end }}
-                    </div>
-                    <br>
-                    <span class="subtitle">
-                        Find me on the internet
-                    </span>
-                    <div class="col-auto px-0 h-100">
-                        {{- partial "sections/hero/social.html" . -}}
-                    </div>
+                <div class="col-auto h-100">
+                    <p>
+                        <img src="https://raw.githubusercontent.com/jimbobbennett/ColoredBadges/main/svg/pronouns/hehim.svg"
+                            alt="Jim uses he/him pronouns">
+                    </p>
                 </div>
+
             </div>
             <div class="col-sm-12 col-md-12 col-lg-4">
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-9 pt-5 image px-5 px-md-5 px-lg-0 text-center">
-                        <img src="{{ .Site.Params.hero.image }}" 
-                            class="img-hero-thumbnail mx-auto" 
-                            alt="Jim"
-                        >
+                        <img src="{{ .Site.Params.hero.image }}" class="img-hero-thumbnail mx-auto" alt="Jim">
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <span class="subtitle my-3">
+                Find me on the internet
+            </span>
+            <div class="col-auto px-0 h-100">
+                {{- partial "sections/hero/social.html" . -}}
             </div>
         </div>
     </div>

@@ -93,9 +93,9 @@ params:
   # Hero
   hero:
     enable: true
-    title: "I'm Jim."
+    title: "Hi, I'm Jim."
     subtitle: "I do developer advocacy"
-    content: "Regional Cloud Advocate at Microsoft focusing on communities in the Pacific North West and the Redmond Reactor. Particularly excited by the Internet of Things and edge computing."
+    content: "Regional Cloud Advocate at Microsoft focusing on communities in the Pacific North West and the [Redmond Reactor](http://developer.microsoft.com/reactor). <br>Particularly excited by the Internet of Things and edge computing."
     image: /images/png/jim-portrait-circle.png
     socialNetworks:
       github: https://github.com/JimBobBennett
@@ -107,202 +107,78 @@ params:
   about:
     enable: true
     title: "About Me"
-    image: "/images/me.png"
+    image: "/images/jpg/jim-portrait-2-square.jpg"
     content: |-
-      I am a software developer with a passion for web development. I have a background in computer science and mathematics, and I have a strong interest in the intersection of technology and art. I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. 
+      I am a Regional Cloud Advocate focusing on building out and skilling communities in the Pacific North West, with a focus on the Microsoft Reactor in Redmond, Washington, as well as a passion for the internet of things, edge computing and TinyML. I'm British, so I sound way smarter than I actually am.
+      
+      In the past I've lived in 4 continents working as a developer in the mobile, desktop, and scientific space. I've spoken at conferences and events all around the globe, organised meetup groups and communities, and written a book on mobile development.
 
-      I am currently working on a project that will be used to help people find the best way to get around the city.
+      I also hate and am allergic to cats, but I have a 9-year-old daughter who loves cats, so I have 2 cats.
     skills:
       enable: true
       title: "Here are a few technologies I've been working with recently:"
       items:
-        - "HTML"
-        - "CSS"
-        - "JavaScript"
-        - "React"
-        - "Node"
-        - "Express"
-
-  # Experience
-  experience:
-    enable: true
-    # title: "Custom Name"
-    items:
-      - job: "Senior Software Developer"
-        company: "Facebook"
-        companyUrl: "https://example.com"
-        date: "Jan 2022 - present"
-        featuredLink:
-          enable: true
-          name: "View the project"
-          url: "https://example.com"
-        content: "I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city."
-
-      - job: "Software Developer"
-        company: "Amazon"
-        companyUrl: "https://example.com"
-        date: "Sep 2020 - Dec 2021"
-        featuredLink:
-          enable: true
-          url: "https://example.com"
-        info:
-          enable: true
-          content: I worked as a software developer for more than one year in Amazon.
-        content: |
-          I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city.
-
-          - Lead backend developer for a product.
-          - Created a frontend design for a product.
-
-      - job: "Junior Software Developer"
-        company: "Apple"
-        companyUrl: "https://example.com"
-        date: "Jan 2020 - Aug 2020"
-        info:
-          enable: false
-        featuredLink:
-          enable: true
-          url: "https://example.com"
-        content: |
-          I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city.
-
-          - Lead backend developer for a product.
-          - Created a frontend design for a product.
-
-      - job: "UI/UX Designer"
-        company: "Netflix"
-        companyUrl: "https://example.com"
-        date: "June 2017 - Nov 2019"
-        featuredLink:
-          enable: true
-          url: "https://example.com"
-        content: |
-          I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city.
-
-          - Lead backend developer for a product.
-          - Created a frontend design for a product.
-
-      - job: "Product Designer"
-        company: "Google"
-        companyUrl: "https://example.com"
-        date: "Feb 2016 - Mar 2017"
-        content: "I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA. I am currently working on a project that will be used to help people find the best way to get around the city."
-
-  # Education
-  education:
-    enable: true
-    # title: "Custom Name"
-    # index: true
-    items:
-      - title: "Master of Business Administration"
-        school:
-          name: "University of California, Berkeley"
-          url: "https://example.org"
-        date: "2013 - 2015"
-        GPA: "3.8 out of 5.0"
-        content: |-
-          Extracurricular Activities
-            - Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            - Tempora esse, eaque delectus nulla quo doloribus itaque expedita alias natus optio totam maxime nihil excepturi velit a animi laborum hic similique.
-      - title: "Bachelor of Science in Computer Science"
-        school:
-          name: "Massachusetts Institute of Technology"
-          url: "https://example.org"
-        date: "2009 - 2013"
-        GPA: "3.9 out of 5.0"
-        content: |-
-          I Publiced two papers in the ACM SIGCHI Conference on Artificial Intelligence.
-          - [Fast and Accurate Object Detection with a Single Convolutional Neural Network](https://example.com)
-          - Face mask detection using a single convolutional neural network.
-
-          Extracurricular Activities
-            - Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            - Tempora esse, eaque delectus nulla quo doloribus itaque expedita alias natus optio totam maxime nihil excepturi velit a animi laborum hic similique.
-        featuredLink:
-          enable: true
-          name: "My academic record"
-          url: "https://example.com"
-      - title: "High School"
-        school:
-          name: "Thomas Jefferson High School for Science and Technology."
-          url: "https://example.org"
-        GPA: "4.2 out of 5.0"
-        featuredLink:
-          enable: true
-          url: "https://example.com"
-
-  # Achievements
-  achievements:
-    enable: true
-    # title: "Custom Name"
-    items:
-      - title: Google kickstart runner
-        content: I solved all problems with optimal solution.
-        url: https://example.com
-      - title: Facebook Hackathon Winner
-        content: Developed a product using Artificial Intelligence.
-      - title: Hugo Profile
-        content: Developed a theme and getting 1K+ downloads per month.
-        url: "https://github.com/gurusabarish/hugo-profile"
-      - title: Microsoft Imagine Runner
-        content: We are developed a product which can help others.
-      - title: Google Summer of Code
-        content: Contributed to a open source project.
-        url: https://example.com
+        - "IoT"
+        - "Edge computing"
+        - "AI"
+        - "TinyML"
+        - "C++"
+        - "Python"
 
   # projects
   projects:
     enable: true
-    # title: "Custom Name"
+    title: "Recent highlights"
     items:
-      - title: Hugo Profile
-        content: A highly customizable and mobile first Hugo template for personal portfolio and blog.
-        image: /images/projects/profile.png
+      - title: IoT for Beginners
+        content: 12 Weeks, 24 Lessons. IoT for All!
+        image: https://raw.githubusercontent.com/microsoft/IoT-For-Beginners/main/images/iot-for-beginners.png
         featured:
-          name: Demo
-          link: https://hugo-profile.netlify.app
+          name: Get started
+          link: https:/aka.ms/iot-beginners
         # badges:
         #   - "Hugo"
         #   - "Bootstrap"
         #   - "Javascript"
         links:
-          - icon: fa fa-envelope
-            url: mailto:?subject=Hugo%20Profile%20Template&body=Check%20it%20out:%20https%3a%2f%2fhugo-profile.netlify.app%2fblog%2fmarkdown-syntax%2f
           - icon: fab fa-github
-            url: https://github.com/gurusabarish/hugo-profile
+            url: https://github.com/Microsoft/iot-for-beginners
           - icon: fab fa-twitter
-            url: https://twitter.com/intent/tweet?text=Check+it+out:&url=https%3A%2F%2Fgithub.com%2Fgurusabarish%2Fhugo-profile
+            url: https://twitter.com/intent/tweet?text=IoT+for+beginners!+Learn+IoT+with+24+free+lessons+from+@jimbobbennett+and+friends:&url=https%3A%2F%2Fgithub.com%2FMicrosoft%2FIoT-for-beginners
 
-      - title: Image Converter
-        content: A web app to convert image to pdf, png to jpg, png to jpg and png to webp without database using django.
-        image: /images/projects/converter.jpg
+      - title: "Let's get personal: Computing"
+        content: On-demand interview series with cool projects that you can build.
+        image: /images/jpg/lets-get-personal-computing.jpg
         featured:
-          name: Demo
-          link: https://django-converter.herokuapp.com
+          name: Watch now
+          link: https://youtube.com/playlist?list=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
         # badges:
         #   - "Django"
         #   - "Bootstrap"
         links:
-          - icon: fab fa-github
-            url: https://github.com/gurusabarish/converter
+          - icon: fab fa-youtube
+            url: https://youtube.com/playlist?list=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
+          - icon: fab fa-twitter
+            url: https://twitter.com/intent/tweet?text=Let's+get+personal:+Computing.+Join+@JimBobBennett+as+he+interviews+guests+who+have+built+cool+projects+you+car+recreate+at+home.&url=https%3A%2F%2Fyoutube.com%2Fplaylist%3Flist=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
 
-      - title: Hugo Profile V2
-        content: A clean and simple Hugo template for personal portfolio and blog.
-        image: /images/projects/profile2.jpg
+      - title: "#JulyOT 2022"
+        content: Celebrate 31 days of IoT!
+        image: /images/gif/julyot.gif
         featured:
-          name: Demo V2
-          link: https://hugo-profile-2.netlify.app
-        # badges:
-        #   - "Hugo"
-        #   - "Bootstrap"
-        #   - "Javascript"
+          name: Join the celebration
+          link: https://JulyOT.dev
         links:
           - icon: fab fa-github
-            url: https://github.com/gurusabarish/HugoProfileV2
+            url: https://github.com/JulyOT/JulyOT
+          - icon: fab fa-twitter
+            url: https://twitter.com/intent/tweet?text=%23JulyOT+is+here!+Celebrate+%23IoT+with+31+days+of+content.&url=https%3A%2F%2Fjulyot.dev
 
-  #Contact
-  social:
-    enable: true
+      - title: Xamarin in Action
+        content: Create native cross-platform apps. Published by Manning Publications.
+        image: /images/jpg/XamarinInActionFinal.jpg
+        featured:
+          name: Buy a copy
+          link: https://www.manning.com/books/xamarin-in-action
 
   footer:
     # recentPosts: false
