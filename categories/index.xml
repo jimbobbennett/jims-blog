@@ -1,1 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Categories on JimBobBennett</title><link>https://jimbobbennett.github.io/jims-blog/categories/</link><description>Recent content in Categories on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://jimbobbennett.github.io/jims-blog/categories/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Categories on JimBobBennett</title><link>https://jimbobbennett.github.io/jims-blog</link><description>Recent content in Categories on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><atom:link href="https://jimbobbennett.github.io/jims-blog/categories/index.xml" rel="self" type="application/rss+xml"/><item><title>Led Ticker Tape</title><link>https://jimbobbennett.github.io/jims-blog/blogs/led-ticker-tape/</link><pubDate>Fri, 25 Feb 2022 17:01:05 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.github.io/jims-blog/blogs/led-ticker-tape/</guid><description>&lt;p>&lt;img src="hello-lights.png" alt="An LED panel showing Hello in green">&lt;/p>
+&lt;p>Anyone who knows me knows I&amp;rsquo;m a big fan of IoT and LEDs. I love using IoT devices to control lights, from the LEDs behind my desk to &lt;a href="https://www.youtube.com/watch?v=h5ETn4PTdQA">smart pumpkins&lt;/a>!&lt;/p>
+&lt;p>I&amp;rsquo;ve been giving the .NET IoT libraries a spin for an upcoming project using a Raspberry Pi Zero W 2. I&amp;rsquo;m usually a Python person when using a Pi, but the project I&amp;rsquo;m working on needs a service that doesn&amp;rsquo;t have Python libraries that run on a Pi. Instead it has a .NET library, so it was time to break out my C# skills for the first time in years.&lt;/p>
+&lt;p>I wanted to build an LED panel that can display text, either static text or scrolling text. So I picked up this &lt;a href="https://amzn.to/3sVjF7M">WS2812B panel from Amazon (allifliate link)&lt;/a>, and started to dig into the .NET IoT libraries. WS2818b LEDs are also known as NeoPixels, and are addressable multicolor LEDs, so you can light up individual ones in any color you like. They are addressed based on the order they are connected to your device, so the first pixel in a string of LEDs is 0, the next is 1 and so on. You can add as many as you like, and the addresses just keep going up.&lt;/p>
+&lt;p>The .NET IoT libraries are on GitHub at &lt;a href="https://github.com/dotnet/iot">github.com/dotnet/iot&lt;/a> and available as a NuGet. They support a wide range of boards including the Raspberry Pi.&lt;/p>
+&lt;h2 id="lighting-leds-in-c">Lighting LEDs in C#&lt;/h2>
+&lt;p>I started as I usually do with a clean install of Raspberry Pi OS Lite. I use the Lite version as I access my Pi remotely using VS Code for all my development. You can read more on how I do this on &lt;a href="https://www.raspberrypi.com/news/coding-on-raspberry-pi-remotely-with-visual-studio-code/">my blog post on the Raspberry Pi blog&lt;/a>. When I connected to my Pi I installed .NET 6, and the C# extension in VS Code.&lt;/p>
+&lt;blockquote>
+&lt;p>One thing to note for the C# extension is it doesn&amp;rsquo;t support remote debugging on the Pi Zero W 2.&lt;/p>
+&lt;/blockquote>
+&lt;p>The .NET IoT libraries have a small amount of documentation and samples, so it wasn&amp;rsquo;t too much effort to get the LEDs lighting up.&lt;/p>
+&lt;p>The .NET libraries control these pixels over SPI, so they need to be connected to an SPI pin and ground on the Pi, as well as to a 5V power supply. You can&amp;rsquo;t use the 5V pins on the Pi as the panel can draw too much power and burn your Pi out, it&amp;rsquo;s best to use an external 5V power supply, either from a USB connection or a power converter plugged into the mains.&lt;/p>
+&lt;p>You also need to do a bit of SPI configuration, and this is documented in the &lt;a href="https://github.com/dotnet/iot/tree/main/src/devices/Ws28xx">GitHub source code for the WS2812B device code&lt;/a>.&lt;/p>
+&lt;blockquote>
+&lt;p>This is different to using the Adafruit NeoPixel libraries from Python, where you use different pins and don&amp;rsquo;t need any SPI configuration.&lt;/p>
+&lt;/blockquote>
+&lt;p>To use the .NET libraries, you start by creating an SPI configuration, then use that to create the pixels:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Create connection settings to connect to the panel using SPI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SpiConnectionSettings settings = &lt;span style="color:#66d9ef">new&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClockFrequency = &lt;span style="color:#ae81ff">2_400_000&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Mode = SpiMode.Mode0,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DataBitLength = &lt;span style="color:#ae81ff">8&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Create an SPI device&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> spi = SpiDevice.Create(settings);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Use the SPI device to connect to the LEDs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// and pass the number of LEDs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> neoPixels = &lt;span style="color:#66d9ef">new&lt;/span> Ws2812b(spi, &lt;span style="color:#ae81ff">256&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When you create the pixels, you pass in the length of the strip. I&amp;rsquo;ve been using a 8x32 panel, which is actually a 256 pixel long strip arranged in and up/down pattern.&lt;/p>
+&lt;p>Once created, you light pixels by getting a &lt;code>BitmapImage&lt;/code> from them, and setting colors on that. This image is a lengthx1 image, so 1 pixel tall, and as wide as the length of the LEDs. For example, my 8x32 panel is 256 pixels long, so is a bitmap of 256x1.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can then set pixels in this image to the color you want. The color is set using the &lt;code>System.Drawing.Color&lt;/code> struct, which wraps ARGB values. The A (alpha channel) is ignored, so you set pixel brightness by reducing the value of the R, G, and B.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Red);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Green);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once the pixels are set in the image, it is commited and the LEDs updated.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>One quirk of the bitmaps, is you have to set all the pixels up to the last one you want set. So if you want to set pixel 10 to be red, you have to also set pixels 0-9 to something, even if it is &lt;code>Color.Black&lt;/code> (off). The first pixel you set is mapped to the first LED in the strip, so if you just set pixels 10-20, then the strip is set as if the first LED was pixel 10.&lt;/p>
+&lt;p>For example, if you just want to set pixel 2 to blue, you can&amp;rsquo;t do this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>What will happen here is pixel 2 is the first one with a value, so that will be considered the first pixel in the strip, so the first LED will light up blue.
+What you need to do is:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Black);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Black);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will set the pixels 0 and 1 to off, and pixel 2 to blue.&lt;/p>
+&lt;h2 id="writing-text">Writing text&lt;/h2>
+&lt;p>I wanted to make my panel show text, either short static text, or scrolling text. The first thing I needed was a font - something that defines how to create letters from pixels. I found a simplar project based on Aruino in a &lt;a href="https://github.com/bigjosh/SimpleTickerTape/tree/main/fonts">GitHub project from Josh Levine&lt;/a> so leveraged this code for a font and re-wrote it in C#.&lt;/p>
+&lt;p>Next I needed the mapping code. These fonts are defined as columns of binary data, so the bits to set. Each character is 8 bits tall (the size of my panel), and 6 bits wide. This mapping code was a bit of fun as I not only needed to divide up my pixels into columns, and map from a pixel in the 1 dimensional strip to a character pixel, but the strips go up and down!&lt;/p>
+&lt;p>The way this panel is made is by weaving an LED strip up and down, so the pixels start at 0 on the top left, go down to 7 on the left-most column, then across one pixel to the right to 8, then up to 15.&lt;/p>
+&lt;p>This gives for the first few columns:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">15&lt;/span> &lt;span style="color:#ae81ff">16&lt;/span> &lt;span style="color:#ae81ff">31&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">14&lt;/span> &lt;span style="color:#ae81ff">17&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#ae81ff">13&lt;/span> &lt;span style="color:#ae81ff">18&lt;/span> &lt;span style="color:#ae81ff">29&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span> &lt;span style="color:#ae81ff">19&lt;/span> &lt;span style="color:#ae81ff">28&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#ae81ff">11&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span> &lt;span style="color:#ae81ff">27&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#ae81ff">21&lt;/span> &lt;span style="color:#ae81ff">26&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">9&lt;/span> &lt;span style="color:#ae81ff">22&lt;/span> &lt;span style="color:#ae81ff">25&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">7&lt;/span> &lt;span style="color:#ae81ff">8&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> &lt;span style="color:#ae81ff">24&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This means that the mapping code needs to alternate - for 0dd numbered columns the pixles go down, for even numbered the pixels go up so the mapping has to be reversed!&lt;/p>
+&lt;p>I&amp;rsquo;m not going to dive into all this mapping here, but you can find the code with full documentation in my &lt;a href="https://github.com/jimbobbennett/NeoPixelTickerTape">NeoPixelTickerTape GitHub repo&lt;/a>.&lt;/p>
+&lt;p>I then added scrolling code that writes text starting at the right-most column, then re-writes it shifting left a column at a time.&lt;/p>
+&lt;p>&lt;img src="tickertape.gif" alt="Hello world scrolling across the ticker tape">&lt;/p>
+&lt;h2 id="check-out-the-code">Check out the code&lt;/h2>
+&lt;p>You can find the code with full documentation in my &lt;a href="https://github.com/jimbobbennett/NeoPixelTickerTape">NeoPixelTickerTape GitHub repo&lt;/a>.&lt;/p>
+&lt;p>You can also download a NuGet pckage to use in your apps:&lt;/p>
+&lt;p>&lt;img src="https://img.shields.io/nuget/v/JimBobBennett.NeoPixelTickerTape.svg?style=flat&amp;amp;logo=nuget" alt="Select this to access the nuget">&lt;/p></description></item></channel></rss>
