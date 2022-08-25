@@ -267,6 +267,7 @@ params:
       - title: "Tech Career Tips - Sea of Nerds"
         videos:
           - title: Tech career tips from educators
+            time: 10AM PT Thursday 25th Aug
             description: "Arrrrrrr, ye swarthy land lubbers. Come set sail with your pirate captain, the Dread Pirate Jim and his pirate crew as we set sail on the seven seas to find the finest treasure in the land – knowledge!"
             image: /images/livestreams/sea-of-nerds-4.jpeg
             registrationLink: https://developer.microsoft.com/reactor/events/16698/
@@ -310,6 +311,24 @@ params:
           - title: "Lesson 4: Connect your Device to the Internet office hours"
             id: j-cVCzRDE2Q
             description: As a follow up to what was covered in the last ‘Communicating with Devices’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
+
+      - title: On Wednesdays we wear tech
+        videos:
+          - title: Subtitle shirt
+            id: JGXfp5u-MpE
+            description: In this episode, Jim shows how to build a smart t-shirt that provides a live stream of everything you say, first in your native language, then translated into a language of your choice. Using a $15 Raspberry Pi Zero W 2, a $20 LED panel, and some free AI services in the cloud you two can build your own smart subtitling t-shirt. 
+          
+          - title: Be-kind-o-matic
+            id: uYkzo7FSI_k
+            description: In this episode, Jim shows how to use speech to text and sentiment analysis to get a feel for how positive or negative spoken sentences are, with a microphone and a Raspberry Pi Zero W 2. He then connects this to a hoodie that lights up red for negative sentiment, or green for positive. 
+          
+          - title: GitHub status bracer
+            id: erLMkzcUAvI
+            description: In this episode, Jim builds a language model that can be used to ask questions about the status of GitHub repos. He then uses this model from a Raspberry Pi to convert spoken questions into an understood query, which he then uses to query GitHub and show the relevant status on a wrist-mounted display. 
+          
+          - title: Reading parrot
+            id: 7csqXMtUYgE
+            description: In this episode, Jim sticks a parrot on his shoulder (an inflatable one, not a real one), adds a camera, a Raspberry Pi Zero W 2, and teaches it how to read. Using a free AI service, this parrot can recognize both printed and hand-written text and read it out loud to you. 
 
       - title: "Ask the expert"
         videos:
