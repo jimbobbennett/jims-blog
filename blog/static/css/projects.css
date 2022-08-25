@@ -62,3 +62,8 @@
 #projects .float-end .btn:focus {
     box-shadow: none !important;
 }
+
+.subtitle {
+    font-size: clamp(14px,5vw,16px);
+    opacity: 0.6;
+}

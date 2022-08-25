@@ -1,0 +1,49 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
+<!-- <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/list.css" media="all"> -->
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/projects.css" media="all">
+{{ end }}
+
+{{ define "title" }}
+{{.Title }} | {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<div class="container pt-5" id="list-page">
+    <div class="row justify-content-center px-3 px-md-5">
+        <h1 class="text-left pb-2">{{.Title}}</h1>
+        <span class="subtitle text-left pb-2">Here is a selection of recent videos I've recorded</span>
+    </div>
+</div>
+<div class="container pt-5" id="list-page">
+    <section id="projects">
+        <div class="container">
+            {{ range .Site.Params.videos.series }}
+                <div class="row justify-content-center px-3 px-md-5">
+                    <h2 class="text-left pb-2">{{ .title }}</h2>
+                </div>
+                <div class="row justify-content-left px-3 px-md-5">
+                    {{ range .videos}}
+                        <div class="col col-lg-4 col-md-4 my-3">
+                            <div class="card h-100" title="{{ .title }}">
+                                <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube.com/embed/{{.id}}" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ .title }}</h5>
+                                    <p class="card-text">{{ .description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {{ end }}
+                </div>
+                <div class="row justify-content-center px-3 px-md-5">
+                    <p class="text-center pb-2">&nbsp;</p>
+                </div>
+            {{ end }}
+        </div>
+    </section>
+</div>
+{{ end }}
