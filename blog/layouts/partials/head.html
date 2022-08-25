@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="icon" href={{ .Site.Params.favicon | default "/fav.png" }} type="image/gif">
+<link rel="icon" href={{ .Site.Params.favicon | default "/fav.png" }} type="image/png">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +39,10 @@
 {{ if .Site.Params.customCSS }}
 <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/style.css">
 {{ end }}
+
+<link rel="shortcut icon" type="image/png" href="/fav.png">
+<link rel="shortcut icon" sizes="192x192" href="/fav.png">
+<link rel="apple-touch-icon" href="/img/fav.png">
 
 <!-- Clarity -->
 <script>
