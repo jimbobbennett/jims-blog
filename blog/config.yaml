@@ -251,6 +251,12 @@ params:
         id: wtTYSyBUpFc
         description: In this show Jim looks at Custom Vision object detection. The custom vision service recently has been updated to include object detection, and this allows you to train the service to detect multiple objects inside an image with their locations, instead of just being a simple classifier. Jim walks through creating an object detection model, tagging regions in images that show the objects to be detected, then he builds a simple Xamarin app to use this to annotate a picture from his daughters toybox, naming all the toys it finds.
 
+    - title: "JonnyChipz - In conversation"
+      videos:
+      - title: In Conversation with Jim Bennett"
+        id: tzVYf6cXNjo
+        description: Join John Lunn aka Jonnychipz as he is joined by Microsoft Regional Cloud Advocate Jim Bennett.
+        
   livestreams:
     upcoming:
       series:
