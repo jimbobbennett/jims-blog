@@ -295,3 +295,54 @@ params:
           - title: "Lesson 4: Connect your Device to the Internet office hours"
             id: j-cVCzRDE2Q
             description: As a follow up to what was covered in the last ‘Communicating with Devices’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
+
+      - title: "Ask the expert"
+        videos:
+          - title: From Padawan to Jedi in Azure IoT
+            id: sD-LDy5IBvI
+            description: The Internet of Things (IoT) is a promising technology that is transforming enterprises. Join us and learn more about everything it can offer to help you in starting your IoT projects, or to move your current ones to the next level.
+
+      - title: "Jim Learns Stuff"
+        videos:
+          - title: "Python Episode 1: Ancient Cryptography"
+            id: Qlboizb7WHc
+            description: In this episode, Jim explores some classic cryptography and builds out tools in Python to not only encrypt messages, but also to try to decrypt them! he’ll be travelling around the ancient world from India, to Rome, Sparta and Baghdad, learning about their techniques for encrypting and decrypting all manner of secrets. 
+          - title: "Python Episode 2: Python in the browser"
+            id: 8XS5ui2Ko-o
+            description: In this episode, Jim learns all about PyScript, putting the early alpha versions through their paces to build out a simple web app. He’ll be seeing if he can do web development without JavaScript.
+            
+          - title: "C++ Episode 1: Intro to modern C++"
+            id: jW34S1Twtxk
+            description: In this first episode, Jim is joined by Sy Brand, a developer advocate on the Microsoft C++ team, to learn about the basics of C++. Jim will be drawing on his knowledge from years ago of both the good and the bad parts of traditional C++, but rather than lead you down the wrong path, Sy will be on hand to share all about modern C++, and they are more than ready to correct Jim’s mistakes! 
+          - title: "C++ Episode 2: C++ Tooling"
+            id: 5avhM8IqA40
+            description: Every good programming language has great tools to help you get the most of it, and C++ is no exception. 25 years ago, Jim first used Microsoft Visual C++ 1.52 which came on a CD-ROM (if any of you remember those). Now C++ is supported by a range of developer tools. 
+          - title: "C++ Episode 3:  Show and tell time!"
+            id: pc-4VJWp1x0
+            description: C++ is a versatile language, supporting everything from operating systems, to games, desktop apps, IoT and more. What better way to wrap up this series with a show-and-tell covering a range of different use cases for this versatile and powerful language. 
+
+      - title: "IoTea in the home"
+        videos:
+          - title: "Episode 1: Time for Tea"
+            id: 8QWI7qkuFBM
+            description: In this episode Jim and Sam introduce themselves and the problem at hand – tracking Sam’s tea. They will talk about the architecture they are planning on implementing, then they will build and live code a scale and get the data into the cloud via IoT Hub.
+            
+          - title: "Episode 2: Teaing up New Devices"
+            id: j7Kixa8Wy9c
+            description: Jim and Sam dig deeper into IoT Hub and how it ingests and exports data. They will look at how to use the device provisioning service to provision any new scales should Sam need to weigh more than just one container of tea.
+            
+          - title: "Episode 3: Pouring out the Data"
+            id: Ir8pKmobLVY
+            description: How much tea does Sam consume? Jim and Sam extract the data from the IoT Hub and store it somewhere, looking at different database options and how data can be streamed in using tools such as Azure Functions and Stream Analytics. They look at costs and decide on an architecture to store all the data.
+            
+          - title: "Episode 4: Dashboards and Darjeeling"
+            id: WGfVxCvMaD0
+            description: Reporting time! Sam loves dashboards so our intrepid developers look at reporting and dashboarding tools to build a dashboard so Sam can quickly see how much tea he has at any given time. These dashboards will let them track metrics and create reports from the data they’re collecting. 
+            
+          - title: "Episode 5: Leaves and Logistics"
+            id: AaG9Iaw59JI
+            description: Once they have dashboards, Sam and Jim will look at automating the supply chain – making predictions on when tea will run out and sending notifications to order more.
+            
+          - title: "Episode 6: Rolling out the Tea Trolley"
+            id: "a0D--654gfM"
+            description: No app is complete without deployment. In this episode Jim and Sam look at how to manage and deploy services using DevOps practices, including using tools to define your infrastructure as code, and to deploy automatically from GitHub. 

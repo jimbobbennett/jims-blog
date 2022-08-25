@@ -48,9 +48,27 @@
             <!-- navbar content -->
             <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
                 <ul class="navbar-nav {{ .Site.Params.navbar.align | default "ms-auto"}} text-center">
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="{{ .Site.BaseURL | relURL }}" aria-label="home">Home</a>
+                    </li>
+
                     {{ if and (.Site.Params.about.enable | default false) (not (.Site.Params.navbar.menus.disableAbout | default false)) }}
                     <li class="nav-item navbar-text">
                         <a class="nav-link" href="{{ .Site.BaseURL | relURL }}#about" aria-label="about">About</a>
+                    </li>
+                    {{ end }}
+
+                    {{ if and (.Site.Params.projects.enable | default false) (not (.Site.Params.navbar.menus.disableEducation | default false)) }}
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="{{ .Site.BaseURL | relURL }}#projects"
+                            aria-label="projects">Recent Highlights</a>
+                    </li>
+                    {{ end }}
+
+                    {{ if and (.Site.Params.social.enable | default false) (not (.Site.Params.navbar.menus.disableSocial | default false)) }}
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="{{ .Site.BaseURL | relURL }}#social"
+                            aria-label="social">Social</a>
                     </li>
                     {{ end }}
 
@@ -82,20 +100,6 @@
                     </li>
                     {{end}}
                     {{end}}
-
-                    {{ if and (.Site.Params.projects.enable | default false) (not (.Site.Params.navbar.menus.disableEducation | default false)) }}
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{ .Site.BaseURL | relURL }}#projects"
-                            aria-label="projects">Recent Highlights</a>
-                    </li>
-                    {{ end }}
-
-                    {{ if and (.Site.Params.social.enable | default false) (not (.Site.Params.navbar.menus.disableSocial | default false)) }}
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{ .Site.BaseURL | relURL }}#social"
-                            aria-label="social">Social</a>
-                    </li>
-                    {{ end }}
                 </ul>
             
             </div>
