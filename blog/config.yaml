@@ -1,6 +1,10 @@
-baseURL: "https://jimbobbennett.github.io/jims-blog/"
+baseURL: https://jimbobbennett.github.io/jims-blog
 languageCode: "en-us"
 title: "JimBobBennett"
+
+author:
+  name: "Jim Bennett"
+  email: "jim@jimbobbennett.io"
 
 Paginate: 3
 # disqusShortname: gurusabarish
