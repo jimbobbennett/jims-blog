@@ -264,13 +264,31 @@ params:
   livestreams:
     upcoming:
       series:
-      - title: "Tech Career Tips - Sea of Nerds"
+      - title: "IoT for Beginners - Project 2, digital agriculture"
         videos:
-          - title: Tech career tips from educators
-            time: 10AM PT Thursday 25th Aug
-            description: "Arrrrrrr, ye swarthy land lubbers. Come set sail with your pirate captain, the Dread Pirate Jim and his pirate crew as we set sail on the seven seas to find the finest treasure in the land – knowledge!"
-            image: /images/livestreams/sea-of-nerds-4.jpeg
-            registrationLink: https://developer.microsoft.com/reactor/events/16698/
+          - title: Episode 1 – detect soil moisture
+            time: 9AM PT Thursday 1st Sep
+            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. This lesson convers monitoring soil moisture using a soil moisture sensor, and in doing so dives more into how IoT devices communicate with sensors."
+            image: /images/livestreams/iot-for-beginners-proj-2-ep-1.jpeg
+            registrationLink: https://developer.microsoft.com/reactor/events/16970/
+
+          - title: Episode 2 – automate plant watering
+            time: 9AM PT Thursday 8th Sep
+            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. This lesson covers controlling a water pump from your IoT device based off sensor data from the soil moisture sensor."
+            image: /images/livestreams/iot-for-beginners-proj-2-ep-2.jpeg
+            registrationLink: https://developer.microsoft.com/reactor/events/16971/
+
+          - title: Episode 3 – migrate your plant to the cloud
+            time: 9AM PT Thursday 15th Sep
+            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. In this lesson we look at migrating your plant to the cloud. We will dive into what the cloud is, and how to set up an IoT service in the cloud to listen to telemetry data. "
+            image: /images/livestreams/iot-for-beginners-proj-2-ep-3.jpeg
+            registrationLink: https://developer.microsoft.com/reactor/events/16972/
+
+          - title: Episode 4 – control watering from the cloud
+            time: 9AM PT Thursday 22nd Sep
+            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. We now have our telemetry going to the cloud. In this lesson we will migrate the watering control logic to the cloud, taking advantage of the power of serverless computing!"
+            image: /images/livestreams/iot-for-beginners-proj-2-ep-4.jpeg
+            registrationLink: https://developer.microsoft.com/reactor/events/16973/
 
     previous:
       series:
@@ -285,6 +303,9 @@ params:
           - title: "Tech career tips from interns at Microsoft – Sea of Nerds"
             id: An5lBy_zTe0
             description: For this session, our crew is joined by a group of young pirates who recently interned at Microsoft.
+          - title: "Tech career tips from game developement educators – Sea of Nerds"
+            id: Efm6LIczfqw
+            description: In this episode our crew is joined by Professor Chris Headleand, the head of the department of games design and technology at Staffordshire University in the UK. As our crew quest for gold, they will be talking about topics including learning games development, how to get internships and jobs with games companies, what tools there are to help you create games, and more!
       - title: "IoT for Beginners"
         videos:
           - title: "Lesson 1: Introduction to IoT"
