@@ -1,4 +1,4 @@
-baseURL: https://jimbobbennett.github.io/jims-blog
+baseURL: https://jimbobbennett.io
 languageCode: "en-us"
 title: "JimBobBennett"
 
@@ -56,7 +56,7 @@ Menus:
 params:
   title: "JimBobBennett"
   description: Blog posts, videos and more from Jim
-  staticPath: ""  # The path to serve the static files from
+  # staticPath: ""  # The path to serve the static files from
   favicon: "/fav.png"
 
   theme:
