@@ -2,6 +2,7 @@
 title: "Led Ticker Tape"
 date: 2022-02-25T17:01:05Z
 draft: false
+featured_image: hello-lights.png
 ---
 
 ![An LED panel showing Hello in green](hello-lights.png)

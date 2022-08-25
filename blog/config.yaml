@@ -58,6 +58,11 @@ params:
   theme:
     disableThemeToggle: true
     defaultTheme: "dark" # dark
+  
+  sitemap:
+    changefreq: "weekly"
+    filename: "sitemap.xml"
+    priority: 0.5
 
   # font:
   #   fontSize: 1.5rem # default: 1rem
