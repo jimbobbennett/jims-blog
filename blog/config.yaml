@@ -56,7 +56,7 @@ Menus:
 params:
   title: "JimBobBennett"
   description: Blog posts, videos and more from Jim
-  staticPath: "jims-blog"  # The path to serve the static files from
+  staticPath: ""  # The path to serve the static files from
   favicon: "/fav.png"
 
   theme:
