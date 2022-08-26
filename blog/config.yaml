@@ -34,6 +34,12 @@ Menus:
       title: Livestreams
       url: /livestreams
       weight: 3
+    
+    - identifier: conferences
+      name: Conferences
+      title: Conferences
+      url: /conferences
+      weight: 4
 
     #Dropdown menu
     # - identifier: dropdown
@@ -401,3 +407,49 @@ params:
           - title: "Episode 6: Rolling out the Tea Trolley"
             id: "a0D--654gfM"
             description: No app is complete without deployment. In this episode Jim and Sam look at how to manage and deploy services using DevOps practices, including using tools to define your infrastructure as code, and to deploy automatically from GitHub. 
+
+  conferences:
+    upcoming:
+      series:
+      - title: "Edge Impulse Imagine"
+        videos:
+          - title: What’s new with Azure IoT to get you building solutions faster
+            time: Friday 30th Sep
+            description: "We all know IoT is hard! So many different tools to use with different boards, so many ways to build out the cloud side of the solution. This is why the IoT teams at Microsoft have been working hard to simplify this process and allow you to go from unboxing an IoT board to a fully working IoT application in as little time as possible."
+            image: /images/conferences/edge-impulse-imagine.png
+            registrationLink: https://www.edgeimpulse.com/imagine
+    previous:
+      series:
+      - title: NDC
+        videos:
+        - title: How thanking people can lead to a better culture
+          id: 5hjpxa52PPc
+          description: This lightning talk investigates thanks through a case study of a company in New Zealand that decided to take thanks from a biweekly meeting held by one team, to a company wide culture change that led to a happier workplace for everyone.
+        - title: Build cross-platform mobile apps using Fabulous
+          id: Hm4EDPNXQqY
+          description: This session will start with an overview of MVU, discussing how it works and why it is such a great architecture. It will then move on to building your first Fabulous app that runs on iOS and Android. 
+      - title: YES All digital 2021
+        videos:
+        - title: Introduction to IoT using Azure IoT services
+          id: j-TukPd42ro
+          description: Yearly Edu Summit 2021. Introduction to IoT using Azure IoT services
+      - title: Microsoft Build 2020
+        videos:
+        - title: Recognizing speech with a few lines of Python
+          id: h6xbpMPSGEA
+          description: In this session we unlock the power of AI to convert the spoken work to text in only a few lines of Python code. Create live captions, dictate messages with your voice, and amaze your friends!
+      - title: Microsoft Build 2019
+        videos:
+        - title: Prototyping an internet connected smart home device with Azure IoT hub
+          id: Dr_nva7q90Q
+          description: In this session we look at how to create a prototype interconnected fan unit using an IoT prototyping board. This board will connect to Azure to upload sensor data, and connect to a fan turning it on if the temperature is above a threshold.
+      - title: Microsoft Build 2018
+        videos:
+        - title: All Things Mobile
+          id: _N2mHFgshOU
+          description:  In this video, Christina and Jim interview Miguel de Icaza, Simina Pasat and Thomas Dohmke about all things mobile.
+      - title: Xamarin Evolve 2016
+        videos:
+        - title: Clicking on the Real World with iBeacon and Eddystone
+          id: vQqIXKU98LI
+          description:  In this session, Jim will take you through a quick overview of beacon technology, including Apple's iBeacons and Google's Eddystone, before diving into some code. We'll even build a simple app live on stage to demonstrate how you can detect and wake up beacons, as well as detect user proximity to beacons.
