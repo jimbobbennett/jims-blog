@@ -225,6 +225,10 @@ params:
         id: XPK3RUUPbjA
         description: On today’s show, Jim is joined by Vanessa, an IoT program manager from Microsoft, who's reduced the journey to IoT Wow to less than 5 minutes for some of the most popular developer kits from the manufacturers of the hardware you find in today's production IoT deployments.
 
+      - title: Build Your Own Retro Toy Robot
+        id: oG8SLTT2NLg
+        description: On today’s show, Jim is joined by John Kennedy, a retro computer and IoT enthusiast who has a fascination for classic robot toys from the 80s. He’s finally got his hands on the toy he wanted from his youth, but instead of being content there, he’s given it a brain!
+
     - title: "IoT Show"
       videos:
       - title: "IoT for Beginners"
