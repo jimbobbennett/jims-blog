@@ -267,9 +267,15 @@ params:
 
     - title: "JonnyChipz - In conversation"
       videos:
-      - title: In Conversation with Jim Bennett"
+      - title: In Conversation with Jim Bennett
         id: tzVYf6cXNjo
         description: Join John Lunn aka Jonnychipz as he is joined by Microsoft Regional Cloud Advocate Jim Bennett.
+
+    - title: "University of Lincoln Christmas Lectures 2020"
+      videos:
+      - title: It's the most Cloudful time of the year
+        id: 6hTUNE1oqYY
+        description:  Jim Bennett from Microsoft will talk about how free cloud services can be used to make a computer science Christmas. This workshop will cover using speech to control Christmas lights, and how to translate holiday wishes into different languages, and using image recognition to see if you are a grinch!
         
   livestreams:
     upcoming:
