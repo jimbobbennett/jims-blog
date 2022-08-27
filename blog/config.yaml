@@ -7,8 +7,6 @@ author:
   email: "jim@jimbobbennett.io"
 
 Paginate: 3
-# disqusShortname: gurusabarish
-# googleAnalytics: G-DWJJVE27WD
 
 markup:
   goldmark:

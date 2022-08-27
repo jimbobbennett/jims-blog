@@ -57,7 +57,7 @@
     :root {
         --text-color: {{ .Site.Params.color.textColor | default "#343a40" }};
         --text-secondary-color: {{ .Site.Params.color.secondaryTextColor | default "#6c757d" }};
-        --background-color: {{ .Site.Params.color.backgroundColor | default "#eaedf0" }};
+        --background-color: {{ .Site.Params.color.backgroundColor | default "#000" }};
         --secondary-background-color: {{ .Site.Params.color.secondaryBackgroundColor | default "#64ffda1a" }};
         --primary-color: {{ .Site.Params.color.primaryColor | default "#007bff" }};
         --secondary-color: {{ .Site.Params.color.secondaryColor | default "#f8f9fa" }};
@@ -71,6 +71,7 @@
         --secondary-color-dark: {{ .Site.Params.color.darkmode.secondaryColor | default "#212529" }};
     }
     body {
+        background-color: {{ .Site.Params.color.backgroundColor | default "#000" }};
         font-size: {{ .Site.Params.font.fontSize | default "1rem" }};
         font-weight: {{ .Site.Params.font.fontWeight | default "400" }};
         line-height: {{ .Site.Params.font.lineHeight | default "1.5" }};
