@@ -1,0 +1,206 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docker on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in docker on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Thu, 03 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Led Ticker Tape</title><link>https://jimbobbennett.dev/blogs/led-ticker-tape/</link><pubDate>Fri, 25 Feb 2022 17:01:05 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/led-ticker-tape/</guid><description>&lt;p>&lt;img src="hello-lights.png" alt="An LED panel showing Hello in green">&lt;/p>
+&lt;p>Anyone who knows me knows I&amp;rsquo;m a big fan of IoT and LEDs. I love using IoT devices to control lights, from the LEDs behind my desk to &lt;a href="https://www.youtube.com/watch?v=h5ETn4PTdQA">smart pumpkins&lt;/a>!&lt;/p>
+&lt;p>I&amp;rsquo;ve been giving the .NET IoT libraries a spin for an upcoming project using a Raspberry Pi Zero W 2. I&amp;rsquo;m usually a Python person when using a Pi, but the project I&amp;rsquo;m working on needs a service that doesn&amp;rsquo;t have Python libraries that run on a Pi. Instead it has a .NET library, so it was time to break out my C# skills for the first time in years.&lt;/p>
+&lt;p>I wanted to build an LED panel that can display text, either static text or scrolling text. So I picked up this &lt;a href="https://amzn.to/3sVjF7M">WS2812B panel from Amazon (allifliate link)&lt;/a>, and started to dig into the .NET IoT libraries. WS2818b LEDs are also known as NeoPixels, and are addressable multicolor LEDs, so you can light up individual ones in any color you like. They are addressed based on the order they are connected to your device, so the first pixel in a string of LEDs is 0, the next is 1 and so on. You can add as many as you like, and the addresses just keep going up.&lt;/p>
+&lt;p>The .NET IoT libraries are on GitHub at &lt;a href="https://github.com/dotnet/iot">github.com/dotnet/iot&lt;/a> and available as a NuGet. They support a wide range of boards including the Raspberry Pi.&lt;/p>
+&lt;h2 id="lighting-leds-in-c">Lighting LEDs in C#&lt;/h2>
+&lt;p>I started as I usually do with a clean install of Raspberry Pi OS Lite. I use the Lite version as I access my Pi remotely using VS Code for all my development. You can read more on how I do this on &lt;a href="https://www.raspberrypi.com/news/coding-on-raspberry-pi-remotely-with-visual-studio-code/">my blog post on the Raspberry Pi blog&lt;/a>. When I connected to my Pi I installed .NET 6, and the C# extension in VS Code.&lt;/p>
+&lt;blockquote>
+&lt;p>One thing to note for the C# extension is it doesn&amp;rsquo;t support remote debugging on the Pi Zero W 2.&lt;/p>
+&lt;/blockquote>
+&lt;p>The .NET IoT libraries have a small amount of documentation and samples, so it wasn&amp;rsquo;t too much effort to get the LEDs lighting up.&lt;/p>
+&lt;p>The .NET libraries control these pixels over SPI, so they need to be connected to an SPI pin and ground on the Pi, as well as to a 5V power supply. You can&amp;rsquo;t use the 5V pins on the Pi as the panel can draw too much power and burn your Pi out, it&amp;rsquo;s best to use an external 5V power supply, either from a USB connection or a power converter plugged into the mains.&lt;/p>
+&lt;p>You also need to do a bit of SPI configuration, and this is documented in the &lt;a href="https://github.com/dotnet/iot/tree/main/src/devices/Ws28xx">GitHub source code for the WS2812B device code&lt;/a>.&lt;/p>
+&lt;blockquote>
+&lt;p>This is different to using the Adafruit NeoPixel libraries from Python, where you use different pins and don&amp;rsquo;t need any SPI configuration.&lt;/p>
+&lt;/blockquote>
+&lt;p>To use the .NET libraries, you start by creating an SPI configuration, then use that to create the pixels:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Create connection settings to connect to the panel using SPI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SpiConnectionSettings settings = &lt;span style="color:#66d9ef">new&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClockFrequency = &lt;span style="color:#ae81ff">2_400_000&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Mode = SpiMode.Mode0,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DataBitLength = &lt;span style="color:#ae81ff">8&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Create an SPI device&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> spi = SpiDevice.Create(settings);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Use the SPI device to connect to the LEDs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// and pass the number of LEDs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> neoPixels = &lt;span style="color:#66d9ef">new&lt;/span> Ws2812b(spi, &lt;span style="color:#ae81ff">256&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When you create the pixels, you pass in the length of the strip. I&amp;rsquo;ve been using a 8x32 panel, which is actually a 256 pixel long strip arranged in and up/down pattern.&lt;/p>
+&lt;p>Once created, you light pixels by getting a &lt;code>BitmapImage&lt;/code> from them, and setting colors on that. This image is a lengthx1 image, so 1 pixel tall, and as wide as the length of the LEDs. For example, my 8x32 panel is 256 pixels long, so is a bitmap of 256x1.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can then set pixels in this image to the color you want. The color is set using the &lt;code>System.Drawing.Color&lt;/code> struct, which wraps ARGB values. The A (alpha channel) is ignored, so you set pixel brightness by reducing the value of the R, G, and B.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Red);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Green);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once the pixels are set in the image, it is commited and the LEDs updated.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>One quirk of the bitmaps, is you have to set all the pixels up to the last one you want set. So if you want to set pixel 10 to be red, you have to also set pixels 0-9 to something, even if it is &lt;code>Color.Black&lt;/code> (off). The first pixel you set is mapped to the first LED in the strip, so if you just set pixels 10-20, then the strip is set as if the first LED was pixel 10.&lt;/p>
+&lt;p>For example, if you just want to set pixel 2 to blue, you can&amp;rsquo;t do this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>What will happen here is pixel 2 is the first one with a value, so that will be considered the first pixel in the strip, so the first LED will light up blue.
+What you need to do is:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Black);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Black);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will set the pixels 0 and 1 to off, and pixel 2 to blue.&lt;/p>
+&lt;h2 id="writing-text">Writing text&lt;/h2>
+&lt;p>I wanted to make my panel show text, either short static text, or scrolling text. The first thing I needed was a font - something that defines how to create letters from pixels. I found a simplar project based on Aruino in a &lt;a href="https://github.com/bigjosh/SimpleTickerTape/tree/main/fonts">GitHub project from Josh Levine&lt;/a> so leveraged this code for a font and re-wrote it in C#.&lt;/p>
+&lt;p>Next I needed the mapping code. These fonts are defined as columns of binary data, so the bits to set. Each character is 8 bits tall (the size of my panel), and 6 bits wide. This mapping code was a bit of fun as I not only needed to divide up my pixels into columns, and map from a pixel in the 1 dimensional strip to a character pixel, but the strips go up and down!&lt;/p>
+&lt;p>The way this panel is made is by weaving an LED strip up and down, so the pixels start at 0 on the top left, go down to 7 on the left-most column, then across one pixel to the right to 8, then up to 15.&lt;/p>
+&lt;p>This gives for the first few columns:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">15&lt;/span> &lt;span style="color:#ae81ff">16&lt;/span> &lt;span style="color:#ae81ff">31&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">14&lt;/span> &lt;span style="color:#ae81ff">17&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#ae81ff">13&lt;/span> &lt;span style="color:#ae81ff">18&lt;/span> &lt;span style="color:#ae81ff">29&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span> &lt;span style="color:#ae81ff">19&lt;/span> &lt;span style="color:#ae81ff">28&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#ae81ff">11&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span> &lt;span style="color:#ae81ff">27&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#ae81ff">21&lt;/span> &lt;span style="color:#ae81ff">26&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">9&lt;/span> &lt;span style="color:#ae81ff">22&lt;/span> &lt;span style="color:#ae81ff">25&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">7&lt;/span> &lt;span style="color:#ae81ff">8&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> &lt;span style="color:#ae81ff">24&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This means that the mapping code needs to alternate - for 0dd numbered columns the pixles go down, for even numbered the pixels go up so the mapping has to be reversed!&lt;/p>
+&lt;p>I&amp;rsquo;m not going to dive into all this mapping here, but you can find the code with full documentation in my &lt;a href="https://github.com/jimbobbennett/NeoPixelTickerTape">NeoPixelTickerTape GitHub repo&lt;/a>.&lt;/p>
+&lt;p>I then added scrolling code that writes text starting at the right-most column, then re-writes it shifting left a column at a time.&lt;/p>
+&lt;p>&lt;img src="tickertape.gif" alt="Hello world scrolling across the ticker tape">&lt;/p>
+&lt;h2 id="check-out-the-code">Check out the code&lt;/h2>
+&lt;p>You can find the code with full documentation in my &lt;a href="https://github.com/jimbobbennett/NeoPixelTickerTape">NeoPixelTickerTape GitHub repo&lt;/a>.&lt;/p>
+&lt;p>You can also download a NuGet pckage to use in your apps:&lt;/p>
+&lt;p>&lt;img src="https://img.shields.io/nuget/v/JimBobBennett.NeoPixelTickerTape.svg?style=flat&amp;amp;logo=nuget" alt="Select this to access the nuget">&lt;/p></description></item><item><title>Auto-posting to dev.to using a GitHub action</title><link>https://jimbobbennett.dev/blogs/auto-posting-to-dev-to/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/auto-posting-to-dev-to/</guid><description>&lt;p>&lt;img src="stream-screenshot.png" alt="A screenshot from teh live stream mentioned here">&lt;/p>
+&lt;p>I&amp;rsquo;ve been wanting to build a tool to post markdown automatically to blogging platforms. That way I (or anyone else) can write a blog post in markdown, save it in a &lt;a href="https://github.com">GitHub&lt;/a> repo, and have it automatically posted to a blogging platform of their choice.&lt;/p>
+&lt;p>I&amp;rsquo;ve created a small Python app to do this, and you can find it on GitHub at &lt;a href="https://github.com/jimbobbennett/auto-blog-poster">github.com/jimbobbennett/auto-blog-poster&lt;/a>. You add some special folders to any folders containing README.md files, and it will create a blog post from the markdown. It will also track when the README file changes and update the blog post.&lt;/p>
+&lt;p>It&amp;rsquo;s slightly annoying to have to remember to run this every time you create or update a post, so I wanted to make it so it could be run automatically. GitHub actions are the perfect way to do this.&lt;/p>
+&lt;h2 id="what-are-github-actions">What are GitHub actions?&lt;/h2>
+&lt;p>GitHub actions is GitHubs CI/CD solution. CI is continuous integration, meaning every time code changes, your code can be built and tested. CD is continuous deployment, so once code is tested it can be deployed automatically.&lt;/p>
+&lt;p>Essentialy you can specify code that is run whenever someone checks in any changes, merges a branch or PR, or raises issues, creates PRs, any task really that you can do in GitHub. GitHub manages spinning up a VM to run everything, all you have to do is write your action, and pay (obviously - the best things in life are not always free).&lt;/p>
+&lt;p>GitHub actions are deined using YAML inside your repository (in a &lt;code>.github\workflows&lt;/code> folder), and you can call out to &lt;em>actions&lt;/em> that do things, such as checking out code, tagging, running scripts, anything you need. You can also build custom actions.&lt;/p>
+&lt;h2 id="custom-actions">Custom actions&lt;/h2>
+&lt;p>A custom action is one you write yourself to do whatever you need. In my case, I want my posting code to be run every time I update a markdown file in another repo, and this is something I can do with a custom action.&lt;/p>
+&lt;p>Custom actions are either written in JavaScript/TypeScript, or run from a Docker container. My app is Python, so I need to use Docker.&lt;/p>
+&lt;h3 id="creating-a-docker-custom-action">Creating a Docker custom action&lt;/h3>
+&lt;p>Docker custom actions are Docker containers that can be run, and will stop when they are complete - you package up your app in a container, and provide it with an &lt;code>ENTRYPOINT&lt;/code> so that Docker can run something.&lt;/p>
+&lt;p>I created a Dockerfile for my auto post tool, along with a shell script as the entrypoint:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create this docker file based off a Python 3.9 Linux image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>FROM python:3.9-slim-buster
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Run everything from /app&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WORKDIR /app
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Copy over the files&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY requirements.txt requirements.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY app.py app.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY dev_to.py dev_to.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY github_access.py github_access.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY entrypoint.sh entrypoint.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install the Python requirements&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN pip3 install -r requirements.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Execute the shell script as the entrypoint&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ENTRYPOINT /app/entrypoint.sh &lt;span style="color:#e6db74">${&lt;/span>@&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This Dockerfile creates a container using a Python base image, copies all my files over, installs my Pip package dependencies, then sets the entrypoint.&lt;/p>
+&lt;p>The interesting thing to note here is the parameter passed to the &lt;code>entrypoint.sh&lt;/code> script - &lt;code>${0}&lt;/code>. My app needs some secrets passed to it - an API key for Dev.to to allow it to post, the repo to post from, and a GitHub token to allow it to update the repo once the post is up. I don&amp;rsquo;t want these embedded in the container as I want to be able to use this action from different repositories (and allow others to use it), so I want these passed when the action is run. The &lt;code>${0}&lt;/code> syntax means everything that is set as an environment variable when running the container, so this passes all the environment variables to the shell script, where they can be used in the app.&lt;/p>
+&lt;p>This means running the container like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run ghcr.io/jimbobbennett/auto-blog-poster:main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --env DEV_TO_API_KEY&lt;span style="color:#f92672">=&lt;/span>xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GITHUB_ACCESS_TOKEN&lt;span style="color:#f92672">=&lt;/span>xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> REPO&lt;span style="color:#f92672">=&lt;/span>xxx/yyy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will pass &lt;code>DEV_TO_API_KEY=xxx GITHUB_ACCESS_TOKEN=xxx REPO=xxx/yyy&lt;/code> to the shell script, and this can be set as a local environment variable in the container.&lt;/p>
+&lt;p>Once created, I can build this container and publish it to the GitHub container registry from an action inside the repo for my post tool.&lt;/p>
+&lt;p>This is my action to publish my Docker container:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Docker Image CI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">push&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">branches&lt;/span>: [ &lt;span style="color:#ae81ff">main ]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pull_request&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">branches&lt;/span>: [ &lt;span style="color:#ae81ff">main ]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">REGISTRY&lt;/span>: &lt;span style="color:#ae81ff">ghcr.io&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">IMAGE_NAME&lt;/span>: &lt;span style="color:#ae81ff">${{ github.repository }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">build&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Log in to the Container registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">registry&lt;/span>: &lt;span style="color:#ae81ff">${{ env.REGISTRY }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">username&lt;/span>: &lt;span style="color:#ae81ff">${{ github.actor }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Extract metadata (tags, labels) for Docker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">meta&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">images&lt;/span>: &lt;span style="color:#ae81ff">${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build and push Docker image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">context&lt;/span>: &lt;span style="color:#ae81ff">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">push&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tags&lt;/span>: &lt;span style="color:#ae81ff">${{ steps.meta.outputs.tags }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">labels&lt;/span>: &lt;span style="color:#ae81ff">${{ steps.meta.outputs.labels }}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This action is run on a push or PR on the main branch. It runs on an Ubuntu VM, logs into the GitHub container registry, checks out my code, gets the tag for the package, builds it and pushed it to the registry.&lt;/p>
+&lt;p>This code has some variables that come from GitHub. Any variable that starts &lt;code>${{ github.xxx }}&lt;/code> is set automatically by GitHub to a relevant value such as the repo name. &lt;code>${{ steps.meta.outputs.xxx }}&lt;/code> are set as outputs of certain steps, and &lt;code>${{ secrets.xxx }}&lt;/code> are secrets you can set on your repo. &lt;code>${{ secrets.GITHUB_TOKEN }}&lt;/code> is a special secret you don&amp;rsquo;t need to set that provides an API token to interact with the current repo.&lt;/p>
+&lt;p>Once this container is pushed, I can use it from an action inside my blog repo!&lt;/p>
+&lt;h3 id="using-a-docker-custom-action">Using a Docker custom action&lt;/h3>
+&lt;p>To use a Docker custom action, I can just pull it from inside my blog repo action and run it. Here&amp;rsquo;s the action YAML:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">on&lt;/span>: [&lt;span style="color:#ae81ff">push]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">REGISTRY&lt;/span>: &lt;span style="color:#ae81ff">ghcr.io&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">build&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Log in to the Container registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">registry&lt;/span>: &lt;span style="color:#ae81ff">${{ env.REGISTRY }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">username&lt;/span>: &lt;span style="color:#ae81ff">${{ github.actor }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Use Docker CLI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions-hub/docker/cli@master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">SKIP_LOGIN&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">docker pull ghcr.io/jimbobbennett/auto-blog-poster:main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">run&lt;/span>: &amp;gt;&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> docker run ghcr.io/jimbobbennett/auto-blog-poster:main
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> --env DEV_TO_API_KEY=${{ secrets.DEV_TO_API_KEY }}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> GITHUB_ACCESS_TOKEN=${{ secrets.GITHUB_TOKEN }}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> REPO=${{ github.repository }}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This action uses a docker custom action to log in to the GitHub container registry, pull my container, then run it, passing in an API key for Dev.to, the GitHub token and the current repository.&lt;/p>
+&lt;p>That&amp;rsquo;s it - now every time the blog post markdown changes in my repo, it is automatically deployed to Dev.to.
+At the moment this is just a playground, but the plan is to build out a new blog that uses this - all the posts will be in GitHub, and it will post to another blogging platform and Dev.to at every checkin.&lt;/p>
+&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>GitHub actions are a lot of fun, and a great way to set up CI/CD. I did a live stream where I worked all this out here:&lt;/p>
+&lt;p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/MSfeKTOO1Tc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;br>
+You can also read more on the great &lt;a href="https://docs.github.com/actions">GitHub Actions docs&lt;/a>.&lt;/p></description></item></channel></rss>
