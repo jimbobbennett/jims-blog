@@ -1,6 +1,8 @@
 {{ define "head" }}
 <meta name="description" content="{{ .Params.description }}">
+<link rel="stylesheet" href="{{.Site.Params.staticPath}}/css/index.css">
 <link rel="stylesheet" href="{{.Site.Params.staticPath}}/css/single.css">
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/projects.css" media="all">
 
 <!-- fontawesome -->
 <script defer src="{{.Site.Params.staticPath}}/fontawesome-5/all-5.15.4.js"></script>
@@ -11,21 +13,25 @@
 {{ end }}
 
 {{ define "main" }}
-<section id="single">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm-12 col-md-12 col-lg-9">
-        <div class="pr-lg-4">
-          <div class="title mb-5">
-            <h1 class="text-center mb-4">{{ .Title }}</h1>
+<section id="projects">
+    <div class="container pt-5" id="list-page">
+        <div class="row justify-content-center px-3 px-md-5">
+            <h1 class="text-left pb-2 content">{{.Title}}</h1>
             {{ if .Params.showAuthor | default true}}
-            <div class="text-center">
+            <div class="text-left content">
               {{ .Params.author }} 
               <small>|</small>
               {{ .Date.Format "Jan 2, 2006" }}
             </div>
             {{end}}
-          </div>
+        </div>
+    </div>
+</section>
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
           {{ if .Params.image }}
           <div class="featured-image">
             <img class="img-fluid" src="{{ .Params.image }}" alt="{{ .Title }}">

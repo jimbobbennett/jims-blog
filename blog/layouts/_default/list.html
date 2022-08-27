@@ -1,6 +1,8 @@
 {{ define "head" }}
 <meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/index.css" media="all">
 <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/list.css" media="all">
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/projects.css" media="all">
 {{ end }}
 
 {{ define "title" }}
@@ -8,8 +10,14 @@
 {{ end }}
 
 {{ define "main" }}
+<section id="projects">
+    <div class="container pt-5" id="list-page">
+        <div class="row justify-content-center px-3 px-md-5">
+            <h1 class="text-left pb-2 content">{{.Title}}</h1>
+        </div>
+    </div>
+</section>
 <div class="container pt-5" id="list-page">
-    <h2 class="text-center pb-2">{{.Title}}</h2>
     <div class="row">
         {{ range .Paginator.Pages }}
         <div class="col-lg-4 col-md-6 my-3">

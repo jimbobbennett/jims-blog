@@ -67,3 +67,8 @@
     font-size: clamp(14px,5vw,16px);
     opacity: 0.6;
 }
+
+
+#projects .content {
+    animation: fade-left 1s ease-out;
+}

@@ -1,0 +1,88 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/index.css" media="all">
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/projects.css" media="all">
+{{ end }}
+
+{{ define "title" }}
+{{.Title }} | {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<section id="projects">
+    <div class="container pt-5" id="list-page">
+        <div class="row justify-content-center px-3 px-md-5">
+            <h1 class="text-left pb-2 content">{{.Title}}</h1>
+            <span class="content subtitle text-left pb-2">Want to download my resume? You can find it here as both a PDF and the original source Sketch file. Feel free to use it as inspiration for your own.</span>
+        </div>
+    </div>
+</section>
+<div class="container pt-5" id="list-page">
+    <section id="projects">
+        <div class="container">
+            <div class="row justify-content-left px-3 px-md-5">
+                <h2 class="text-left pb-2">PDF</h2>
+            </div>
+                <div class="row justify-content-left px-3 px-md-5">
+                        <div class="col col-lg-4 col-md-4 my-3">
+                            <div class="card h-100">
+                                <div class="card-head">
+                                    <a href="/downloads/jim-bennett-resume.pdf">
+                                        <img class="card-img-top" src="/images/png/jim-resume-cover.png" alt="Jim's resume">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">My resume as a PDF</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Updated August 2022</h6>
+                                    <p class="card-text">Feel free to download this and use as inspiration for your own resume.</p>
+                                </div>
+                                <div class="card-footer py-3">
+                                    <span class="float-end">
+                                        <a class="btn btn-sm" href="/downloads/jim-bennett-resume.pdf" target="_blank">
+                                            Download
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="row justify-content-center px-3 px-md-5">
+                    <p class="text-center pb-2">&nbsp;</p>
+                </div>
+        </div>
+    </section>
+    <section id="projects">
+        <div class="container">
+            <div class="row justify-content-left px-3 px-md-5">
+                <h2 class="text-left pb-2">Sketch</h2>
+            </div>
+                <div class="row justify-content-left px-3 px-md-5">
+                        <div class="col col-lg-4 col-md-4 my-3">
+                            <div class="card h-100">
+                                <div class="card-head">
+                                    <a href="/downloads/jim-bennett-resume.sketch">
+                                        <img class="card-img-top" src="/images/png/jim-resume-cover.png" alt="Jim's resume">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">My resume as a <a href="https://www.sketch.com">Sketch</a> file</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Updated August 2022</h6>
+                                    <p class="card-text">Feel free to download this and use as inspiration for your own resume. You will need <a href="https://www.sketch.com">Sketch</a> for macOS to open this file.</p>
+                                </div>
+                                <div class="card-footer py-3">
+                                    <span class="float-end">
+                                        <a class="btn btn-sm" href="/downloads/jim-bennett-resume.sketch" target="_blank">
+                                            Download
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="row justify-content-center px-3 px-md-5">
+                    <p class="text-center pb-2">&nbsp;</p>
+                </div>
+        </div>
+    </section>
+</div>
+{{ end }}

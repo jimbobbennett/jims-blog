@@ -40,6 +40,12 @@ Menus:
       title: Conferences
       url: /conferences
       weight: 4
+    
+    - identifier: resume
+      name: Resume
+      title: Resume
+      url: /resume
+      weight: 5
 
     #Dropdown menu
     # - identifier: dropdown
