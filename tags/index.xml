@@ -203,4 +203,49 @@ At the moment this is just a playground, but the plan is to build out a new blog
 &lt;iframe src="https://www.youtube.com/embed/MSfeKTOO1Tc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
 &lt;/div>
 &lt;br>
-You can also read more on the great &lt;a href="https://docs.github.com/actions">GitHub Actions docs&lt;/a>.&lt;/p></description></item></channel></rss>
+You can also read more on the great &lt;a href="https://docs.github.com/actions">GitHub Actions docs&lt;/a>.&lt;/p></description></item><item><title>Getting started with GitHub Codespaces</title><link>https://jimbobbennett.dev/blogs/github-codespaces/</link><pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/github-codespaces/</guid><description>&lt;p>&lt;img src="banner.png" alt="VS Code running a code space">&lt;/p>
+&lt;p>The bane of every new developers life is getting your environment set up to be productive. And when I say new developer - I don&amp;rsquo;t just mean a dev who is new to a team, but every developer who needs to work on a project they haven&amp;rsquo;t worked on before.&lt;/p>
+&lt;p>Each project has it&amp;rsquo;s own dependencies, required tools, required libraries, a whole swathe of things that need to be installed, and can in some cases cause problems when projects have conflicting requirements. I certainly remember having to uninstall/reinstall different tooling versions when switching projects, sometimes multiple times a day 😱.&lt;/p>
+&lt;p>What if there was a way to fix this? If we could instantly have a pre-configured developer machine with the right tools that we need available at the click of a button? Even better one powered by the cloud so we don&amp;rsquo;t even need to worry about the power of our local machine, or even be able to access from a tablet or phone? This is where &lt;a href="https://github.com/features/codespaces">Codespaces&lt;/a> comes in.&lt;/p>
+&lt;p>&lt;a href="https://github.com/features/codespaces">GitHub Codespaces&lt;/a> are virtual developer machines in the cloud that you access through VS Code, running either on your desktop or in a browser. You can launch any GitHub repo inside a Codespace, with everything you do running in that Codespace - your code lives there, your debug sessions run there, your terminal runs commands there, it&amp;rsquo;s as if someone teleported a dev machine into your office!&lt;/p>
+&lt;h2 id="setting-up-a-codespace">Setting up a Codespace&lt;/h2>
+&lt;p>I&amp;rsquo;ve been recently working on a project for my team that consists of a Python app that I want to run as a Docker container, so I thought it would be fun to configure the repo for this to run inside a Codespace so when anyone else on the team wants to work on it, they won&amp;rsquo;t have any local configuration to do.&lt;/p>
+&lt;h3 id="sign-up-for-codespaces">Sign up for Codespaces&lt;/h3>
+&lt;p>Codespaces needs to be set up for a team or organization - mainly so someone can pay! Despite the claims that the best things in life are free, you do need to pay for Codespace.&lt;/p>
+&lt;h3 id="open-your-repo-in-a-codespace">Open your repo in a Codespace&lt;/h3>
+&lt;p>The first step is to open the repo in Codespaces. From the repo in GitHub, select &lt;strong>Codespaces&lt;/strong> from the &lt;strong>Code&lt;/strong> button, then select &lt;strong>New codespace&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="image-2.png" alt="The new codespace button">&lt;/p>
+&lt;p>This will set up your code in a new Codespace - essentiall a blank VM using a default image from GitHub. This image is based off Ubuntu, and comes pre-configured with Python. Node, Docker and other stuff. You can read up on this default image at &lt;a href="https://aka.ms/ghcs-default-image">aka.ms/ghcs-default-image&lt;/a>.&lt;/p>
+&lt;p>This image contains almost everything I need - the tools are all installed, and VS Code is running with my code in it.&lt;/p>
+&lt;p>&lt;img src="image-3.png" alt="VS Code running in a browser under Codespaces">&lt;/p>
+&lt;p>My code is in Python, and this image comes with Python 3.8 installed. It means I can create a Codespace, and run my code in only a few seconds!&lt;/p>
+&lt;h2 id="configure-your-codespace">Configure your Codespace&lt;/h2>
+&lt;p>The good news is Codespaces are configurable - you can define the details for the container in which your Codespace runs in a &lt;code>devcontainer.json&lt;/code> file. I can use this to change the image used, configure what tools are installed, that sort of thing. The big upside of this is to ensure I have the right versions - the default container currently has Python 3.8 installed, but I can create a devcontainer file to set another version.&lt;/p>
+&lt;p>I&amp;rsquo;ll start by creating a devcontainer file. The Codespaces extension is installed for you in VS Code, so you can use the command palette to access options to configure the devcontainer file.&lt;/p>
+&lt;p>I started by selecting &lt;strong>Codespaces: Add Development Container Configuration Files&amp;hellip;.&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="image-4.png" alt="The Codespaces: Add Development Container Configuration Files command palette option">&lt;/p>
+&lt;p>From there I selected &lt;strong>From a predefined container configuration definition&amp;hellip;&lt;/strong> to use a pre-defined image. I could also use any container I have in my container registry.&lt;/p>
+&lt;p>&lt;img src="image-5.png" alt="The From a predefined container configuration definition option">&lt;/p>
+&lt;p>From the images I chose a Python 3 image, and selected Python 3.10.&lt;/p>
+&lt;p>&lt;img src="image-6.png" alt="The image options with a range of images to choose from">&lt;/p>
+&lt;p>&lt;img src="image-9.png" alt="The python 3 version options">&lt;/p>
+&lt;p>I then had an option to add a Node version, so selected None as I don&amp;rsquo;t want Node.&lt;/p>
+&lt;p>&lt;img src="image-10.png" alt="Node version selection">&lt;/p>
+&lt;p>Next I could select features to pre-install. I selected Docker as I need support for that.&lt;/p>
+&lt;p>&lt;img src="image-11.png" alt="Selecting the docker option for the container">&lt;/p>
+&lt;p>2 things now happen. 2 new files are created in my explorer, &lt;code>devcontainer.json&lt;/code> and &lt;code>Dockerfile&lt;/code> in a folder called &lt;code>.devcontainer&lt;/code>, and a toast will popup suggesting I rebuild the container. When I do this, Codespaces will restart with a new image based off my selections. It takes a while the first time as the container needs to be built.&lt;/p>
+&lt;p>&lt;img src="image-12.png" alt="The toast popup">&lt;/p>
+&lt;p>The devcontainer.json file directs the Codespace to use the Dockerfile that was created to define the image. It then includes things like a list of extensions that VS Code will need - in my case PyLance.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;extensions&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ms-python.python&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ms-python.vscode-pylance&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>I could and any more extensions here if I wanted, such as the Docker extension.&lt;/p>
+&lt;p>I could also edit these files to create a virtual environment, install Python packages, that sort of thing - though I&amp;rsquo;m not sure I&amp;rsquo;d need a virtual environment as my container will only be used to develop from this repo, so I could install packages globally and not worry.&lt;/p>
+&lt;h3 id="check-in-your-files">Check in your files&lt;/h3>
+&lt;p>Once you are happy with your dev container setup, you can then check the .devcontainer folder and all it&amp;rsquo;s contents into your repo. This will then be used by anyone who creates a Codespace for your repo!&lt;/p>
+&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>If you want to learn more, check out the Codespaces docs - &lt;a href="https://docs.github.com/codespaces">docs.github.com/codespaces&lt;/a>. There was also some great videos on it from GitHub Universe, this particular one by &lt;a href="https://twitter.com/2PercentSilk">Allison Weins&lt;/a> and Bailey Brooks works through the configuration of Codespaces.&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/X9Z-rUixnzk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div></description></item></channel></rss>
