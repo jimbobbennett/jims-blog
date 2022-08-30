@@ -17,7 +17,7 @@ My 8-year-old daughter bought me "Farts - a spotters guide" - a book with some b
 
 ## TinyML
 
-TinyML is a relatively new field, and is all about creating tiny machine learning models that can run on microcontrollers. These models are really tiny - in the order of kilobytes instead of the usual megabytes or gigabytes. They need to be this tiny to run on microcontrollers that typically have killobytes of RAM. These models also draw little power, typically in the single-digit milliwatts or lower.
+TinyML is a relatively new field, and is all about creating tiny machine learning models that can run on microcontrollers. These models are really tiny - in the order of kilobytes instead of the usual megabytes or gigabytes. They need to be this tiny to run on microcontrollers that typically have kilobytes of RAM. These models also draw little power, typically in the single-digit milliwatts or lower.
 
 What are the use cases for TinyML? Well there are loads, anywhere you want to run ML models offline with minimal power draw. You may even have some TinyML models running in your house right now. For example, smart voice controlled devices listen for a wake word, and this needs to be offline and draw minimal power - perfect for a TinyML model. Another use case is in healthcare with devices that can monitor your health that run for years on tiny batteries. It's also being used in animal smart collars and trackers, [using audio to monitor the health of elephants in the wild](https://www.hackster.io/contests/ElephantEdge). So yes - a fart detector has a real world application!
 
@@ -27,7 +27,7 @@ To build a TinyML model you need to decide what type of model to build, gather t
 
 ## Building a fart detector
 
-For my fart detector, I needed to build an audio classifier that could run on a microcontroller. Becuase I'm terrible at electronics and understanding I2C, SPI and all that other stuff, I decided to use an all-in-one Arduino board that has a microphone built in allowing me to use off-the-shelf Arduino libraries to gather audio data. The board of choice was the Arduino Nano 33 Sense BLE board, a small Arduino board with a whole raft of sensors including a microphone, tempersture, pressure, humidity, light level and color, gesture and proximity. That's a lot of sensors in such a tiny board!
+For my fart detector, I needed to build an audio classifier that could run on a microcontroller. Because I'm terrible at electronics and understanding I2C, SPI and all that other stuff, I decided to use an all-in-one Arduino board that has a microphone built in allowing me to use off-the-shelf Arduino libraries to gather audio data. The board of choice was the Arduino Nano 33 Sense BLE board, a small Arduino board with a whole raft of sensors including a microphone, temperature, pressure, humidity, light level and color, gesture and proximity. That's a lot of sensors in such a tiny board!
 
 ![An arduino Nano sense 33 BLE IoT board](nano-sense.jpg)
 
@@ -37,7 +37,7 @@ To code this board, I could use the free Arduino IDE, but I prefer to use [Visua
 
 To train TinyML models you not only need the model to by tiny, but you also need small inputs - the more data that goes into training the model or inference (that is running the model), the larger it is. Audio data can be quite large - for example CD quality audio (remember CDs?) is 44.1KHz/16-bit which means it captures 2 bytes of data 44,100 times per second, or 176KB per second! That's a lot of data - if we wanted to use all of it and train our model with 2 seconds worth of data it wouldn't be TinyML any more.
 
-A great trick with audio data is realising you don't need all of it to classify particular sounds. Instead you can get an average value that represents many samples and use that as the data. In the case of the Arduino, the library that captures audio, [PDM](https://www.arduino.cc/en/Reference/PDM), captures audio at 16KHz in 512 byte buffers, containing 256 2-byte samples. This means each buffer has 1/64th of a second of audio data in it. We can then calculate a root mean square (RMS) of all this data to get a single 4-byte floating point value. If we do this for every buffer, we end up with 64 4-byte floats per second, or 256 bytes per second. Much smaller than raw audio at the PDM sample rate of 16KHz giving 32,000 bytes per second!
+A great trick with audio data is realizing you don't need all of it to classify particular sounds. Instead you can get an average value that represents many samples and use that as the data. In the case of the Arduino, the library that captures audio, [PDM](https://www.arduino.cc/en/Reference/PDM), captures audio at 16KHz in 512 byte buffers, containing 256 2-byte samples. This means each buffer has 1/64th of a second of audio data in it. We can then calculate a root mean square (RMS) of all this data to get a single 4-byte floating point value. If we do this for every buffer, we end up with 64 4-byte floats per second, or 256 bytes per second. Much smaller than raw audio at the PDM sample rate of 16KHz giving 32,000 bytes per second!
 
 ```cpp
 #define BUFFER_SIZE 512U
@@ -61,7 +61,7 @@ You can find the full code to capture audio samples in the [Microsoft IoT Curric
 
 ### Train the model
 
-To train the model, we need a good range of audio data captured from the Arduino device - ideally 15-30 samples per audio we want to classify. A classifier distinguishes the input between multiple labels, so we need to gather data for multiple lables. For example, to classify the farts from my fart book I'd need to gather 15-30 samples for at least 2 different farts.
+To train the model, we need a good range of audio data captured from the Arduino device - ideally 15-30 samples per audio we want to classify. A classifier distinguishes the input between multiple labels, so we need to gather data for multiple labels. For example, to classify the farts from my fart book I'd need to gather 15-30 samples for at least 2 different farts.
 
 The audio data sent to the serial monitor from the Arduino can be captured into .csv files, and these can be loaded by a Python script and used to train a model.
 
@@ -101,7 +101,7 @@ You can find the training code in the [Microsoft IoT Curriculum resource GitHub 
 The C++ code that comes out of the training can then be added to the microcontroller code. Instead of dumping the audio data to the serial port, it can be sent to the classifier code, and the label of the best match is returned.
 
 ```cpp
-void procesSamples()
+void processSamples()
 {
   // Write out the classification to the serial port
   Serial.print("Label: ");

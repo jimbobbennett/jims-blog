@@ -21,9 +21,9 @@ It's slightly annoying to have to remember to run this every time you create or 
 
 GitHub actions is GitHubs CI/CD solution. CI is continuous integration, meaning every time code changes, your code can be built and tested. CD is continuous deployment, so once code is tested it can be deployed automatically. 
 
-Essentialy you can specify code that is run whenever someone checks in any changes, merges a branch or PR, or raises issues, creates PRs, any task really that you can do in GitHub. GitHub manages spinning up a VM to run everything, all you have to do is write your action, and pay (obviously - the best things in life are not always free).
+Essentially you can specify code that is run whenever someone checks in any changes, merges a branch or PR, or raises issues, creates PRs, any task really that you can do in GitHub. GitHub manages spinning up a VM to run everything, all you have to do is write your action, and pay (obviously - the best things in life are not always free).
 
-GitHub actions are deined using YAML inside your repository (in a `.github\workflows` folder), and you can call out to *actions* that do things, such as checking out code, tagging, running scripts, anything you need. You can also build custom actions.
+GitHub actions are defined using YAML inside your repository (in a `.github\workflows` folder), and you can call out to *actions* that do things, such as checking out code, tagging, running scripts, anything you need. You can also build custom actions.
 
 ## Custom actions
 

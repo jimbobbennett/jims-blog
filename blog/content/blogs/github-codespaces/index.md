@@ -33,7 +33,7 @@ The first step is to open the repo in Codespaces. From the repo in GitHub, selec
 
 ![The new codespace button](image-2.png)
 
-This will set up your code in a new Codespace - essentiall a blank VM using a default image from GitHub. This image is based off Ubuntu, and comes pre-configured with Python. Node, Docker and other stuff. You can read up on this default image at [aka.ms/ghcs-default-image](https://aka.ms/ghcs-default-image).
+This will set up your code in a new Codespace - essentially a blank VM using a default image from GitHub. This image is based off Ubuntu, and comes pre-configured with Python. Node, Docker and other stuff. You can read up on this default image at [aka.ms/ghcs-default-image](https://aka.ms/ghcs-default-image).
 
 This image contains almost everything I need - the tools are all installed, and VS Code is running with my code in it.
 

@@ -15,7 +15,7 @@ Anyone who knows me knows I'm a big fan of IoT and LEDs. I love using IoT device
 
 I've been giving the .NET IoT libraries a spin for an upcoming project using a Raspberry Pi Zero W 2. I'm usually a Python person when using a Pi, but the project I'm working on needs a service that doesn't have Python libraries that run on a Pi. Instead it has a .NET library, so it was time to break out my C# skills for the first time in years.
 
-I wanted to build an LED panel that can display text, either static text or scrolling text. So I picked up this [WS2812B panel from Amazon (allifliate link)](https://amzn.to/3sVjF7M), and started to dig into the .NET IoT libraries. WS2818b LEDs are also known as NeoPixels, and are addressable multicolor LEDs, so you can light up individual ones in any color you like. They are addressed based on the order they are connected to your device, so the first pixel in a string of LEDs is 0, the next is 1 and so on. You can add as many as you like, and the addresses just keep going up.
+I wanted to build an LED panel that can display text, either static text or scrolling text. So I picked up this [WS2812B panel from Amazon (affiliate link)](https://amzn.to/3sVjF7M), and started to dig into the .NET IoT libraries. WS2818b LEDs are also known as NeoPixels, and are addressable multicolor LEDs, so you can light up individual ones in any color you like. They are addressed based on the order they are connected to your device, so the first pixel in a string of LEDs is 0, the next is 1 and so on. You can add as many as you like, and the addresses just keep going up.
 
 The .NET IoT libraries are on GitHub at [github.com/dotnet/iot](https://github.com/dotnet/iot) and available as a NuGet. They support a wide range of boards including the Raspberry Pi.
 
@@ -54,7 +54,7 @@ var neoPixels = new Ws2812b(spi, 256);
 
 When you create the pixels, you pass in the length of the strip. I've been using a 8x32 panel, which is actually a 256 pixel long strip arranged in and up/down pattern.
 
-Once created, you light pixels by getting a `BitmapImage` from them, and setting colors on that. This image is a lengthx1 image, so 1 pixel tall, and as wide as the length of the LEDs. For example, my 8x32 panel is 256 pixels long, so is a bitmap of 256x1.
+Once created, you light pixels by getting a `BitmapImage` from them, and setting colors on that. This image is a `length x 1` image, so 1 pixel tall, and as wide as the length of the LEDs. For example, my 8x32 panel is 256 pixels long, so is a bitmap of 256x1.
 
 ```csharp
 var img = neoPixels.Image;
@@ -68,7 +68,7 @@ img.SetPixel(1, 0, Color.Green);
 img.SetPixel(2, 0, Color.Blue);
 ```
 
-Once the pixels are set in the image, it is commited and the LEDs updated.
+Once the pixels are set in the image, it is committed and the LEDs updated.
 
 ```csharp
 neoPixels.Update();
@@ -103,7 +103,7 @@ This will set the pixels 0 and 1 to off, and pixel 2 to blue.
 
 ## Writing text
 
-I wanted to make my panel show text, either short static text, or scrolling text. The first thing I needed was a font - something that defines how to create letters from pixels. I found a simplar project based on Aruino in a [GitHub project from Josh Levine](https://github.com/bigjosh/SimpleTickerTape/tree/main/fonts) so leveraged this code for a font and re-wrote it in C#.
+I wanted to make my panel show text, either short static text, or scrolling text. The first thing I needed was a font - something that defines how to create letters from pixels. I found a similar project based on Arduino in a [GitHub project from Josh Levine](https://github.com/bigjosh/SimpleTickerTape/tree/main/fonts) so leveraged this code for a font and re-wrote it in C#.
 
 Next I needed the mapping code. These fonts are defined as columns of binary data, so the bits to set. Each character is 8 bits tall (the size of my panel), and 6 bits wide. This mapping code was a bit of fun as I not only needed to divide up my pixels into columns, and map from a pixel in the 1 dimensional strip to a character pixel, but the strips go up and down!
 
@@ -122,7 +122,7 @@ This gives for the first few columns:
 7    8   23   24
 ```
 
-This means that the mapping code needs to alternate - for 0dd numbered columns the pixles go down, for even numbered the pixels go up so the mapping has to be reversed!
+This means that the mapping code needs to alternate - for 0dd numbered columns the pixels go down, for even numbered the pixels go up so the mapping has to be reversed!
 
 I'm not going to dive into all this mapping here, but you can find the code with full documentation in my [NeoPixelTickerTape GitHub repo](https://github.com/jimbobbennett/NeoPixelTickerTape).
 
@@ -134,6 +134,6 @@ I then added scrolling code that writes text starting at the right-most column, 
 
 You can find the code with full documentation in my [NeoPixelTickerTape GitHub repo](https://github.com/jimbobbennett/NeoPixelTickerTape).
 
-You can also download a NuGet pckage to use in your apps:
+You can also download a NuGet package to use in your apps:
 
 ![Select this to access the nuget](https://img.shields.io/nuget/v/JimBobBennett.NeoPixelTickerTape.svg?style=flat&logo=nuget)
