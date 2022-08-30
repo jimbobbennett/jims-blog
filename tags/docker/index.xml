@@ -248,4 +248,38 @@ You can also read more on the great &lt;a href="https://docs.github.com/actions"
 &lt;p>If you want to learn more, check out the Codespaces docs - &lt;a href="https://docs.github.com/codespaces">docs.github.com/codespaces&lt;/a>. There was also some great videos on it from GitHub Universe, this particular one by &lt;a href="https://twitter.com/2PercentSilk">Allison Weins&lt;/a> and Bailey Brooks works through the configuration of Codespaces.&lt;/p>
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
 &lt;iframe src="https://www.youtube.com/embed/X9Z-rUixnzk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
-&lt;/div></description></item></channel></rss>
+&lt;/div></description></item><item><title>Announcing a New Free Curriculum: IoT for Beginners</title><link>https://jimbobbennett.dev/blogs/announcing-iot-for-beginners/</link><pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/announcing-iot-for-beginners/</guid><description>&lt;p>It is our very great pleasure to announce the release of a new, free, MIT-licensed open-source curriculum all about the Internet of Things: &lt;a href="https://aka.ms/iot-beginners">IoT for Beginners&lt;/a>. Brought to you by a team of Azure Cloud Advocates, Program Managers, and &lt;a href="https://studentambassadors.microsoft.com/">Microsoft Learn Student Ambassadors&lt;/a>, we hope to empower students of all ages to learn the basics of IoT. Presuming no knowledge of IoT, we offer a free 12-week, 24-lesson curriculum to help you dive into this amazing field.&lt;/p>
+&lt;p>If you liked our first two curricula, &lt;a href="https://aka.ms/webdev-beginners">Web Dev for Beginners&lt;/a> and &lt;a href="https://aka.ms/ml-beginners">Machine Learning for beginners&lt;/a>, you will love IoT for Beginners!&lt;/p>
+&lt;h2 id="join-us-on-the-journey-of-your-food-from-farm-to-table">Join us on the journey of your food, from farm to table!&lt;/h2>
+&lt;p>🌽 Join us as we take the same journey as your food as it travels from farm to table, taking advantage of IoT on the way to improve farming, transport, manufacturing and food processing, retail and smart homes. 🌽&lt;/p>
+&lt;p>Our curricula are structured with a modified Project-Based pedagogy and include:&lt;/p>
+&lt;ul>
+&lt;li>a pre-lesson warmup quiz&lt;/li>
+&lt;li>a written lesson&lt;/li>
+&lt;li>video&lt;/li>
+&lt;li>knowledge checks&lt;/li>
+&lt;li>a project to build&lt;/li>
+&lt;li>infographics, sketchnotes, and visuals&lt;/li>
+&lt;li>a challenge&lt;/li>
+&lt;li>an assignment&lt;/li>
+&lt;li>a post-lesson quiz&lt;/li>
+&lt;li>opportunities to deepen your knowledge on Microsoft Learn&lt;/li>
+&lt;/ul>
+&lt;h2 id="what-will-you-learn">What will you learn?&lt;/h2>
+&lt;p>&lt;img src="Roadmap.jpg" alt="The curriculum roadmap">&lt;/p>
+&lt;p>The lessons are grouped so that you can deep-dive into use cases of IoT. We start with an introduction to IoT, covering devices, sensors, actuators and cloud connectivity, where you will build an internet connected version of the &amp;ldquo;Hello world&amp;rdquo; or IoT, an LED. We then move on to farming, learning about digital agriculture and feedback loops to control automated watering systems. Your food then leaves the farm on trucks, and you learn how to track vehicles using GPS, visualize their journeys and get alerts when a truck approaches a processing plant. Once in the plant, we move to AIoT, learning how to distinguish between ripe and unripe fruit using AI models running from IoT devices and on the edge. Next we move to the supermarket, using IoT to manage stock levels. Finally we take the food home to cook, and learn about consumer smart devices, building a voice controlled smart timer that can even speak multiple languages.&lt;/p>
+&lt;h2 id="hardware">Hardware&lt;/h2>
+&lt;p>The hard part (pun intended) for IoT is hardware, so we&amp;rsquo;ve designed this curriculum to be as accessible as possible. We want you to Learn IoT, not learn how to solder, know how to read resistor color codes, or know what a microfarad is, so we&amp;rsquo;ve made hardware choices to make things easier.&lt;/p>
+&lt;p>You can choose to learn using microcontrollers using Arduino with a &lt;a href="https://www.seeedstudio.com/Wio-Terminal-p-4509.html">Wio Terminal&lt;/a>, or single board computers using a &lt;a href="https://www.raspberrypi.org/products/raspberry-pi-4-model-b/">Raspberry Pi&lt;/a>. We&amp;rsquo;ve also added a &lt;a href="https://github.com/CounterFit-IoT">virtual hardware option&lt;/a> so you can learn without having to purchase anything!&lt;/p>
+&lt;p>For sensors and actuators, we&amp;rsquo;ve gone with the &lt;a href="https://www.seeedstudio.com/category/Grove-c-1003.html">Grove kit&lt;/a> from &lt;a href="https://www.seeedstudio.com/">Seeed Studio&lt;/a>, with easy to connect sensors and actuators.&lt;/p>
+&lt;p>&lt;img src="seeed.png" alt="The Seeed studio logo">&lt;/p>
+&lt;p>Our friends at Seeed have made it easy to buy the hardware, with packages containing all of the kit you need.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.seeedstudio.com/IoT-for-beginners-with-Seeed-and-Microsoft-Wio-Terminal-Starter-Kit-p-5006.html">IoT for beginners with Seeed and Microsoft - Wio Terminal Starter Kit&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.seeedstudio.com/IoT-for-beginners-with-Seeed-and-Microsoft-Raspberry-Pi-Starter-Kit.html">IoT for beginners with Seeed and Microsoft - Raspberry Pi 4 Starter Kit&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>If you are interested in learning using virtual hardware, you can write IoT code locally as if you were using a Raspberry Pi, then simulate sensors and actuators using &lt;a href="https://github.com/CounterFit-IoT">CounterFit&lt;/a>, a free, open source tool for simulating hardware.&lt;/p>
+&lt;h2 id="a-sneak-peek">A sneak peek&lt;/h2>
+&lt;p>This curriculum is filled with a lot of art, created by our team. Take a look at this cool sketchnote created by &lt;a href="https://twitter.com/nitya">@nitya&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="sketchnote.png" alt="A sketch note visualizing lesson 1 of the curriculum">&lt;/p>
+&lt;p>Without further ado, please meet &lt;a href="https://aka.ms/iot-beginners">IoT For Beginners: A Curriculum&lt;/a>!&lt;/p></description></item></channel></rss>
