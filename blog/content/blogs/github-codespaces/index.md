@@ -3,8 +3,10 @@ title: "Getting started with GitHub Codespaces"
 date: 2022-01-27
 draft: false
 featured_image: banner.png
+images: 
+  - banner.png
 tags: ["github", "codespaces", "vscode" ,"python", "container"]
-description: Learn how to auto post markdown from GitHub to dev.to
+description: Speed up setting up a new dev environment with GitHub codespaces
 ---
 
 ![VS Code running a code space](banner.png)

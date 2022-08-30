@@ -3,6 +3,8 @@ title: "Led Ticker Tape"
 date: 2022-02-25T17:01:05Z
 draft: false
 featured_image: hello-lights.png
+images: 
+  - hello-lights.png
 tags: ["led", "light", "dotnet" ,".net", "iot"]
 description: Learn how to scroll text using .NET IoT and an LED panel
 ---

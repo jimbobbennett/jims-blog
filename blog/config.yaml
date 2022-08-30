@@ -6,7 +6,7 @@ author:
   name: "Jim Bennett"
   email: "jim@jimbobbennett.io"
 
-Paginate: 3
+Paginate: 12
 
 markup:
   goldmark:
@@ -66,6 +66,8 @@ Menus:
 params:
   title: "JimBobBennett"
   description: Blog posts, videos and more from Jim
+  images: 
+  - twitter-card-site.png
   # staticPath: ""  # The path to serve the static files from
   favicon: "/fav.png"
 
