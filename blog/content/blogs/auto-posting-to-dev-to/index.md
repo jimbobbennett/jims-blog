@@ -4,7 +4,7 @@ date: 2022-02-03
 draft: false
 featured_image: stream-screenshot.png
 images: 
-  - stream-screenshot.png
+  - blogs/auto-posting-to-dev-to/stream-screenshot.png
 tags: ["github", "github-actions", "docker" ,"python", "ci-cd"]
 description: Learn how to auto post markdown from GitHub to dev.to
 ---

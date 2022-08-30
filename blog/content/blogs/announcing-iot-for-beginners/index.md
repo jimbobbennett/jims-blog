@@ -4,7 +4,7 @@ date: 2021-07-09
 draft: false
 featured_image: iot-for-beginners.png
 images: 
-  - iot-for-beginners.png
+  - blogs/announcing-iot-for-beginners/iot-for-beginners.png
 tags: ["iot", "curriculum", "beginners" ,"python", "c++", "raspberrypi", "arduino"]
 description: "It is our very great pleasure to announce the release of a new, free, MIT-licensed open-source curriculum all about the Internet of Things: IoT for Beginners"
 ---
