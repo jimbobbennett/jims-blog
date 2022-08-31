@@ -14,18 +14,18 @@
 
 {{ define "main" }}
 <section id="projects">
-  <div class="container pt-5" id="list-page">
-    <div class="row justify-content-center px-3 px-md-5">
-      <h1 class="text-left pb-2 content">{{.Title}}</h1>
-      {{ if .Params.showAuthor | default true}}
-      <div class="text-left content">
-        {{ .Params.author }}
-        <small>|</small>
-        {{ .Date.Format "Jan 2, 2006" }}
-      </div>
-      {{end}}
+    <div class="container pt-5" id="list-page">
+        <div class="row justify-content-center px-3 px-md-5">
+            <h1 class="text-left pb-2 content">{{.Title}}</h1>
+            {{ if .Params.showAuthor | default true}}
+            <div class="text-left content">
+              {{ .Params.author }} 
+              <small>|</small>
+              {{ .Date.Format "Jan 2, 2006" }}
+            </div>
+            {{end}}
+        </div>
     </div>
-  </div>
 </section>
 <section id="single">
   <div class="container">
@@ -38,7 +38,7 @@
           </div>
           {{ end }}
           <article class="page-content  p-2">
-            {{ .Content | emojify }}
+          {{ .Content | emojify }}
           </article>
         </div>
       </div>
@@ -46,12 +46,12 @@
         <div class="sticky-sidebar">
           {{ if .Params.toc | default true}}
           <aside class="toc">
-            <h5>
-              Table Of Contents
-            </h5>
-            <div class="toc-content">
-              {{.TableOfContents}}
-            </div>
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                {{.TableOfContents}}
+              </div>
           </aside>
           {{ end }}
 
@@ -72,23 +72,26 @@
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-9 p-4">
         <div id="disqus_thread"></div>
-        <script type="text/javascript">
-
-          (function () {
-            // Don't ever inject Disqus on localhost--it creates unwanted
-            // discussions from 'localhost:1313' on your Disqus account...
-            if (window.location.hostname == "localhost")
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            
+            var disqus_config = function () {
+              this.page.url = {{ .Page.Permalink }};  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = {{ .File.UniqueID }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            (function() { // DON'T EDIT BELOW THIS LINE
+             if (window.location.hostname == "localhost")
               return;
 
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            var disqus_shortname = '{{ .Site.DisqusShortname }}';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-          })();
+            var d = document, s = d.createElement('script');
+            s.src = 'https://jimbobbennett.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-            Disqus.</a></noscript>
-        <a href="https://disqus.com/" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
       </div>
     </div>
   </div>
@@ -99,7 +102,7 @@
 
 <script>
   var topScroll = document.getElementById("topScroll");
-  window.onscroll = function () { scrollFunction() };
+  window.onscroll = function() {scrollFunction()};
 
   function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
