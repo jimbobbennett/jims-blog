@@ -70,7 +70,7 @@ params:
   - twitter-card-site.png
   # staticPath: ""  # The path to serve the static files from
   favicon: "/fav.png"
-  disqusShortname: jimbobbennett
+  DisqusShortname: jimbobbennett
 
   theme:
     disableThemeToggle: true
