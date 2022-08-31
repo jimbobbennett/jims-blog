@@ -1,0 +1,663 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>powerapps on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in powerapps on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/powerapps/index.xml" rel="self" type="application/rss+xml"/><item><title>Led Ticker Tape</title><link>https://jimbobbennett.dev/blogs/led-ticker-tape/</link><pubDate>Fri, 25 Feb 2022 17:01:05 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/led-ticker-tape/</guid><description>&lt;p>&lt;img src="hello-lights.png" alt="An LED panel showing Hello in green">&lt;/p>
+&lt;p>Anyone who knows me knows I&amp;rsquo;m a big fan of IoT and LEDs. I love using IoT devices to control lights, from the LEDs behind my desk to &lt;a href="https://www.youtube.com/watch?v=h5ETn4PTdQA">smart pumpkins&lt;/a>!&lt;/p>
+&lt;p>I&amp;rsquo;ve been giving the .NET IoT libraries a spin for an upcoming project using a Raspberry Pi Zero W 2. I&amp;rsquo;m usually a Python person when using a Pi, but the project I&amp;rsquo;m working on needs a service that doesn&amp;rsquo;t have Python libraries that run on a Pi. Instead it has a .NET library, so it was time to break out my C# skills for the first time in years.&lt;/p>
+&lt;p>I wanted to build an LED panel that can display text, either static text or scrolling text. So I picked up this &lt;a href="https://amzn.to/3sVjF7M">WS2812B panel from Amazon (affiliate link)&lt;/a>, and started to dig into the .NET IoT libraries. WS2818b LEDs are also known as NeoPixels, and are addressable multicolor LEDs, so you can light up individual ones in any color you like. They are addressed based on the order they are connected to your device, so the first pixel in a string of LEDs is 0, the next is 1 and so on. You can add as many as you like, and the addresses just keep going up.&lt;/p>
+&lt;p>The .NET IoT libraries are on GitHub at &lt;a href="https://github.com/dotnet/iot">github.com/dotnet/iot&lt;/a> and available as a NuGet. They support a wide range of boards including the Raspberry Pi.&lt;/p>
+&lt;h2 id="lighting-leds-in-c">Lighting LEDs in C#&lt;/h2>
+&lt;p>I started as I usually do with a clean install of Raspberry Pi OS Lite. I use the Lite version as I access my Pi remotely using VS Code for all my development. You can read more on how I do this on &lt;a href="https://www.raspberrypi.com/news/coding-on-raspberry-pi-remotely-with-visual-studio-code/">my blog post on the Raspberry Pi blog&lt;/a>. When I connected to my Pi I installed .NET 6, and the C# extension in VS Code.&lt;/p>
+&lt;blockquote>
+&lt;p>One thing to note for the C# extension is it doesn&amp;rsquo;t support remote debugging on the Pi Zero W 2.&lt;/p>
+&lt;/blockquote>
+&lt;p>The .NET IoT libraries have a small amount of documentation and samples, so it wasn&amp;rsquo;t too much effort to get the LEDs lighting up.&lt;/p>
+&lt;p>The .NET libraries control these pixels over SPI, so they need to be connected to an SPI pin and ground on the Pi, as well as to a 5V power supply. You can&amp;rsquo;t use the 5V pins on the Pi as the panel can draw too much power and burn your Pi out, it&amp;rsquo;s best to use an external 5V power supply, either from a USB connection or a power converter plugged into the mains.&lt;/p>
+&lt;p>You also need to do a bit of SPI configuration, and this is documented in the &lt;a href="https://github.com/dotnet/iot/tree/main/src/devices/Ws28xx">GitHub source code for the WS2812B device code&lt;/a>.&lt;/p>
+&lt;blockquote>
+&lt;p>This is different to using the Adafruit NeoPixel libraries from Python, where you use different pins and don&amp;rsquo;t need any SPI configuration.&lt;/p>
+&lt;/blockquote>
+&lt;p>To use the .NET libraries, you start by creating an SPI configuration, then use that to create the pixels:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Create connection settings to connect to the panel using SPI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SpiConnectionSettings settings = &lt;span style="color:#66d9ef">new&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClockFrequency = &lt;span style="color:#ae81ff">2_400_000&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Mode = SpiMode.Mode0,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DataBitLength = &lt;span style="color:#ae81ff">8&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Create an SPI device&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> spi = SpiDevice.Create(settings);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Use the SPI device to connect to the LEDs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// and pass the number of LEDs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> neoPixels = &lt;span style="color:#66d9ef">new&lt;/span> Ws2812b(spi, &lt;span style="color:#ae81ff">256&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When you create the pixels, you pass in the length of the strip. I&amp;rsquo;ve been using a 8x32 panel, which is actually a 256 pixel long strip arranged in and up/down pattern.&lt;/p>
+&lt;p>Once created, you light pixels by getting a &lt;code>BitmapImage&lt;/code> from them, and setting colors on that. This image is a &lt;code>length x 1&lt;/code> image, so 1 pixel tall, and as wide as the length of the LEDs. For example, my 8x32 panel is 256 pixels long, so is a bitmap of 256x1.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can then set pixels in this image to the color you want. The color is set using the &lt;code>System.Drawing.Color&lt;/code> struct, which wraps ARGB values. The A (alpha channel) is ignored, so you set pixel brightness by reducing the value of the R, G, and B.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Red);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Green);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once the pixels are set in the image, it is committed and the LEDs updated.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>One quirk of the bitmaps, is you have to set all the pixels up to the last one you want set. So if you want to set pixel 10 to be red, you have to also set pixels 0-9 to something, even if it is &lt;code>Color.Black&lt;/code> (off). The first pixel you set is mapped to the first LED in the strip, so if you just set pixels 10-20, then the strip is set as if the first LED was pixel 10.&lt;/p>
+&lt;p>For example, if you just want to set pixel 2 to blue, you can&amp;rsquo;t do this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>What will happen here is pixel 2 is the first one with a value, so that will be considered the first pixel in the strip, so the first LED will light up blue.
+What you need to do is:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> img = neoPixels.Image;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Black);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Black);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>img.SetPixel(&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, Color.Blue);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>neoPixels.Update();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will set the pixels 0 and 1 to off, and pixel 2 to blue.&lt;/p>
+&lt;h2 id="writing-text">Writing text&lt;/h2>
+&lt;p>I wanted to make my panel show text, either short static text, or scrolling text. The first thing I needed was a font - something that defines how to create letters from pixels. I found a similar project based on Arduino in a &lt;a href="https://github.com/bigjosh/SimpleTickerTape/tree/main/fonts">GitHub project from Josh Levine&lt;/a> so leveraged this code for a font and re-wrote it in C#.&lt;/p>
+&lt;p>Next I needed the mapping code. These fonts are defined as columns of binary data, so the bits to set. Each character is 8 bits tall (the size of my panel), and 6 bits wide. This mapping code was a bit of fun as I not only needed to divide up my pixels into columns, and map from a pixel in the 1 dimensional strip to a character pixel, but the strips go up and down!&lt;/p>
+&lt;p>The way this panel is made is by weaving an LED strip up and down, so the pixels start at 0 on the top left, go down to 7 on the left-most column, then across one pixel to the right to 8, then up to 15.&lt;/p>
+&lt;p>This gives for the first few columns:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">15&lt;/span> &lt;span style="color:#ae81ff">16&lt;/span> &lt;span style="color:#ae81ff">31&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">14&lt;/span> &lt;span style="color:#ae81ff">17&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#ae81ff">13&lt;/span> &lt;span style="color:#ae81ff">18&lt;/span> &lt;span style="color:#ae81ff">29&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span> &lt;span style="color:#ae81ff">19&lt;/span> &lt;span style="color:#ae81ff">28&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#ae81ff">11&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span> &lt;span style="color:#ae81ff">27&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#ae81ff">21&lt;/span> &lt;span style="color:#ae81ff">26&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">9&lt;/span> &lt;span style="color:#ae81ff">22&lt;/span> &lt;span style="color:#ae81ff">25&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">7&lt;/span> &lt;span style="color:#ae81ff">8&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> &lt;span style="color:#ae81ff">24&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This means that the mapping code needs to alternate - for 0dd numbered columns the pixels go down, for even numbered the pixels go up so the mapping has to be reversed!&lt;/p>
+&lt;p>I&amp;rsquo;m not going to dive into all this mapping here, but you can find the code with full documentation in my &lt;a href="https://github.com/jimbobbennett/NeoPixelTickerTape">NeoPixelTickerTape GitHub repo&lt;/a>.&lt;/p>
+&lt;p>I then added scrolling code that writes text starting at the right-most column, then re-writes it shifting left a column at a time.&lt;/p>
+&lt;p>&lt;img src="tickertape.gif" alt="Hello world scrolling across the ticker tape">&lt;/p>
+&lt;h2 id="check-out-the-code">Check out the code&lt;/h2>
+&lt;p>You can find the code with full documentation in my &lt;a href="https://github.com/jimbobbennett/NeoPixelTickerTape">NeoPixelTickerTape GitHub repo&lt;/a>.&lt;/p>
+&lt;p>You can also download a NuGet package to use in your apps:&lt;/p>
+&lt;p>&lt;img src="https://img.shields.io/nuget/v/JimBobBennett.NeoPixelTickerTape.svg?style=flat&amp;amp;logo=nuget" alt="Select this to access the nuget">&lt;/p></description></item><item><title>Auto-posting to dev.to using a GitHub action</title><link>https://jimbobbennett.dev/blogs/auto-posting-to-dev-to/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/auto-posting-to-dev-to/</guid><description>&lt;p>&lt;img src="stream-screenshot.png" alt="A screenshot from teh live stream mentioned here">&lt;/p>
+&lt;p>I&amp;rsquo;ve been wanting to build a tool to post markdown automatically to blogging platforms. That way I (or anyone else) can write a blog post in markdown, save it in a &lt;a href="https://github.com">GitHub&lt;/a> repo, and have it automatically posted to a blogging platform of their choice.&lt;/p>
+&lt;p>I&amp;rsquo;ve created a small Python app to do this, and you can find it on GitHub at &lt;a href="https://github.com/jimbobbennett/auto-blog-poster">github.com/jimbobbennett/auto-blog-poster&lt;/a>. You add some special folders to any folders containing README.md files, and it will create a blog post from the markdown. It will also track when the README file changes and update the blog post.&lt;/p>
+&lt;p>It&amp;rsquo;s slightly annoying to have to remember to run this every time you create or update a post, so I wanted to make it so it could be run automatically. GitHub actions are the perfect way to do this.&lt;/p>
+&lt;h2 id="what-are-github-actions">What are GitHub actions?&lt;/h2>
+&lt;p>GitHub actions is GitHubs CI/CD solution. CI is continuous integration, meaning every time code changes, your code can be built and tested. CD is continuous deployment, so once code is tested it can be deployed automatically.&lt;/p>
+&lt;p>Essentially you can specify code that is run whenever someone checks in any changes, merges a branch or PR, or raises issues, creates PRs, any task really that you can do in GitHub. GitHub manages spinning up a VM to run everything, all you have to do is write your action, and pay (obviously - the best things in life are not always free).&lt;/p>
+&lt;p>GitHub actions are defined using YAML inside your repository (in a &lt;code>.github\workflows&lt;/code> folder), and you can call out to &lt;em>actions&lt;/em> that do things, such as checking out code, tagging, running scripts, anything you need. You can also build custom actions.&lt;/p>
+&lt;h2 id="custom-actions">Custom actions&lt;/h2>
+&lt;p>A custom action is one you write yourself to do whatever you need. In my case, I want my posting code to be run every time I update a markdown file in another repo, and this is something I can do with a custom action.&lt;/p>
+&lt;p>Custom actions are either written in JavaScript/TypeScript, or run from a Docker container. My app is Python, so I need to use Docker.&lt;/p>
+&lt;h3 id="creating-a-docker-custom-action">Creating a Docker custom action&lt;/h3>
+&lt;p>Docker custom actions are Docker containers that can be run, and will stop when they are complete - you package up your app in a container, and provide it with an &lt;code>ENTRYPOINT&lt;/code> so that Docker can run something.&lt;/p>
+&lt;p>I created a Dockerfile for my auto post tool, along with a shell script as the entrypoint:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create this docker file based off a Python 3.9 Linux image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>FROM python:3.9-slim-buster
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Run everything from /app&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WORKDIR /app
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Copy over the files&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY requirements.txt requirements.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY app.py app.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY dev_to.py dev_to.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY github_access.py github_access.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY entrypoint.sh entrypoint.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install the Python requirements&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN pip3 install -r requirements.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Execute the shell script as the entrypoint&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ENTRYPOINT /app/entrypoint.sh &lt;span style="color:#e6db74">${&lt;/span>@&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This Dockerfile creates a container using a Python base image, copies all my files over, installs my Pip package dependencies, then sets the entrypoint.&lt;/p>
+&lt;p>The interesting thing to note here is the parameter passed to the &lt;code>entrypoint.sh&lt;/code> script - &lt;code>${0}&lt;/code>. My app needs some secrets passed to it - an API key for Dev.to to allow it to post, the repo to post from, and a GitHub token to allow it to update the repo once the post is up. I don&amp;rsquo;t want these embedded in the container as I want to be able to use this action from different repositories (and allow others to use it), so I want these passed when the action is run. The &lt;code>${0}&lt;/code> syntax means everything that is set as an environment variable when running the container, so this passes all the environment variables to the shell script, where they can be used in the app.&lt;/p>
+&lt;p>This means running the container like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run ghcr.io/jimbobbennett/auto-blog-poster:main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --env DEV_TO_API_KEY&lt;span style="color:#f92672">=&lt;/span>xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GITHUB_ACCESS_TOKEN&lt;span style="color:#f92672">=&lt;/span>xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> REPO&lt;span style="color:#f92672">=&lt;/span>xxx/yyy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will pass &lt;code>DEV_TO_API_KEY=xxx GITHUB_ACCESS_TOKEN=xxx REPO=xxx/yyy&lt;/code> to the shell script, and this can be set as a local environment variable in the container.&lt;/p>
+&lt;p>Once created, I can build this container and publish it to the GitHub container registry from an action inside the repo for my post tool.&lt;/p>
+&lt;p>This is my action to publish my Docker container:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Docker Image CI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">push&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">branches&lt;/span>: [ &lt;span style="color:#ae81ff">main ]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pull_request&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">branches&lt;/span>: [ &lt;span style="color:#ae81ff">main ]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">REGISTRY&lt;/span>: &lt;span style="color:#ae81ff">ghcr.io&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">IMAGE_NAME&lt;/span>: &lt;span style="color:#ae81ff">${{ github.repository }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">build&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Log in to the Container registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">registry&lt;/span>: &lt;span style="color:#ae81ff">${{ env.REGISTRY }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">username&lt;/span>: &lt;span style="color:#ae81ff">${{ github.actor }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Extract metadata (tags, labels) for Docker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">meta&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">images&lt;/span>: &lt;span style="color:#ae81ff">${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build and push Docker image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">context&lt;/span>: &lt;span style="color:#ae81ff">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">push&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tags&lt;/span>: &lt;span style="color:#ae81ff">${{ steps.meta.outputs.tags }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">labels&lt;/span>: &lt;span style="color:#ae81ff">${{ steps.meta.outputs.labels }}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This action is run on a push or PR on the main branch. It runs on an Ubuntu VM, logs into the GitHub container registry, checks out my code, gets the tag for the package, builds it and pushed it to the registry.&lt;/p>
+&lt;p>This code has some variables that come from GitHub. Any variable that starts &lt;code>${{ github.xxx }}&lt;/code> is set automatically by GitHub to a relevant value such as the repo name. &lt;code>${{ steps.meta.outputs.xxx }}&lt;/code> are set as outputs of certain steps, and &lt;code>${{ secrets.xxx }}&lt;/code> are secrets you can set on your repo. &lt;code>${{ secrets.GITHUB_TOKEN }}&lt;/code> is a special secret you don&amp;rsquo;t need to set that provides an API token to interact with the current repo.&lt;/p>
+&lt;p>Once this container is pushed, I can use it from an action inside my blog repo!&lt;/p>
+&lt;h3 id="using-a-docker-custom-action">Using a Docker custom action&lt;/h3>
+&lt;p>To use a Docker custom action, I can just pull it from inside my blog repo action and run it. Here&amp;rsquo;s the action YAML:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">on&lt;/span>: [&lt;span style="color:#ae81ff">push]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">REGISTRY&lt;/span>: &lt;span style="color:#ae81ff">ghcr.io&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">build&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Log in to the Container registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">registry&lt;/span>: &lt;span style="color:#ae81ff">${{ env.REGISTRY }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">username&lt;/span>: &lt;span style="color:#ae81ff">${{ github.actor }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Use Docker CLI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions-hub/docker/cli@master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">env&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">SKIP_LOGIN&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">docker pull ghcr.io/jimbobbennett/auto-blog-poster:main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">run&lt;/span>: &amp;gt;&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> docker run ghcr.io/jimbobbennett/auto-blog-poster:main
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> --env DEV_TO_API_KEY=${{ secrets.DEV_TO_API_KEY }}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> GITHUB_ACCESS_TOKEN=${{ secrets.GITHUB_TOKEN }}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> REPO=${{ github.repository }}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This action uses a docker custom action to log in to the GitHub container registry, pull my container, then run it, passing in an API key for Dev.to, the GitHub token and the current repository.&lt;/p>
+&lt;p>That&amp;rsquo;s it - now every time the blog post markdown changes in my repo, it is automatically deployed to Dev.to.
+At the moment this is just a playground, but the plan is to build out a new blog that uses this - all the posts will be in GitHub, and it will post to another blogging platform and Dev.to at every checkin.&lt;/p>
+&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>GitHub actions are a lot of fun, and a great way to set up CI/CD. I did a live stream where I worked all this out here:&lt;/p>
+&lt;p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/MSfeKTOO1Tc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;br>
+You can also read more on the great &lt;a href="https://docs.github.com/actions">GitHub Actions docs&lt;/a>.&lt;/p></description></item><item><title>Getting started with GitHub Codespaces</title><link>https://jimbobbennett.dev/blogs/github-codespaces/</link><pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/github-codespaces/</guid><description>&lt;p>&lt;img src="banner.png" alt="VS Code running a code space">&lt;/p>
+&lt;p>The bane of every new developers life is getting your environment set up to be productive. And when I say new developer - I don&amp;rsquo;t just mean a dev who is new to a team, but every developer who needs to work on a project they haven&amp;rsquo;t worked on before.&lt;/p>
+&lt;p>Each project has it&amp;rsquo;s own dependencies, required tools, required libraries, a whole swathe of things that need to be installed, and can in some cases cause problems when projects have conflicting requirements. I certainly remember having to uninstall/reinstall different tooling versions when switching projects, sometimes multiple times a day 😱.&lt;/p>
+&lt;p>What if there was a way to fix this? If we could instantly have a pre-configured developer machine with the right tools that we need available at the click of a button? Even better one powered by the cloud so we don&amp;rsquo;t even need to worry about the power of our local machine, or even be able to access from a tablet or phone? This is where &lt;a href="https://github.com/features/codespaces">Codespaces&lt;/a> comes in.&lt;/p>
+&lt;p>&lt;a href="https://github.com/features/codespaces">GitHub Codespaces&lt;/a> are virtual developer machines in the cloud that you access through VS Code, running either on your desktop or in a browser. You can launch any GitHub repo inside a Codespace, with everything you do running in that Codespace - your code lives there, your debug sessions run there, your terminal runs commands there, it&amp;rsquo;s as if someone teleported a dev machine into your office!&lt;/p>
+&lt;h2 id="setting-up-a-codespace">Setting up a Codespace&lt;/h2>
+&lt;p>I&amp;rsquo;ve been recently working on a project for my team that consists of a Python app that I want to run as a Docker container, so I thought it would be fun to configure the repo for this to run inside a Codespace so when anyone else on the team wants to work on it, they won&amp;rsquo;t have any local configuration to do.&lt;/p>
+&lt;h3 id="sign-up-for-codespaces">Sign up for Codespaces&lt;/h3>
+&lt;p>Codespaces needs to be set up for a team or organization - mainly so someone can pay! Despite the claims that the best things in life are free, you do need to pay for Codespace.&lt;/p>
+&lt;h3 id="open-your-repo-in-a-codespace">Open your repo in a Codespace&lt;/h3>
+&lt;p>The first step is to open the repo in Codespaces. From the repo in GitHub, select &lt;strong>Codespaces&lt;/strong> from the &lt;strong>Code&lt;/strong> button, then select &lt;strong>New codespace&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="image-2.png" alt="The new codespace button">&lt;/p>
+&lt;p>This will set up your code in a new Codespace - essentially a blank VM using a default image from GitHub. This image is based off Ubuntu, and comes pre-configured with Python. Node, Docker and other stuff. You can read up on this default image at &lt;a href="https://aka.ms/ghcs-default-image">aka.ms/ghcs-default-image&lt;/a>.&lt;/p>
+&lt;p>This image contains almost everything I need - the tools are all installed, and VS Code is running with my code in it.&lt;/p>
+&lt;p>&lt;img src="image-3.png" alt="VS Code running in a browser under Codespaces">&lt;/p>
+&lt;p>My code is in Python, and this image comes with Python 3.8 installed. It means I can create a Codespace, and run my code in only a few seconds!&lt;/p>
+&lt;h2 id="configure-your-codespace">Configure your Codespace&lt;/h2>
+&lt;p>The good news is Codespaces are configurable - you can define the details for the container in which your Codespace runs in a &lt;code>devcontainer.json&lt;/code> file. I can use this to change the image used, configure what tools are installed, that sort of thing. The big upside of this is to ensure I have the right versions - the default container currently has Python 3.8 installed, but I can create a devcontainer file to set another version.&lt;/p>
+&lt;p>I&amp;rsquo;ll start by creating a devcontainer file. The Codespaces extension is installed for you in VS Code, so you can use the command palette to access options to configure the devcontainer file.&lt;/p>
+&lt;p>I started by selecting &lt;strong>Codespaces: Add Development Container Configuration Files&amp;hellip;.&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="image-4.png" alt="The Codespaces: Add Development Container Configuration Files command palette option">&lt;/p>
+&lt;p>From there I selected &lt;strong>From a predefined container configuration definition&amp;hellip;&lt;/strong> to use a pre-defined image. I could also use any container I have in my container registry.&lt;/p>
+&lt;p>&lt;img src="image-5.png" alt="The From a predefined container configuration definition option">&lt;/p>
+&lt;p>From the images I chose a Python 3 image, and selected Python 3.10.&lt;/p>
+&lt;p>&lt;img src="image-6.png" alt="The image options with a range of images to choose from">&lt;/p>
+&lt;p>&lt;img src="image-9.png" alt="The python 3 version options">&lt;/p>
+&lt;p>I then had an option to add a Node version, so selected None as I don&amp;rsquo;t want Node.&lt;/p>
+&lt;p>&lt;img src="image-10.png" alt="Node version selection">&lt;/p>
+&lt;p>Next I could select features to pre-install. I selected Docker as I need support for that.&lt;/p>
+&lt;p>&lt;img src="image-11.png" alt="Selecting the docker option for the container">&lt;/p>
+&lt;p>2 things now happen. 2 new files are created in my explorer, &lt;code>devcontainer.json&lt;/code> and &lt;code>Dockerfile&lt;/code> in a folder called &lt;code>.devcontainer&lt;/code>, and a toast will popup suggesting I rebuild the container. When I do this, Codespaces will restart with a new image based off my selections. It takes a while the first time as the container needs to be built.&lt;/p>
+&lt;p>&lt;img src="image-12.png" alt="The toast popup">&lt;/p>
+&lt;p>The devcontainer.json file directs the Codespace to use the Dockerfile that was created to define the image. It then includes things like a list of extensions that VS Code will need - in my case PyLance.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;extensions&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ms-python.python&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ms-python.vscode-pylance&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>I could and any more extensions here if I wanted, such as the Docker extension.&lt;/p>
+&lt;p>I could also edit these files to create a virtual environment, install Python packages, that sort of thing - though I&amp;rsquo;m not sure I&amp;rsquo;d need a virtual environment as my container will only be used to develop from this repo, so I could install packages globally and not worry.&lt;/p>
+&lt;h3 id="check-in-your-files">Check in your files&lt;/h3>
+&lt;p>Once you are happy with your dev container setup, you can then check the .devcontainer folder and all it&amp;rsquo;s contents into your repo. This will then be used by anyone who creates a Codespace for your repo!&lt;/p>
+&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>If you want to learn more, check out the Codespaces docs - &lt;a href="https://docs.github.com/codespaces">docs.github.com/codespaces&lt;/a>. There was also some great videos on it from GitHub Universe, this particular one by &lt;a href="https://twitter.com/2PercentSilk">Allison Weins&lt;/a> and Bailey Brooks works through the configuration of Codespaces.&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/X9Z-rUixnzk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div></description></item><item><title>Announcing a New Free Curriculum: IoT for Beginners</title><link>https://jimbobbennett.dev/blogs/announcing-iot-for-beginners/</link><pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/announcing-iot-for-beginners/</guid><description>&lt;p>It is our very great pleasure to announce the release of a new, free, MIT-licensed open-source curriculum all about the Internet of Things: &lt;a href="https://aka.ms/iot-beginners">IoT for Beginners&lt;/a>. Brought to you by a team of Azure Cloud Advocates, Program Managers, and &lt;a href="https://studentambassadors.microsoft.com/">Microsoft Learn Student Ambassadors&lt;/a>, we hope to empower students of all ages to learn the basics of IoT. Presuming no knowledge of IoT, we offer a free 12-week, 24-lesson curriculum to help you dive into this amazing field.&lt;/p>
+&lt;p>If you liked our first two curricula, &lt;a href="https://aka.ms/webdev-beginners">Web Dev for Beginners&lt;/a> and &lt;a href="https://aka.ms/ml-beginners">Machine Learning for beginners&lt;/a>, you will love IoT for Beginners!&lt;/p>
+&lt;h2 id="join-us-on-the-journey-of-your-food-from-farm-to-table">Join us on the journey of your food, from farm to table!&lt;/h2>
+&lt;p>🌽 Join us as we take the same journey as your food as it travels from farm to table, taking advantage of IoT on the way to improve farming, transport, manufacturing and food processing, retail and smart homes. 🌽&lt;/p>
+&lt;p>Our curricula are structured with a modified Project-Based pedagogy and include:&lt;/p>
+&lt;ul>
+&lt;li>a pre-lesson warmup quiz&lt;/li>
+&lt;li>a written lesson&lt;/li>
+&lt;li>video&lt;/li>
+&lt;li>knowledge checks&lt;/li>
+&lt;li>a project to build&lt;/li>
+&lt;li>infographics, sketchnotes, and visuals&lt;/li>
+&lt;li>a challenge&lt;/li>
+&lt;li>an assignment&lt;/li>
+&lt;li>a post-lesson quiz&lt;/li>
+&lt;li>opportunities to deepen your knowledge on Microsoft Learn&lt;/li>
+&lt;/ul>
+&lt;h2 id="what-will-you-learn">What will you learn?&lt;/h2>
+&lt;p>&lt;img src="Roadmap.jpg" alt="The curriculum roadmap">&lt;/p>
+&lt;p>The lessons are grouped so that you can deep-dive into use cases of IoT. We start with an introduction to IoT, covering devices, sensors, actuators and cloud connectivity, where you will build an internet connected version of the &amp;ldquo;Hello world&amp;rdquo; or IoT, an LED. We then move on to farming, learning about digital agriculture and feedback loops to control automated watering systems. Your food then leaves the farm on trucks, and you learn how to track vehicles using GPS, visualize their journeys and get alerts when a truck approaches a processing plant. Once in the plant, we move to AIoT, learning how to distinguish between ripe and unripe fruit using AI models running from IoT devices and on the edge. Next we move to the supermarket, using IoT to manage stock levels. Finally we take the food home to cook, and learn about consumer smart devices, building a voice controlled smart timer that can even speak multiple languages.&lt;/p>
+&lt;h2 id="hardware">Hardware&lt;/h2>
+&lt;p>The hard part (pun intended) for IoT is hardware, so we&amp;rsquo;ve designed this curriculum to be as accessible as possible. We want you to Learn IoT, not learn how to solder, know how to read resistor color codes, or know what a microfarad is, so we&amp;rsquo;ve made hardware choices to make things easier.&lt;/p>
+&lt;p>You can choose to learn using microcontrollers using Arduino with a &lt;a href="https://www.seeedstudio.com/Wio-Terminal-p-4509.html">Wio Terminal&lt;/a>, or single board computers using a &lt;a href="https://www.raspberrypi.org/products/raspberry-pi-4-model-b/">Raspberry Pi&lt;/a>. We&amp;rsquo;ve also added a &lt;a href="https://github.com/CounterFit-IoT">virtual hardware option&lt;/a> so you can learn without having to purchase anything!&lt;/p>
+&lt;p>For sensors and actuators, we&amp;rsquo;ve gone with the &lt;a href="https://www.seeedstudio.com/category/Grove-c-1003.html">Grove kit&lt;/a> from &lt;a href="https://www.seeedstudio.com/">Seeed Studio&lt;/a>, with easy to connect sensors and actuators.&lt;/p>
+&lt;p>&lt;img src="seeed.png" alt="The Seeed studio logo">&lt;/p>
+&lt;p>Our friends at Seeed have made it easy to buy the hardware, with packages containing all of the kit you need.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.seeedstudio.com/IoT-for-beginners-with-Seeed-and-Microsoft-Wio-Terminal-Starter-Kit-p-5006.html">IoT for beginners with Seeed and Microsoft - Wio Terminal Starter Kit&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.seeedstudio.com/IoT-for-beginners-with-Seeed-and-Microsoft-Raspberry-Pi-Starter-Kit.html">IoT for beginners with Seeed and Microsoft - Raspberry Pi 4 Starter Kit&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>If you are interested in learning using virtual hardware, you can write IoT code locally as if you were using a Raspberry Pi, then simulate sensors and actuators using &lt;a href="https://github.com/CounterFit-IoT">CounterFit&lt;/a>, a free, open source tool for simulating hardware.&lt;/p>
+&lt;h2 id="a-sneak-peek">A sneak peek&lt;/h2>
+&lt;p>This curriculum is filled with a lot of art, created by our team. Take a look at this cool sketchnote created by &lt;a href="https://twitter.com/nitya">@nitya&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="sketchnote.png" alt="A sketch note visualizing lesson 1 of the curriculum">&lt;/p>
+&lt;p>Without further ado, please meet &lt;a href="https://aka.ms/iot-beginners">IoT For Beginners: A Curriculum&lt;/a>!&lt;/p></description></item><item><title>Using TinyML to identify farts</title><link>https://jimbobbennett.dev/blogs/tiny-ml-farts/</link><pubDate>Mon, 22 Feb 2021 17:01:05 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/tiny-ml-farts/</guid><description>&lt;blockquote>
+&lt;p>TLDR; Find a complete hands-on lab to build a TinyML audio classifier at &lt;a href="https://github.com/microsoft/iot-curriculum/tree/main/labs/tiny-ml/audio-classifier">github.com/microsoft/iot-curriculum/tree/main/labs/tiny-ml/audio-classifier&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;p>My 8-year-old daughter bought me &amp;ldquo;Farts - a spotters guide&amp;rdquo; - a book with some buttons down the side and when you press them, they make different fart sounds. This is the height of humor for an 8 year old, and still pretty funny as an adult. I thought it would be fun to see if I could distinguish between the different fart noises using machine learning - and not just any machine learning, but seeing as I love IoT, I wanted it to run on a microcontroller!&lt;/p>
+&lt;p>&lt;img src="fart-book.jpg" alt="Farts, a spotters guide">&lt;/p>
+&lt;h2 id="tinyml">TinyML&lt;/h2>
+&lt;p>TinyML is a relatively new field, and is all about creating tiny machine learning models that can run on microcontrollers. These models are really tiny - in the order of kilobytes instead of the usual megabytes or gigabytes. They need to be this tiny to run on microcontrollers that typically have kilobytes of RAM. These models also draw little power, typically in the single-digit milliwatts or lower.&lt;/p>
+&lt;p>What are the use cases for TinyML? Well there are loads, anywhere you want to run ML models offline with minimal power draw. You may even have some TinyML models running in your house right now. For example, smart voice controlled devices listen for a wake word, and this needs to be offline and draw minimal power - perfect for a TinyML model. Another use case is in healthcare with devices that can monitor your health that run for years on tiny batteries. It&amp;rsquo;s also being used in animal smart collars and trackers, &lt;a href="https://www.hackster.io/contests/ElephantEdge">using audio to monitor the health of elephants in the wild&lt;/a>. So yes - a fart detector has a real world application!&lt;/p>
+&lt;p>To build a TinyML model you need to decide what type of model to build, gather training data, train the model, then deploy it to your device to handle new data. In this case, I wanted an audio classifier, so decided to use a &lt;a href="https://scikit-learn.org/stable/modules/svm.html">support vector machine classifier&lt;/a>.&lt;/p>
+&lt;blockquote>
+&lt;p>Despite this sounding all fancy and like I know what I&amp;rsquo;m talking about, I actually have no clue what this is - I just learned about them from a great tutorial which I followed to get inspiration for this post! The tutorial is &lt;a href="https://eloquentarduino.github.io/2020/08/better-word-classification-with-arduino-33-ble-sense-and-machine-learning/">Better word classification with Arduino Nano 33 BLE Sense and Machine Learning&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="building-a-fart-detector">Building a fart detector&lt;/h2>
+&lt;p>For my fart detector, I needed to build an audio classifier that could run on a microcontroller. Because I&amp;rsquo;m terrible at electronics and understanding I2C, SPI and all that other stuff, I decided to use an all-in-one Arduino board that has a microphone built in allowing me to use off-the-shelf Arduino libraries to gather audio data. The board of choice was the Arduino Nano 33 Sense BLE board, a small Arduino board with a whole raft of sensors including a microphone, temperature, pressure, humidity, light level and color, gesture and proximity. That&amp;rsquo;s a lot of sensors in such a tiny board!&lt;/p>
+&lt;p>&lt;img src="nano-sense.jpg" alt="An arduino Nano sense 33 BLE IoT board">&lt;/p>
+&lt;p>To code this board, I could use the free Arduino IDE, but I prefer to use &lt;a href="https://code.visualstudio.com/">Visual Studio Code&lt;/a>, along with the &lt;a href="https://platformio.org/">PlatformIO extension&lt;/a>. This allows the creation of standalone microcontroller projects with .ini files that define the board and libraries used. I can check a project into GitHub and someone can clone it and immediately start working with it without the need for instructions on what boards and libraries they need to set up.&lt;/p>
+&lt;h3 id="getting-training-data">Getting training data&lt;/h3>
+&lt;p>To train TinyML models you not only need the model to by tiny, but you also need small inputs - the more data that goes into training the model or inference (that is running the model), the larger it is. Audio data can be quite large - for example CD quality audio (remember CDs?) is 44.1KHz/16-bit which means it captures 2 bytes of data 44,100 times per second, or 176KB per second! That&amp;rsquo;s a lot of data - if we wanted to use all of it and train our model with 2 seconds worth of data it wouldn&amp;rsquo;t be TinyML any more.&lt;/p>
+&lt;p>A great trick with audio data is realizing you don&amp;rsquo;t need all of it to classify particular sounds. Instead you can get an average value that represents many samples and use that as the data. In the case of the Arduino, the library that captures audio, &lt;a href="https://www.arduino.cc/en/Reference/PDM">PDM&lt;/a>, captures audio at 16KHz in 512 byte buffers, containing 256 2-byte samples. This means each buffer has 1/64th of a second of audio data in it. We can then calculate a root mean square (RMS) of all this data to get a single 4-byte floating point value. If we do this for every buffer, we end up with 64 4-byte floats per second, or 256 bytes per second. Much smaller than raw audio at the PDM sample rate of 16KHz giving 32,000 bytes per second!&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#define BUFFER_SIZE 512U
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Check we have a full buffers worth
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">if&lt;/span> (PDM.available() &lt;span style="color:#f92672">==&lt;/span> BUFFER_SIZE)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Read from the buffer
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> PDM.read(_buffer, BUFFER_SIZE);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Calculate the root mean square value of the buffer
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">int16_t&lt;/span> rms;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> arm_rms_q15((q15_t &lt;span style="color:#f92672">*&lt;/span>)_buffer, BUFFER_SIZE&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#66d9ef">sizeof&lt;/span>(&lt;span style="color:#66d9ef">int16_t&lt;/span>), (q15_t &lt;span style="color:#f92672">*&lt;/span>)&lt;span style="color:#f92672">&amp;amp;&lt;/span>rms);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The RMS value can be checked against a threshold to see if there is actual audio data or not, and if audio data is detected, the next 2 seconds worth can be grabbed. In this case it&amp;rsquo;s output to the serial port so it can be read from the PlatformIO serial monitor in VS Code.&lt;/p>
+&lt;p>You can find the full code to capture audio samples in the &lt;a href="https://github.com/microsoft/iot-curriculum/tree/main/labs/tiny-ml/audio-classifier/code/audio-capture">Microsoft IoT Curriculum resource GitHub repo in the labs folder&lt;/a>.&lt;/p>
+&lt;h3 id="train-the-model">Train the model&lt;/h3>
+&lt;p>To train the model, we need a good range of audio data captured from the Arduino device - ideally 15-30 samples per audio we want to classify. A classifier distinguishes the input between multiple labels, so we need to gather data for multiple labels. For example, to classify the farts from my fart book I&amp;rsquo;d need to gather 15-30 samples for at least 2 different farts.&lt;/p>
+&lt;p>The audio data sent to the serial monitor from the Arduino can be captured into .csv files, and these can be loaded by a Python script and used to train a model.&lt;/p>
+&lt;p>The model in question is trained using &lt;a href="https://scikit-learn.org/">Scikit-Learn&lt;/a>, a Python Machine Learning library. The audio data is loaded into numpy arrays, then split into training and testing data, the model is trained using the training data, then tested with the testing data to give an idea on the accuracy.&lt;/p>
+&lt;blockquote>
+&lt;p>If you have a nice shiny Apple M1 mac (like I do), then installing Scikit-Learn is currently not as easy. Check out my &lt;a href="https://jimbobbennett.dev/blogs/installing-scikit-learn-on-an-apple-m1/">guide on how to install it&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Split the data into a training and testing set to test the accuracy of the model
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If you are happy with the accuracy of the model, you can remove this split
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>dataset_train, dataset_test, label_train, label_test &lt;span style="color:#f92672">=&lt;/span> train_test_split(dataset, dataset_labels.ravel(), test_size&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Build the support vector classification for our data and train the model
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>svc &lt;span style="color:#f92672">=&lt;/span> SVC(kernel&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>poly&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>, degree&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, gamma&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.1&lt;/span>, C&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svc.fit(dataset_train, label_train)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Test the accuracy of the model
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>print(&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>Accuracy:&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>, svc.score(dataset_test, label_test))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once the model has been trained, it can be exported using the rather useful &lt;a href="https://pypi.org/project/micromlgen/">micromlgen Python library&lt;/a> which can convert ML models into raw C++ code to run on microcontrollers.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>from micromlgen import port
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Convert the model to C code and write to the classifier.h file
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>c_code &lt;span style="color:#f92672">=&lt;/span> port(svc, classmap&lt;span style="color:#f92672">=&lt;/span>label_map)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>with open(&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>classifier.h&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;w&amp;#39;&lt;/span>) as f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f.write(c_code)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f.close()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can find the training code in the &lt;a href="https://github.com/microsoft/iot-curriculum/tree/main/labs/tiny-ml/audio-classifier/code/model-trainer">Microsoft IoT Curriculum resource GitHub repo in the labs folder&lt;/a>.&lt;/p>
+&lt;h2 id="classify-farts">Classify farts&lt;/h2>
+&lt;p>The C++ code that comes out of the training can then be added to the microcontroller code. Instead of dumping the audio data to the serial port, it can be sent to the classifier code, and the label of the best match is returned.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">processSamples&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Write out the classification to the serial port
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> Serial.print(&lt;span style="color:#e6db74">&amp;#34;Label: &amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Serial.println(clf.predictLabel(_samples));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>You can find a complete hands on lab implementing this in the &lt;a href="https://github.com/microsoft/iot-curriculum/tree/main/labs/tiny-ml/audio-classifier">Microsoft IoT Curriculum resource GitHub repo in the labs folder&lt;/a>.&lt;/p></description></item><item><title>Installing Scikit-Learn on a Apple Silicon</title><link>https://jimbobbennett.dev/blogs/installing-scikit-learn-on-an-apple-m1/</link><pubDate>Sun, 31 Jan 2021 17:01:05 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/installing-scikit-learn-on-an-apple-m1/</guid><description>&lt;p>At the end of last year I splashed out on a shiny new Apple MacBookAir with the M1 processor as I was fed up with an old Intel-based MacBookPro that was quite honestly crippled by corporate anti-virus software.&lt;/p>
+&lt;p>Out the box this machine is amazing. It&amp;rsquo;s ridiculously fast, and lasts for ever on battery. Seriously - I charge it every 2 days and manage a full day of coding, writing, emails, Teams, the lot. Did I also mention it&amp;rsquo;s fast? I can have all the things running and it barely breaks a sweat, even with only 8GB of RAM.&lt;/p>
+&lt;p>The downside is that not all software works on the new ARM-64 architecture. Apple have a translation layer called Rosetta 2 (Rosetta 1 was their translation from PowerPC to Intel), and this works great most of the time for every day apps, but it doesn&amp;rsquo;t always work for development tools and libraries, as the mix of translated and untranslated stuff just breaks down.&lt;/p>
+&lt;p>One library I needed to use that isn&amp;rsquo;t supported is Scikit-Learn. Now I&amp;rsquo;m no Python expert, and I don&amp;rsquo;t really understand what Scikit-Learn does, I just know I need it to train some TinyML models to &lt;a href="https://eloquentarduino.github.io/2020/08/better-word-classification-with-arduino-33-ble-sense-and-machine-learning/">recognize wake words on an Arduino Nano 33 sense board&lt;/a>. If I try a normal pip install scikit-learn, I get a whole wall of errors, both using Python 3.9 for the M1, and Python 3.8 under Rosetta.&lt;/p>
+&lt;p>So what to do?&lt;/p>
+&lt;p>It turns out the solution is to use &lt;a href="https://github.com/conda-forge/miniforge">Miniforge&lt;/a>, a version of Conda that is comparable to Miniconda, but supports various CPU architectures. Whatever that means. As I said, I&amp;rsquo;m no Python expert, but this tool essentially allows me to create virtual environments and install packages compiling them for the M1 chip! Any packages it doesn&amp;rsquo;t support can then be installed from pip.&lt;/p>
+&lt;p>So how do I install all this?&lt;/p>
+&lt;p>Firstly - I need to install Miniforge. The install script is on the GitHub page, or you can download it by clicking &lt;a href="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh">this link&lt;/a>. It wanted to activate it in every terminal, which I didn&amp;rsquo;t want so I turned that off by running:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>conda config --set auto_activate_base false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Next I went to the folder containing my Python code, and created a virtual environment:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>conda create -n .venv python
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is pretty much the same as creating a virtual environment with Python, just using a different tool. Like with Python, the virtual environment then needs to be activated:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>conda activate .venv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finally, I can install Scikit-Learn:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>conda install scikit-learn
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Done! For the particular thing I&amp;rsquo;m working on, I needed a package that isn&amp;rsquo;t available from Miniforge, so I just installed it with pip:&lt;/p>
+&lt;p>pip install micromlgen
+Done! I could then run my Python script as normal, and it all worked nicely. And fast - my M1 ran the script in question in 2 seconds, 5 times faster than the 10 seconds my Surface Book took.&lt;/p></description></item><item><title>Build a virtual IoT Lab with Raspberry Pis and Azure IoT Hub</title><link>https://jimbobbennett.dev/blogs/build-virtual-iot-lab/</link><pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/build-virtual-iot-lab/</guid><description>&lt;p>The rise of virtual education has led to sweeping changes in how students are taught. A lot of computer science lessons can be run with only small changes thanks to the cloud - &lt;a href="https://azure.microsoft.com/services/lab-services/pre-configured">Azure Lab Services&lt;/a> can provide virtual machines with developer tooling, or &lt;a href="https://github.com/features/codespaces">GitHub Codespaces&lt;/a> can replace the physical lab setups that Universities used to use.&lt;/p>
+&lt;p>One area that has limitations is the Internet of Things. You can&amp;rsquo;t move small microcontrollers or small board computers to the cloud, posting devices is expensive and leads to support issues that often can only be resolved by posting the device back, and asking students to purchase devices is problematic as this can be expensive for a group of students who may already be paying many thousands of dollars for tuition, and in some cases not feasible due to shipping or customs issues.&lt;/p>
+&lt;p>Although it is impossible to re-create an IoT lab fully in a virtual setting, it is possible to make devices like Raspberry Pi&amp;rsquo;s available over the internet, either from a University campus, or even from the Lecturers home (given enough upload bandwidth), and these can then be connected to microcontrollers to program these if needed. There are plenty of solutions to do this that involve opening SSH ports over the internet, but these are not the most secure as you have to have a public SSH port open.&lt;/p>
+&lt;p>One novel way that increases security is using &lt;a href="https://docs.microsoft.com/azure/iot-hub/iot-hub-device-streams-overview?WT.mc_id=academic-7372-jabenn">Azure IoT Hub device streams&lt;/a>.&lt;/p>
+&lt;h2 id="use-device-streams-to-proxy-an-ssh-connection">Use device streams to proxy an SSH connection&lt;/h2>
+&lt;p>Device streams provide secure two-way TCP tunnels via standard HTTPS connections - allowing devices to bypass firewalls and other network considerations, and avoid having SSH ports open over the internet, but still have security via IoT Hub.&lt;/p>
+&lt;p>You can then run server code on your local device to emulate SSH, and it can forward the connection to a device stream via IoT Hub, which streams to the client IoT device which is running client code to listen to the requests over the stream and redirect them to the local SSH port, and stream back the results, essentially using very thin proxies.&lt;/p>
+&lt;p>&lt;img src="ssh-over-iot-hub-architecture.png" alt="IoT hub acting as an ssh proxy">&lt;/p>
+&lt;p>Although the Pi is connected to an IoT Hub to stream the SSH commands, it can still connect to another IoT Hub for IoT development, and run services like Azure IoT Edge. From a users perspective, it&amp;rsquo;s the same as SSHing into the Pi - they connect an SSH session to the local proxy using a different port, and that logs them into the Pi. Behind the scenes the IoT Hub device streams make it work, but to the user, it&amp;rsquo;s as if they connected natively.&lt;/p>
+&lt;p>The full process for how to set this up, as well as all the code you need to build and run the proxy is available as one of our &lt;a href="https://github.com/microsoft/iot-curriculum/blob/main/educator-guides/lab-guides/virtual-iot-lab/iot-hub-ssh-virtual-lab.md">Lab Guides as part of the Microsoft IoT Curriculum resources&lt;/a>. Check out the instructions and try it out.&lt;/p>
+&lt;p>&lt;a href="https://github.com/microsoft/iot-curriculum/blob/main/educator-guides/lab-guides/virtual-iot-lab/iot-hub-ssh-virtual-lab.md">github.com/microsoft/iot-curriculum/blob/main/educator-guides/lab-guides/virtual-iot-lab/iot-hub-ssh-virtual-lab.md&lt;/a>&lt;/p></description></item><item><title>What is edge computing, why do it, why send IoT data to the cloud?</title><link>https://jimbobbennett.dev/blogs/what-is-edge-computing/</link><pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/what-is-edge-computing/</guid><description>&lt;p>I recently had a student reach out to me with some great questions around Edge computing and how it matches to IoT, and indeed why even use the cloud with IoT. They have to write a paper on the difference between edge computing and just using the cloud, and were researching these terms and trying to understand the whys and hows.&lt;/p>
+&lt;p>There is currently a lot of confusion around this topic, especially when product pages are full of buzzwords, marketing speak and business decision maker language, not student friendly explanations, so I thought I&amp;rsquo;d take a moment to try to answer their questions with a blog post and hopefully help others navigate this minefield.&lt;/p>
+&lt;p>This blog post is a mind dump in the style of I didn&amp;rsquo;t have time to give you a short answer, so I wrote a long blog post instead, so comments and criticism welcome.&lt;/p>
+&lt;h2 id="temperature-detection">Temperature detection&lt;/h2>
+&lt;p>I&amp;rsquo;m going to frame all this with the canonical IoT example of temperature detection. It&amp;rsquo;s one of the &amp;rsquo;easiest&amp;rsquo; IoT scenarios in that there are a huge range of devices and examples out there for this. You take an IoT device such as a micro controller (for example an Arduino board) or a single-board computer (for example a Raspberry Pi), attach a temperature sensor, and gather the data.&lt;/p>
+&lt;h2 id="what-is-cloud-computing">What is cloud computing?&lt;/h2>
+&lt;p>Lets start with the cloud. The cloud is someone elses computer - you pay per use for either computing resources or software resources managed by someone else. it allows you to not worry about purchasing hardware, managing cooling, electricity and networking, managing software, security, patching and the other day to day operations, and instead outsources these to experts. The cost comes down - you only pay for what you need when you need it, and speed of delivery goes up as the services are pretty much instant on.&lt;/p>
+&lt;p>In the IoT space for example, a few clicks brings you a service you can securely send IoT data to, and a well defined way to get the data back out for analysis, all for a modest monthly fee. Running the same setup manually would be highly expensive and a lot of work.&lt;/p>
+&lt;h3 id="why-send-this-data-to-the-cloud">Why send this data to the cloud?&lt;/h3>
+&lt;p>A great question - why use the cloud when you can just read the data yourself, either by showing it on a screen or even by connecting to a Raspberry Pi and reading the values?&lt;/p>
+&lt;p>The answer lies in the rise of the smart thermostat. In the house I grew up in, the temperature sensor was a dumb device - it detected the temperature and if it was lower than a value on a thermostat, the heating turned on. The next generation was connected thermostats - sending the data to the cloud. This added a level of usability to these devices - yes you could walk to the thermostat and check the temperature of your house, but you could also get this on your phone. Combine this with the ability to also control the thermostat remotely you have a great advantage of using the cloud. You can check the temperature of your house from anywhere and control it from anywhere. On your way home unexpectedly on a cold day? You can check how cold your house is and turn the heating up if it&amp;rsquo;s set to a colder vacant setting. The cloud starts to take your data and control anywhere.&lt;/p>
+&lt;p>Yes, if you don&amp;rsquo;t care and just want a wall thermometer then there&amp;rsquo;s no need, but as soon as you want access away from the temperature sensor, the cloud wins.&lt;/p>
+&lt;p>The next generation of smart thermostats is around analyzing this data in the cloud. A disconnected device relies on manual control, a cloud connected device can use algorithms to make control decisions for you based on a wide variety of data. Your cloud connected thermostat can check your calendar, and if it sees you are on vacation it can turn your heating off. It can also check weather, and if the heating is off but a cold snap is coming it can turn it on to stop pipes freezing. All this comes via having the data and control in the cloud.&lt;/p>
+&lt;p>This idea can be taken further with temperature monitoring of factories and machinery - sometimes subtle variations in temperature of a machine component can indicate an upcoming failure. By constantly monitoring the temperature, with data sent to AI models, you can be do predictive maintenance, replacing a part early before a costly failure.&lt;/p>
+&lt;h3 id="the-downside-of-the-cloud">The downside of the cloud&lt;/h3>
+&lt;p>The cloud isn&amp;rsquo;t perfect, and can have a couple of downsides - though these can be mitigated.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Reliance on the cloud&lt;/p>
+&lt;p>Recently one of the big cloud providers had an outage, and social media was full of complaints from people who can&amp;rsquo;t vacuum their house as the cloud was down. If your device relies on the cloud, it also needs to work when the cloud is not there - I don&amp;rsquo;t want a WiFi outage or a data center fire to stop me from having heating, especially if I lived in a really cold location! There are also locations where internet connections are unavailable or expensive, such as oil rigs or deep underground, or even in space.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Data privacy&lt;/p>
+&lt;p>The cloud is secure, and the big clouds have a lot of certifications and approvals for data security, but there might be times when you don&amp;rsquo;t want data in the cloud. For example, some countries insist on personal data remaining in-country (data sovereignty laws). If the cloud doesn&amp;rsquo;t have a data center in your country, you have to store it locally or on a local data center. Some data, such as medical data might need to stay on-site in a hospital.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Bandwidth and network speed&lt;/p>
+&lt;p>Bandwidth isn&amp;rsquo;t free. If you want to run AI models to analyze video from security cameras, sending all that data to the cloud is going to need a lot of bandwidth. That&amp;rsquo;s expensive, and not always available. The internet is also not as fast as internal networks, so if you need the data or results of analysis quickly then it might be faster to have the analytics closer to the data capture.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Cost&lt;/p>
+&lt;p>The cloud brings the cost down, but sometimes you don&amp;rsquo;t want or need to pay for the power of the cloud. It might be that a $99 NVIDIA Jetson Nano can run your AI models fast enough that you don&amp;rsquo;t want to rent a $100 a month GPU-powered VM in the cloud.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>This is where Edge computing comes in.&lt;/p>
+&lt;h2 id="what-is-edge-computing">What is edge computing?&lt;/h2>
+&lt;p>Edge computing is running parts of the cloud on the edge - that is on your own network in your building or data center. You can take advantage of the cloud to build and train workloads, then deploy them to an edge device to run closer to your data. This way you get the benefit of the scalable power of the cloud to train complex models, and the advantage of local compute to:&lt;/p>
+&lt;ul>
+&lt;li>Avoid dependency on the internet and the cloud - your models can run offline, so if the cloud or internet goes down, or if you are away from the internet such as at sea, they keep running.&lt;/li>
+&lt;li>Keep your data private and local&lt;/li>
+&lt;li>Not be limited by external bandwidth and internet speed, only be limited by your internal network bandwidth&lt;/li>
+&lt;li>Control costs using existing hardware&lt;/li>
+&lt;/ul>
+&lt;p>Thinking about factory monitoring - you can do this so much better on the edge than in the cloud. You can gather the data you need and train complex AI models for predictive maintenance in the cloud. Once trained, you can download these models to an IoT Edge device built using cheap hardware. This device can be on your local network close to the machinery, and respond to temperature data - instantly alerting someone or even turning the machinery down or off it it detects a possible failure. If the internet or the cloud goes down - the device still works. If you send millions of data points to it for analysis, you are not limited by outgoing internet speeds.&lt;/p>
+&lt;p>These models running on the edge are not static - you can constantly improve and retrain models in the cloud and deploy them to the edge as required.&lt;/p>
+&lt;p>You can also use these edge devices as gateways - sending data up to the cloud as needed. This can be filtered data, such as removing duplicate values or data within an allowed range, or they can be used to route data from devices that can&amp;rsquo;t connect to the cloud services directly. They can even shield devices from being connected directly to the internet of these devices are not secure.&lt;/p>
+&lt;p>To visualize how this works - I&amp;rsquo;m going to defer to an article from the Microsoft Documentation covering &lt;a href="https://docs.microsoft.com/azure/stream-analytics/stream-analytics-edge">running Stream Analytics on IoT Edge&lt;/a>. Stream Analytics is a tool for creating real-time queries against streaming data, outputting the results of the query to other systems. Stream Analytics jobs can be run in the cloud, or downloaded onto an IoT Edge device and run on the edge.&lt;/p>
+&lt;p>&lt;img src="asaedge-highlevel-diagram.png" alt="High-level diagram of IoT Edge">&lt;/p>
+&lt;p>This diagram shows IoT Edge devices running Azure Stream Analytics jobs via the IoT Edge runtime, running on-premise in a factory, with data coming in from a variety of devices. The results of the Stream Analytics job are then sent on to Azure IoT Hub for further analytics if needed.&lt;/p>
+&lt;h2 id="more-resource">More resource&lt;/h2>
+&lt;p>If you want to learn more about this topic - here&amp;rsquo;s some great resource:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://azure.microsoft.com/services/iot-edge/">Azure IoT Edge product page&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/azure/iot-edge/">Azure IoT Edge documentation&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://youtu.be/LaAiyuzPRyY">Run cognitive services on IoT Edge&lt;/a> - a video where I am joined by &lt;a href="https://twitter.com/mpaloski">Marko Paloski&lt;/a> and we talk about running a pre-built AI service on the Edge using Azure IoT Edge&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/ai-edge-engineer/?WT.mc_id=academic-11509-jabenn">AI Edge engineer learning path on Microsoft Learn&lt;/a> - a learning path produced in partnership with the &lt;a href="https://www.conted.ox.ac.uk/courses/artificial-intelligence-cloud-and-edge-implementations">University of Oxford&lt;/a> covering AI on the edge&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/build-intelligent-edge-with-azure-iot-edge/">Build the intelligent edge learning path on Microsoft Learn&lt;/a> - a learning path covering how to use Azure IoT Edge to build IoT solutions that require having cloud intelligence deployed locally on IoT Edge devices&lt;/li>
+&lt;li>&lt;a href="https://github.com/microsoft/iot-curriculum">Microsoft IoT Curriculum resource&lt;/a> - a GitHub repo of resources, curated links and labs for IoT classes, projects and learning&lt;/li>
+&lt;li>&lt;a href="https://github.com/microsoft/iot-curriculum/tree/main/labs/ai-edge/vision/manufacturing-part-check">Assembly line QA lab&lt;/a> - a hands-on-lab covering how to use IoT edge to do AI-powered assembly line validation&lt;/li>
+&lt;/ul></description></item><item><title>Control holiday lights with Python, Azure IoT and Power Apps</title><link>https://jimbobbennett.dev/blogs/control-holiday-lights-power-apps/</link><pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/control-holiday-lights-power-apps/</guid><description>&lt;p>As the nights draw in here in the northern hemisphere, there are a number of winter celebrations that happen - and one thing they all have in common is lights.&lt;/p>
+&lt;p>In the past I&amp;rsquo;ve just purchased strings of lights from the nearest retailer, strung them up to a tree or around my house, and fought with remote controls or buttons to get the color I wanted.&lt;/p>
+&lt;p>Well this year I decided to do something better and build IoT powered holiday lights, controlled by a Power App built with no code!&lt;/p>
+&lt;p>&lt;img src="app-controlled-lights.gif" alt="Lights controlled by a power app">&lt;/p>
+&lt;p>The hardware would be based around &lt;a href="https://www.amazon.com/gp/product/B07FVPN3PH">WS2812B programmable LED strips (also referred to as Neopixels)&lt;/a>, controlled by a &lt;a href="https://www.raspberrypi.org/products/raspberry-pi-zero-w">Raspberry Pi Zero W&lt;/a>. Software wise, the Pi would run some Python code to talk to &lt;a href="https://azure.microsoft.com/services/iot-central">Azure IoT Central&lt;/a> - an IoT software as a service platform that can send commands to the Pi to turn the lights on or off. A &lt;a href="https://powerapps.microsoft.com/">Power App&lt;/a> would then be used to control IoT Central via a mobile app - written with no code! All these cloud services can be used for free, which is even better!&lt;/p>
+&lt;blockquote>
+&lt;p>You can find a full hands-on guide to building this your self with detailed instructions and all the code in my &lt;a href="https://github.com/jimbobbennett/NeopixelHolidayLights">Neopixel Holiday Lights GitHub Repo&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="hardware-needed">Hardware needed&lt;/h2>
+&lt;p>To create this, you will need the following hardware:&lt;/p>
+&lt;ul>
+&lt;li>A Raspberry Pi that can connect to the internet such as a Pi Zero W or a Pi 3/4, with appropriate SD card and power supply&lt;/li>
+&lt;li>A strip of WS212B programmable LEDs&lt;/li>
+&lt;li>A 5v power supply - either a USB to terminal block lead or a 5v DC converter&lt;/li>
+&lt;li>Jumper wires&lt;/li>
+&lt;/ul>
+&lt;p>To wire the hardware, connect the positive lead or pin on the LEDs to the positive terminal on the 5v power supply, Connect the negative lead or pin to both the negative terminal on the power supply, and a GND GPIO pin on the Raspberry Pi. Some LED strips have twin negative leads for this reason, otherwise you&amp;rsquo;ll need to solder or attach more leads as necessary. Finally attach the control pin to GPIO pin 18 on the Raspberry Pi. You can find details on the pin numbers in the &lt;a href="https://www.raspberrypi.org/documentation/usage/gpio/">Raspberry Pi GPIO documentation&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="wiring-1.png" alt="The wiring of the neo pixels">&lt;/p>
+&lt;h2 id="azure-iot-central">Azure IoT Central&lt;/h2>
+&lt;p>&lt;a href="https://azure.microsoft.com/services/iot-central">Azure IoT Central&lt;/a> is a software as a services platform that allows you to build the cloud infrastructure and security for your IoT apps with no code. It is based around device templates - a description of the data that a device can send to the cloud, and commands the cloud can send to the device to instruct it to do something.&lt;/p>
+&lt;p>Start by heading to &lt;a href="https://apps.azureiotcentral.com/">apps.azureiotcentral.com&lt;/a> and creating a new app. Although IoT Central is a paid service, you can use it for free. There is a free tier, but apps created using this are deleted after 7 days, so go for one of the standard tiers. Both the standard tiers offer 2 devices for free, so you can control your Pi without paying anything.&lt;/p>
+&lt;p>You will need an Azure Subscription to sign up, so if you don&amp;rsquo;t have one you can sign up for free. Students can sign up at &lt;a href="https://azure.microsoft.com/free/students/">azure.microsoft.com/free/students&lt;/a> to get $100 of credit for a year, renewing every year, otherwise sign up at &lt;a href="https://azure.microsoft.com/free/">azure.microsoft.com/free&lt;/a> to get $200 of credit that lasts 30 days.&lt;/p>
+&lt;p>Once you have your app created, create a device template with 2 commands and a property. The commands will turn the lights on and off, and the property will allow the color to be persisted so restarting the Pi means the lights will re-light with the last color set.&lt;/p>
+&lt;p>Name one of the commands &lt;code>On&lt;/code> and make it take a request parameter called &lt;code>Color&lt;/code>. Name the other command &lt;code>Off&lt;/code> with no request parameter. Create the property called &lt;code>Color&lt;/code> as a &lt;code>string&lt;/code>. Publish this template, then create a new device using it. Once you&amp;rsquo;ve created the device, grab the connection details.&lt;/p>
+&lt;h2 id="program-the-pi">Program the Pi&lt;/h2>
+&lt;p>Next step is to program the Pi to connect to IoT Central, receive the commands and turn on the lights. This can be done in Python. Make sure your Pi is using the latest Raspberry Pi OS, with all the latest updates and is connected to the internet. You can use either the Lite or Desktop version - for a project like this where the Pi is running headless I like to use the Lite version to allow me to use smaller SD cards and boot the Pis faster.&lt;/p>
+&lt;blockquote>
+&lt;p>To program the Pi, you can use your favorite Python tool. I personally recommend using &lt;a href="https://code.visualstudio.com/">Visual Studio Code&lt;/a>, a free, open source developer text editor that has extensions for a variety of languages, including the &lt;a href="https://devblogs.microsoft.com/python/announcing-pylance-fast-feature-rich-language-support-for-python-in-visual-studio-code/">PyLance extension for Python&lt;/a>. If you are using the full desktop version of Raspberry Pi OS, you can &lt;a href="https://jimbobbennett.dev/blogs/run-visual-studio-code-on-a-raspberry-pi">install VS Code locally&lt;/a>, otherwise use the &lt;a href="https://code.visualstudio.com/docs/remote/ssh">Remote SSH extension&lt;/a> to code remotely on a Pi 3 or 4, or the &lt;a href="https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs">SSH File system extension&lt;/a> to code remotely on a Pi Zero.&lt;/p>
+&lt;/blockquote>
+&lt;p>First you need to install some Pip packages. These need to be installed using &lt;code>sudo&lt;/code> - to control the Neopixels you need to run the code as a super user. Install the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>rpi_ws281x
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>adafruit-circuitpython-neopixel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>azure-iot-device
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>python-dotenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The first 2 packages provide control for the LEDs, the &lt;code>azure-iot-device&lt;/code> package has the Python code for devices to connect to IoT Central, and &lt;code>python-dotenv&lt;/code> is used to load secrets from .env files to avoid things like API keys being uploaded to source code control.&lt;/p>
+&lt;p>Once these are installed, create a file called &lt;code>.env&lt;/code> on the Pi in whatever folder you want to create the code in to store the connection details for the IoT Central device, and add the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ID_SCOPE&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;ID scope&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">DEVICE_ID&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;device id&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">PRIMARY_KEY&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;primary key&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Replace &lt;code>&amp;lt;ID scope&amp;gt;&lt;/code> with the value of the ID Scope from the IoT Central device connection dialog. Replace &lt;code>&amp;lt;device id&amp;gt;&lt;/code> with the device ID, and the &lt;code>&amp;lt;primary key&amp;gt;&lt;/code> with the primary key.&lt;/p>
+&lt;p>Next create a file called &lt;code>app.py&lt;/code> and add the following code. You can also find this code in &lt;a href="https://github.com/jimbobbennett/NeopixelHolidayLights/blob/main/code/iot-controlled/app.py">the GitHub repo tha accompanies this post&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> asyncio
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> board
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> neopixel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> azure.iot.device.aio &lt;span style="color:#f92672">import&lt;/span> IoTHubDeviceClient, ProvisioningDeviceClient
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> azure.iot.device &lt;span style="color:#f92672">import&lt;/span> MethodResponse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> dotenv &lt;span style="color:#f92672">import&lt;/span> load_dotenv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Define the NeoPixel strip setting:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The pin the control wire is connected to (18 in this code)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The length of the strip (150 LEDs in this code)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The brightness (0.2 on a scale of 0-1)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If the colors are written as soon as the values are updated, or if they need to be&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># updated all at once as soon as the values are set&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pixels &lt;span style="color:#f92672">=&lt;/span> neopixel&lt;span style="color:#f92672">.&lt;/span>NeoPixel(board&lt;span style="color:#f92672">.&lt;/span>D18, &lt;span style="color:#ae81ff">150&lt;/span>, brightness&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.2&lt;/span>, auto_write&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load the IoT Central connection details from a .env file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>load_dotenv()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id_scope &lt;span style="color:#f92672">=&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>getenv(&lt;span style="color:#e6db74">&amp;#39;ID_SCOPE&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>device_id &lt;span style="color:#f92672">=&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>getenv(&lt;span style="color:#e6db74">&amp;#39;DEVICE_ID&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>primary_key &lt;span style="color:#f92672">=&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>getenv(&lt;span style="color:#e6db74">&amp;#39;PRIMARY_KEY&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Declare the device client so it can be used from all the function&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>device_client &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Provisions the device with the Azure device provisioning service or returns&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the connection details if the device is already provisioned&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">register_device&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> provisioning_device_client &lt;span style="color:#f92672">=&lt;/span> ProvisioningDeviceClient&lt;span style="color:#f92672">.&lt;/span>create_from_symmetric_key(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> provisioning_host&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;global.azure-devices-provisioning.net&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> registration_id&lt;span style="color:#f92672">=&lt;/span>device_id,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id_scope&lt;span style="color:#f92672">=&lt;/span>id_scope,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> symmetric_key&lt;span style="color:#f92672">=&lt;/span>primary_key,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> provisioning_device_client&lt;span style="color:#f92672">.&lt;/span>register()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the color of the Neopixels based on a color string coming in.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This color string is a 6 character code, 2 characters for red, 2 for green&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># and 2 for blue. These 2 characters are a HEX value from 00 to FF.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># For example FF0000 is full red, no green or blue. FFFFFF is white, 000000 is off.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Once the color is set, write it back to the IoT Central property via a device twin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">set_color&lt;/span>(color):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># split in the color string into the red, green and blue components, and convert these&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># to valid hex strings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0x&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> color[&lt;span style="color:#ae81ff">0&lt;/span>:&lt;span style="color:#ae81ff">2&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> g &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0x&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> color[&lt;span style="color:#ae81ff">2&lt;/span>:&lt;span style="color:#ae81ff">4&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> b &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0x&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> color[&lt;span style="color:#ae81ff">4&lt;/span>:&lt;span style="color:#ae81ff">6&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Convert hext to numerical values&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r_value &lt;span style="color:#f92672">=&lt;/span> int(r, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> g_value &lt;span style="color:#f92672">=&lt;/span> int(g, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> b_value &lt;span style="color:#f92672">=&lt;/span> int(b, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Updating color: r =&amp;#39;&lt;/span>, r_value, &lt;span style="color:#e6db74">&amp;#39;, g =&amp;#39;&lt;/span>, g_value, &lt;span style="color:#e6db74">&amp;#39;, b =&amp;#39;&lt;/span>, b_value)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Set all the pixels to the new color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pixels&lt;span style="color:#f92672">.&lt;/span>fill((r_value, g_value, b_value))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Show the color on all the pixels&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pixels&lt;span style="color:#f92672">.&lt;/span>show()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Write the color back as a property&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Properties are written to the device twin, so patch the reported properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># with the color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> patch &lt;span style="color:#f92672">=&lt;/span> {&lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span>:color}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Sending patch:&amp;#34;&lt;/span>, patch)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>patch_twin_reported_properties(patch)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># IoT Central command handler&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># IoT Central commands are implemented as IoT Hub direct methods&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">command_handler&lt;/span>(method_request):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Message received:&amp;#34;&lt;/span>, method_request&lt;span style="color:#f92672">.&lt;/span>name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Message payload:&amp;#34;&lt;/span>, method_request&lt;span style="color:#f92672">.&lt;/span>payload)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Determine how to respond to the command based on the IoT Hub direct method method name&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># which is the same as the IoT Central command name&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> method_request&lt;span style="color:#f92672">.&lt;/span>name &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;On&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># For an On request, set the color based on the payload&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> set_color(method_request&lt;span style="color:#f92672">.&lt;/span>payload)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;executed on&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">elif&lt;/span> method_request&lt;span style="color:#f92672">.&lt;/span>name &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Off&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># For an Off request, set the color to 000000, which turns the pixels off&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> set_color(&lt;span style="color:#e6db74">&amp;#34;000000&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;executed off&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Received unknown method: &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> method_request&lt;span style="color:#f92672">.&lt;/span>name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Method calls have to return a response so IoT Central knows it was handled correctly,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># So send a 200 response to show we handled this&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> payload &lt;span style="color:#f92672">=&lt;/span> {&lt;span style="color:#e6db74">&amp;#34;result&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">True&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> status &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">200&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Send the response&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> method_response &lt;span style="color:#f92672">=&lt;/span> MethodResponse&lt;span style="color:#f92672">.&lt;/span>create_from_method_request(method_request, status, payload)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>send_method_response(method_response)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">property_handler&lt;/span>(patch):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Patch received:&amp;#34;&lt;/span>, patch)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span> &lt;span style="color:#f92672">in&lt;/span> patch:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> set_color(patch[&lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The main async function that runs the app&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">global&lt;/span> device_client
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Regsiter the Pi as an IoT device in IoT Central&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> registration_result &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> register_device()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Build the IoT Hub connection string from the registration details&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># IoT Central sits on top of IoT Hub, and the Python SDK only supports IoT Hub,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># So to talk to IoT central the IoT Hub connection string needs to be built from details&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># from registering the device with the provisioning service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> conn_str&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;HostName=&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> registration_result&lt;span style="color:#f92672">.&lt;/span>registration_state&lt;span style="color:#f92672">.&lt;/span>assigned_hub &lt;span style="color:#f92672">+&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;;DeviceId=&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> device_id &lt;span style="color:#f92672">+&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;;SharedAccessKey=&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> primary_key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># The client object is used to interact with your Azure IoT Central app via IoT Hub, so create this &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># from the connection string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> device_client &lt;span style="color:#f92672">=&lt;/span> IoTHubDeviceClient&lt;span style="color:#f92672">.&lt;/span>create_from_connection_string(conn_str)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Connect the client to IoT Hub&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Connecting&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>connect()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Connected&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># IoT Central stores properties in the device twin, so read this to see if we have a color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># stored from the last run for the lights. This way when the device starts up it can set the color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># to the last setting&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> twin &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>get_twin()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Got twin: &amp;#39;&lt;/span>, twin)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Load the color from the reported properties of the twin if it exists&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#e6db74">&amp;#39;reported&amp;#39;&lt;/span> &lt;span style="color:#f92672">in&lt;/span> twin &lt;span style="color:#f92672">and&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span> &lt;span style="color:#f92672">in&lt;/span> twin[&lt;span style="color:#e6db74">&amp;#39;reported&amp;#39;&lt;/span>]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> set_color(twin[&lt;span style="color:#e6db74">&amp;#39;reported&amp;#39;&lt;/span>][&lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Set the method request handler on the client to handle IoT Central commands&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> device_client&lt;span style="color:#f92672">.&lt;/span>on_method_request_received &lt;span style="color:#f92672">=&lt;/span> command_handler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Handle updates to the color property from IoT Central&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> device_client&lt;span style="color:#f92672">.&lt;/span>on_twin_desired_properties_patch_received &lt;span style="color:#f92672">=&lt;/span> property_handler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Define a message loop that keeps the app alive whilst listening for commands&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">main_loop&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> &lt;span style="color:#66d9ef">True&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>sleep(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Wait for user to indicate they are done listening for method calls&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> main_loop()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Finally, disconnect&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>disconnect()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Start the async app running&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> asyncio&lt;span style="color:#f92672">.&lt;/span>run(main())
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Read the code and the comments to see what it does.&lt;/p>
+&lt;p>This code will connect to the Azure device provisioning service to authenticate the device using the settings from the &lt;code>.env&lt;/code> file, then connect. It will load the properties to see if a color has already been set, and if so set the Neopixels to that color. It will then listen for commands to change the color of the Neopixels or turn them off.&lt;/p>
+&lt;p>Run the code as sudo with the following command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo python3 app.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The app will start up and connect. You can then run the commands in IoT Central to control the lights.&lt;/p>
+&lt;p>The color for the On command should be given as a string value representing a Hex string. It will be 6 characters long, with 2 characters each representing the R, G and B values with values from 0-255 (&lt;code>00&lt;/code> - &lt;code>FF&lt;/code>). For example, red is &lt;code>FF0000&lt;/code>, green is &lt;code>00FF00&lt;/code>, blue is &lt;code>0000FF&lt;/code>, yellow is &lt;code>FFFF00&lt;/code>, white is &lt;code>FFFFFF&lt;/code>.&lt;/p>
+&lt;h2 id="set-up-a-power-app">Set up a Power App&lt;/h2>
+&lt;p>Power Apps allow you to build apps with low or no code, by creating flows that connect logic and services, and connecting these to a UI designed on a canvas.&lt;/p>
+&lt;p>You will need a Power Apps account to create one, and if you don&amp;rsquo;t have one you can sign up for a &lt;a href="https://powerapps.microsoft.com/communityplan/">community plan&lt;/a>. This will give you a free environment for learning and building your own apps.&lt;/p>
+&lt;p>Start by creating a flow in the Power App. This should use the &lt;strong>Create from Template&lt;/strong> option selecting &lt;strong>Power Apps button&lt;/strong>. Name this flow &lt;code>Turn lights on&lt;/code> and add an &lt;em>Azure IoT Central V3&lt;/em> connector (&lt;strong>NOT&lt;/strong> the V2 connector). Select your IoT Central app, add the device id, set the device template, select the capability, then select the &lt;em>On&lt;/em> command. A new box will appear for the color to pass to this command, so select this box and select &lt;strong>Ask in Power Apps&lt;/strong> from the box that appears. Then save the flow.&lt;/p>
+&lt;p>&lt;img src="on-flow-complete.png" alt="The complete on flow">&lt;/p>
+&lt;p>Create another flow for the &lt;em>Off&lt;/em> command called &lt;code>Turn lights off&lt;/code>.&lt;/p>
+&lt;p>Once you have the flows, create an app, Drag a text input and two buttons to the canvas and align then in a column.&lt;/p>
+&lt;p>Name the text input &lt;code>ColorInput&lt;/code>, remove the default value and change the hint to color.&lt;/p>
+&lt;p>Name one button &lt;code>On&lt;/code> and select the &lt;strong>Action&lt;/strong> tab on the ribbon, then select &lt;strong>Power Automate&lt;/strong>. From the popup, select the &lt;em>Turn lights on&lt;/em> flow. It will take a few seconds to add the flow. When it does a half complete function will appear in the function bar. Pass the &lt;code>Text&lt;/code> property of the &lt;code>ColorInput&lt;/code> control into:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>PowerAppsbutton.Run(ColorInput.Text)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Name the other button &lt;code>Off&lt;/code> and add the &lt;em>Turn lights off&lt;/em> flow to it. The function for this doesn&amp;rsquo;t need any parameters, so just close the brackets.&lt;/p>
+&lt;p>&lt;img src="power-app-canvas.png" alt="The complete power apps canvas">&lt;/p>
+&lt;p>Make sure the app is running on the Pi, then save and test the Power App using the &lt;strong>Preview this app&lt;/strong> button on the toolbar.&lt;/p>
+&lt;h2 id="done">Done!&lt;/h2>
+&lt;p>Your app is now complete! Mount the lights somewhere and control them from the Power App. You can you can run it on your phone. Install the &lt;strong>Power Apps&lt;/strong> app from the &lt;a href="https://apps.apple.com/us/app/power-apps/id1047318566">Apple App Store&lt;/a> or &lt;a href="https://play.google.com/store/apps/details?id=com.microsoft.msapps">Google Play Store&lt;/a>, log in, select your app and use it to control your lights.&lt;/p>
+&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>You can learn more about Azure IoT Central and the Microsoft Power Platform via Microsoft Learn, a hands-on, self-guided learning platform from Microsoft.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/develop-iot-solutions-with-azure-iot-central">Develop IoT Central applications with IoT Central&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/power-plat-fundamentals/">Microsoft Power Platform Fundamentals&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

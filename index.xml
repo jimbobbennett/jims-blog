@@ -378,4 +378,286 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;p>&lt;img src="ssh-over-iot-hub-architecture.png" alt="IoT hub acting as an ssh proxy">&lt;/p>
 &lt;p>Although the Pi is connected to an IoT Hub to stream the SSH commands, it can still connect to another IoT Hub for IoT development, and run services like Azure IoT Edge. From a users perspective, it&amp;rsquo;s the same as SSHing into the Pi - they connect an SSH session to the local proxy using a different port, and that logs them into the Pi. Behind the scenes the IoT Hub device streams make it work, but to the user, it&amp;rsquo;s as if they connected natively.&lt;/p>
 &lt;p>The full process for how to set this up, as well as all the code you need to build and run the proxy is available as one of our &lt;a href="https://github.com/microsoft/iot-curriculum/blob/main/educator-guides/lab-guides/virtual-iot-lab/iot-hub-ssh-virtual-lab.md">Lab Guides as part of the Microsoft IoT Curriculum resources&lt;/a>. Check out the instructions and try it out.&lt;/p>
-&lt;p>&lt;a href="https://github.com/microsoft/iot-curriculum/blob/main/educator-guides/lab-guides/virtual-iot-lab/iot-hub-ssh-virtual-lab.md">github.com/microsoft/iot-curriculum/blob/main/educator-guides/lab-guides/virtual-iot-lab/iot-hub-ssh-virtual-lab.md&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="https://github.com/microsoft/iot-curriculum/blob/main/educator-guides/lab-guides/virtual-iot-lab/iot-hub-ssh-virtual-lab.md">github.com/microsoft/iot-curriculum/blob/main/educator-guides/lab-guides/virtual-iot-lab/iot-hub-ssh-virtual-lab.md&lt;/a>&lt;/p></description></item><item><title>What is edge computing, why do it, why send IoT data to the cloud?</title><link>https://jimbobbennett.dev/blogs/what-is-edge-computing/</link><pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/what-is-edge-computing/</guid><description>&lt;p>I recently had a student reach out to me with some great questions around Edge computing and how it matches to IoT, and indeed why even use the cloud with IoT. They have to write a paper on the difference between edge computing and just using the cloud, and were researching these terms and trying to understand the whys and hows.&lt;/p>
+&lt;p>There is currently a lot of confusion around this topic, especially when product pages are full of buzzwords, marketing speak and business decision maker language, not student friendly explanations, so I thought I&amp;rsquo;d take a moment to try to answer their questions with a blog post and hopefully help others navigate this minefield.&lt;/p>
+&lt;p>This blog post is a mind dump in the style of I didn&amp;rsquo;t have time to give you a short answer, so I wrote a long blog post instead, so comments and criticism welcome.&lt;/p>
+&lt;h2 id="temperature-detection">Temperature detection&lt;/h2>
+&lt;p>I&amp;rsquo;m going to frame all this with the canonical IoT example of temperature detection. It&amp;rsquo;s one of the &amp;rsquo;easiest&amp;rsquo; IoT scenarios in that there are a huge range of devices and examples out there for this. You take an IoT device such as a micro controller (for example an Arduino board) or a single-board computer (for example a Raspberry Pi), attach a temperature sensor, and gather the data.&lt;/p>
+&lt;h2 id="what-is-cloud-computing">What is cloud computing?&lt;/h2>
+&lt;p>Lets start with the cloud. The cloud is someone elses computer - you pay per use for either computing resources or software resources managed by someone else. it allows you to not worry about purchasing hardware, managing cooling, electricity and networking, managing software, security, patching and the other day to day operations, and instead outsources these to experts. The cost comes down - you only pay for what you need when you need it, and speed of delivery goes up as the services are pretty much instant on.&lt;/p>
+&lt;p>In the IoT space for example, a few clicks brings you a service you can securely send IoT data to, and a well defined way to get the data back out for analysis, all for a modest monthly fee. Running the same setup manually would be highly expensive and a lot of work.&lt;/p>
+&lt;h3 id="why-send-this-data-to-the-cloud">Why send this data to the cloud?&lt;/h3>
+&lt;p>A great question - why use the cloud when you can just read the data yourself, either by showing it on a screen or even by connecting to a Raspberry Pi and reading the values?&lt;/p>
+&lt;p>The answer lies in the rise of the smart thermostat. In the house I grew up in, the temperature sensor was a dumb device - it detected the temperature and if it was lower than a value on a thermostat, the heating turned on. The next generation was connected thermostats - sending the data to the cloud. This added a level of usability to these devices - yes you could walk to the thermostat and check the temperature of your house, but you could also get this on your phone. Combine this with the ability to also control the thermostat remotely you have a great advantage of using the cloud. You can check the temperature of your house from anywhere and control it from anywhere. On your way home unexpectedly on a cold day? You can check how cold your house is and turn the heating up if it&amp;rsquo;s set to a colder vacant setting. The cloud starts to take your data and control anywhere.&lt;/p>
+&lt;p>Yes, if you don&amp;rsquo;t care and just want a wall thermometer then there&amp;rsquo;s no need, but as soon as you want access away from the temperature sensor, the cloud wins.&lt;/p>
+&lt;p>The next generation of smart thermostats is around analyzing this data in the cloud. A disconnected device relies on manual control, a cloud connected device can use algorithms to make control decisions for you based on a wide variety of data. Your cloud connected thermostat can check your calendar, and if it sees you are on vacation it can turn your heating off. It can also check weather, and if the heating is off but a cold snap is coming it can turn it on to stop pipes freezing. All this comes via having the data and control in the cloud.&lt;/p>
+&lt;p>This idea can be taken further with temperature monitoring of factories and machinery - sometimes subtle variations in temperature of a machine component can indicate an upcoming failure. By constantly monitoring the temperature, with data sent to AI models, you can be do predictive maintenance, replacing a part early before a costly failure.&lt;/p>
+&lt;h3 id="the-downside-of-the-cloud">The downside of the cloud&lt;/h3>
+&lt;p>The cloud isn&amp;rsquo;t perfect, and can have a couple of downsides - though these can be mitigated.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Reliance on the cloud&lt;/p>
+&lt;p>Recently one of the big cloud providers had an outage, and social media was full of complaints from people who can&amp;rsquo;t vacuum their house as the cloud was down. If your device relies on the cloud, it also needs to work when the cloud is not there - I don&amp;rsquo;t want a WiFi outage or a data center fire to stop me from having heating, especially if I lived in a really cold location! There are also locations where internet connections are unavailable or expensive, such as oil rigs or deep underground, or even in space.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Data privacy&lt;/p>
+&lt;p>The cloud is secure, and the big clouds have a lot of certifications and approvals for data security, but there might be times when you don&amp;rsquo;t want data in the cloud. For example, some countries insist on personal data remaining in-country (data sovereignty laws). If the cloud doesn&amp;rsquo;t have a data center in your country, you have to store it locally or on a local data center. Some data, such as medical data might need to stay on-site in a hospital.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Bandwidth and network speed&lt;/p>
+&lt;p>Bandwidth isn&amp;rsquo;t free. If you want to run AI models to analyze video from security cameras, sending all that data to the cloud is going to need a lot of bandwidth. That&amp;rsquo;s expensive, and not always available. The internet is also not as fast as internal networks, so if you need the data or results of analysis quickly then it might be faster to have the analytics closer to the data capture.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Cost&lt;/p>
+&lt;p>The cloud brings the cost down, but sometimes you don&amp;rsquo;t want or need to pay for the power of the cloud. It might be that a $99 NVIDIA Jetson Nano can run your AI models fast enough that you don&amp;rsquo;t want to rent a $100 a month GPU-powered VM in the cloud.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>This is where Edge computing comes in.&lt;/p>
+&lt;h2 id="what-is-edge-computing">What is edge computing?&lt;/h2>
+&lt;p>Edge computing is running parts of the cloud on the edge - that is on your own network in your building or data center. You can take advantage of the cloud to build and train workloads, then deploy them to an edge device to run closer to your data. This way you get the benefit of the scalable power of the cloud to train complex models, and the advantage of local compute to:&lt;/p>
+&lt;ul>
+&lt;li>Avoid dependency on the internet and the cloud - your models can run offline, so if the cloud or internet goes down, or if you are away from the internet such as at sea, they keep running.&lt;/li>
+&lt;li>Keep your data private and local&lt;/li>
+&lt;li>Not be limited by external bandwidth and internet speed, only be limited by your internal network bandwidth&lt;/li>
+&lt;li>Control costs using existing hardware&lt;/li>
+&lt;/ul>
+&lt;p>Thinking about factory monitoring - you can do this so much better on the edge than in the cloud. You can gather the data you need and train complex AI models for predictive maintenance in the cloud. Once trained, you can download these models to an IoT Edge device built using cheap hardware. This device can be on your local network close to the machinery, and respond to temperature data - instantly alerting someone or even turning the machinery down or off it it detects a possible failure. If the internet or the cloud goes down - the device still works. If you send millions of data points to it for analysis, you are not limited by outgoing internet speeds.&lt;/p>
+&lt;p>These models running on the edge are not static - you can constantly improve and retrain models in the cloud and deploy them to the edge as required.&lt;/p>
+&lt;p>You can also use these edge devices as gateways - sending data up to the cloud as needed. This can be filtered data, such as removing duplicate values or data within an allowed range, or they can be used to route data from devices that can&amp;rsquo;t connect to the cloud services directly. They can even shield devices from being connected directly to the internet of these devices are not secure.&lt;/p>
+&lt;p>To visualize how this works - I&amp;rsquo;m going to defer to an article from the Microsoft Documentation covering &lt;a href="https://docs.microsoft.com/azure/stream-analytics/stream-analytics-edge">running Stream Analytics on IoT Edge&lt;/a>. Stream Analytics is a tool for creating real-time queries against streaming data, outputting the results of the query to other systems. Stream Analytics jobs can be run in the cloud, or downloaded onto an IoT Edge device and run on the edge.&lt;/p>
+&lt;p>&lt;img src="asaedge-highlevel-diagram.png" alt="High-level diagram of IoT Edge">&lt;/p>
+&lt;p>This diagram shows IoT Edge devices running Azure Stream Analytics jobs via the IoT Edge runtime, running on-premise in a factory, with data coming in from a variety of devices. The results of the Stream Analytics job are then sent on to Azure IoT Hub for further analytics if needed.&lt;/p>
+&lt;h2 id="more-resource">More resource&lt;/h2>
+&lt;p>If you want to learn more about this topic - here&amp;rsquo;s some great resource:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://azure.microsoft.com/services/iot-edge/">Azure IoT Edge product page&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/azure/iot-edge/">Azure IoT Edge documentation&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://youtu.be/LaAiyuzPRyY">Run cognitive services on IoT Edge&lt;/a> - a video where I am joined by &lt;a href="https://twitter.com/mpaloski">Marko Paloski&lt;/a> and we talk about running a pre-built AI service on the Edge using Azure IoT Edge&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/ai-edge-engineer/?WT.mc_id=academic-11509-jabenn">AI Edge engineer learning path on Microsoft Learn&lt;/a> - a learning path produced in partnership with the &lt;a href="https://www.conted.ox.ac.uk/courses/artificial-intelligence-cloud-and-edge-implementations">University of Oxford&lt;/a> covering AI on the edge&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/build-intelligent-edge-with-azure-iot-edge/">Build the intelligent edge learning path on Microsoft Learn&lt;/a> - a learning path covering how to use Azure IoT Edge to build IoT solutions that require having cloud intelligence deployed locally on IoT Edge devices&lt;/li>
+&lt;li>&lt;a href="https://github.com/microsoft/iot-curriculum">Microsoft IoT Curriculum resource&lt;/a> - a GitHub repo of resources, curated links and labs for IoT classes, projects and learning&lt;/li>
+&lt;li>&lt;a href="https://github.com/microsoft/iot-curriculum/tree/main/labs/ai-edge/vision/manufacturing-part-check">Assembly line QA lab&lt;/a> - a hands-on-lab covering how to use IoT edge to do AI-powered assembly line validation&lt;/li>
+&lt;/ul></description></item><item><title>Control holiday lights with Python, Azure IoT and Power Apps</title><link>https://jimbobbennett.dev/blogs/control-holiday-lights-power-apps/</link><pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/control-holiday-lights-power-apps/</guid><description>&lt;p>As the nights draw in here in the northern hemisphere, there are a number of winter celebrations that happen - and one thing they all have in common is lights.&lt;/p>
+&lt;p>In the past I&amp;rsquo;ve just purchased strings of lights from the nearest retailer, strung them up to a tree or around my house, and fought with remote controls or buttons to get the color I wanted.&lt;/p>
+&lt;p>Well this year I decided to do something better and build IoT powered holiday lights, controlled by a Power App built with no code!&lt;/p>
+&lt;p>&lt;img src="app-controlled-lights.gif" alt="Lights controlled by a power app">&lt;/p>
+&lt;p>The hardware would be based around &lt;a href="https://www.amazon.com/gp/product/B07FVPN3PH">WS2812B programmable LED strips (also referred to as Neopixels)&lt;/a>, controlled by a &lt;a href="https://www.raspberrypi.org/products/raspberry-pi-zero-w">Raspberry Pi Zero W&lt;/a>. Software wise, the Pi would run some Python code to talk to &lt;a href="https://azure.microsoft.com/services/iot-central">Azure IoT Central&lt;/a> - an IoT software as a service platform that can send commands to the Pi to turn the lights on or off. A &lt;a href="https://powerapps.microsoft.com/">Power App&lt;/a> would then be used to control IoT Central via a mobile app - written with no code! All these cloud services can be used for free, which is even better!&lt;/p>
+&lt;blockquote>
+&lt;p>You can find a full hands-on guide to building this your self with detailed instructions and all the code in my &lt;a href="https://github.com/jimbobbennett/NeopixelHolidayLights">Neopixel Holiday Lights GitHub Repo&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="hardware-needed">Hardware needed&lt;/h2>
+&lt;p>To create this, you will need the following hardware:&lt;/p>
+&lt;ul>
+&lt;li>A Raspberry Pi that can connect to the internet such as a Pi Zero W or a Pi 3/4, with appropriate SD card and power supply&lt;/li>
+&lt;li>A strip of WS212B programmable LEDs&lt;/li>
+&lt;li>A 5v power supply - either a USB to terminal block lead or a 5v DC converter&lt;/li>
+&lt;li>Jumper wires&lt;/li>
+&lt;/ul>
+&lt;p>To wire the hardware, connect the positive lead or pin on the LEDs to the positive terminal on the 5v power supply, Connect the negative lead or pin to both the negative terminal on the power supply, and a GND GPIO pin on the Raspberry Pi. Some LED strips have twin negative leads for this reason, otherwise you&amp;rsquo;ll need to solder or attach more leads as necessary. Finally attach the control pin to GPIO pin 18 on the Raspberry Pi. You can find details on the pin numbers in the &lt;a href="https://www.raspberrypi.org/documentation/usage/gpio/">Raspberry Pi GPIO documentation&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="wiring-1.png" alt="The wiring of the neo pixels">&lt;/p>
+&lt;h2 id="azure-iot-central">Azure IoT Central&lt;/h2>
+&lt;p>&lt;a href="https://azure.microsoft.com/services/iot-central">Azure IoT Central&lt;/a> is a software as a services platform that allows you to build the cloud infrastructure and security for your IoT apps with no code. It is based around device templates - a description of the data that a device can send to the cloud, and commands the cloud can send to the device to instruct it to do something.&lt;/p>
+&lt;p>Start by heading to &lt;a href="https://apps.azureiotcentral.com/">apps.azureiotcentral.com&lt;/a> and creating a new app. Although IoT Central is a paid service, you can use it for free. There is a free tier, but apps created using this are deleted after 7 days, so go for one of the standard tiers. Both the standard tiers offer 2 devices for free, so you can control your Pi without paying anything.&lt;/p>
+&lt;p>You will need an Azure Subscription to sign up, so if you don&amp;rsquo;t have one you can sign up for free. Students can sign up at &lt;a href="https://azure.microsoft.com/free/students/">azure.microsoft.com/free/students&lt;/a> to get $100 of credit for a year, renewing every year, otherwise sign up at &lt;a href="https://azure.microsoft.com/free/">azure.microsoft.com/free&lt;/a> to get $200 of credit that lasts 30 days.&lt;/p>
+&lt;p>Once you have your app created, create a device template with 2 commands and a property. The commands will turn the lights on and off, and the property will allow the color to be persisted so restarting the Pi means the lights will re-light with the last color set.&lt;/p>
+&lt;p>Name one of the commands &lt;code>On&lt;/code> and make it take a request parameter called &lt;code>Color&lt;/code>. Name the other command &lt;code>Off&lt;/code> with no request parameter. Create the property called &lt;code>Color&lt;/code> as a &lt;code>string&lt;/code>. Publish this template, then create a new device using it. Once you&amp;rsquo;ve created the device, grab the connection details.&lt;/p>
+&lt;h2 id="program-the-pi">Program the Pi&lt;/h2>
+&lt;p>Next step is to program the Pi to connect to IoT Central, receive the commands and turn on the lights. This can be done in Python. Make sure your Pi is using the latest Raspberry Pi OS, with all the latest updates and is connected to the internet. You can use either the Lite or Desktop version - for a project like this where the Pi is running headless I like to use the Lite version to allow me to use smaller SD cards and boot the Pis faster.&lt;/p>
+&lt;blockquote>
+&lt;p>To program the Pi, you can use your favorite Python tool. I personally recommend using &lt;a href="https://code.visualstudio.com/">Visual Studio Code&lt;/a>, a free, open source developer text editor that has extensions for a variety of languages, including the &lt;a href="https://devblogs.microsoft.com/python/announcing-pylance-fast-feature-rich-language-support-for-python-in-visual-studio-code/">PyLance extension for Python&lt;/a>. If you are using the full desktop version of Raspberry Pi OS, you can &lt;a href="https://jimbobbennett.dev/blogs/run-visual-studio-code-on-a-raspberry-pi">install VS Code locally&lt;/a>, otherwise use the &lt;a href="https://code.visualstudio.com/docs/remote/ssh">Remote SSH extension&lt;/a> to code remotely on a Pi 3 or 4, or the &lt;a href="https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs">SSH File system extension&lt;/a> to code remotely on a Pi Zero.&lt;/p>
+&lt;/blockquote>
+&lt;p>First you need to install some Pip packages. These need to be installed using &lt;code>sudo&lt;/code> - to control the Neopixels you need to run the code as a super user. Install the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>rpi_ws281x
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>adafruit-circuitpython-neopixel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>azure-iot-device
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>python-dotenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The first 2 packages provide control for the LEDs, the &lt;code>azure-iot-device&lt;/code> package has the Python code for devices to connect to IoT Central, and &lt;code>python-dotenv&lt;/code> is used to load secrets from .env files to avoid things like API keys being uploaded to source code control.&lt;/p>
+&lt;p>Once these are installed, create a file called &lt;code>.env&lt;/code> on the Pi in whatever folder you want to create the code in to store the connection details for the IoT Central device, and add the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ID_SCOPE&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;ID scope&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">DEVICE_ID&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;device id&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">PRIMARY_KEY&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;primary key&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Replace &lt;code>&amp;lt;ID scope&amp;gt;&lt;/code> with the value of the ID Scope from the IoT Central device connection dialog. Replace &lt;code>&amp;lt;device id&amp;gt;&lt;/code> with the device ID, and the &lt;code>&amp;lt;primary key&amp;gt;&lt;/code> with the primary key.&lt;/p>
+&lt;p>Next create a file called &lt;code>app.py&lt;/code> and add the following code. You can also find this code in &lt;a href="https://github.com/jimbobbennett/NeopixelHolidayLights/blob/main/code/iot-controlled/app.py">the GitHub repo tha accompanies this post&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> asyncio
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> board
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> neopixel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> azure.iot.device.aio &lt;span style="color:#f92672">import&lt;/span> IoTHubDeviceClient, ProvisioningDeviceClient
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> azure.iot.device &lt;span style="color:#f92672">import&lt;/span> MethodResponse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> dotenv &lt;span style="color:#f92672">import&lt;/span> load_dotenv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Define the NeoPixel strip setting:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The pin the control wire is connected to (18 in this code)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The length of the strip (150 LEDs in this code)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The brightness (0.2 on a scale of 0-1)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If the colors are written as soon as the values are updated, or if they need to be&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># updated all at once as soon as the values are set&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pixels &lt;span style="color:#f92672">=&lt;/span> neopixel&lt;span style="color:#f92672">.&lt;/span>NeoPixel(board&lt;span style="color:#f92672">.&lt;/span>D18, &lt;span style="color:#ae81ff">150&lt;/span>, brightness&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.2&lt;/span>, auto_write&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load the IoT Central connection details from a .env file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>load_dotenv()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id_scope &lt;span style="color:#f92672">=&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>getenv(&lt;span style="color:#e6db74">&amp;#39;ID_SCOPE&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>device_id &lt;span style="color:#f92672">=&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>getenv(&lt;span style="color:#e6db74">&amp;#39;DEVICE_ID&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>primary_key &lt;span style="color:#f92672">=&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>getenv(&lt;span style="color:#e6db74">&amp;#39;PRIMARY_KEY&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Declare the device client so it can be used from all the function&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>device_client &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Provisions the device with the Azure device provisioning service or returns&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the connection details if the device is already provisioned&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">register_device&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> provisioning_device_client &lt;span style="color:#f92672">=&lt;/span> ProvisioningDeviceClient&lt;span style="color:#f92672">.&lt;/span>create_from_symmetric_key(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> provisioning_host&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;global.azure-devices-provisioning.net&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> registration_id&lt;span style="color:#f92672">=&lt;/span>device_id,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id_scope&lt;span style="color:#f92672">=&lt;/span>id_scope,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> symmetric_key&lt;span style="color:#f92672">=&lt;/span>primary_key,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> provisioning_device_client&lt;span style="color:#f92672">.&lt;/span>register()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the color of the Neopixels based on a color string coming in.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This color string is a 6 character code, 2 characters for red, 2 for green&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># and 2 for blue. These 2 characters are a HEX value from 00 to FF.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># For example FF0000 is full red, no green or blue. FFFFFF is white, 000000 is off.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Once the color is set, write it back to the IoT Central property via a device twin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">set_color&lt;/span>(color):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># split in the color string into the red, green and blue components, and convert these&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># to valid hex strings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0x&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> color[&lt;span style="color:#ae81ff">0&lt;/span>:&lt;span style="color:#ae81ff">2&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> g &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0x&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> color[&lt;span style="color:#ae81ff">2&lt;/span>:&lt;span style="color:#ae81ff">4&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> b &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0x&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> color[&lt;span style="color:#ae81ff">4&lt;/span>:&lt;span style="color:#ae81ff">6&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Convert hext to numerical values&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r_value &lt;span style="color:#f92672">=&lt;/span> int(r, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> g_value &lt;span style="color:#f92672">=&lt;/span> int(g, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> b_value &lt;span style="color:#f92672">=&lt;/span> int(b, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Updating color: r =&amp;#39;&lt;/span>, r_value, &lt;span style="color:#e6db74">&amp;#39;, g =&amp;#39;&lt;/span>, g_value, &lt;span style="color:#e6db74">&amp;#39;, b =&amp;#39;&lt;/span>, b_value)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Set all the pixels to the new color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pixels&lt;span style="color:#f92672">.&lt;/span>fill((r_value, g_value, b_value))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Show the color on all the pixels&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pixels&lt;span style="color:#f92672">.&lt;/span>show()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Write the color back as a property&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Properties are written to the device twin, so patch the reported properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># with the color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> patch &lt;span style="color:#f92672">=&lt;/span> {&lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span>:color}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Sending patch:&amp;#34;&lt;/span>, patch)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>patch_twin_reported_properties(patch)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># IoT Central command handler&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># IoT Central commands are implemented as IoT Hub direct methods&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">command_handler&lt;/span>(method_request):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Message received:&amp;#34;&lt;/span>, method_request&lt;span style="color:#f92672">.&lt;/span>name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Message payload:&amp;#34;&lt;/span>, method_request&lt;span style="color:#f92672">.&lt;/span>payload)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Determine how to respond to the command based on the IoT Hub direct method method name&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># which is the same as the IoT Central command name&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> method_request&lt;span style="color:#f92672">.&lt;/span>name &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;On&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># For an On request, set the color based on the payload&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> set_color(method_request&lt;span style="color:#f92672">.&lt;/span>payload)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;executed on&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">elif&lt;/span> method_request&lt;span style="color:#f92672">.&lt;/span>name &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Off&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># For an Off request, set the color to 000000, which turns the pixels off&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> set_color(&lt;span style="color:#e6db74">&amp;#34;000000&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;executed off&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Received unknown method: &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> method_request&lt;span style="color:#f92672">.&lt;/span>name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Method calls have to return a response so IoT Central knows it was handled correctly,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># So send a 200 response to show we handled this&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> payload &lt;span style="color:#f92672">=&lt;/span> {&lt;span style="color:#e6db74">&amp;#34;result&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">True&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> status &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">200&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Send the response&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> method_response &lt;span style="color:#f92672">=&lt;/span> MethodResponse&lt;span style="color:#f92672">.&lt;/span>create_from_method_request(method_request, status, payload)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>send_method_response(method_response)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">property_handler&lt;/span>(patch):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;Patch received:&amp;#34;&lt;/span>, patch)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span> &lt;span style="color:#f92672">in&lt;/span> patch:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> set_color(patch[&lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The main async function that runs the app&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">global&lt;/span> device_client
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Regsiter the Pi as an IoT device in IoT Central&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> registration_result &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> register_device()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Build the IoT Hub connection string from the registration details&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># IoT Central sits on top of IoT Hub, and the Python SDK only supports IoT Hub,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># So to talk to IoT central the IoT Hub connection string needs to be built from details&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># from registering the device with the provisioning service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> conn_str&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;HostName=&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> registration_result&lt;span style="color:#f92672">.&lt;/span>registration_state&lt;span style="color:#f92672">.&lt;/span>assigned_hub &lt;span style="color:#f92672">+&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;;DeviceId=&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> device_id &lt;span style="color:#f92672">+&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;;SharedAccessKey=&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> primary_key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># The client object is used to interact with your Azure IoT Central app via IoT Hub, so create this &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># from the connection string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> device_client &lt;span style="color:#f92672">=&lt;/span> IoTHubDeviceClient&lt;span style="color:#f92672">.&lt;/span>create_from_connection_string(conn_str)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Connect the client to IoT Hub&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Connecting&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>connect()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Connected&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># IoT Central stores properties in the device twin, so read this to see if we have a color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># stored from the last run for the lights. This way when the device starts up it can set the color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># to the last setting&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> twin &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>get_twin()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Got twin: &amp;#39;&lt;/span>, twin)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Load the color from the reported properties of the twin if it exists&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#e6db74">&amp;#39;reported&amp;#39;&lt;/span> &lt;span style="color:#f92672">in&lt;/span> twin &lt;span style="color:#f92672">and&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span> &lt;span style="color:#f92672">in&lt;/span> twin[&lt;span style="color:#e6db74">&amp;#39;reported&amp;#39;&lt;/span>]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> set_color(twin[&lt;span style="color:#e6db74">&amp;#39;reported&amp;#39;&lt;/span>][&lt;span style="color:#e6db74">&amp;#39;Color&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Set the method request handler on the client to handle IoT Central commands&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> device_client&lt;span style="color:#f92672">.&lt;/span>on_method_request_received &lt;span style="color:#f92672">=&lt;/span> command_handler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Handle updates to the color property from IoT Central&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> device_client&lt;span style="color:#f92672">.&lt;/span>on_twin_desired_properties_patch_received &lt;span style="color:#f92672">=&lt;/span> property_handler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Define a message loop that keeps the app alive whilst listening for commands&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">main_loop&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> &lt;span style="color:#66d9ef">True&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>sleep(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Wait for user to indicate they are done listening for method calls&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> main_loop()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Finally, disconnect&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> device_client&lt;span style="color:#f92672">.&lt;/span>disconnect()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Start the async app running&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> asyncio&lt;span style="color:#f92672">.&lt;/span>run(main())
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Read the code and the comments to see what it does.&lt;/p>
+&lt;p>This code will connect to the Azure device provisioning service to authenticate the device using the settings from the &lt;code>.env&lt;/code> file, then connect. It will load the properties to see if a color has already been set, and if so set the Neopixels to that color. It will then listen for commands to change the color of the Neopixels or turn them off.&lt;/p>
+&lt;p>Run the code as sudo with the following command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo python3 app.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The app will start up and connect. You can then run the commands in IoT Central to control the lights.&lt;/p>
+&lt;p>The color for the On command should be given as a string value representing a Hex string. It will be 6 characters long, with 2 characters each representing the R, G and B values with values from 0-255 (&lt;code>00&lt;/code> - &lt;code>FF&lt;/code>). For example, red is &lt;code>FF0000&lt;/code>, green is &lt;code>00FF00&lt;/code>, blue is &lt;code>0000FF&lt;/code>, yellow is &lt;code>FFFF00&lt;/code>, white is &lt;code>FFFFFF&lt;/code>.&lt;/p>
+&lt;h2 id="set-up-a-power-app">Set up a Power App&lt;/h2>
+&lt;p>Power Apps allow you to build apps with low or no code, by creating flows that connect logic and services, and connecting these to a UI designed on a canvas.&lt;/p>
+&lt;p>You will need a Power Apps account to create one, and if you don&amp;rsquo;t have one you can sign up for a &lt;a href="https://powerapps.microsoft.com/communityplan/">community plan&lt;/a>. This will give you a free environment for learning and building your own apps.&lt;/p>
+&lt;p>Start by creating a flow in the Power App. This should use the &lt;strong>Create from Template&lt;/strong> option selecting &lt;strong>Power Apps button&lt;/strong>. Name this flow &lt;code>Turn lights on&lt;/code> and add an &lt;em>Azure IoT Central V3&lt;/em> connector (&lt;strong>NOT&lt;/strong> the V2 connector). Select your IoT Central app, add the device id, set the device template, select the capability, then select the &lt;em>On&lt;/em> command. A new box will appear for the color to pass to this command, so select this box and select &lt;strong>Ask in Power Apps&lt;/strong> from the box that appears. Then save the flow.&lt;/p>
+&lt;p>&lt;img src="on-flow-complete.png" alt="The complete on flow">&lt;/p>
+&lt;p>Create another flow for the &lt;em>Off&lt;/em> command called &lt;code>Turn lights off&lt;/code>.&lt;/p>
+&lt;p>Once you have the flows, create an app, Drag a text input and two buttons to the canvas and align then in a column.&lt;/p>
+&lt;p>Name the text input &lt;code>ColorInput&lt;/code>, remove the default value and change the hint to color.&lt;/p>
+&lt;p>Name one button &lt;code>On&lt;/code> and select the &lt;strong>Action&lt;/strong> tab on the ribbon, then select &lt;strong>Power Automate&lt;/strong>. From the popup, select the &lt;em>Turn lights on&lt;/em> flow. It will take a few seconds to add the flow. When it does a half complete function will appear in the function bar. Pass the &lt;code>Text&lt;/code> property of the &lt;code>ColorInput&lt;/code> control into:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>PowerAppsbutton.Run(ColorInput.Text)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Name the other button &lt;code>Off&lt;/code> and add the &lt;em>Turn lights off&lt;/em> flow to it. The function for this doesn&amp;rsquo;t need any parameters, so just close the brackets.&lt;/p>
+&lt;p>&lt;img src="power-app-canvas.png" alt="The complete power apps canvas">&lt;/p>
+&lt;p>Make sure the app is running on the Pi, then save and test the Power App using the &lt;strong>Preview this app&lt;/strong> button on the toolbar.&lt;/p>
+&lt;h2 id="done">Done!&lt;/h2>
+&lt;p>Your app is now complete! Mount the lights somewhere and control them from the Power App. You can you can run it on your phone. Install the &lt;strong>Power Apps&lt;/strong> app from the &lt;a href="https://apps.apple.com/us/app/power-apps/id1047318566">Apple App Store&lt;/a> or &lt;a href="https://play.google.com/store/apps/details?id=com.microsoft.msapps">Google Play Store&lt;/a>, log in, select your app and use it to control your lights.&lt;/p>
+&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>You can learn more about Azure IoT Central and the Microsoft Power Platform via Microsoft Learn, a hands-on, self-guided learning platform from Microsoft.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/develop-iot-solutions-with-azure-iot-central">Develop IoT Central applications with IoT Central&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/power-plat-fundamentals/">Microsoft Power Platform Fundamentals&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
