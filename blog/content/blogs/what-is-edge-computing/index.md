@@ -5,7 +5,7 @@ draft: false
 featured_image: "asaedge-highlevel-diagram.png"
 images: 
   - "blogs/what-is-edge-computing/asaedge-highlevel-diagram.png"
-tags: ["ai", "iot", "edge" ,"iot-edge", "cloud"]
+tags: ["ai", "iot", "edge" ,"iotedge", "cloud"]
 description: This blog post is a mind dump in the style of I didn't have time to give you a short answer, so I wrote a long blog post instead on the difference between edge computing and just using the cloud, along with the whys and hows.
 ---
 

@@ -5,7 +5,7 @@ draft: false
 featured_image: "app-controlled-lights.gif"
 images: 
   - "blogs/control-holiday-lights-power-apps/app-controlled-lights.gif"
-tags: ["iot-central", "iot", "azure" ,"raspberrypi", "lights", "powerapps", "powerplatform"]
+tags: ["iotcentral", "iot", "azure" ,"raspberrypi", "lights", "powerapps", "powerplatform"]
 description: Well this year I decided to build IoT powered holiday lights, controlled by a Power App built with no code!
 ---
 
