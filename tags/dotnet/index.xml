@@ -660,4 +660,31 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;ul>
 &lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/develop-iot-solutions-with-azure-iot-central">Develop IoT Central applications with IoT Central&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://docs.microsoft.com/learn/paths/power-plat-fundamentals/">Microsoft Power Platform Fundamentals&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Run Visual Studio Code on a Raspberry Pi</title><link>https://jimbobbennett.dev/blogs/run-visual-studio-code-on-a-raspberry-pi/</link><pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/run-visual-studio-code-on-a-raspberry-pi/</guid><description>&lt;p>It&amp;rsquo;s finally here! An official supported version of VS Code that runs on a Raspberry Pi!&lt;/p>
+&lt;blockquote class="twitter-tweet">&lt;p lang="en" dir="ltr">ICYMI: VS Code now officially supports &lt;a href="https://twitter.com/Raspberry_Pi?ref_src=twsrc%5Etfw">@Raspberry_Pi&lt;/a> too! 🍰&lt;br>&lt;br>➡️ Download the Linux ARM and ARM64 builds here: &lt;a href="https://t.co/aMc3pDFkDu">https://t.co/aMc3pDFkDu&lt;/a> &lt;a href="https://t.co/gsATu20K4X">pic.twitter.com/gsATu20K4X&lt;/a>&lt;/p>&amp;mdash; Visual Studio Code (@code) &lt;a href="https://twitter.com/code/status/1315371339012739072?ref_src=twsrc%5Etfw">October 11, 2020&lt;/a>&lt;/blockquote>
+&lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8">&lt;/script>
+&lt;p>This to me is great news. &lt;a href="https://raspberrypi.org/">The Raspberry Pi&lt;/a> is a low-priced, small form factor computer that can run a full version of Linux. It&amp;rsquo;s popular with hobbyists and kids - it was originally designed to be a cheap computer for kids to learn to code on. It has the same standard USB and HDMI ports that a PC or Mac would have, as well as GPIO (General Purpose Input Output) pins that can be used to work with a wide array of external electronic components, devices, sensors, machinery and robotics.&lt;/p>
+&lt;p>What this VS Code release means is kids who are using a Pi can now use the same IDE that their grown ups use at work - Mum codes C# in VS Code at work and daughter codes Python in VS Code on a $35 computer at home connected to the family TV.&lt;/p>
+&lt;p>Lets look at how to get it set up.&lt;/p>
+&lt;h2 id="installing-vs-code-on-a-raspberry-pi">Installing VS Code on a Raspberry Pi&lt;/h2>
+&lt;p>&lt;strong>STOP THE PRESS&lt;/strong>&lt;/p>
+&lt;p>VS Code is now in the Raspberry Pi apt repositories. You can install it by launching a terminal and running the following command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install code -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="using-vs-code">Using VS Code&lt;/h2>
+&lt;p>Once the installer has finished, you will see Visual Studio Code as an option in the programming folder in the Pi menu. Select it to launch VS Code.&lt;/p>
+&lt;p>&lt;img src="vscode-pi-menu.png" alt="VS Code in the Pi menu">&lt;/p>
+&lt;p>You can now install your favourite extensions and program away! Be aware that not all extensions will work fully!&lt;/p>
+&lt;p>&lt;img src="code-on-pi.png" alt="VS Code running on the Pi">&lt;/p></description></item><item><title>Building smart garden ornaments with a Raspberry Pi and micro:bits</title><link>https://jimbobbennett.dev/blogs/smart-garden-ornaments/</link><pubDate>Sat, 11 Jul 2020 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/smart-garden-ornaments/</guid><description>&lt;p>Ever wanted to track things happening in your garden, neighborhood or school using smart garden ornaments? Now you can using BBC micro:bits and a cloud-based IoT service.&lt;/p>
+&lt;blockquote>
+&lt;p>TL;DR: check out this project on GitHub for a weeks worth of fun to do with families, friends or in the classroom using a Raspberry Pi, microbits and an IoT service.&lt;/p>
+&lt;p>&lt;a href="https://github.com/jimbobbennett/smart-garden-ornaments">github.com/jimbobbennett/smart-garden-ornaments&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>At Microsoft, we are celebrating July as our IoT month - after all who wouldn&amp;rsquo;t want to make use of the pun JulyOT! As part of this month, I created a fun project for schools, families and makers.&lt;/p>
+&lt;p>This is a fun week long project for those who want to take their first steps into the world of the Internet of Things (IoT) using devices that are popular with kids, and tools that make programming accessible to young developers. You&amp;rsquo;ll use a Raspberry Pi along with some &lt;a href="https://microbit.org/">BBC micro:bits&lt;/a> and any garden ornaments you have to hand to build a smart neighborhood, gathering data such as temperature and noise levels and displaying it in the cloud using &lt;a href="https://azure.microsoft.com/services/iot-central">Azure IoT Central&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="project-dashboard.png" alt="The IoT Central project dashboard">&lt;/p>
+&lt;p>This is great for families, groups of friends, or even in the classroom - gathering data around your home, neighborhood or school.&lt;/p>
+&lt;p>Check out the project on GitHub! It&amp;rsquo;s broken down into 5 days of activities, from setting up the cloud service, to gathering data from micro:bits, to creating a mesh network to extend the range, to adding more sensors.&lt;/p>
+&lt;p>&lt;a href="https://github.com/jimbobbennett/smart-garden-ornaments">github.com/jimbobbennett/smart-garden-ornaments&lt;/a>&lt;/p>
+&lt;p>I&amp;rsquo;d love you to contribute to this project! Please send in your stories of what you have set up, any additional ideas for ways to extend the project, or any other sensors you&amp;rsquo;ve set up!&lt;/p>
+&lt;p>Happy making!&lt;/p></description></item></channel></rss>
