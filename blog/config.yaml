@@ -236,6 +236,10 @@ params:
         id: oG8SLTT2NLg
         description: On today’s show, Jim is joined by John Kennedy, a retro computer and IoT enthusiast who has a fascination for classic robot toys from the 80s. He’s finally got his hands on the toy he wanted from his youth, but instead of being content there, he’s given it a brain!
 
+      - title: Build an Augmented Reality App to Shoot Hoops Anywhere
+        id: iKnMvYOsyyY
+        description: On today's show, Jim is joined by Gustavo Cordido, Microsoft developer advocate who specializes in spatial computing and extended reality. He knows the metaverse is coming and is dedicated to helping developers learn not only what it is, but how to start building apps that embrace augmented and virtual realities as building blocks towards the metaverse.
+
     - title: "IoT Show"
       videos:
       - title: "IoT for Beginners"
