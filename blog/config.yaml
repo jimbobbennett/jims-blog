@@ -278,6 +278,12 @@ params:
         id: tzVYf6cXNjo
         description: Join John Lunn aka Jonnychipz as he is joined by Microsoft Regional Cloud Advocate Jim Bennett.
 
+    - title: "8 bits with PJ and Brandon"
+      videos:
+      - title: 8 bits with Jim Bennett
+        id: eksa-EnKIfE
+        description: We chat with Jim Bennett, Developer Advocate at Microsoft, about tech, life, and anything in between.
+
     - title: "University of Lincoln Christmas Lectures 2020"
       videos:
       - title: It's the most Cloudful time of the year
