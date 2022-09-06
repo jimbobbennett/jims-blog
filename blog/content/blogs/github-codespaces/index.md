@@ -4,7 +4,7 @@ date: 2022-01-27
 draft: false
 featured_image: banner.png
 images: 
-  - banner.png
+  - blogs/github-codespaces/banner.png
 tags: ["github", "codespaces", "vscode" ,"python", "container"]
 description: Speed up setting up a new dev environment with GitHub codespaces
 ---
