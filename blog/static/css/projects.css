@@ -72,3 +72,24 @@
 #projects .content {
     animation: fade-left 1s ease-out;
 }
+
+#projects .content a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--primary-color) !important;
+}
+
+#projects .content a::after {
+    content: "";
+    display: block;
+    width: 0px;
+    height: 2px;
+    bottom: 0.37em;
+    background-color: var(--primary-color);
+    transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
+    opacity: 0.5;
+}
+
+#projects .content a:hover::after, #projects .content a:focus::after, #projects .content a:active::after {
+    width: 100%;
+}
