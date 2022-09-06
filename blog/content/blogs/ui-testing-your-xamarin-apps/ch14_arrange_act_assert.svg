@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1102px" height="1071px" viewBox="0 0 1102 1071" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>ch11_arrange_act_assert</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="120" height="212.564417"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="212.564417" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="0" y="0" width="120" height="32.509852"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="32.509852" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="0" y="32" width="120" height="31.8846626"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="31.8846626" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+        <rect id="path-7" x="203" y="74" width="14" height="10"></rect>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="14" height="10" fill="white">
+            <use xlink:href="#path-7"></use>
+        </mask>
+        <rect id="path-9" x="0" y="0" width="120" height="214.763359"></rect>
+        <mask id="mask-10" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="214.763359" fill="white">
+            <use xlink:href="#path-9"></use>
+        </mask>
+        <rect id="path-11" x="0" y="0" width="120" height="32.8461609"></rect>
+        <mask id="mask-12" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="32.8461609" fill="white">
+            <use xlink:href="#path-11"></use>
+        </mask>
+        <rect id="path-13" x="0" y="62.6413793" width="120" height="32.2145039"></rect>
+        <mask id="mask-14" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="32.2145039" fill="white">
+            <use xlink:href="#path-13"></use>
+        </mask>
+        <rect id="path-15" x="0" y="32.3310345" width="120" height="32.2145039"></rect>
+        <mask id="mask-16" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="32.2145039" fill="white">
+            <use xlink:href="#path-15"></use>
+        </mask>
+        <rect id="path-17" x="203" y="74" width="14" height="10"></rect>
+        <mask id="mask-18" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="14" height="10" fill="white">
+            <use xlink:href="#path-17"></use>
+        </mask>
+        <rect id="path-19" x="0" y="0" width="120" height="214.763359"></rect>
+        <mask id="mask-20" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="214.763359" fill="white">
+            <use xlink:href="#path-19"></use>
+        </mask>
+        <rect id="path-21" x="0" y="0" width="120" height="32.8461609"></rect>
+        <mask id="mask-22" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="32.8461609" fill="white">
+            <use xlink:href="#path-21"></use>
+        </mask>
+        <ellipse id="path-23" cx="29.5" cy="90.4258621" rx="19.5" ry="13.6396552"></ellipse>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-24">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-25" x="0" y="0" width="120" height="214.763359"></rect>
+        <mask id="mask-26" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="214.763359" fill="white">
+            <use xlink:href="#path-25"></use>
+        </mask>
+        <rect id="path-27" x="0" y="0" width="120" height="32.8461609"></rect>
+        <mask id="mask-28" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="32.8461609" fill="white">
+            <use xlink:href="#path-27"></use>
+        </mask>
+        <ellipse id="path-29" cx="111.5" cy="55.0637931" rx="13.5" ry="13.6396552"></ellipse>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-30">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-31" x="0" y="0" width="120" height="214.763359"></rect>
+        <mask id="mask-32" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="214.763359" fill="white">
+            <use xlink:href="#path-31"></use>
+        </mask>
+        <rect id="path-33" x="0" y="0" width="120" height="32.8461609"></rect>
+        <mask id="mask-34" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="32.8461609" fill="white">
+            <use xlink:href="#path-33"></use>
+        </mask>
+        <rect id="path-35" x="0" y="32.3310345" width="120" height="32.2145039"></rect>
+        <mask id="mask-36" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="32.2145039" fill="white">
+            <use xlink:href="#path-35"></use>
+        </mask>
+        <ellipse id="path-37" cx="115.5" cy="55.0637931" rx="13.5" ry="13.6396552"></ellipse>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-38">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Tests" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Test-structure" transform="translate(-104.000000, -140.000000)">
+            <g id="ch11_arrange_act_assert" transform="translate(105.000000, 141.000000)">
+                <g id="Arrange">
+                    <g id="iphone" transform="translate(432.000000, 0.000000)" stroke="#9B9B9B">
+                        <path d="M138,273.027591 C138,282.376387 130.366477,289.953431 120.949569,289.953431 L17.0514923,289.953431 C7.63458462,289.953431 0.00106153846,282.376387 0.00106153846,273.027591 L0.00106153846,17.0115693 C0.00106153846,7.66277372 7.63458462,0.085729927 17.0514923,0.085729927 L120.949569,0.085729927 C130.366477,0.085729927 138,7.66277372 138,17.0115693 L138,273.027591 L138,273.027591 L138,273.027591 Z" id="bezel" stroke-width="2" fill="#FDFDFD"></path>
+                        <rect id="screen" fill="#FFFFFF" x="9.55384615" y="38.1021898" width="118.818" height="210.709343"></rect>
+                        <path d="M81.7384615,27.2494161 C81.7384615,27.9214964 81.2724462,28.4633942 80.6981538,28.4633942 L59.3591077,28.4633942 C58.7837538,28.4633942 58.3188,27.920438 58.3188,27.2494161 L58.3188,24.5187591 C58.3188,23.8466788 58.7848154,23.304781 59.3591077,23.304781 L80.6981538,23.304781 C81.2724462,23.304781 81.7384615,23.8477372 81.7384615,24.5187591 L81.7384615,27.2494161 L81.7384615,27.2494161 L81.7384615,27.2494161 Z" id="speaker"></path>
+                        <ellipse id="camera" cx="70.0615385" cy="12.7007299" rx="3.18461538" ry="3.17518248"></ellipse>
+                        <ellipse id="lock" cx="69.0424615" cy="268.833175" rx="10.6578462" ry="10.585"></ellipse>
+                    </g>
+                    <g id="Main-screen" transform="translate(441.000000, 37.000000)">
+                        <use id="Rectangle-1" stroke="#979797" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+                        <use id="Rectangle-2" stroke="#979797" mask="url(#mask-4)" stroke-width="2" fill-opacity="0.398182745" fill="#9B9B9B" xlink:href="#path-3"></use>
+                        <text id="Countr" font-family="Helvetica-Bold, Helvetica" font-size="12" font-weight="bold" fill="#4A4A4A">
+                            <tspan x="40.8388672" y="20">Countr</tspan>
+                        </text>
+                        <use id="Rectangle" stroke="#979797" mask="url(#mask-6)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-5"></use>
+                        <text id="4" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="78" y="52">4</tspan>
+                        </text>
+                        <text id="+" font-family="Helvetica" font-size="18" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="104" y="52">+</tspan>
+                        </text>
+                        <text id="Coffees" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="7" y="52">Coffees</tspan>
+                        </text>
+                        <text id="Add" font-family="Helvetica" font-size="10" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="97.2070312" y="20">Add</tspan>
+                        </text>
+                    </g>
+                    <g id="Laptop" transform="translate(0.000000, 64.000000)" stroke="#9B9B9B">
+                        <path d="M251.142857,0 L41.4343434,0 C35.7283058,0 30.8643579,4.65609666 30.8643579,10.4232485 L30.8643579,147.593198 L261.712843,147.593194 L261.712843,10.4232485 C261.71283,4.65567725 256.866495,0 251.142857,0 L251.142857,0 Z" id="bezel" stroke-width="2" fill="#FEFEFE"></path>
+                        <ellipse id="webcam" stroke-width="2" cx="146.7114" cy="7.98873824" rx="1.69119769" ry="1.68183963"></ellipse>
+                        <g id="bottom" transform="translate(0.000000, 147.581428)">
+                            <path d="M270.934944,13.0384617 L21.6845368,13.0384617 C8.72700289,13.0384617 0,8.61690534 0,6.73660864 L0,1.02087666 C0,0.45577854 0.564437229,0 1.26628427,0 L291.352773,0 C292.055466,0 292.620749,0.45577854 292.620749,1.02087666 L292.620749,6.96155469 C292.617789,8.44788046 285.859763,13.0384617 270.934944,13.0384617 L270.934944,13.0384617 Z" id="Shape" stroke-width="2" fill="#FDFDFD"></path>
+                            <path d="M0.211399711,6.09666866 L291.834205,6.09666866" id="Line"></path>
+                        </g>
+                        <rect id="screen" fill="#FFFFFF" x="39" y="16" width="211.853736" height="122.778077"></rect>
+                        <path d="M177.998557,148.001887 L177.998557,149.299847 C177.998557,150.225279 176.166448,150.504765 174.779666,150.504765 L117.882942,150.504765 C116.423861,150.504765 114.578644,150.2257 114.578644,149.299847 L114.578644,148.001887" id="touchpad" fill="#FFFFFF"></path>
+                    </g>
+                    <g id="Group-2" transform="translate(293.000000, 215.000000)" stroke="#979797">
+                        <path d="M0.5,0.5 C0.5,0.5 15.4158594,-2.18326957 32.6874292,7.5 C52.2439604,18.4643284 59.714098,59.651402 95.0298087,82.3742267 C130.345519,105.097051 163.046271,99.7570205 180.682163,99.7570205 C208.432406,99.7570205 210.003495,83.3742267 210.003495,83.3742267" id="Line" stroke-width="2" stroke-linecap="square"></path>
+                        <use id="Rectangle-3" mask="url(#mask-8)" stroke-width="4" fill="#FFFFFF" xlink:href="#path-7"></use>
+                    </g>
+                    <text id="app-=-AppInitializer" font-family="CourierNewPSMT, Courier New" font-size="12" font-weight="normal" fill="#4A4A4A">
+                        <tspan x="51" y="137">app = AppInitializer.</tspan>
+                        <tspan x="51" y="151">   StartApp(Platform.iOS);</tspan>
+                    </text>
+                </g>
+                <text id="Arrange-The-app-is-l" font-family="Helvetica-Light, Helvetica" font-size="48" font-weight="300" fill="#4A4A4A">
+                    <tspan x="673" y="47">Arrange</tspan>
+                    <tspan x="846.376" y="47" font-size="36"></tspan>
+                    <tspan x="673" y="105" font-size="36"></tspan>
+                    <tspan x="673" y="148" font-size="24">The app is launched on the target</tspan>
+                    <tspan x="673" y="177" font-size="24">device and the test framework</tspan>
+                    <tspan x="673" y="206" font-size="24">connects to it</tspan>
+                </text>
+                <g id="Assert" transform="translate(0.000000, 750.000000)">
+                    <g id="iphone" transform="translate(432.000000, 0.000000)" stroke="#9B9B9B">
+                        <path d="M138,275.852015 C138,285.297522 130.366477,292.952949 120.949569,292.952949 L17.0514923,292.952949 C7.63458462,292.952949 0.00106153846,285.297522 0.00106153846,275.852015 L0.00106153846,17.1875511 C0.00106153846,7.7420438 7.63458462,0.0866167883 17.0514923,0.0866167883 L120.949569,0.0866167883 C130.366477,0.0866167883 138,7.7420438 138,17.1875511 L138,275.852015 L138,275.852015 L138,275.852015 Z" id="bezel" stroke-width="2" fill="#FDFDFD"></path>
+                        <rect id="screen" fill="#FFFFFF" x="9.55384615" y="38.4963504" width="118.818" height="212.889095"></rect>
+                        <path d="M81.7384615,27.5313066 C81.7384615,28.2103394 81.2724462,28.7578431 80.6981538,28.7578431 L59.3591077,28.7578431 C58.7837538,28.7578431 58.3188,28.2092701 58.3188,27.5313066 L58.3188,24.7724015 C58.3188,24.0933686 58.7848154,23.545865 59.3591077,23.545865 L80.6981538,23.545865 C81.2724462,23.545865 81.7384615,24.094438 81.7384615,24.7724015 L81.7384615,27.5313066 L81.7384615,27.5313066 L81.7384615,27.5313066 Z" id="speaker"></path>
+                        <ellipse id="camera" cx="70.0615385" cy="12.8321168" rx="3.18461538" ry="3.2080292"></ellipse>
+                        <ellipse id="lock" cx="69.0424615" cy="271.614208" rx="10.6578462" ry="10.6945"></ellipse>
+                    </g>
+                    <g id="Main-screen" transform="translate(441.000000, 37.382759)">
+                        <use id="Rectangle-1" stroke="#979797" mask="url(#mask-10)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-9"></use>
+                        <use id="Rectangle-2" stroke="#979797" mask="url(#mask-12)" stroke-width="2" fill-opacity="0.398182745" fill="#9B9B9B" xlink:href="#path-11"></use>
+                        <text id="Countr" font-family="Helvetica-Bold, Helvetica" font-size="12" font-weight="bold" fill="#4A4A4A">
+                            <tspan x="40.8388672" y="20.0931034">Countr</tspan>
+                        </text>
+                        <use id="Rectangle" stroke="#979797" mask="url(#mask-14)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-13"></use>
+                        <use id="Rectangle" stroke="#979797" mask="url(#mask-16)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-15"></use>
+                        <text id="4" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="78" y="52.4241379">4</tspan>
+                        </text>
+                        <text id="0" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="78" y="82.7344828">0</tspan>
+                        </text>
+                        <text id="+" font-family="Helvetica" font-size="18" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="104" y="52.3517241">+</tspan>
+                        </text>
+                        <text id="+" font-family="Helvetica" font-size="18" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="104" y="82.662069">+</tspan>
+                        </text>
+                        <text id="Coffees" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="7" y="52.4241379">Coffees</tspan>
+                        </text>
+                        <text id="Runs" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="7" y="82.7344828">Runs</tspan>
+                        </text>
+                        <text id="Add" font-family="Helvetica" font-size="10" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="97.2070312" y="20.1034483">Add</tspan>
+                        </text>
+                    </g>
+                    <g id="Laptop" transform="translate(0.000000, 64.662069)" stroke="#9B9B9B">
+                        <path d="M251.142857,0 L41.4343434,0 C35.7283058,0 30.8643579,4.70426318 30.8643579,10.5310752 L30.8643579,149.120025 L261.712843,149.12002 L261.712843,10.5310752 C261.71283,4.70383943 256.866495,0 251.142857,0 L251.142857,0 Z" id="bezel" stroke-width="2" fill="#FEFEFE"></path>
+                        <ellipse id="webcam" stroke-width="2" cx="146.7114" cy="8.07138036" rx="1.69119769" ry="1.69923797"></ellipse>
+                        <g id="bottom" transform="translate(0.000000, 149.108132)">
+                            <path d="M270.934944,13.1733424 L21.6845368,13.1733424 C8.72700289,13.1733424 0,8.70604574 0,6.80629769 L0,1.03143745 C0,0.46049349 0.564437229,0 1.26628427,0 L291.352773,0 C292.055466,0 292.620749,0.46049349 292.620749,1.03143745 L292.620749,7.03357077 C292.617789,8.53527233 285.859763,13.1733424 270.934944,13.1733424 L270.934944,13.1733424 Z" id="Shape" stroke-width="2" fill="#FDFDFD"></path>
+                            <path d="M0.211399711,6.15973765 L291.834205,6.15973765" id="Line"></path>
+                        </g>
+                        <rect id="screen" fill="#FFFFFF" x="39" y="16" width="211.853736" height="124.048195"></rect>
+                        <path d="M177.998557,149.532941 L177.998557,150.844328 C177.998557,151.779334 176.166448,152.061711 174.779666,152.061711 L117.882942,152.061711 C116.423861,152.061711 114.578644,151.779759 114.578644,150.844328 L114.578644,149.532941" id="touchpad" fill="#FFFFFF"></path>
+                    </g>
+                    <g id="Group-2" transform="translate(293.000000, 218.000000)" stroke="#979797">
+                        <path d="M0.5,0.5 C0.5,0.5 15.4158594,-2.18326957 32.6874292,7.5 C52.2439604,18.4643284 59.714098,59.651402 95.0298087,82.3742267 C130.345519,105.097051 163.046271,99.7570205 180.682163,99.7570205 C208.432406,99.7570205 210.003495,83.3742267 210.003495,83.3742267" id="Line" stroke-width="2" stroke-linecap="square"></path>
+                        <use id="Rectangle-3" mask="url(#mask-18)" stroke-width="4" fill="#FFFFFF" xlink:href="#path-17"></use>
+                    </g>
+                    <text id="app.WaitForElement-(" font-family="CourierNewPSMT, Courier New" font-size="12" font-weight="normal" fill="#4A4A4A">
+                        <tspan x="48" y="139">app.WaitForElement</tspan>
+                        <tspan x="48" y="153">   (c =&gt; c.Marked(“Runs”)); </tspan>
+                    </text>
+                </g>
+                <text id="Assert-The-tests-loo" font-family="Helvetica-Light, Helvetica" font-size="48" font-weight="300" fill="#4A4A4A">
+                    <tspan x="673" y="797">Assert</tspan>
+                    <tspan x="809.896" y="797" font-size="36"></tspan>
+                    <tspan x="673" y="855" font-size="36"></tspan>
+                    <tspan x="673" y="898" font-size="24">The tests look at the UI and ensure</tspan>
+                    <tspan x="673" y="927" font-size="24">that it is in the correct state, for example</tspan>
+                    <tspan x="673" y="956" font-size="24">looking for the correct value on labels</tspan>
+                </text>
+                <g id="Act" transform="translate(0.000000, 375.000000)">
+                    <g id="Group" transform="translate(216.000000, 0.000000)">
+                        <g id="iphone" stroke="#9B9B9B">
+                            <path d="M138,275.852015 C138,285.297522 130.366477,292.952949 120.949569,292.952949 L17.0514923,292.952949 C7.63458462,292.952949 0.00106153846,285.297522 0.00106153846,275.852015 L0.00106153846,17.1875511 C0.00106153846,7.7420438 7.63458462,0.0866167883 17.0514923,0.0866167883 L120.949569,0.0866167883 C130.366477,0.0866167883 138,7.7420438 138,17.1875511 L138,275.852015 L138,275.852015 L138,275.852015 Z" id="bezel" stroke-width="2" fill="#FDFDFD"></path>
+                            <rect id="screen" fill="#FFFFFF" x="9.55384615" y="38.4963504" width="118.818" height="212.889095"></rect>
+                            <path d="M81.7384615,27.5313066 C81.7384615,28.2103394 81.2724462,28.7578431 80.6981538,28.7578431 L59.3591077,28.7578431 C58.7837538,28.7578431 58.3188,28.2092701 58.3188,27.5313066 L58.3188,24.7724015 C58.3188,24.0933686 58.7848154,23.545865 59.3591077,23.545865 L80.6981538,23.545865 C81.2724462,23.545865 81.7384615,24.094438 81.7384615,24.7724015 L81.7384615,27.5313066 L81.7384615,27.5313066 L81.7384615,27.5313066 Z" id="speaker"></path>
+                            <ellipse id="camera" cx="70.0615385" cy="12.8321168" rx="3.18461538" ry="3.2080292"></ellipse>
+                            <ellipse id="lock" cx="69.0424615" cy="271.614208" rx="10.6578462" ry="10.6945"></ellipse>
+                        </g>
+                        <g id="Main-screen" transform="translate(9.000000, 37.382759)">
+                            <use id="Rectangle-1" stroke="#979797" mask="url(#mask-20)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-19"></use>
+                            <use id="Rectangle-2" stroke="#979797" mask="url(#mask-22)" stroke-width="2" fill-opacity="0.398182745" fill="#9B9B9B" xlink:href="#path-21"></use>
+                            <text id="New" font-family="Helvetica-Bold, Helvetica" font-size="12" font-weight="bold" fill="#4A4A4A">
+                                <tspan x="48.1630859" y="20.0931034">New</tspan>
+                            </text>
+                            <text id="Done" font-family="Helvetica" font-size="10" font-weight="normal" fill="#4A4A4A">
+                                <tspan x="91.09375" y="20.1034483">Done</tspan>
+                            </text>
+                            <text id="&lt;Countr" font-family="Helvetica" font-size="10" font-weight="normal" fill="#4A4A4A">
+                                <tspan x="4" y="20.1034483">&lt;Countr</tspan>
+                            </text>
+                        </g>
+                        <text id="Runs" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="15" y="94.8586207">Runs</tspan>
+                        </text>
+                        <g id="Oval">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-24)" xlink:href="#path-23"></use>
+                            <use stroke="#4A4A4A" stroke-width="1" fill-opacity="0.397814764" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-23"></use>
+                        </g>
+                    </g>
+                    <g id="Group" transform="translate(432.000000, 0.000000)">
+                        <g id="iphone" stroke="#9B9B9B">
+                            <path d="M138,275.852015 C138,285.297522 130.366477,292.952949 120.949569,292.952949 L17.0514923,292.952949 C7.63458462,292.952949 0.00106153846,285.297522 0.00106153846,275.852015 L0.00106153846,17.1875511 C0.00106153846,7.7420438 7.63458462,0.0866167883 17.0514923,0.0866167883 L120.949569,0.0866167883 C130.366477,0.0866167883 138,7.7420438 138,17.1875511 L138,275.852015 L138,275.852015 L138,275.852015 Z" id="bezel" stroke-width="2" fill="#FDFDFD"></path>
+                            <rect id="screen" fill="#FFFFFF" x="9.55384615" y="38.4963504" width="118.818" height="212.889095"></rect>
+                            <path d="M81.7384615,27.5313066 C81.7384615,28.2103394 81.2724462,28.7578431 80.6981538,28.7578431 L59.3591077,28.7578431 C58.7837538,28.7578431 58.3188,28.2092701 58.3188,27.5313066 L58.3188,24.7724015 C58.3188,24.0933686 58.7848154,23.545865 59.3591077,23.545865 L80.6981538,23.545865 C81.2724462,23.545865 81.7384615,24.094438 81.7384615,24.7724015 L81.7384615,27.5313066 L81.7384615,27.5313066 L81.7384615,27.5313066 Z" id="speaker"></path>
+                            <ellipse id="camera" cx="70.0615385" cy="12.8321168" rx="3.18461538" ry="3.2080292"></ellipse>
+                            <ellipse id="lock" cx="69.0424615" cy="271.614208" rx="10.6578462" ry="10.6945"></ellipse>
+                        </g>
+                        <g id="Main-screen" transform="translate(9.000000, 37.382759)">
+                            <use id="Rectangle-1" stroke="#979797" mask="url(#mask-26)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-25"></use>
+                            <use id="Rectangle-2" stroke="#979797" mask="url(#mask-28)" stroke-width="2" fill-opacity="0.398182745" fill="#9B9B9B" xlink:href="#path-27"></use>
+                            <text id="New" font-family="Helvetica-Bold, Helvetica" font-size="12" font-weight="bold" fill="#4A4A4A">
+                                <tspan x="48.1630859" y="20.0931034">New</tspan>
+                            </text>
+                            <text id="Done" font-family="Helvetica" font-size="10" font-weight="normal" fill="#4A4A4A">
+                                <tspan x="91.09375" y="20.1034483">Done</tspan>
+                            </text>
+                            <text id="&lt;Countr" font-family="Helvetica" font-size="10" font-weight="normal" fill="#4A4A4A">
+                                <tspan x="4" y="20.1034483">&lt;Countr</tspan>
+                            </text>
+                        </g>
+                        <text id="Runs" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                            <tspan x="15" y="94.8586207">Runs</tspan>
+                        </text>
+                        <g id="Oval">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-30)" xlink:href="#path-29"></use>
+                            <use stroke="#4A4A4A" stroke-width="1" fill-opacity="0.397814764" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-29"></use>
+                        </g>
+                    </g>
+                    <g id="Group">
+                        <g id="iphone" stroke="#9B9B9B">
+                            <path d="M138,275.852015 C138,285.297522 130.366477,292.952949 120.949569,292.952949 L17.0514923,292.952949 C7.63458462,292.952949 0.00106153846,285.297522 0.00106153846,275.852015 L0.00106153846,17.1875511 C0.00106153846,7.7420438 7.63458462,0.0866167883 17.0514923,0.0866167883 L120.949569,0.0866167883 C130.366477,0.0866167883 138,7.7420438 138,17.1875511 L138,275.852015 L138,275.852015 L138,275.852015 Z" id="bezel" stroke-width="2" fill="#FDFDFD"></path>
+                            <rect id="screen" fill="#FFFFFF" x="9.55384615" y="38.4963504" width="118.818" height="212.889095"></rect>
+                            <path d="M81.7384615,27.5313066 C81.7384615,28.2103394 81.2724462,28.7578431 80.6981538,28.7578431 L59.3591077,28.7578431 C58.7837538,28.7578431 58.3188,28.2092701 58.3188,27.5313066 L58.3188,24.7724015 C58.3188,24.0933686 58.7848154,23.545865 59.3591077,23.545865 L80.6981538,23.545865 C81.2724462,23.545865 81.7384615,24.094438 81.7384615,24.7724015 L81.7384615,27.5313066 L81.7384615,27.5313066 L81.7384615,27.5313066 Z" id="speaker"></path>
+                            <ellipse id="camera" cx="70.0615385" cy="12.8321168" rx="3.18461538" ry="3.2080292"></ellipse>
+                            <ellipse id="lock" cx="69.0424615" cy="271.614208" rx="10.6578462" ry="10.6945"></ellipse>
+                        </g>
+                        <g id="Main-screen" transform="translate(9.000000, 37.382759)">
+                            <use id="Rectangle-1" stroke="#979797" mask="url(#mask-32)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-31"></use>
+                            <use id="Rectangle-2" stroke="#979797" mask="url(#mask-34)" stroke-width="2" fill-opacity="0.398182745" fill="#9B9B9B" xlink:href="#path-33"></use>
+                            <text id="Countr" font-family="Helvetica-Bold, Helvetica" font-size="12" font-weight="bold" fill="#4A4A4A">
+                                <tspan x="40.8388672" y="20.0931034">Countr</tspan>
+                            </text>
+                            <use id="Rectangle" stroke="#979797" mask="url(#mask-36)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-35"></use>
+                            <text id="4" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                                <tspan x="78" y="52.4241379">4</tspan>
+                            </text>
+                            <text id="+" font-family="Helvetica" font-size="18" font-weight="normal" fill="#4A4A4A">
+                                <tspan x="104" y="52.3517241">+</tspan>
+                            </text>
+                            <text id="Coffees" font-family="Helvetica" font-size="12" font-weight="normal" fill="#4A4A4A">
+                                <tspan x="7" y="52.4241379">Coffees</tspan>
+                            </text>
+                            <text id="Add" font-family="Helvetica" font-size="10" font-weight="normal" fill="#4A4A4A">
+                                <tspan x="97.2070312" y="20.1034483">Add</tspan>
+                            </text>
+                        </g>
+                        <g id="Oval">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-38)" xlink:href="#path-37"></use>
+                            <use stroke="#4A4A4A" stroke-width="1" fill-opacity="0.397814764" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-37"></use>
+                        </g>
+                    </g>
+                    <g id="Group-3" transform="translate(358.000000, 136.000000)">
+                        <path d="M52,20 L55.6231647,9.99947427 L52,0 C56.5992395,4.00504705 64.0193039,7.78507965 70,9.99947427 C64.0193039,12.2149204 56.5992395,15.9960044 52,20 Z" id="Arrow-head-01" fill="#9B9B9B"></path>
+                        <path d="M0.5,10 L65.5878697,10" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square"></path>
+                    </g>
+                    <g id="Group-3" transform="translate(142.000000, 136.000000)">
+                        <path d="M52,20 L55.6231647,9.99947427 L52,0 C56.5992395,4.00504705 64.0193039,7.78507965 70,9.99947427 C64.0193039,12.2149204 56.5992395,15.9960044 52,20 Z" id="Arrow-head-01" fill="#9B9B9B"></path>
+                        <path d="M0.5,10 L65.5878697,10" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square"></path>
+                    </g>
+                </g>
+                <text id="Act-The-test-connect" font-family="Helvetica-Light, Helvetica" font-size="48" font-weight="300" fill="#4A4A4A">
+                    <tspan x="673" y="422">Act</tspan>
+                    <tspan x="745.048" y="422" font-size="36"></tspan>
+                    <tspan x="673" y="480" font-size="36"></tspan>
+                    <tspan x="673" y="523" font-size="24">The test connects to the device and</tspan>
+                    <tspan x="673" y="552" font-size="24">interacts with it as if it was a user, for</tspan>
+                    <tspan x="673" y="581" font-size="24">example tapping buttons and entering</tspan>
+                    <tspan x="673" y="610" font-size="24">text</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
