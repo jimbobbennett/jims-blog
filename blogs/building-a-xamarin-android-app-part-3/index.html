@@ -1,0 +1,241 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=icon href=/fav.png type=image/png><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/font.css media=all><meta property="og:title" content="Building a Xamarin Android app - part 3"><meta property="og:description" content="This is the third part in the my series about building an Android app using Xamarin.Android. You can find the first part here and the second part here, and I highly recommend reading these first.
+Data binding In the first 2 parts of this we created our basic app shell and built a core library with models that used SQLite to store and retrieve our data. We&rsquo;re now going to expand on this by adding the layer in-between to bind the data to our UI."><meta property="og:type" content="article"><meta property="og:url" content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-3/"><meta property="og:image" content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-3/banner.png"><meta property="article:section" content="blogs"><meta property="article:published_time" content="2016-01-30T17:51:36+00:00"><meta property="article:modified_time" content="2016-01-30T17:51:36+00:00"><meta property="og:site_name" content="JimBobBennett"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-3/banner.png"><meta name=twitter:title content="Building a Xamarin Android app - part 3"><meta name=twitter:description content="This is the third part in the my series about building an Android app using Xamarin.Android. You can find the first part here and the second part here, and I highly recommend reading these first.
+Data binding In the first 2 parts of this we created our basic app shell and built a core library with models that used SQLite to store and retrieve our data. We&rsquo;re now going to expand on this by adding the layer in-between to bind the data to our UI."><meta name=twitter:site content="@jimbobbennett"><meta name=twitter:creator content="@jimbobbennett"><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous><link rel=stylesheet href=/css/header.css media=all><link rel=stylesheet href=/css/footer.css media=all><link rel=stylesheet href=/css/theme.css media=all><link rel="shortcut icon" type=image/png href=/fav.png><link rel="shortcut icon" sizes=192x192 href=/fav.png><link rel=apple-touch-icon href=/fav.png><script type=text/javascript>(function(e,t,n,s,o,i,a){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)},i=t.createElement(s),i.async=1,i.src="https://www.clarity.ms/tag/"+o,a=t.getElementsByTagName(s)[0],a.parentNode.insertBefore(i,a)})(window,document,"clarity","script","dctc2ydykv")</script><style>:root{--text-color:#343a40;--text-secondary-color:#6c757d;--background-color:#000;--secondary-background-color:#64ffda1a;--primary-color:#007bff;--secondary-color:#f8f9fa;--text-color-dark:#e4e6eb;--text-secondary-color-dark:#b0b3b8;--background-color-dark:#000000;--secondary-background-color-dark:#212529;--primary-color-dark:#ffffff;--secondary-color-dark:#212529}body{background-color:#000;font-size:1rem;font-weight:400;line-height:1.5;text-align:left}</style><meta name=description content><link rel=stylesheet href=/css/index.css><link rel=stylesheet href=/css/single.css><link rel=stylesheet href=/css/projects.css media=all><script defer src=/fontawesome-5/all-5.15.4.js></script><title>Building a Xamarin Android app - part 3 | JimBobBennett</title></head><body class=light onload=loading()><header><nav class="pt-3 navbar navbar-expand-lg"><div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5"><a class="navbar-brand primary-font text-wrap" href=/><img src=/fav.png width=30 height=30 class="d-inline-block align-top">
+JimBobBennett</a>
+<button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarContent aria-controls=navbarContent aria-expanded=false aria-label="Toggle navigation"><svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" data-view-component="true"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button><div class="collapse navbar-collapse text-wrap primary-font" id=navbarContent><ul class="navbar-nav ms-auto text-center"><li class="nav-item navbar-text"><a class=nav-link href=/ aria-label=home>Home</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#about aria-label=about>About</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#projects aria-label=projects>Recent Highlights</a></li><li class="nav-item navbar-text"><a class=nav-link href=/blogs title="Blog posts">Blog</a></li><li class="nav-item navbar-text"><a class=nav-link href=/videos title=Videos>Videos</a></li><li class="nav-item navbar-text"><a class=nav-link href=/livestreams title=Livestreams>Livestreams</a></li><li class="nav-item navbar-text"><a class=nav-link href=/conferences title=Conferences>Conferences</a></li><li class="nav-item navbar-text"><a class=nav-link href=/resume title=Resume>Resume</a></li></ul></div></div></nav></header><div id=content><section id=projects><div class="container pt-5" id=list-page><div class="row justify-content-center px-3 px-md-5"><h1 class="text-left pb-2 content">Building a Xamarin Android app - part 3</h1><div class="text-left content">Jim Bennett
+<small>|</small>
+Jan 30, 2016</div></div></div></section><section id=single><div class=container><div class="row justify-content-center"><div class="col-sm-12 col-md-12 col-lg-9"><div class=pr-lg-4><article class="page-content p-2"><p>This is the third part in the my series about building an Android app using Xamarin.Android. You can find the first part <a href=/blogs/building-an-android-app-part-1/>here</a> and the second part <a href=/blogs/building-an-android-app-part-2/>here</a>, and I highly recommend reading these first.</p><h4 id=data-binding>Data binding</h4><p>In the first 2 parts of this we created our basic app shell and built a core library with models that used SQLite to store and retrieve our data. We&rsquo;re now going to expand on this by adding the layer in-between to bind the data to our UI.</p><p>Having been a WPF developer in the past I&rsquo;m a big fan of the <a href=https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel>MVVM pattern</a>, so I&rsquo;m planning on using the same pattern here. I won&rsquo;t go into the details of this pattern, so if you&rsquo;ve never come across it before it&rsquo;s worth reading up as it&rsquo;s a useful pattern supported natively in Xamarin.Forms and on iOS and Android using tools like MVVMLight or <a href=https://github.com/MvvmCross/MvvmCross>MVVMCross</a>. To help with this I&rsquo;m going to use <a href=http://www.mvvmlight.net>MVVMLight</a> by <a href=http://www.galasoft.ch>Laurent Bugnion</a>. As the name suggests this is a light-weight MVVM library which provides the basic toolbox to allow you to use the pattern without constraining you to a particular architecture. MVVMLight has two different nuget packages to install - one for the Android app and one for our core project.</p><p>For StupendousCounter.Droid install MVVMLight. This has all the platform specific code in (so for an Android project you get a library with Android specific code in) that allows for things like UI binding - this needs to know about the controls so needs to be platform-specific. When installing this you may get an error about not being able to find App.Xaml - just ignore this as it isn&rsquo;t relevant for Android projects. Once this is installed you will see a new folder created called <code>ViewModel</code> that contains a dummy view model and an example ViewModelLocator. We&rsquo;ll come back to these later on.</p><div class=image-div style=width:700px><p><img src=Screen-Shot-2016-01-22-at-13-14-29.png alt="MVVMLight nuget package"></p></div><br><div class=image-div style=width:300px><p><img src=Screen-Shot-2016-01-23-at-13-52-58.png alt="ViewModel folder"></p></div><br><p>For StupendousCounter.Core install the libs only one - MVVMLightLibs. This has things like the base view model but nothing platform specific.</p><div class=image-div style=width:700px><p><img src=Screen-Shot-2016-01-22-at-13-24-39.png alt="MVVMLightLibs nuget package"></p></div><br><h6 id=showing-some-data>Showing some data</h6><p>Lets start by showing some data on screen. To make it easier we&rsquo;ll just mock some up on startup if we don&rsquo;t have an existing counters. In our <code>MainActivity.cs</code> we can add some dummy data if we are in debug (to save accidentally leaving this in in release code) just after we&rsquo;ve setup the <code>DatabaseHelper</code>:</p><pre tabindex=0><code>private static async Task AddDummyData()
+{
+    var dbHelper = new DatabaseHelper();
+    if (!(await dbHelper.GetAllCountersAsync()).Any())
+    {
+        var counter1 = new Counter
+        {
+            Name = &#34;Monkey Count&#34;,
+            Description = &#34;The number of monkeys&#34;,
+            Value = 10
+        };
+
+        var counter2 = new Counter
+        {
+            Name = &#34;Playtpus Count&#34;,
+            Description = &#34;The number of duck-billed platypuses&#34;,
+            Value = 4
+        };
+
+        await dbHelper.AddOrUpdateCounterAsync(counter1);
+        await dbHelper.AddOrUpdateCounterAsync(counter2);
+    }
+}
+</code></pre><p>And call this if we&rsquo;re in debug in our &lsquo;OnCreate&rsquo; method:</p><pre tabindex=0><code>protected override async void OnCreate(Bundle savedInstanceState)
+{
+    base.OnCreate(savedInstanceState);
+
+    var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+    var dbPath = Path.Combine(path, &#34;counters.db3&#34;);
+    DatabaseHelper.CreateDatabase(dbPath);
+
+# if DEBUG
+    await AddDummyData();
+# endif
+</code></pre><p>Notice how we&rsquo;re awaiting the call to <code>AddDummyData</code>? Yup - this is an async method we&rsquo;re in. In the default <code>OnCreate</code> it&rsquo;s not async - but we can make it so by just adding the <code>async</code> keyword and it just works. Which is really nice.</p><div class=image-div style=width:300px><p><img src=meme2.jpg alt="Async all the things!"></p></div><br><p>We have some data, so lets create our first view model to display it.
+When we added MVVMLight to the StupendousCounter.Droid project it created a dummy <code>MainViewModel</code> and &lsquo;ViewModelLocator&rsquo;. These are useful starting points for our code but they are not in the right place - one of the big upsides of MVVM is the separation of concerns that is gives us, so the UI is completely independent of the Model (which contains our data) and the view model (which is a converter that converts from the UI view of our data to the Models view). Despite the view model converting from model to UI it should never contain any UI specific code - it converts the Models into a set of properties and commands that are bound to the UI in the View and allows the UI to get or set data or perform actions. Properties are simple data types that the view can show, update and detect updates to based off the <a href="https://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396">INotifyPropertyChanged</a> interface. Commands are implementations of <a href="https://msdn.microsoft.com/en-us/library/system.windows.input.icommand(v=vs.110).aspx">ICommand</a> that allow an event raised on the UI to run an action including checking if that action is allowed based on some criteria. These are all non-UI specific pieces and therefore do not need to be in the UI layer, nor do they need to be platform specific. So it&rsquo;s better to put them in the Core project so that if we want to port this app to iOS we don&rsquo;t have to re-implement the view models, just the Views. We can also then write unit tests against them simulating the View&rsquo;s interaction by getting or setting properties, detecting the <code>PropertyChanged</code> event on the <code>INotifyPropertyChanged</code> interface and executing commands.</p><p>To do this just drag the folder to the StupendousCounter.Core project and delete it from StupendousCounter.Droid. Then just update the namespaces in the 2 files to match the new location - using Resharper of course!</p><p>We need a couple of view models - one for the individual counters and one for the overall collection of counters.</p><h6 id=counterviewmodel>CounterViewModel</h6><p>Lets start with the <code>CounterViewModel</code>, a view model that wraps a <code>Counter</code>:</p><pre tabindex=0><code>using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+
+namespace StupendousCounter.Core.ViewModel
+{
+    public class CounterViewModel : ViewModelBase
+    {
+        private readonly Counter _counter;
+        private readonly IDatabaseHelper _databaseHelper;
+
+        public CounterViewModel(Counter counter, IDatabaseHelper databaseHelper)
+        {
+            _counter = counter;
+            _databaseHelper = databaseHelper;
+        }
+
+        public string Name =&gt; _counter.Name;
+        public string Description =&gt; _counter.Description;
+        public string Value =&gt; _counter.Value.ToString(&#34;N0&#34;);
+
+        private RelayCommand _incrementCommand;
+        public RelayCommand IncrementCommand =&gt; _incrementCommand ?? (_incrementCommand = new RelayCommand(async () =&gt; await IncrementAsync()));
+
+        private async Task IncrementAsync()
+        {
+            await _databaseHelper.IncrementCounterAsync(_counter);
+            RaisePropertyChanged(() =&gt; Value);
+        }
+    }
+}
+</code></pre><p>This view model derives from <code>GalaSoft.MvvmLightViewModelBase</code>. This base class provides a few useful bits of functionality including an implementation of <code>INotifyPropertyChanged</code> to make it easy to raise events when properties change. It has other cool stuff as well, but that&rsquo;s outside the scope of this but it&rsquo;s worth reading up on it.</p><p>The constructor takes a <code>Counter</code> that will provide all our data, and an <code>IDatabaseHelper</code> that we can use to update the counters value. Note that its the interface, not the concrete <code>DatabaseHelper</code> that we use so that we can mock it later for unit tests.</p><p>The <code>Name</code> and <code>Description</code> properties are simple read-only pass throughs to the properties on the underlying <code>Counter</code>. The <code>Value</code> property is slightly more complicated - I&rsquo;m converting it to a string with no decimal places so it can be shown in a text view. I&rsquo;m using the new, cleaner <a href=https://visualstudiomagazine.com/articles/2015/06/03/c-sharp-6-expression-bodied-properties-dictionary-initializer.aspx>C# 6 expression bodied property</a> syntax for these which is so much cleaner than writing the properties out in full. These are read only as there is no need to update them directly - the only property that we can update is the value when the counter is incremented and we don&rsquo;t want to do this with a direct property update, instead we want to do this in the <code>IncrementCommand</code>. This command uses a MVVMLight <code>RelayCommand</code> to wrap an async call to our <code>Increment</code> method. This will increment the counter in the SQLite db using our database helper, then call <code>RaisePropertyChanged</code> to indicate back to the view that the value has changed so the UI should update what it shows on screen. One thing I still think is odd is that there isn&rsquo;t an implementation of <code>ICommand</code> in the .Net framework - you either have to write your own or use one from a library like MVVMLight. Seems like a serious omission to me.</p><h6 id=unit-testing-the-counterviewmodel>Unit testing the CounterViewModel</h6><p>We&rsquo;ve now got the view model for our counter, so before we use it we should test it (I know some people will say we should have written our tests before writing the view model but hey ho). For this we need a basic class library called <code>StupendousCounter.Core.Tests</code>.</p><div class=image-div style=width:700px><p><img src=Screen-Shot-2016-01-23-at-14-53-49.png alt="Create StupendousCounter.Core.Tests class library"></p></div><br><p>We can add the same <code>NUnit</code> and <code>FluentAssertions</code> nuget packages as we did for the Android bases tests, and <code>MVVMLightLibs</code>. We also want to install <a href=https://www.nuget.org/packages/Moq/>Moq</a>, an enjoyable mocking library that we can use to mock out the database layer. The <code>CommonServiceLocator</code> shown in the picture below is a dependency of <code>MVVMLightLibs</code> and is installed automatically.</p><div class=image-div style=width:700px><p><img src=Screen-Shot-2016-01-23-at-15-01-14.png alt="Installed nuget packages"></p></div><br><p>Now we have our packages installed, lets delete the auto created <code>Class1.cs</code> and add our <code>CounterViewModelTests</code> class. I like to keep the structure of the tests project the same as the project it&rsquo;s testing so I&rsquo;ve created it in the <code>ViewModel</code> folder.</p><div class=image-div style=width:300px><p><img src=Screen-Shot-2016-01-23-at-15-05-00.png alt="CounterViewModelTests class"></p></div><br><pre tabindex=0><code>using FluentAssertions;
+using Moq;
+using NUnit.Framework;
+using StupendousCounter.Core.ViewModel;
+
+namespace StupendousCounter.Core.Tests.ViewModel
+{
+    [TestFixture]
+    public class CounterViewModelTests
+    {
+        private Mock&lt;IDatabaseHelper&gt; _mockDatabaseHelper;
+
+        private CounterViewModel CreateCounterViewModel(int value = 10, string description = &#34;Bar&#34;, string name = &#34;Foo&#34;)
+        {
+            var counter = new Counter { Name = name, Description = description, Value = value };
+            return new CounterViewModel(counter, _mockDatabaseHelper.Object);
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mockDatabaseHelper = new Mock&lt;IDatabaseHelper&gt;();
+        }
+
+        [Test]
+        public void NameShouldComeFromTheCounter()
+        {
+            CreateCounterViewModel().Name.Should().Be(&#34;Foo&#34;);
+        }
+
+        [Test]
+        public void DescriptionShouldComeFromTheCounter()
+        {
+            CreateCounterViewModel().Description.Should().Be(&#34;Bar&#34;);
+        }
+
+        [Test]
+        public void ValueShouldComeFromTheCounter()
+        {
+            CreateCounterViewModel().Value.Should().Be(&#34;10&#34;);
+        }
+
+        [Test]
+        public void ExecutingTheIncrementCommandShouldIncrementTheValueInTheDatabaseHelper()
+        {
+            _mockDatabaseHelper.Setup(d =&gt; d.IncrementCounterAsync(It.IsAny&lt;Counter&gt;())).Callback&lt;Counter&gt;(c =&gt; ++c.Value);
+            var counter = new Counter {Value = 10};
+            var vm = new CounterViewModel(counter, _mockDatabaseHelper.Object);
+            vm.IncrementCommand.Execute(null);
+            _mockDatabaseHelper.Verify(d =&gt; d.IncrementCounterAsync(counter));
+            vm.Value.Should().Be(&#34;11&#34;);
+        }
+
+        [Test]
+        public void ExecutingTheIncrementCommandShouldRaiseAPropertyChangeForValue()
+        {
+            var vm = CreateCounterViewModel();
+            vm.MonitorEvents();
+            vm.IncrementCommand.Execute(null);
+            vm.ShouldRaisePropertyChangeFor(v =&gt; vm.Value);
+        }
+    }
+}
+</code></pre><p>Some of the tests should be self-explanatory. The <code>xxxShouldComeFromTheCounter</code> tests verify that the values on the view model actually come from the counter. These are great sanity tests as it&rsquo;s easy to copy/past properties when creating lots of passthroughs in bigger view models and forget to update the underlying property name. For the value test we are expecting a string value, so we&rsquo;re comparing against a string representation of the set value.</p><p><code>ExecutingTheIncrementCommandShouldIncrementTheValueInTheDatabaseHelper</code> is a bit more interesting. This tests 2 things - firstly that the database helper is used to increment the counter (remember our architecture is such that the incrementation is done in the database helper to ensure we store the history, and secondly that the value is updated in the view model. It&rsquo;s in this test the <code>Moq</code> is used. In the <code>SetUp</code> method a <code>Mock&lt;IDatabaseHelper></code> is created - this is a dummy object that we can use to provide our own implementation of the interface. It exposes an <code>Object</code> property that is the interface we&rsquo;re implementing and allows us to setup methods and properties to do what we want, and verify calls against them. In this case in the test were setting up the <code>IncrementCounterAsync</code> method to increment the counters value. When we execute the <code>IncrementCommand</code> it calls this method on the database helper stored in the view model, which is our mock, so our method gets called. After the command is executed we verify that the method on the Mock was actually called, and validate that the value was incremented. Mocks are really handy as we&rsquo;ve managed to test code that calls the database helper without actually needing to set up a SQLite db.</p><p>The final test <code>ExecutingTheIncrementCommandShouldRaiseAPropertyChangeForValue</code> is interesting as well. This is to validate that our UI is going to be updated. We can take it for granted that if a <code>PropertyChanged</code> event is fired then the UI will be updated as we will be binding this property using MVVMLight later, so all we need to do is ensure that when we execute the <code>IncrementCommand</code> the correct property change event is fired. FluentAssertions has some nice extension methods to ensure property change events are fired and these take expressions allowing the property in question to be defined in code instead of using a magic string - less fragile if the property name changes.</p><p>If you run these tests they should all pass allowing us to have some confidence in this view model.</p><div class=image-div style=width:400px><p><img src=Screen-Shot-2016-01-23-at-15-42-22.png alt="All tests passing"></p></div><br><h6 id=countersviemodel>CountersVieModel</h6><p>Once we have a view model for the individual counters we can create one for the overall list of counters. For this we will create a new class, <code>CountersViewModel</code>. Like the <code>CounterViewModel</code> above this will also derive from <code>ViewModelBase</code>.</p><pre tabindex=0><code>using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
+
+namespace StupendousCounter.Core.ViewModel
+{
+    public class CountersViewModel : ViewModelBase
+    {
+        private readonly IDatabaseHelper _databaseHelper;
+
+        private readonly ObservableCollection&lt;CounterViewModel&gt; _counters = new ObservableCollection&lt;CounterViewModel&gt;();
+        public ReadOnlyObservableCollection&lt;CounterViewModel&gt; Counters { get; private set; }
+
+        public CountersViewModel(IDatabaseHelper databaseHelper)
+        {
+            _databaseHelper = databaseHelper;
+            Counters = new ReadOnlyObservableCollection&lt;CounterViewModel&gt;(_counters);
+        }
+
+        public async Task LoadCountersAsync()
+        {
+            var counters = await _databaseHelper.GetAllCountersAsync();
+            foreach (var counter in counters)
+            {
+                _counters.Add(new CounterViewModel(counter, _databaseHelper));
+            }
+        }
+    }
+}
+</code></pre><p>This is quite a simple view model - it takes the database helper and exposes a method to load the counters from the database and wrap them all in the appropriate view model. These counters are exposed as a <code>ReadonlyObservableCollection&lt;CounterViewModel></code>, as opposed to a standard <code>ObservableCollection&lt;CounterViewModel></code>. Most people just use observable collections to expose collections of objects in the view model, but I prefer to expose them as a read only collection. The reason for this is the public properties and methods expose the intent and capabilities of a class, and to me exposng an observable collection that can be modified suggests that it is perfectly acceptable to modify the collection externally. In this case we don&rsquo;t want it to be modified externally, and when we implement an add button we will do it via a command that adds the new counter instead of by modifiying the collection directly. Therefore by exposing it as a read only collection we are saying that we explicitly don&rsquo;t want anyone else to modify it.</p><h6 id=unit-testing-the-countersviewmodel>Unit testing the CountersViewModel</h6><p>Despite being a simple view model we still shoudl write tests - always good to get as much converage as possible to catch any silly errors. At the moment all we need to test is that when we load the conters they are loaded correctly so this is a simple unit test class:</p><pre tabindex=0><code>using System.Collections.Generic;
+using System.Threading.Tasks;
+using FluentAssertions;
+using Moq;
+using NUnit.Framework;
+using StupendousCounter.Core.ViewModel;
+
+namespace StupendousCounter.Core.Tests.ViewModel
+{
+    [TestFixture]
+    public class CountersViewModelTests
+    {
+        private Mock&lt;IDatabaseHelper&gt; _mockDatabaseHelper;
+
+        private readonly Counter _monkeyCounter = new Counter
+        {
+            Name = &#34;Monkey Count&#34;,
+            Description = &#34;The number of monkeys&#34;,
+            Value = 10
+        };
+
+        private readonly Counter _platypusCounter = new Counter
+        {
+            Name = &#34;Playtpus Count&#34;,
+            Description = &#34;The number of duck-billed platypuses&#34;,
+            Value = 4
+        };
+
+        private static bool Matches(CounterViewModel cvm, Counter counter)
+        {
+            return cvm.Name == counter.Name &amp;&amp;
+                   cvm.Description == counter.Description &amp;&amp;
+                   cvm.Value == counter.Value.ToString(&#34;N0&#34;);
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mockDatabaseHelper = new Mock&lt;IDatabaseHelper&gt;();
+        }
+
+        [Test]
+        public async Task LoadCountersAsyncShouldLoadTheCountersFromTheDatabase()
+        {
+            _mockDatabaseHelper.Setup(d =&gt; d.GetAllCountersAsync()).ReturnsAsync(new List&lt;Counter&gt; {_monkeyCounter, _platypusCounter});
+            var vm = new CountersViewModel(_mockDatabaseHelper.Object);
+            await vm.LoadCountersAsync();
+            vm.Counters.Should().HaveCount(2);
+            vm.Counters.Should().Contain(c =&gt; Matches(c, _monkeyCounter));
+            vm.Counters.Should().Contain(c =&gt; Matches(c, _platypusCounter));
+        }
+    }
+}
+</code></pre><p>The single test here will load the counters and ensure they match the ones we&rsquo;ve mocked the database helper to return. The only lightly new thing here is this test is async - note the <code>async Task</code> return type. This tells NUnit to run these using async/await so inside the tests we can <code>await</code> any async calls, like the <code>LoadCountersAsync</code> method on the database helper.</p><h6 id=exposing-our-view-models>Exposing our view models</h6><p>The autogenerated classes provided by MVVMLight expose a main view model and a view model locator. The <code>MainViewModel.cs</code> file isn&rsquo;t really of any use to us, so it can be deleted.
+The <code>ViewModelLocator</code> however is useful. It&rsquo;s an implementation of the service locator pattern using SimpleIoC internally. Once tidied up and changed to suit our needs it looks like this:</p><pre tabindex=0><code>using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
+
+namespace StupendousCounter.Core.ViewModel
+{
+    public class ViewModelLocator
+    {
+        static ViewModelLocator()
+        {
+            ServiceLocator.SetLocatorProvider(() =&gt; SimpleIoc.Default);
+
+            SimpleIoc.Default.Register&lt;IDatabaseHelper&gt;(() =&gt; new DatabaseHelper());
+            SimpleIoc.Default.Register&lt;CountersViewModel&gt;();
+        }
+
+        public static CountersViewModel Counters =&gt; ServiceLocator.Current.GetInstance&lt;CountersViewModel&gt;();
+    }
+}
+</code></pre><p>The hordes of comments have been removed as we don&rsquo;t really need them. The clean method is also gone as again we don&rsquo;t need it. The important change though is in the static constructor where we register a new <code>DatabaseHelper</code> instance as an <code>IDatabaseHelper</code>, as well as registering the <code>CountersViewModel</code> type. These are registered against the <code>SimpleIoc.Default</code> instance, which is set up as the locator provider for the <code>ServiceLocator</code>. <code>SimpleIoc.Default</code> is a default instance of the <code>SimpleIoc</code> container, and anything registered in a container instance is effectively a singleton inside that instance. Having this default instance set up as the service locators provider means that whenever we access the <code>ServiceLocator.Current</code> singleton and get an instance we will get the single instance that we registered.
+For example out <code>Counters</code> property gets the instance of <code>CountersViewModel</code> from the service locator, which in turn gets it from the default SimpleIoc instance, which checks if it has an instance of the type and if so returns it, if not it creates a new one injecting any constructor parameters using types also registered in the SimpleIoc instance.
+If none of this makes sense then I suggest you stop reading here and read up on the <a href=https://en.wikipedia.org/wiki/Dependency_injection>dependency injection pattern</a> and <a href=https://en.wikipedia.org/wiki/Service_locator_pattern>service locator patterns</a>. These are pretty standard, allow for nicely decoupled applications, and are pretty fundamental to a good MVVM implementation.</p><p>The code for this can be found in GitHub on the Part3 branch at <a href=https://github.com/jimbobbennett/StupendousCounter/tree/Part3>https://github.com/jimbobbennett/StupendousCounter/tree/Part3</a></p><p>In the <a href=/blogs/building-a-xamarin-android-app-part-4/>next part</a> we&rsquo;ll work on the actual UI and start wiring everything up.</p><hr><p><table cellspacing=0 cellpadding=0 style=border:none;border-collapse:collapse><tr style=padding:0><td style=padding:0;vertical-align:top><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ss&ref=ss_til&ad_type=product_link&tracking_id=expecti-21&marketplace=amazon&region=GB&placement=B0000250CZ&asins=B0000250CZ&linkId=&show_border=false&link_opens_in_new_window=true"></iframe></td><td style='padding:0 30px;vertical-align:top'><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ss&ref=ss_til&ad_type=product_link&tracking_id=expecti-21&marketplace=amazon&region=GB&placement=B00W3G9LQI&asins=B00W3G9LQI&linkId=&show_border=false&link_opens_in_new_window=true"></iframe></td><td style='padding:0 30px;vertical-align:top'><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ss&ref=ss_til&ad_type=product_link&tracking_id=expecti-21&marketplace=amazon&region=GB&placement=B00533Y2KI&asins=B00533Y2KI&linkId=&show_border=false&link_opens_in_new_window=true"></iframe></td><td style='padding:0 30px'><p style=color:#686868;!important>Continuing on from the last post where I mentioned what I was listening to whilst developing, today I'm listening to <a href=http://www.heathernova.com>Heather Nova</a></p><p style=color:#686868;!important>Note - these are an affiliate links - if you click them and buy I get a small cut.</p></td></tr></table></p></article></div></div><div class="col-sm-12 col-md-12 col-lg-3"><div class=sticky-sidebar><aside class=toc><h5>Table Of Contents</h5><div class=toc-content><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></aside><aside class=tags><h5>Tags</h5><ul class="tags-ul list-unstyled list-inline"><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin target=_blank>xamarin</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin.android target=_blank>xamarin.android</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/technology target=_blank>Technology</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/mvvmlight target=_blank>mvvmlight</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/mvvm target=_blank>mvvm</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/tutorial target=_blank>tutorial</a></li></ul></aside></div></div></div><div class=row><div class="col-sm-12 col-md-12 col-lg-9 p-4"><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-3/",this.page.identifier="aa5d1524699fd3cbdbce398fd63d8924"};(function(){if(window.location.hostname=="localhost")return;var e=document,t=e.createElement("script");t.src="https://jimbobbennett.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div><button class="p-2 px-3" onclick=topFunction() id=topScroll>
+<i class="fas fa-angle-up"></i></button></section><script>var topScroll=document.getElementById("topScroll");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?topScroll.style.display="block":topScroll.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script></div><footer><div class="container py-4"><div class="row justify-content-center"><div class="col-md-4 text-center">&copy; 2022 All Rights Reserved</div></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js integrity=sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13 crossorigin=anonymous></script>
+<script>document.body.className.includes("light")&&(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))</script><script>let loadingIcons;function loading(){myVar=setTimeout(showPage,100)}function showPage(){try{document.getElementById("loading-icons").style.display="block"}catch{}}</script><script>function createCopyButton(e,t){const n=document.createElement("button");n.className="copy-code-button",n.type="button",n.innerText="Copy",n.addEventListener("click",()=>copyCodeToClipboard(n,e,t)),addCopyButtonToDom(n,e)}async function copyCodeToClipboard(e,t,n){const s=t.querySelector("pre > code").innerText;try{n.writeText(s)}finally{codeWasCopied(e)}}function codeWasCopied(e){e.blur(),e.innerText="Copied!",setTimeout(function(){e.innerText="Copy"},2e3)}function addCopyButtonToDom(e,t){t.insertBefore(e,t.firstChild);const n=document.createElement("div");n.className="highlight-wrapper",t.parentNode.insertBefore(n,t),n.appendChild(t)}if(navigator&&navigator.clipboard)document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,navigator.clipboard));else{var script=document.createElement("script");script.src="https://cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js",script.integrity="sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94=",script.crossOrigin="anonymous",script.onload=function(){addCopyButtons(clipboard)},document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,script)),document.body.appendChild(script)}</script></body></html>

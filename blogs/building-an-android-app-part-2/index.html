@@ -1,0 +1,161 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=icon href=/fav.png type=image/png><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/font.css media=all><meta property="og:title" content="Building a Xamarin Android app - part 2"><meta property="og:description" content="This is the second part in the my series about building an Android app using Xamarin.Android. You can find the first part here, and I highly recommend reading that first.
+Time to think about data In the last post we put together the basic app shell, colour scheme etc. Now lets think about the data model, and how we are going to persist the data - it&rsquo;s no good having a counter if the data is lost every time the app is restarted."><meta property="og:type" content="article"><meta property="og:url" content="https://jimbobbennett.dev/blogs/building-an-android-app-part-2/"><meta property="og:image" content="https://jimbobbennett.dev/blogs/building-an-android-app-part-2/banner.png"><meta property="article:section" content="blogs"><meta property="article:published_time" content="2016-01-15T21:12:13+00:00"><meta property="article:modified_time" content="2016-01-15T21:12:13+00:00"><meta property="og:site_name" content="JimBobBennett"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jimbobbennett.dev/blogs/building-an-android-app-part-2/banner.png"><meta name=twitter:title content="Building a Xamarin Android app - part 2"><meta name=twitter:description content="This is the second part in the my series about building an Android app using Xamarin.Android. You can find the first part here, and I highly recommend reading that first.
+Time to think about data In the last post we put together the basic app shell, colour scheme etc. Now lets think about the data model, and how we are going to persist the data - it&rsquo;s no good having a counter if the data is lost every time the app is restarted."><meta name=twitter:site content="@jimbobbennett"><meta name=twitter:creator content="@jimbobbennett"><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous><link rel=stylesheet href=/css/header.css media=all><link rel=stylesheet href=/css/footer.css media=all><link rel=stylesheet href=/css/theme.css media=all><link rel="shortcut icon" type=image/png href=/fav.png><link rel="shortcut icon" sizes=192x192 href=/fav.png><link rel=apple-touch-icon href=/fav.png><script type=text/javascript>(function(e,t,n,s,o,i,a){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)},i=t.createElement(s),i.async=1,i.src="https://www.clarity.ms/tag/"+o,a=t.getElementsByTagName(s)[0],a.parentNode.insertBefore(i,a)})(window,document,"clarity","script","dctc2ydykv")</script><style>:root{--text-color:#343a40;--text-secondary-color:#6c757d;--background-color:#000;--secondary-background-color:#64ffda1a;--primary-color:#007bff;--secondary-color:#f8f9fa;--text-color-dark:#e4e6eb;--text-secondary-color-dark:#b0b3b8;--background-color-dark:#000000;--secondary-background-color-dark:#212529;--primary-color-dark:#ffffff;--secondary-color-dark:#212529}body{background-color:#000;font-size:1rem;font-weight:400;line-height:1.5;text-align:left}</style><meta name=description content><link rel=stylesheet href=/css/index.css><link rel=stylesheet href=/css/single.css><link rel=stylesheet href=/css/projects.css media=all><script defer src=/fontawesome-5/all-5.15.4.js></script><title>Building a Xamarin Android app - part 2 | JimBobBennett</title></head><body class=light onload=loading()><header><nav class="pt-3 navbar navbar-expand-lg"><div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5"><a class="navbar-brand primary-font text-wrap" href=/><img src=/fav.png width=30 height=30 class="d-inline-block align-top">
+JimBobBennett</a>
+<button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarContent aria-controls=navbarContent aria-expanded=false aria-label="Toggle navigation"><svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" data-view-component="true"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button><div class="collapse navbar-collapse text-wrap primary-font" id=navbarContent><ul class="navbar-nav ms-auto text-center"><li class="nav-item navbar-text"><a class=nav-link href=/ aria-label=home>Home</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#about aria-label=about>About</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#projects aria-label=projects>Recent Highlights</a></li><li class="nav-item navbar-text"><a class=nav-link href=/blogs title="Blog posts">Blog</a></li><li class="nav-item navbar-text"><a class=nav-link href=/videos title=Videos>Videos</a></li><li class="nav-item navbar-text"><a class=nav-link href=/livestreams title=Livestreams>Livestreams</a></li><li class="nav-item navbar-text"><a class=nav-link href=/conferences title=Conferences>Conferences</a></li><li class="nav-item navbar-text"><a class=nav-link href=/resume title=Resume>Resume</a></li></ul></div></div></nav></header><div id=content><section id=projects><div class="container pt-5" id=list-page><div class="row justify-content-center px-3 px-md-5"><h1 class="text-left pb-2 content">Building a Xamarin Android app - part 2</h1><div class="text-left content">Jim Bennett
+<small>|</small>
+Jan 15, 2016</div></div></div></section><section id=single><div class=container><div class="row justify-content-center"><div class="col-sm-12 col-md-12 col-lg-9"><div class=pr-lg-4><article class="page-content p-2"><p>This is the second part in the my series about building an Android app using Xamarin.Android. You can find the first part <a href=/blogs/building-an-android-app-part-1/>here</a>, and I highly recommend reading that first.</p><h4 id=time-to-think-about-data>Time to think about data</h4><div class=image-div style=width:200px><p><img src=tumblr_inline_ns06dw2ek41qau8io_500.jpg alt=Data></p></div><br><p>In the last post we put together the basic app shell, colour scheme etc. Now lets think about the data model, and how we are going to persist the data - it&rsquo;s no good having a counter if the data is lost every time the app is restarted. For persistence we&rsquo;ll simply use SQLite as we just need something to be stored locally for now.</p><p>The basic set of classes we need are something to represent a counter with its name, description and current value, and a way of storing the dates the counters were incremented. This historical data would allow us to see when counters were incremented - for example it may be nice to see that your &lsquo;cup of coffee&rsquo; count is 74 but it would also be nice to show that in a chart showing cups per day instead of just the total.</p><h6 id=pcl>PCL</h6><p>Now &lsquo;because we&rsquo;re not animals&rsquo; (phrase ©2016 <a href>Mike James</a>) I&rsquo;ll be putting all the data and business logic into a portable class library (PCL) so that we can easily port this to another platform if required. If you don&rsquo;t know what a PCL is I suggest you <a href=https://developer.xamarin.com/guides/cross-platform/application_fundamentals/pcl/>read the docs</a>.</p><p>First we create the PCL - I&rsquo;m going to call it StupendousCounter.Core.</p><div class=image-div style=width:700px><p><img src=Screen-Shot-2016-01-15-at-11-11-23.png alt="PCL creation"></p></div><br><p>When you create a PCL you have to select which targets it supports so that VS can ensure the right subset of the .Net framework is available. The following targets need to be selected:</p><div class=image-div style=width:400px><p><img src=Screen-Shot-2016-01-15-at-11-56-22.png alt="PCL targets"></p></div><br><p>Once created we can delete the class1.cs file that is auto generated.</p><h6 id=sqlite>SQLite</h6><p>Next, we&rsquo;re going to need to add SQLite. There&rsquo;s a number of different nuget packages we could add, and a selection of ways we can do this but for this we&rsquo;re going to use <a href=https://www.nuget.org/packages/sqlite-net-pcl/>SQLite-net-pcl</a>. Note that this is the SQLite-net**-pcl** version, not the base SQLite-net version which won&rsquo;t work with a PCL. This nuget package needs to be added to both projects - the .Core and the .Droid.</p><p>It&rsquo;s really easy to create classes that can be stored in SQLite - it can store simple data types out of the box and has attributes to handle fun things like auto-incrementing primary keys.</p><p>This is the class we&rsquo;ll be using for our counters. This is defined in <code>Counter.cs</code>:</p><pre tabindex=0><code>using SQLite;
+
+namespace StupendousCounter.Core
+{
+    public class Counter
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public long Value { get; set; }
+    }
+}
+</code></pre><br><p>And this is the counter history, defined in <code>CounterIncrementHistory.cs</code>:</p><pre tabindex=0><code>using System;
+
+namespace StupendousCounter.Core
+{
+    public class CounterIncrementHistory
+    {
+        [Indexed]
+        public int CounterId { get; set; }
+        public DateTime IncrementDateTimeUtc { get; set; }
+    }
+}
+</code></pre><br><p>Note the <code>[Indexed]</code> attribute on the CounterId so that this column gets indexed.</p><p>That&rsquo;s the data classes sorted, now we need to think about how we store and retrieve this data.</p><h6 id=database-connection>Database connection</h6><p>To help us handle the relationships between the counter and it&rsquo;s history, and to abstract away the database from the application (good <a href=https://en.wikipedia.org/wiki/Separation_of_concerns>separation of concerns</a> helps with unit testing which we&rsquo;ll add later), we&rsquo;ll need to create a database helper. This will contain methods to retrieve all counters, create a new one, update an existing one or increment the counter (and persist the change to the history).
+We start by creating an interface that defines our helper. It needs to be an interface so that we can <a href=https://github.com/Moq/moq4>mock it out later when unit testing</a>.</p><p>Here&rsquo;s the interface code defined in <code>IDatabaseHelper.cs</code>:</p><pre tabindex=0><code>using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace StupendousCounter.Core
+{
+    public interface IDatabaseHelper
+    {
+        Task AddOrUpdateCounterAsync(Counter counter);
+        Task IncrementCounterAsync(Counter counter);
+        Task&lt;IEnumerable&lt;Counter&gt;&gt; GetAllCountersAsync();
+        Task&lt;IEnumerable&lt;CounterIncrementHistory&gt;&gt; GetCounterHistoryAsync(int counterId);
+    }
+}
+</code></pre><br><p>Notice all the methods are set up ready to use async/await because we&rsquo;re writing modern code and want to do it properly!</p><p>Now lets start constructing the implementation (or to be honest lets get <a href=https://www.jetbrains.com/resharper/>Resharper</a> to create our implementation) in <code>DatabaseHelper.cs</code>:</p><pre tabindex=0><code>using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace StupendousCounter.Core
+{
+    public class DatabaseHelper : IDatabaseHelper
+    {   
+        public async Task AddOrUpdateCounterAsync(Counter counter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task IncrementCounterAsync(Counter counter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task&lt;IEnumerable&lt;Counter&gt;&gt; GetAllCountersAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task&lt;IEnumerable&lt;CounterIncrementHistory&gt;&gt; GetCounterHistoryAsync(int counterId)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+</code></pre><br><p>SQLite is a file based database - it stores it&rsquo;s data in a single .db file that is stored locally on the device. This location is different depending on which OS it&rsquo;s running on, so Android puts these files in one place, iOS somewhere different. This means that we have to do some work in the Android project itself to construct the path to the database file, and this path needs to be available to our database helper implementation. We also need to initialise the database to create the tables that will be storing our data. The simplest way to do this is to have a static initialisation method that we call from the MainActivity:</p><pre tabindex=0><code>    public class DatabaseHelper : IDatabaseHelper
+    {
+        public static void CreateDatabase(string dbPath)
+        {}
+</code></pre><br><p>In Android the correct place to store your SQLite database files according to Xamarin is in the personal folder, which is defined quite helpfully in <code>System.Environment.SpecialFolder.Personal</code>. Honestly I&rsquo;ve yet to find out exactly why this is the recommended place, so if you know please let me know!</p><p>In our <code>MainActivity.cs</code>, in the <code>OnCreate</code> method we can grab this folder, add a db file and pass that to the CreateDatabase method on our database helper:</p><pre tabindex=0><code>protected override void OnCreate(Bundle savedInstanceState)
+{
+    base.OnCreate(savedInstanceState);
+    var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+    var dbPath = Path.Combine(path, &#34;counters.db3&#34;);
+    DatabaseHelper.CreateDatabase(dbPath);
+</code></pre><br><p>There are nicer ways of doing this, and we&rsquo;ll improve this in a later part, so don&rsquo;t be too offended by this implementation.</p><p>For the body of the <code>CreateDatabase</code> we store the db file path, open the database and create all the tables. Luckily SQLite is smart enough to not create the tables if they already exist, so this can be run as many times as you want without worrying about corrupting data.</p><pre tabindex=0><code>private static string _dbPath;
+public static void CreateDatabase(string dbPath)
+{
+    _dbPath = dbPath;
+    using (var connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.Create|SQLiteOpenFlags.ReadWrite))
+    {
+        connection.CreateTable&lt;Counter&gt;();
+        connection.CreateTable&lt;CounterIncrementHistory&gt;();
+    }
+}
+</code></pre><br><p>Now lets implement the main logic. First up, <code>AddOrUpdateCounterAsync</code>:</p><pre tabindex=0><code>public async Task AddOrUpdateCounterAsync(Counter counter)
+{
+    var connection = new SQLiteAsyncConnection(_dbPath);
+    if (counter.Id == 0)
+        await connection.InsertAsync(counter);
+    else
+        await connection.InsertOrReplaceAsync(counter);
+}
+</code></pre><br><p>This method checks the id on the counter - if it&rsquo;s 0 then its a new counter and is inserted, otherwise it&rsquo;s updated. Remember our Id field had the <code>[PrimaryKey]</code> attribute, so that&rsquo;s how SQLite can know which counter to update.
+For the update we use the <code>InsertOrReplace</code> method, and this checks the Id against the database and if it&rsquo;s not found then it inserts the item, otherwise it replaces it. Now this sounds a lot like what we&rsquo;ve implemented ourselves, so why do we do the check for an Id of 0 and call <code>Insert</code> if found? The reason is the <code>[AutoIncrement]</code> attribute. This tells SQLite to automatically increment the id to get the next one - so if we have 10 items in the database and we insert one more it gets its id set to 11. If we insert this counter using <code>Insert</code> then the id on our object gets updated - so we can see the new Id in the Counter instance that is passed in. If we call <code>InsertOrReplace</code> it doesn&rsquo;t update the instance passed id. I&rsquo;m not sure if this is by design or a bug but it&rsquo;s a bit annoying, hence the workaround of calling <code>Insert</code> if the id is 0. This way once this method is called we can always trust the id of the Counter we passed in.</p><p>Second up is <code>IncrementCounterAsync</code>:</p><pre tabindex=0><code>public async Task IncrementCounterAsync(Counter counter)
+{
+    var connection = new SQLiteAsyncConnection(_dbPath);
+
+    counter.Value++;
+    await AddOrUpdateCounterAsync(counter);
+    var history = new CounterIncrementHistory
+    {
+        CounterId = counter.Id,
+        IncrementDateTimeUtc = DateTime.UtcNow
+    };
+
+    await connection.InsertAsync(history);
+}
+</code></pre><br><p>This is a little bit more involved. First up it increments the value, then updates the entry in the database to reflect the new value (using our <code>AddorUpdateAsync</code> method to ensure the Id on the Counter is updated). Next we create a history entry, then this history entry gets inserted. Note that the timestamp is stored as UTC time - this allows the times to be adjusted for wherever the user is and if they increment in a different time zone the data doesn&rsquo;t get out of whack.</p><p>Thirdly we need to implement <code>GetAllCountersAsync</code>:</p><pre tabindex=0><code>public async Task&lt;IEnumerable&lt;Counter&gt;&gt; GetAllCountersAsync()
+{
+    var connection = new SQLiteAsyncConnection(_dbPath);
+    return await connection.Table&lt;Counter&gt;().ToListAsync();
+}
+</code></pre><br><p>The generic <code>Table&lt;T></code> method on the connection returns the table that stores the given type, and from there we get it back as a list of Counters from the database.
+Just be aware though - these will be new instances. So if you add a Counter then get all the Counter you have added will be a different instance than the Counter in the collection with the same Id.</p><p>Finally we need to implement <code>GetCounterHistoryAsync</code>:</p><pre tabindex=0><code>public async Task&lt;IEnumerable&lt;CounterIncrementHistory&gt;&gt; GetCounterHistory(int counterId)
+{
+    var connection = new SQLiteAsyncConnection(_dbPath);
+    return await connection.Table&lt;CounterIncrementHistory&gt;().Where(c =&gt; c.CounterId == counterId).ToListAsync();
+}
+</code></pre><br><p>This queries the history based off the counter id.</p><p>This is our database connection all finished - so now lets test it. We haven&rsquo;t wired it up to the UI yet, so lets test it by building some unit tests.</p><h4 id=unit-testing-our-database-connection>Unit testing our database connection</h4><p>The best way to verify everything is working is with a stack of unit tests. Normally when writing C# code you create a console application or a class library and create your tests in there. This works well for simple cases, but with SQLite I don&rsquo;t think it quite cuts the mustard. The problem is the platform specific implementation of SQLite might be different on Android (the platform we&rsquo;re targeting) and Windows (the platform the tests would be run on).
+Luckily there is a way to easily run unit tests on Android - a Xamarin Android Unit test project. So lets start be creating a new project of this type.</p><div class=image-div style=width:700px><p><img src=Screen-Shot-2016-01-15-at-18-15-22.png alt="Xamarin Android Unit Test project creation"></p></div><br><p>This project creates an Android app that runs our unit tests. It uses a custom variant of NUnit called <code>Xamarin.Android.NUnitLite</code>, but for all intents and purposes this can be used like NUnit.
+The app runs like any other Android app and has a &lsquo;Run Tests&rsquo; button. This will work through all classes in the project with the NUnit <code>[TestFixture]</code> attribute and run all methods with the <code>[Test]</code> attribute, dumping their output to the screen.</p><div class=image-div style=width:300px><p><img src=Screen-Shot-2016-01-15-at-18-48-34.png alt="Xamarin Android Unit Test app"></p></div><br><p>We do have to install a couple of other nuget packages as well - first we need SQLite-pcl-net of course. Second we need FluentAssertions.Xamarin - simply because I love the assertion syntax of Fluent Assertions and this is a version that runs on mobile.</p><p>Once all these packages are installed, we can bin the auto-created tests file and create our own called <code>DatabaseHelpersTests.cs</code>.</p><h6 id=writing-our-first-test>Writing our first test</h6><p>Lets start with a simple test to start with which is to test that a newly inserted Counter gets its Id set.
+In our <code>DatabaseHelpersTests.cs</code> first we mark the class with the <code>[TestFixture]</code> attribute</p><pre tabindex=0><code>[TestFixture]
+public class DatabaseHelperTests
+</code></pre><br><p>Then we can create our first test:</p><pre tabindex=0><code>[Test]
+public void InsertingACounterShouldSetItsIdAsync()
+{
+    var dbfile = Path.Combine(RootPath, Guid.NewGuid().ToString(&#34;N&#34;) + &#34;.db3&#34;);
+
+    DatabaseHelper.CreateDatabase(dbfile);
+
+    var db = new DatabaseHelper();
+    var counter = new Counter
+    {
+        Name = &#34;TestCounter&#34;,
+        Description = &#34;A test counter&#34;
+    };
+
+    counter.Id.Should().Be(0);
+
+    var res = Task.Run(async () =&gt;
+    {
+        await db.AddOrUpdateCounterAsync(counter);
+        return 0;
+    }).Result;
+
+    counter.Id.Should().Be(1);
+}
+</code></pre><br><p>What this test does is create a database with a new unique name (so we can ensure the database is clean), it then creates a new counter and verifies the Id is 0 (love me that assertion syntax!).
+The next is the odd bit. If you create an async unit test it seems to hang when running it on the simulator, so to work around it I have to run the async code in a Task that is waited for. This works. Very annoying, but not much else we can do.
+Once the counter is inserted we assert that the counter is updated to 1.</p><p>Launching the test app and clicking &lsquo;Run Tests&rsquo; will run this test and you&rsquo;ll see it pass, with &lsquo;1 test passed&rsquo; showing on the app.</p><p>I&rsquo;ll add a selection of other tests as well, and these can all be seen in the code on GitHub in the Part2 branch at <a href=https://github.com/jimbobbennett/StupendousCounter/tree/Part2>https://github.com/jimbobbennett/StupendousCounter/tree/Part2</a>.</p><p>In the <a href=/blogs/building-a-xamarin-android-app-part-3/>next part</a> we&rsquo;ll start wiring the UI up to the data using <a href=http://www.mvvmlight.net>MVVMLight</a>.</p><hr><p><table cellspacing=0 cellpadding=0 style=border:none;border-collapse:collapse><tr style=padding:0><td style=padding:0;vertical-align:top><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ss&ref=ss_til&ad_type=product_link&tracking_id=expecti-21&marketplace=amazon&region=GB&placement=B00E4JGPO8&asins=B00E4JGPO8&linkId=&show_border=false&link_opens_in_new_window=true"></iframe></td><td style='padding:0 30px;vertical-align:top'><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ss&ref=ss_til&ad_type=product_link&tracking_id=expecti-21&marketplace=amazon&region=GB&placement=B00JLZVJSM&asins=B00JLZVJSM&linkId=&show_border=false&link_opens_in_new_window=true"></iframe></td><td style='padding:0 30px;vertical-align:top'><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ss&ref=ss_til&ad_type=product_link&tracking_id=expecti-21&marketplace=amazon&region=GB&placement=B008CYV046&asins=B008CYV046&linkId=&show_border=false&link_opens_in_new_window=true"></iframe></td><td style='padding:0 30px'><p style=color:#686868;!important>Continuing on from the last post where I mentioned what I was listening to whilst developing, today I'm listening to <a href=http://www.nicolabenedetti.co.uk>Nicola Benedetti</a></p><p style=color:#686868;!important>Note - these are an affiliate links - if you click them and buy I get a small cut.</p></td></tr></table></p></article></div></div><div class="col-sm-12 col-md-12 col-lg-3"><div class=sticky-sidebar><aside class=toc><h5>Table Of Contents</h5><div class=toc-content><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></aside><aside class=tags><h5>Tags</h5><ul class="tags-ul list-unstyled list-inline"><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin target=_blank>xamarin</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin.android target=_blank>xamarin.android</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/technology target=_blank>Technology</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/sqlite target=_blank>sqlite</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/database target=_blank>database</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/tutorial target=_blank>tutorial</a></li></ul></aside></div></div></div><div class=row><div class="col-sm-12 col-md-12 col-lg-9 p-4"><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://jimbobbennett.dev/blogs/building-an-android-app-part-2/",this.page.identifier="a1c6c5751df0afd2aec18c2bd2ef6900"};(function(){if(window.location.hostname=="localhost")return;var e=document,t=e.createElement("script");t.src="https://jimbobbennett.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div><button class="p-2 px-3" onclick=topFunction() id=topScroll>
+<i class="fas fa-angle-up"></i></button></section><script>var topScroll=document.getElementById("topScroll");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?topScroll.style.display="block":topScroll.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script></div><footer><div class="container py-4"><div class="row justify-content-center"><div class="col-md-4 text-center">&copy; 2022 All Rights Reserved</div></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js integrity=sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13 crossorigin=anonymous></script>
+<script>document.body.className.includes("light")&&(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))</script><script>let loadingIcons;function loading(){myVar=setTimeout(showPage,100)}function showPage(){try{document.getElementById("loading-icons").style.display="block"}catch{}}</script><script>function createCopyButton(e,t){const n=document.createElement("button");n.className="copy-code-button",n.type="button",n.innerText="Copy",n.addEventListener("click",()=>copyCodeToClipboard(n,e,t)),addCopyButtonToDom(n,e)}async function copyCodeToClipboard(e,t,n){const s=t.querySelector("pre > code").innerText;try{n.writeText(s)}finally{codeWasCopied(e)}}function codeWasCopied(e){e.blur(),e.innerText="Copied!",setTimeout(function(){e.innerText="Copy"},2e3)}function addCopyButtonToDom(e,t){t.insertBefore(e,t.firstChild);const n=document.createElement("div");n.className="highlight-wrapper",t.parentNode.insertBefore(n,t),n.appendChild(t)}if(navigator&&navigator.clipboard)document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,navigator.clipboard));else{var script=document.createElement("script");script.src="https://cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js",script.integrity="sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94=",script.crossOrigin="anonymous",script.onload=function(){addCopyButtons(clipboard)},document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,script)),document.body.appendChild(script)}</script></body></html>

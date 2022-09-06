@@ -1,0 +1,381 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=icon href=/fav.png type=image/png><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/font.css media=all><meta property="og:title" content="Building a Xamarin Android app - part 5"><meta property="og:description" content="This is the fifth part in the my series about building an Android app using Xamarin.Android. I highly recommend reading these first. The previous parts are:
+Creating the basic app Defining our data Building view models Binding the view models to the UI Adding the Add button Currently we have a nice recycler view showing our dummy counters in card views. So the next step is to allow new counters to be added."><meta property="og:type" content="article"><meta property="og:url" content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-5/"><meta property="og:image" content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-5/banner.png"><meta property="article:section" content="blogs"><meta property="article:published_time" content="2016-02-18T08:59:14+00:00"><meta property="article:modified_time" content="2016-02-18T08:59:14+00:00"><meta property="og:site_name" content="JimBobBennett"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-5/banner.png"><meta name=twitter:title content="Building a Xamarin Android app - part 5"><meta name=twitter:description content="This is the fifth part in the my series about building an Android app using Xamarin.Android. I highly recommend reading these first. The previous parts are:
+Creating the basic app Defining our data Building view models Binding the view models to the UI Adding the Add button Currently we have a nice recycler view showing our dummy counters in card views. So the next step is to allow new counters to be added."><meta name=twitter:site content="@jimbobbennett"><meta name=twitter:creator content="@jimbobbennett"><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous><link rel=stylesheet href=/css/header.css media=all><link rel=stylesheet href=/css/footer.css media=all><link rel=stylesheet href=/css/theme.css media=all><link rel="shortcut icon" type=image/png href=/fav.png><link rel="shortcut icon" sizes=192x192 href=/fav.png><link rel=apple-touch-icon href=/fav.png><script type=text/javascript>(function(e,t,n,s,o,i,a){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)},i=t.createElement(s),i.async=1,i.src="https://www.clarity.ms/tag/"+o,a=t.getElementsByTagName(s)[0],a.parentNode.insertBefore(i,a)})(window,document,"clarity","script","dctc2ydykv")</script><style>:root{--text-color:#343a40;--text-secondary-color:#6c757d;--background-color:#000;--secondary-background-color:#64ffda1a;--primary-color:#007bff;--secondary-color:#f8f9fa;--text-color-dark:#e4e6eb;--text-secondary-color-dark:#b0b3b8;--background-color-dark:#000000;--secondary-background-color-dark:#212529;--primary-color-dark:#ffffff;--secondary-color-dark:#212529}body{background-color:#000;font-size:1rem;font-weight:400;line-height:1.5;text-align:left}</style><meta name=description content><link rel=stylesheet href=/css/index.css><link rel=stylesheet href=/css/single.css><link rel=stylesheet href=/css/projects.css media=all><script defer src=/fontawesome-5/all-5.15.4.js></script><title>Building a Xamarin Android app - part 5 | JimBobBennett</title></head><body class=light onload=loading()><header><nav class="pt-3 navbar navbar-expand-lg"><div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5"><a class="navbar-brand primary-font text-wrap" href=/><img src=/fav.png width=30 height=30 class="d-inline-block align-top">
+JimBobBennett</a>
+<button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarContent aria-controls=navbarContent aria-expanded=false aria-label="Toggle navigation"><svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" data-view-component="true"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button><div class="collapse navbar-collapse text-wrap primary-font" id=navbarContent><ul class="navbar-nav ms-auto text-center"><li class="nav-item navbar-text"><a class=nav-link href=/ aria-label=home>Home</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#about aria-label=about>About</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#projects aria-label=projects>Recent Highlights</a></li><li class="nav-item navbar-text"><a class=nav-link href=/blogs title="Blog posts">Blog</a></li><li class="nav-item navbar-text"><a class=nav-link href=/videos title=Videos>Videos</a></li><li class="nav-item navbar-text"><a class=nav-link href=/livestreams title=Livestreams>Livestreams</a></li><li class="nav-item navbar-text"><a class=nav-link href=/conferences title=Conferences>Conferences</a></li><li class="nav-item navbar-text"><a class=nav-link href=/resume title=Resume>Resume</a></li></ul></div></div></nav></header><div id=content><section id=projects><div class="container pt-5" id=list-page><div class="row justify-content-center px-3 px-md-5"><h1 class="text-left pb-2 content">Building a Xamarin Android app - part 5</h1><div class="text-left content">Jim Bennett
+<small>|</small>
+Feb 18, 2016</div></div></div></section><section id=single><div class=container><div class="row justify-content-center"><div class="col-sm-12 col-md-12 col-lg-9"><div class=pr-lg-4><article class="page-content p-2"><p>This is the fifth part in the my series about building an Android app using Xamarin.Android. I highly recommend reading these first.
+The previous parts are:</p><ul><li><a href=/blogs/building-an-android-app-part-1/>Creating the basic app</a></li><li><a href=/blogs/building-an-android-app-part-2/>Defining our data</a></li><li><a href=/blogs/building-a-xamarin-android-app-part-3/>Building view models</a></li><li><a href=/blogs/building-a-xamarin-android-app-part-4/>Binding the view models to the UI</a></li></ul><h4 id=adding-the-add-button>Adding the Add button</h4><p>Currently we have a nice recycler view showing our dummy counters in card views. So the next step is to allow new counters to be added. The current way to add new items is using a floating action button - a button at the bottom of the screen that when pressed will add the new counter.</p><div class=image-div style=width:300px><p><img src=floating-add-button.png alt="Floating add button"></p></div><br><p>First thing to do is add it to the layout in <code>counters_fragment.axml</code>. At the moment this contains a <code>LinearLayout</code> but we&rsquo;ll need to change that to a <code>FrameLayout</code> so that the add button is correctly placed on top. We&rsquo;re not using a normal button here, but a <code>FloatingActionButton</code>, a button designed to float above other controls in the view. This means we can add a load of counters and scroll the recycler view up and down without the add button moving from it&rsquo;s floating location in the bottom right.</p><pre tabindex=0><code>&lt;FrameLayout xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    xmlns:app=&#34;http://schemas.android.com/apk/res-auto&#34;
+    android:layout_width=&#34;fill_parent&#34;
+    android:layout_height=&#34;fill_parent&#34;&gt;
+    &lt;android.support.v7.widget.RecyclerView
+        android:id=&#34;@+id/countersRecyclerView&#34;
+        android:scrollbars=&#34;vertical&#34;
+        android:layout_width=&#34;fill_parent&#34;
+        android:layout_height=&#34;fill_parent&#34;
+        android:background=&#34;@color/divider&#34; /&gt;
+    &lt;android.support.design.widget.FloatingActionButton
+        android:id=&#34;@+id/floatingAddNewCounterButton&#34;
+        android:layout_width=&#34;wrap_content&#34;
+        android:layout_height=&#34;wrap_content&#34;
+        android:layout_gravity=&#34;bottom|right&#34;
+        android:layout_margin=&#34;16dp&#34;
+        android:elevation=&#34;4dp&#34;
+        android:scaleType=&#34;fitXY&#34;
+        android:src=&#34;@drawable/ic_add_white_24dp&#34;
+        app:borderWidth=&#34;0dp&#34; /&gt;
+&lt;/FrameLayout&gt;
+</code></pre><p>The icon being used here, <code>ic_add_white_24dp</code>, also comes from Googles material icons at <a href=https://design.google.com/icons/>https://design.google.com/icons/</a>. Its a 24dp icon, the recommended size for floating action buttons. We don&rsquo;t need to set the colour of the action button, this automatically comes from the colours we added from Material Palette in <a href=/blogs/building-an-android-app-part-1/>part 1</a>.</p><h4 id=adding-navigation>Adding navigation</h4><p>Now we have the add button, we need to think about what it needs to do. We need this button to navigate to another activity where the user can enter details about the new counter and save it. MVVMLight has a nice navigation system but we are limited in how we can use it because we are using AppCompat. Luckily I&rsquo;ve already created a workaround which is documented <a href=/blogs/mvvmlight-navigation-and-appcompatactivity/>on another blog post here</a>. To add this working navigation we just need to add <a href=https://www.nuget.org/packages/JimBobBennett.MvvmLight.AppCompat/>the MVVMLight.AppCompat nuget package</a>, and set it up. We start with the set up by changing our <code>BaseActivity</code> to derive from <code>AppCompatActivityBase</code>.</p><pre tabindex=0><code>public abstract class BaseActivity : AppCompatActivityBase
+</code></pre><p>Then we need to register the navigation and dialog services with the IoC container. The concrete implementations of the services are platform specific, so we can&rsquo;t simply register them in the view model locator. Instead we have to expose methods to allow the registration to happen externally so that we can call it from our Android project. The following methods to register need to be added to the <code>ViewModelLoator</code>:</p><pre tabindex=0><code>public static void RegisterNavigationService(INavigationService navigationService)
+{
+    SimpleIoc.Default.Register(() =&gt; navigationService);
+}
+
+public static void RegisterDialogService(IDialogService dialogService)
+{
+    SimpleIoc.Default.Register(() =&gt; dialogService);
+}
+</code></pre><p>These are then called from our <code>MainActivity</code> in a new constructor:</p><pre tabindex=0><code>public MainActivity()
+{
+    var navigationService = new AppCompatNavigationService();
+    ViewModelLocator.RegisterNavigationService(navigationService);
+    ViewModelLocator.RegisterDialogService(new AppCompatDialogService());
+}
+</code></pre><p>Whilst we&rsquo;re editing the <code>MainActivity</code> it makes sense to delete the dummy counter code as well - seeing as we are adding the ability to add new counters we don&rsquo;t need to pre-populate the app with fake counters. Just delete the <code>AddDummyData</code> method and the call to it.</p><h4 id=creating-the-new-counter>Creating the new counter</h4><p>To create the new counter we need to define a new activity to allow the user to enter details about the counter. This activity needs a layout, a view model and to be wired into the navigation so that we can navigate to it from our new add button.</p><h6 id=layout>Layout</h6><p>Lets start with the layout. This needs to have text boxes so the user can enter the name and description for the counter, along with a button to create the new counter. We&rsquo;re not going to bother with a cancel option - the UI will require the create button to be clicked to create the counter with back acting as a cancel, either the back button on the tool bar or the hardware back button.</p><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+&lt;LinearLayout xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    xmlns:app=&#34;http://schemas.android.com/apk/res-auto&#34;
+    android:orientation=&#34;vertical&#34;
+    android:layout_width=&#34;match_parent&#34;
+    android:layout_height=&#34;match_parent&#34;&gt;
+    &lt;android.support.design.widget.AppBarLayout
+        android:layout_height=&#34;wrap_content&#34;
+        android:layout_width=&#34;match_parent&#34;
+        android:id=&#34;@+id/toolbar_layout&#34;&gt;
+        &lt;include
+            android:id=&#34;@+id/toolbar&#34;
+            layout=&#34;@layout/toolbar&#34;
+            app:layout_scrollFlags=&#34;scroll|enterAlways&#34; /&gt;
+    &lt;/android.support.design.widget.AppBarLayout&gt;
+    &lt;LinearLayout
+        android:orientation=&#34;vertical&#34;
+        android:layout_width=&#34;match_parent&#34;
+        android:layout_height=&#34;match_parent&#34;
+        android:padding=&#34;24dp&#34;&gt;
+        &lt;android.support.design.widget.TextInputLayout
+            android:layout_width=&#34;match_parent&#34;
+            android:layout_height=&#34;wrap_content&#34;
+            android:layout_marginBottom=&#34;24dp&#34;&gt;
+            &lt;EditText
+                android:id=&#34;@+id/new_counter_name&#34;
+                android:layout_width=&#34;fill_parent&#34;
+                android:layout_height=&#34;wrap_content&#34;
+                android:hint=&#34;Name&#34; /&gt;
+        &lt;/android.support.design.widget.TextInputLayout&gt;
+        &lt;android.support.design.widget.TextInputLayout
+            android:layout_width=&#34;match_parent&#34;
+            android:layout_height=&#34;wrap_content&#34;
+            android:layout_marginBottom=&#34;24dp&#34;&gt;
+            &lt;EditText
+                android:id=&#34;@+id/new_counter_description&#34;
+                android:layout_width=&#34;fill_parent&#34;
+                android:layout_height=&#34;wrap_content&#34;
+                android:hint=&#34;Description&#34; /&gt;
+        &lt;/android.support.design.widget.TextInputLayout&gt;
+        &lt;Button
+            android:text=&#34;Create Counter&#34;
+            android:layout_width=&#34;match_parent&#34;
+            android:layout_height=&#34;wrap_content&#34;
+            android:id=&#34;@+id/new_counter_create&#34; /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>This is a standard app bar layout showing the toolbar, same as the main layout, with text boxes for the name and description, and a &lsquo;Create Counter&rsquo; button. The cool thing we&rsquo;re doing here is the edit boxes. We&rsquo;re not just using a boring label with a text box below, instead we&rsquo;re using a <code>TextInputLayout</code>. This wraps the <code>EditText</code> so you see a hint inside the text box, then when you touch inside to enter the text the hint moves to above the box.</p><div class=image-div style=width:300px><p><img src=Hint.gif alt="Hint inside the text input layout"></p></div><br><h6 id=view-model>View model</h6><p>Before we create an activity to show this layout, lets create the view model. We start by creating the <code>NewCounterViewModel</code> in our <code>ViewModel</code> folder. The first part of this is to create the properties to hold the name and description fields.</p><pre tabindex=0><code>public class NewCounterViewModel : ViewModelBase
+{
+    private string _name;
+
+    public string Name
+    {
+        get { return _name; }
+        set { Set(() =&gt; Name, ref _name, value); }
+    }
+
+    private string _description;
+
+    public string Description
+    {
+        get { return _description; }
+        set { Set(() =&gt; Description, ref _description, value); }
+    }
+}
+</code></pre><p>This view model is derived from <code>ViewModelBase</code>, and the property setters use the base class <code>Set</code> method to not only set the value but to raise the relevant property change event.</p><p>Now we have the data part sorted, it&rsquo;s time to add some commands.</p><pre tabindex=0><code>public class NewCounterViewModel : ViewModelBase
+{
+    private readonly IDatabaseHelper _databaseHelper;
+    private readonly IDialogService _dialogService;
+    private readonly INavigationService _navigationService;
+
+    public NewCounterViewModel(IDatabaseHelper databaseHelper, IDialogService dialogService, INavigationService navigationService)
+    {
+        _databaseHelper = databaseHelper;
+        _dialogService = dialogService;
+        _navigationService = navigationService;
+    }
+
+    private RelayCommand _goBackCommand;
+    public RelayCommand GoBackCommand =&gt; _goBackCommand ?? (_goBackCommand = new RelayCommand(() =&gt; _navigationService.GoBack()));
+
+    private RelayCommand _addCounterCommand;
+    public RelayCommand AddCounterCommand =&gt; _addCounterCommand ?? (_addCounterCommand = new RelayCommand(async () =&gt; await AddCounter()));
+
+    private async Task AddCounter()
+    {
+        if (string.IsNullOrEmpty(Name))
+        {
+            await _dialogService.ShowError(&#34;The name must be set&#34;, &#34;No name&#34;, &#34;OK&#34;, null);
+            return;
+        }
+
+        if (string.IsNullOrEmpty(Description))
+        {
+            await _dialogService.ShowError(&#34;The description must be set&#34;, &#34;No description&#34;, &#34;OK&#34;, null);
+            return;
+        }
+
+        await _databaseHelper.AddOrUpdateCounterAsync(new Counter {Name = Name, Description = Description});
+        _navigationService.GoBack();
+    }
+}
+</code></pre><p>This adds two commands.<br>The first is the <code>GoBackCommand</code>, which will be wired up to the toolbars back button. This uses the navigation service that is injected into the constructor to navigate back - under the hood this pops the current activity off the stack and returns to the previous one, the same as the hardware back button.
+The second command, <code>AddCounterCommand</code> will create and add a new command. It starts with some simple validation to ensure the values are set, and if not raises an alert using the MVVMLight dialog service injected into the constructor. If this validation is passed the new counter is created, added to the database using the database helper injected into the constructor, and the activity is popped off the stack using the navigation service.</p><p>Like all good coders we should be testing our view model, so lets add <code>NewCounterViewModelTests</code> to the test project.</p><pre tabindex=0><code>[TestFixture]
+public class NewCounterViewModelTests
+{
+    private Mock&lt;IDatabaseHelper&gt; _mockDatabaseHelper;
+    private Mock&lt;IDialogService&gt; _mockDialogService;
+    private Mock&lt;INavigationService&gt; _mockNavigationService;
+
+    [SetUp]
+    public void SetUp()
+    {
+        _mockDatabaseHelper = new Mock&lt;IDatabaseHelper&gt;();
+        _mockDialogService = new Mock&lt;IDialogService&gt;();
+        _mockNavigationService = new Mock&lt;INavigationService&gt;();
+    }
+
+    [Test]
+    public void SettingTheNameRaisesAPropertyChangedEvent()
+    {
+        var vm = new NewCounterViewModel(_mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+        vm.MonitorEvents();
+        vm.Name = &#34;Foo&#34;;
+        vm.ShouldRaisePropertyChangeFor(v =&gt; v.Name);
+    }
+
+    [Test]
+    public void SettingTheDescriptionRaisesAPropertyChangedEvent()
+    {
+        var vm = new NewCounterViewModel(_mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+        vm.MonitorEvents();
+        vm.Description = &#34;Foo&#34;;
+        vm.ShouldRaisePropertyChangeFor(v =&gt; v.Description);
+    }
+
+    [Test]
+    public void GoBackCommandNavigatesBackwards()
+    {
+        var vm = new NewCounterViewModel(_mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+        vm.GoBackCommand.Execute(null);
+        _mockNavigationService.Verify(n =&gt; n.GoBack(), Times.Once);
+    }
+
+    [Test]
+    public void AddCommandRaisesAnErrorIfTheNameIsNotSet()
+    {
+        var vm = new NewCounterViewModel(_mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+        vm.Description = &#34;Bar&#34;;
+        vm.AddCounterCommand.Execute(null);
+        _mockDialogService.Verify(d =&gt; d.ShowError(It.IsAny&lt;string&gt;(), It.IsAny&lt;string&gt;(), It.IsAny&lt;string&gt;(), null), Times.Once);
+        _mockDatabaseHelper.Verify(d =&gt; d.AddOrUpdateCounterAsync(It.IsAny&lt;Counter&gt;()), Times.Never);
+    }
+
+    [Test]
+    public void AddCommandRaisesAnErrorIfTheDescriptionIsNotSet()
+    {
+        var vm = new NewCounterViewModel(_mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+        vm.Name = &#34;Foo&#34;;
+        vm.AddCounterCommand.Execute(null);
+        _mockDialogService.Verify(d =&gt; d.ShowError(It.IsAny&lt;string&gt;(), It.IsAny&lt;string&gt;(), It.IsAny&lt;string&gt;(), null), Times.Once);
+        _mockDatabaseHelper.Verify(d =&gt; d.AddOrUpdateCounterAsync(It.IsAny&lt;Counter&gt;()), Times.Never);
+    }
+
+    [Test]
+    public void AddComandAddsTheCounterAndNavigatesBack()
+    {
+        var vm = new NewCounterViewModel(_mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+        vm.Name = &#34;Foo&#34;;
+        vm.Description = &#34;Bar&#34;;
+        vm.AddCounterCommand.Execute(null);
+        _mockDialogService.Verify(d =&gt; d.ShowError(It.IsAny&lt;string&gt;(), It.IsAny&lt;string&gt;(), It.IsAny&lt;string&gt;(), null), Times.Never);
+        _mockDatabaseHelper.Verify(d =&gt; d.AddOrUpdateCounterAsync(It.IsAny&lt;Counter&gt;()), Times.Once);
+        _mockNavigationService.Verify(n =&gt; n.GoBack(), Times.Once);
+    }
+}
+</code></pre><p>Because we&rsquo;re using dependency injection we can mock all the interfaces that are injected into the view model. This means we can test the behaviour of the commands ensuring the <code>GoBackCommand</code> calls the relevant <code>GoBack</code> method on the navigation service, that the navigation doesn&rsquo;t happen if we add a counter with data missing and that if all the information is there the counter gets added to the database. We can also check that setting the properties raises the relevant property change events. We can get pretty awesome coverage here to ensure out view model works.</p><p>The last thing to do with the view model is to add it to our locator. We need this so that the IoC container can resolve the constructor injection.</p><pre tabindex=0><code>static ViewModelLocator()
+{
+    ...
+    SimpleIoc.Default.Register&lt;NewCounterViewModel&gt;();
+}
+
+public const string NewCounterPageKey = &#34;NewCounterPage&#34;;
+
+public static NewCounterViewModel NewCounter =&gt; ServiceLocator.Current.GetInstance&lt;NewCounterViewModel&gt;();
+</code></pre><p>Here we register it with the IoC container in the constructor. Unfortunately SimpleIoC only supports singletons, so we have to always deal with a single instance - something we will have to consider later on.
+Once registered we can expose a static property to return the instance, and a constant that defines a key for it. This key will be registered with the navigation service once we have defined the activity.</p><h6 id=activity>Activity</h6><p>We have our layout and we have our view model, so now we can create the Activity that brings it all together.</p><p>Lets start with the basics:</p><pre tabindex=0><code>[Activity(Label = &#34;New Counter&#34;)]
+public class NewCounterActivity : BaseActivity
+{
+    protected override int LayoutResource =&gt; Resource.Layout.new_counter;
+
+    public override bool OnOptionsItemSelected(IMenuItem item)
+    {
+        if (item.ItemId == Android.Resource.Id.Home)
+        {
+            ViewModel.GoBackCommand.Execute(null);
+            return true;
+        }
+        return base.OnOptionsItemSelected(item);
+    }
+}
+</code></pre><p>Here we&rsquo;re creating the activity, derived from our <code>BaseActivity</code>. We override the <code>LayoutResource</code> to point to our new layout. We also override &lsquo;OnOptionsItemSelected&rsquo; to detect if the <code>Home</code> button is pressed, executing the command on our view model to navigate backwards.</p><p>Next we need to wire up the <code>NewCounterViewModel</code>. We do this in the <code>OnCreate</code> method and store it in a public property (more on this later). As mentioned earlier the IoC container only stores singletons, so we need to clear the data before we can use it to stop the view showing the name and description of the previous counter that was added.</p><pre tabindex=0><code>public NewCounterViewModel ViewModel { get; private set; }
+
+protected override void OnCreate(Bundle savedInstanceState)
+{
+    base.OnCreate(savedInstanceState);            
+    ViewModel = ViewModelLocator.NewCounter;
+    ViewModel.Name = string.Empty;
+    ViewModel.Description = string.Empty;
+}
+</code></pre><p>Then we need to add public properties for the controls on our view.</p><pre tabindex=0><code>private EditText _name;
+public EditText Name =&gt; _name ?? (_name = FindViewById&lt;EditText&gt;(Resource.Id.new_counter_name));
+
+private EditText _description;
+public EditText Description =&gt; _description ?? (_description = FindViewById&lt;EditText&gt;(Resource.Id.new_counter_description));
+
+private Button _createCounter;
+public Button CreateCounter =&gt; _createCounter ?? (_createCounter = FindViewById&lt;Button&gt;(Resource.Id.new_counter_create));
+</code></pre><p>These properties will resolve the widgets by looking for them in the layout, and once found stored in a field so we only need to do one lookup.</p><p>Lastly we need to bind the controls to the properties on the view model using the MVVMLight binding mechanism. And this is where the public visibility of the properties comes into play.</p><pre tabindex=0><code>private readonly List&lt;Binding&gt; _bindings = new List&lt;Binding&gt;();
+
+protected override void OnCreate(Bundle savedInstanceState)
+{
+    ...
+    Bind();
+}
+
+private void Bind()
+{
+    _bindings.Add(this.SetBinding(() =&gt; ViewModel.Name, () =&gt; Name.Text, BindingMode.TwoWay));
+    _bindings.Add(this.SetBinding(() =&gt; ViewModel.Description, () =&gt; Description.Text, BindingMode.TwoWay));
+    CreateCounter.SetCommand(nameof(Button.Click), ViewModel.AddCounterCommand);
+}
+</code></pre><p>In out <code>OnCreate</code> method we call a new method, <code>Bind</code>, that uses MVVMLight to bind up the properties. MVVMLight has extension methods for binding properties and commands. We call <code>SetBinding</code> passing in an expression that points to the source for the binding, an expression that points to the target, and the binding mode.</p><p>Behind the scenes the <code>SetBinding</code> method will resolve the expressions to the public properties on the object that the extension method is called on. So for example in the first binding it looks at the source expression and finds the <code>ViewModel</code> property (remember from before that we made this property public), and on that view model finds the <code>Name</code> property. It then looks at the target expression and resolves the public <code>Name</code> property on the Activity (the EditText public property we added earlier). It will start by copying the value from the source by evaluating the <code>ViewModel.Name</code> property and setting it on the <code>Name.Text</code> property. Then based on the binding mode it will wire up listeners for value changes. We&rsquo;re using <code>BindingMode.TwoWay</code> so we need a two-way binding - changes in the source update the target and changes in the target update the source. This means the binding will listen for property change events on the <code>ViewModel</code> and if one is raised for the <code>Name</code> property it will update the control, and it will listen for changes to the text of the <code>Name</code> edit text control, and if the test changes it will update the view model.
+The <code>SetBinding</code> creates a weak binding, so we need to keep a reference to it to stop the garbage collector from cleaning up. This is what the <code>_bindings</code> list is for.</p><p>As well as binding the properties, we need to bind the command. This is done using the <code>SetCommand</code> extension method. This takes the name of the event and a command to bind to. It will find the event with the given name on the object the extension method is called on, and when that event is fired it will execute the command. It also checks the <code>CanExecute</code> status of the command and will enable or disable the button depending on the value. This is a nice way to enable or disable UI functionality from the view model.</p><p>Almost there - we now have an activity with a UI and a view model. Now we need to navigate to it.</p><h6 id=navigating-to-the-new-activity>Navigating to the new activity</h6><p>Navigation in MVVMLight is based around the idea of registering an activity against a key in your platform specific code, and navigating to that key in the portable code.
+Registration happens when we first register the navigation service in the <code>MainActivity</code> constructor. We call the <code>Configure</code> method passing in the key we defined in our <code>ViewModelLocator</code> earlier, and the type of Activity we want created when we navigate to this key.</p><pre tabindex=0><code>public MainActivity()
+{
+    ....
+    var navigationService = new AppCompatNavigationService();
+    navigationService.Configure(ViewModelLocator.NewCounterPageKey, typeof(NewCounterActivity));
+    ...
+}
+</code></pre><p>We can then add a command to the <code>CountersViewModel</code> to do this navigation using an injected <code>INavigationService</code>.</p><pre tabindex=0><code>public CountersViewModel(IDatabaseHelper databaseHelper, INavigationService navigationService)
+{
+    ...
+    _navigationService = navigationService;
+    ...
+}
+
+private RelayCommand _addNewCounterCommand;
+public RelayCommand AddNewCounterCommand =&gt; _addNewCounterCommand ?? (_addNewCounterCommand = new RelayCommand(AddNewCounter));
+
+private void AddNewCounter()
+{
+    _navigationService.NavigateTo(ViewModelLocator.NewCounterPageKey);
+}
+</code></pre><p>This command when executed will call the <code>NavigateTo</code> method on the <code>INavigationService</code> passing the key that we defined earlier. Once we make this call the navigation service does everything for us - creating the activity and pushing it onto the top of the navigation stack. And because we&rsquo;re good developers we can add a unit test to our <code>CountersViewModelTests</code> to verify this as well.</p><pre tabindex=0><code>[Test]
+public void ExecutingAddNewCounterCommandShouldNavigateToTheNewCounterActivity()
+{
+    var vm = new CountersViewModel(_mockDatabaseHelper.Object, _mockNavigationService.Object);
+    vm.AddNewCounterCommand.Execute(null);
+    _mockNavigationService.Verify(n =&gt; n.NavigateTo(ViewModelLocator.NewCounterPageKey), Times.Once);
+}
+</code></pre><p>Finally we need to bind this command to the UI inside the <code>CountersFragment</code> using the MVVMLight <code>SetCommand</code> extension method we discussed above.</p><pre tabindex=0><code>private FloatingActionButton _floatingActionButton;
+
+public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+{
+    ...
+    _floatingActionButton = view.FindViewById&lt;FloatingActionButton&gt;(Resource.Id.floatingAddNewCounterButton);
+    _floatingActionButton.SetCommand(nameof(FloatingActionButton.Click), ViewModelLocator.Counters.AddNewCounterCommand);
+    ...
+}
+</code></pre><p>Now this is all done we can run the app and test the navigation.</p><div class=image-div style=width:400px><p><img src=Newcounter-1.gif alt="Adding a new counter"></p></div><br><h6 id=updating-the-counters-in-the-ui>Updating the counters in the UI</h6><p>If you run and test this you will be able to add a new counter, but the list of counters won&rsquo;t be updated. Recycler views are not able to automatically detect changes to the underlying collection. The final piece of the adding counters puzzle is to wire this up.
+The best way to handle this is from the database layer up - we can raise an event in our database helper when the counters are changed, detect this in the counters view model and update our UI.</p><p>Let&rsquo;s start with the database helper by adding an event to our <code>IDatabaseHelper</code> interface:</p><pre tabindex=0><code>event EventHandler CountersChanged;
+</code></pre><p>Then we implement it in <code>DatabaseHelper</code>.</p><pre tabindex=0><code>public async Task AddOrUpdateCounterAsync(Counter counter)
+{
+    ...
+    OnCountersChanged();
+}
+
+public event EventHandler CountersChanged;
+
+private void OnCountersChanged()
+{
+    CountersChanged?.Invoke(this, new EventArgs());
+}
+</code></pre><p>Notice the new C# 6 null-conditional operator. This will check the value of <code>CountersChanged</code> and if this is null do nothing, otherwise it will call the <code>Invoke</code> method. Lovely clean code!</p><p>We have our event, so lets wire it up in our <code>CountersViewModel</code> to update the counters we expose in the view model.</p><pre tabindex=0><code>public CountersViewModel(IDatabaseHelper databaseHelper, INavigationService navigationService)
+{
+    ...
+    _databaseHelper.CountersChanged += async (s, e) =&gt; await LoadCountersAsync();
+    ...
+}
+
+public async Task LoadCountersAsync()
+{
+    _counters.Clear();
+    ...
+}
+</code></pre><p>We&rsquo;re listening on the event and when it is fired reloading the counters from the SQLite database. We&rsquo;re re-using the <code>LoadCountersAsync</code> method so we have to tweak it to always clear the collection before populating it with the data loaded from the database helper.</p><p>We now have our observable collection changing when the database changes, so we can listen on this to update the view. This can be handled in the <code>CountersAdapter</code> - the component in the recycler view that adapts the counters collection to the UI.</p><pre tabindex=0><code>public CountersAdapter()
+{
+    ((INotifyCollectionChanged)ViewModelLocator.Counters.Counters).CollectionChanged += OnCollectionChanged;
+}
+
+private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+{
+    NotifyDataSetChanged();
+}
+</code></pre><p>In here we handle the collection change method and when fired call <code>NotifyDataSetChanged</code>, a method that tells the recycler view to update the items in the UI. The <code>Counters</code> property on the <code>CountersViewModel</code> is a <code>ReadOnlyObservableCollection</code> which implements <code>INotifyCollectionChanged</code> explicitly, so we have to cast it to get access to the <code>CollectionChanged</code> event.</p><p>Note that this is not the most performant way of doing this. Every action on the collection will cause the entire UI to be updated. The reload is a clear then add of items one by one, so for example if there are 5 counters the <code>CollectionChanged</code> event will be raised 6 times and the UI will be fully rebuilt 6 times. The use of <code>NotifyDataSetChanged</code> will also cause an entire UI rebuild - there are other notify methods that handle single item adds, deletes or moves which could be used to improve performance. We could also improve the performance by implementing our own collection and only raising the event once. In this case we don&rsquo;t have to worry too much - we don&rsquo;t need to be lightening fast as will only have a few items.</p><h4 id=lets-test-it-all-out>Lets test it all out</h4><p>Now everything is wired up, lets take the app for a spin.</p><div class=image-div style=width:400px><p><img src=Newcounter-2.gif alt="Working add new counter"></p></div><br><hr><h4 id=update>Update</h4><p>After feedback from the comments against this post, lets tweak the UI to have a button on the toolbar to create the counter instead of on the bottom of the view.</p><p>First we need to remove the button from the bottom of the <code>new_counter.axml</code> layout file - just need to delete the <code>Button</code> element.</p><p>Next we need a menu. The way extra items are added to the toolbar is by creating a menu and inflating it into the toolbar. There is a visual studio template for menus, so right click on the &lsquo;Resources/menu&rsquo; folder and add a new item using the Android menu template called <code>new_counter_menu.xml</code>.</p><div class=image-div style=width:700px><p><img src=Screen-Shot-2016-03-17-at-21-42-07.png alt="Android menu template"></p></div><p>In this menu we need to add one item for the new counter button.</p><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; ?&gt;
+&lt;menu xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+      xmlns:app=&#34;http://schemas.android.com/apk/res-auto&#34;&gt;
+  &lt;item android:id=&#34;@+id/action_create_counter&#34;
+        app:showAsAction=&#34;always&#34;
+        android:icon=&#34;@drawable/ic_done_white_48dp&#34;/&gt;
+&lt;/menu&gt;
+</code></pre><p>The icon being used here is the done icon from Google&rsquo;s material icons mentioned above. Download this one and copy it to the various drawable folders.
+Notice as well the <code>showAsAction</code> property comes from the <code>xmlns:app="http://schemas.android.com/apk/res-auto"</code> namespace - if you use it from the <code>android</code> namespace then the menu item will appear on the overflow menu without an icon.</p><p>Now we have our menu, we need to wire it up in the <code>NewCounterActivity</code>. We can start here by deleting the <code>CreateCounter</code> button and all references to it. Then we need to create the new menu in the toolbar. This is done by overriding the <code>OnCreateMenuItems</code> method and loading our new menu into the toolbar in there.</p><pre tabindex=0><code>public override bool OnCreateOptionsMenu(IMenu menu)
+{
+    base.OnCreateOptionsMenu(menu);
+    Toolbar.InflateMenu(Resource.Menu.new_counter_menu);            
+    return true;
+}
+</code></pre><p>Last thing to do is to handle the menu click in the <code>OnOptionsItemSelected</code> method. When the new menu item is selected we need to execute the same command the previous button used.</p><pre tabindex=0><code>public override bool OnOptionsItemSelected(IMenuItem item)
+{
+    switch (item.ItemId)
+    {
+        case Android.Resource.Id.Home:
+            ViewModel.GoBackCommand.Execute(null);
+            return true;
+        case Resource.Id.action_create_counter:
+            ViewModel.AddCounterCommand.Execute(null);
+            return true;
+        default:
+            return base.OnOptionsItemSelected(item);
+    }
+}
+</code></pre><p>Done!</p><div class=image-div style=width:400px><p><img src=Screen-Shot-2016-03-17-at-22-04-49.png alt="New counter activity with new menu"></p></div><br><p>The code for this can be found in GitHub on the Part5 branch at <a href=https://github.com/jimbobbennett/StupendousCounter/tree/Part5>https://github.com/jimbobbennett/StupendousCounter/tree/Part5</a></p><p>In the next part we&rsquo;ll work on deleting counters.</p></article></div></div><div class="col-sm-12 col-md-12 col-lg-3"><div class=sticky-sidebar><aside class=toc><h5>Table Of Contents</h5><div class=toc-content><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></aside><aside class=tags><h5>Tags</h5><ul class="tags-ul list-unstyled list-inline"><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin target=_blank>xamarin</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin.android target=_blank>xamarin.android</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/mvvmlight target=_blank>mvvmlight</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/binding target=_blank>binding</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/technology target=_blank>Technology</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/ui target=_blank>UI</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/tutorial target=_blank>tutorial</a></li></ul></aside></div></div></div><div class=row><div class="col-sm-12 col-md-12 col-lg-9 p-4"><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-5/",this.page.identifier="5897f192a4a756a9d8c735749fe08521"};(function(){if(window.location.hostname=="localhost")return;var e=document,t=e.createElement("script");t.src="https://jimbobbennett.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div><button class="p-2 px-3" onclick=topFunction() id=topScroll>
+<i class="fas fa-angle-up"></i></button></section><script>var topScroll=document.getElementById("topScroll");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?topScroll.style.display="block":topScroll.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script></div><footer><div class="container py-4"><div class="row justify-content-center"><div class="col-md-4 text-center">&copy; 2022 All Rights Reserved</div></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js integrity=sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13 crossorigin=anonymous></script>
+<script>document.body.className.includes("light")&&(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))</script><script>let loadingIcons;function loading(){myVar=setTimeout(showPage,100)}function showPage(){try{document.getElementById("loading-icons").style.display="block"}catch{}}</script><script>function createCopyButton(e,t){const n=document.createElement("button");n.className="copy-code-button",n.type="button",n.innerText="Copy",n.addEventListener("click",()=>copyCodeToClipboard(n,e,t)),addCopyButtonToDom(n,e)}async function copyCodeToClipboard(e,t,n){const s=t.querySelector("pre > code").innerText;try{n.writeText(s)}finally{codeWasCopied(e)}}function codeWasCopied(e){e.blur(),e.innerText="Copied!",setTimeout(function(){e.innerText="Copy"},2e3)}function addCopyButtonToDom(e,t){t.insertBefore(e,t.firstChild);const n=document.createElement("div");n.className="highlight-wrapper",t.parentNode.insertBefore(n,t),n.appendChild(t)}if(navigator&&navigator.clipboard)document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,navigator.clipboard));else{var script=document.createElement("script");script.src="https://cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js",script.integrity="sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94=",script.crossOrigin="anonymous",script.onload=function(){addCopyButtons(clipboard)},document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,script)),document.body.appendChild(script)}</script></body></html>

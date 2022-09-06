@@ -1,0 +1,326 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=icon href=/fav.png type=image/png><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/font.css media=all><meta property="og:title" content="Building a Xamarin Android app - part 6"><meta property="og:description" content="This is the sixth part in the my series about building an Android app using Xamarin.Android. I highly recommend reading the rest of the series first. The previous parts are:
+Creating the basic app Defining our data Building view models Binding the view models to the UI Adding the add button Editing and deleting our counters So far we have a pretty nice but simple app - we can add new counters and increment them."><meta property="og:type" content="article"><meta property="og:url" content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-6-2/"><meta property="og:image" content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-6-2/banner.png"><meta property="article:section" content="blogs"><meta property="article:published_time" content="2016-03-24T08:27:44+00:00"><meta property="article:modified_time" content="2016-03-24T08:27:44+00:00"><meta property="og:site_name" content="JimBobBennett"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-6-2/banner.png"><meta name=twitter:title content="Building a Xamarin Android app - part 6"><meta name=twitter:description content="This is the sixth part in the my series about building an Android app using Xamarin.Android. I highly recommend reading the rest of the series first. The previous parts are:
+Creating the basic app Defining our data Building view models Binding the view models to the UI Adding the add button Editing and deleting our counters So far we have a pretty nice but simple app - we can add new counters and increment them."><meta name=twitter:site content="@jimbobbennett"><meta name=twitter:creator content="@jimbobbennett"><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous><link rel=stylesheet href=/css/header.css media=all><link rel=stylesheet href=/css/footer.css media=all><link rel=stylesheet href=/css/theme.css media=all><link rel="shortcut icon" type=image/png href=/fav.png><link rel="shortcut icon" sizes=192x192 href=/fav.png><link rel=apple-touch-icon href=/fav.png><script type=text/javascript>(function(e,t,n,s,o,i,a){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)},i=t.createElement(s),i.async=1,i.src="https://www.clarity.ms/tag/"+o,a=t.getElementsByTagName(s)[0],a.parentNode.insertBefore(i,a)})(window,document,"clarity","script","dctc2ydykv")</script><style>:root{--text-color:#343a40;--text-secondary-color:#6c757d;--background-color:#000;--secondary-background-color:#64ffda1a;--primary-color:#007bff;--secondary-color:#f8f9fa;--text-color-dark:#e4e6eb;--text-secondary-color-dark:#b0b3b8;--background-color-dark:#000000;--secondary-background-color-dark:#212529;--primary-color-dark:#ffffff;--secondary-color-dark:#212529}body{background-color:#000;font-size:1rem;font-weight:400;line-height:1.5;text-align:left}</style><meta name=description content><link rel=stylesheet href=/css/index.css><link rel=stylesheet href=/css/single.css><link rel=stylesheet href=/css/projects.css media=all><script defer src=/fontawesome-5/all-5.15.4.js></script><title>Building a Xamarin Android app - part 6 | JimBobBennett</title></head><body class=light onload=loading()><header><nav class="pt-3 navbar navbar-expand-lg"><div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5"><a class="navbar-brand primary-font text-wrap" href=/><img src=/fav.png width=30 height=30 class="d-inline-block align-top">
+JimBobBennett</a>
+<button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarContent aria-controls=navbarContent aria-expanded=false aria-label="Toggle navigation"><svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" data-view-component="true"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button><div class="collapse navbar-collapse text-wrap primary-font" id=navbarContent><ul class="navbar-nav ms-auto text-center"><li class="nav-item navbar-text"><a class=nav-link href=/ aria-label=home>Home</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#about aria-label=about>About</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#projects aria-label=projects>Recent Highlights</a></li><li class="nav-item navbar-text"><a class=nav-link href=/blogs title="Blog posts">Blog</a></li><li class="nav-item navbar-text"><a class=nav-link href=/videos title=Videos>Videos</a></li><li class="nav-item navbar-text"><a class=nav-link href=/livestreams title=Livestreams>Livestreams</a></li><li class="nav-item navbar-text"><a class=nav-link href=/conferences title=Conferences>Conferences</a></li><li class="nav-item navbar-text"><a class=nav-link href=/resume title=Resume>Resume</a></li></ul></div></div></nav></header><div id=content><section id=projects><div class="container pt-5" id=list-page><div class="row justify-content-center px-3 px-md-5"><h1 class="text-left pb-2 content">Building a Xamarin Android app - part 6</h1><div class="text-left content">Jim Bennett
+<small>|</small>
+Mar 24, 2016</div></div></div></section><section id=single><div class=container><div class="row justify-content-center"><div class="col-sm-12 col-md-12 col-lg-9"><div class=pr-lg-4><article class="page-content p-2"><p>This is the sixth part in the my series about building an Android app using Xamarin.Android. I highly recommend reading the rest of the series first.
+The previous parts are:</p><ul><li><a href=/blogs/building-an-android-app-part-1/>Creating the basic app</a></li><li><a href=/blogs/building-an-android-app-part-2/>Defining our data</a></li><li><a href=/blogs/building-a-xamarin-android-app-part-3/>Building view models</a></li><li><a href=/blogs/building-a-xamarin-android-app-part-4/>Binding the view models to the UI</a></li><li><a href=/blogs/building-a-xamarin-android-app-part-5/>Adding the add button</a></li></ul><h4 id=editing-and-deleting-our-counters>Editing and deleting our counters</h4><p>So far we have a pretty nice but simple app - we can add new counters and increment them. The next thing we need to add is the ability to edit or delete a counter. Lets start at the bottom of our stack and work up to the UI.
+We need to be able to edit or delete the counter - so we need a way to update the record or delete the row in out SQLite db, we need commands on our ViewModel to expose this, and we need a nice UI to handle the user interaction.</p><h6 id=basic-ui-design>Basic UI design</h6><p>Before we begin though, we should consider how the user will delete a counter, so that we can implement it in the correct way. Our recycler view showing the counters is our way to interact with them - tapping on the plus button will increment the counter, so it makes sense to use this to drive editing a counter. We already make use of tapping on the plus button, so a simple tap on the recycler view item may not be the best way to drive the edit (it would be too easy to tap the wrong thing and edit instead of incrementing the counter). Instead we can take advantage of one of Androids other UI paradigm - the long touch. If a user performs a long touch on the counter in our recycler view we can show a new activity where they can edit the name or description of the counter, or delete it (and we can re-use this screen later to show the counters history).</p><div class=image-div style=width:300px><p><img src=AnimateLongPress.gif alt="Gif showing the long press editing a counter"></p></div><br><p>Lets crack on with the implementation.</p><h6 id=database>Database</h6><p>In our <code>DatabaseHelper</code> we already have the ability to update counters using the <code>AddOrUpdateCounterAsync</code> method, so all we need to do is add an async delete method that takes a counter and deletes the row from SQLite.
+This needs to be added to the interface:</p><pre tabindex=0><code>public interface IDatabaseHelper
+{
+    Task DeleteCounterAsync(Counter counter);
+    ...
+}
+</code></pre><p>And the implementation:</p><pre tabindex=0><code>public async Task DeleteCounterAsync(Counter counter)
+{
+    var connection = new SQLiteAsyncConnection(_dbPath);
+    await connection.DeleteAsync(counter);
+    OnCountersChanged();
+}
+</code></pre><p>After the row is deleted we also need to raise the <code>CountersChanged</code> event to notify anything that is interested, such as our <code>CountersViewModel</code> that the counters have changed.</p><p>And obviously as we are good developers we need some tests for this in our Android unit test suite in the <code>DatabaseHelperTests</code> fixture to cover the deleting of rows and raising the collection changed event:</p><pre tabindex=0><code>[Test]
+public void DeletingACounterShouldDeleteTheCounter()
+{
+    var dbfile = Path.Combine(RootPath, Guid.NewGuid().ToString(&#34;N&#34;) + &#34;.db3&#34;);
+
+    DatabaseHelper.CreateDatabase(dbfile);
+
+    var db = new DatabaseHelper();
+    var counter = new Counter
+    {
+        Name = &#34;TestCounter&#34;,
+        Description = &#34;A test counter&#34;
+    };
+            
+    var res = Task.Run(async () =&gt;
+    {
+        await db.AddOrUpdateCounterAsync(counter);
+        return 0;
+    }).Result;
+            
+    var counters = Task.Run(async () =&gt; await db.GetAllCountersAsync()).Result;
+            
+    counters.Should().HaveCount(1);
+            
+    res = Task.Run(async () =&gt;
+    {
+        await db.DeleteCounterAsync(counter);
+        return 0;
+    }).Result;
+
+    counters = Task.Run(async () =&gt; await db.GetAllCountersAsync()).Result;
+    counters.Should().HaveCount(0);
+}
+
+[Test]
+public void DeletingACounterShouldRaiseTheCollectionChangedEvent()
+{
+    var dbfile = Path.Combine(RootPath, Guid.NewGuid().ToString(&#34;N&#34;) + &#34;.db3&#34;);
+
+    DatabaseHelper.CreateDatabase(dbfile);
+
+    var db = new DatabaseHelper();
+    var counter = new Counter
+    {
+        Name = &#34;TestCounter&#34;,
+        Description = &#34;A test counter&#34;
+    };
+
+    var res = Task.Run(async () =&gt;
+    {
+        await db.AddOrUpdateCounterAsync(counter);
+        return 0;
+    }).Result;
+
+    var eventRecorder = new EventRecorder(db, nameof(DatabaseHelper.CountersChanged));
+    eventRecorder.RecordEvent();
+            
+    res = Task.Run(async () =&gt;
+    {
+        await db.DeleteCounterAsync(counter);
+        return 0;
+    }).Result;
+
+    eventRecorder.Should().HaveCount(1);
+}
+</code></pre><h6 id=viewmodel>ViewModel</h6><p>What we need here is a ViewModel that exposes properties for the name and description of our counter, as well as providing a mechanism to save or delete it. We could build a new ViewModel for this, but we already have 2 ViewModels that represent counters with various levels of functionality on them - a <code>NewCounterViewModel</code> that allows the setting of the <code>Name</code> and <code>Description</code> properties, as well as a command to save the new counter to the database, and a <code>CounterViewModel</code> that has a readonly view of the counters details with a command to increment it&rsquo;s value. Ideally we should follow the <a href=https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>DRY principle</a> and only have one, so instead of adding a new one, lets take this opportunity of refactoring the code to have only one ViewModel, and add our new requirements to it.</p><p>So lets take the <code>CounterViewModel</code> and make this work for all our scenarios. First we need to change the <code>Name</code> and <code>Description</code> properties. These are currently read only and just return the value from the counter. What we&rsquo;ll do with these is make them read/write properties with a property change notification and a backing field, and set them in the constructor. We don&rsquo;t want to use passthrough properties, we need a backing field. This is because we want to allow the user to cancel their changes when they edit, if we pass the value straight through to the counter when we set it we will have to store the original value somewhere to allow us to revert it. It&rsquo;s easier to save the values in a field and only apply them to the counter if the user saves the changes.</p><pre tabindex=0><code>public CounterViewModel(Counter counter, IDatabaseHelper databaseHelper)
+{
+    ...
+    Name = counter.Name;
+    Description = counter.Description;
+}
+
+private string _name;
+public string Name
+{
+    get { return _name; }
+    set { Set(ref _name, value); }
+}
+
+private string _description;
+public string Description
+{
+    get { return _description; }
+    set { Set(ref _description, value); }
+}
+</code></pre><p>The <code>NewCounterViewModel</code> also has commands to add a new counter and navigate back. The call on the database helper to add the new counter is the same as the one we will need to use to save the edits, <code>AddOrUpdateCounterAsync</code>, so lets copy the <code>AddCounterCommand</code> from the <code>NewCounterViewModel</code> and rename it to <code>SaveCommand</code> so it can be used for both new and edits. We&rsquo;ll also need to add the <code>IDialogService</code> and <code>INavigationService</code> to the constructor parameters so they can be used by this command.</p><pre tabindex=0><code>public CounterViewModel(Counter counter, IDatabaseHelper databaseHelper, IDialogService dialogService, INavigationService navigationService)
+{
+    _dialogService = dialogService;
+    _navigationService = navigationService;
+    ...
+}
+
+private RelayCommand _saveCommand;
+public RelayCommand SaveCommand =&gt; _saveCommand ?? (_saveCommand = new RelayCommand(async () =&gt; await SaveAsync()));
+
+private async Task SaveAsync()
+{
+    if (string.IsNullOrEmpty(Name))
+    {
+        await _dialogService.ShowError(&#34;The name must be set&#34;, &#34;No name&#34;, &#34;OK&#34;, null);
+        return;
+    }
+
+    if (string.IsNullOrEmpty(Description))
+    {
+        await _dialogService.ShowError(&#34;The description must be set&#34;, &#34;No description&#34;, &#34;OK&#34;, null);
+        return;
+    }
+
+    _counter.Name = Name;
+    _counter.Description = Description;
+    await _databaseHelper.AddOrUpdateCounterAsync(_counter);
+    _navigationService.GoBack();
+}
+</code></pre><p>There is one code change made here as well - in the <code>NewCounterViewModel</code> a new <code>Counter</code> was created with the values from the properties. Here we use the <code>_counter</code> field, and update the values from our properties.</p><p>We can then add the <code>GoBackCommand</code> as well.</p><pre tabindex=0><code>private RelayCommand _goBackCommand;
+public RelayCommand GoBackCommand =&gt; _goBackCommand ?? (_goBackCommand = new RelayCommand(() =&gt; _navigationService.GoBack()));
+</code></pre><p>Next we need to add the <code>DeleteCommand</code> to expose the new delete functionality we&rsquo;ve added to the database helper.</p><pre tabindex=0><code>private RelayCommand _deleteCommand;
+public RelayCommand DeleteCommand =&gt; _deleteCommand ?? (_deleteCommand = new RelayCommand(async () =&gt; await DeleteAsync()));
+
+private async Task DeleteAsync()
+{
+    if (await _dialogService.ShowMessage($&#34;Are you sure you want to delete {Name}?&#34;, &#34;Delete counter&#34;, &#34;Yes&#34;, &#34;No&#34;, null))
+    {
+        await _databaseHelper.DeleteCounterAsync(_counter);
+        _navigationService.GoBack();
+    }
+}
+</code></pre><p>Nothing unexpected or new here - we show a dialog confirming with the user that they want to delete, and if they say yes delete the counter from the database and navigate back.</p><p>To test this we also need to copy the tests from the <code>NewCounterViewModelTests</code> fixture, making the relevant changes to change the type of view model that is constructed. We can then also add some tests for the <code>DeleteCommand</code>, as well as ensuring the saving tests will copy the values to the counter.</p><pre tabindex=0><code>[Test]
+public void ExecutingTheSaveCommandUpdatesTheChangesOnTheCounter()
+{
+    var counter = new Counter {Value = 10, Name = &#34;Name&#34;, Description = &#34;Description&#34;};
+    var vm = new CounterViewModel(counter, _mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+    vm.Name = &#34;New Name&#34;;
+    vm.Description = &#34;New Description&#34;;
+    vm.SaveCommand.Execute(null);
+    counter.Name.Should().Be(&#34;New Name&#34;);
+    counter.Description.Should().Be(&#34;New Description&#34;);
+}
+
+[Test]
+public void ExecutingTheSaveCommandUpdatesTheCounterInTheDatabase()
+{
+    var counter = new Counter { Value = 10, Name = &#34;Name&#34;, Description = &#34;Description&#34; };
+    var vm = new CounterViewModel(counter, _mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+    vm.Name = &#34;New Name&#34;;
+    vm.Description = &#34;New Description&#34;;
+    vm.SaveCommand.Execute(null);
+    _mockDatabaseHelper.Verify(d =&gt; d.AddOrUpdateCounterAsync(counter));
+}
+
+[Test]
+public void ExecutingTheSaveCommandNavigatesBack()
+{
+    var vm = CreateCounterViewModel();
+    vm.SaveCommand.Execute(null);
+    _mockNavigationService.Verify(n =&gt; n.GoBack());
+}
+
+[Test]
+public void ExecutingTheDeleteCommandConfirmsTheDelete()
+{
+    var vm = CreateCounterViewModel();
+    vm.DeleteCommand.Execute(null);
+    _mockDialogService.Verify(d =&gt; d.ShowMessage($&#34;Are you sure you want to delete {vm.Name}?&#34;, &#34;Delete counter&#34;, &#34;Yes&#34;, &#34;No&#34;, null));
+}
+
+[Test]
+public void ExecutingTheDeleteCommandAndSelectingYesOnTheDialogDeletesTheCounter()
+{
+    var counter = new Counter { Value = 10, Name = &#34;Name&#34;, Description = &#34;Description&#34; };
+    var vm = new CounterViewModel(counter, _mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+    _mockDialogService.Setup(d =&gt; d.ShowMessage($&#34;Are you sure you want to delete {vm.Name}?&#34;, &#34;Delete counter&#34;, &#34;Yes&#34;, &#34;No&#34;, null))
+        .ReturnsAsync(true);
+    vm.DeleteCommand.Execute(null);
+    _mockDatabaseHelper.Verify(d =&gt; d.DeleteCounterAsync(counter), Times.Once);
+}
+
+[Test]
+public void ExecutingTheDeleteCommandAndSelectingNoOnTheDialogDoesNotDeleteTheCounter()
+{
+    var counter = new Counter { Value = 10, Name = &#34;Name&#34;, Description = &#34;Description&#34; };
+    var vm = new CounterViewModel(counter, _mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+    _mockDialogService.Setup(d =&gt; d.ShowMessage($&#34;Are you sure you want to delete {vm.Name}?&#34;, &#34;Delete counter&#34;, &#34;Yes&#34;, &#34;No&#34;, null))
+        .ReturnsAsync(false);
+    vm.DeleteCommand.Execute(null);
+    _mockDatabaseHelper.Verify(d =&gt; d.DeleteCounterAsync(counter), Times.Never);
+}
+</code></pre><p>After doing this we can tidy up by deleting the <code>NewCounterViewModel</code> and <code>NewCounterViewModelTests</code> classes. We also need to make the new code work. At the moment the <code>NewCounterActivity</code> uses a <code>NewCounterViewModel</code>, and gets it from the <code>ViewModelLocator</code>, clearing the values each time. We can delete it from the <code>ViewModelLocator</code>, change the type of the <code>ViewModel</code> property on the activity to be <code>CounterViewModel</code>, change the command that gets called to save, and create a new one with a new counter.</p><pre tabindex=0><code>public CounterViewModel ViewModel { get; private set; }
+
+protected override void OnCreate(Bundle savedInstanceState)
+{
+    ...
+    ViewModel = GetCounterViewModel();
+    ...
+}
+
+protected virtual CounterViewModel GetCounterViewModel()
+{
+    return new CounterViewModel(new Counter(),
+        ViewModelLocator.DatabaseHelper,
+        ViewModelLocator.DialogService,
+        ViewModelLocator.NavigationService);
+}
+
+public override bool OnOptionsItemSelected(IMenuItem item)
+{
+    switch (item.ItemId)
+    {
+        ...
+        case Resource.Id.action_save_counter:
+            ViewModel.SaveCommand.Execute(null);
+            return true;
+        ...
+    }
+}
+</code></pre><p>Notice how the <code>GetCounterViewModel</code> is protected and virtual? We&rsquo;ll see why later when we look at creating the views.</p><p>We then need to update the <code>CountersViewModel</code> to pass the new parameters to the constructor for our <code>CounterViewModel</code>. These extra parameters need to be added to the constructor so that the IoC container can populate them, then passed through once the <code>CounterViewModels</code> are created.</p><pre tabindex=0><code>public CountersViewModel(IDatabaseHelper databaseHelper, INavigationService navigationService, IDialogService dialogService)
+{
+    _navigationService = navigationService;
+    _dialogService = dialogService;
+    ...
+}
+
+public async Task LoadCountersAsync()
+{
+    ...
+    foreach (var counter in counters)
+        _counters.Add(new CounterViewModel(counter, _databaseHelper, _dialogService, _navigationService));
+}
+</code></pre><p>Also here the <code>CountersViewModelTests</code> should be updated to mock up these extra parameters and pass them through when constructing the <code>CounterViewModels</code>.</p><p>We&rsquo;re almost there with the ViewModels part. The last thing to think about is how we are actually going to start the editing process. Android has a UI paradigm of a long press on an item in a list that leads to extra functionality, such as editing. We can use this here - the user can long press on the counters in our recycler view and we can open an edit activity. To make this work we need to add a command to our <code>CounterViewModel</code> that using the <code>INavigationService</code> to navigate to a new screen, passing the counter through. First we define a new key for this in our <code>ViewModelLocator</code>.</p><pre tabindex=0><code>public const string EditCounterPageKey = &#34;EditCounterPage&#34;;
+</code></pre><p>Then we add the command to our <code>CounterViewModel</code>.</p><pre tabindex=0><code>private RelayCommand _editCommand;
+public RelayCommand EditCommand =&gt; _editCommand ?? (_editCommand = new RelayCommand( Edit));
+
+private void Edit()
+{
+    _navigationService.NavigateTo(ViewModelLocator.EditCounterPageKey, _counter);
+}
+</code></pre><p>Then we add a test to the <code>CounterViewModelTests</code>.</p><pre tabindex=0><code>[Test]
+public void ExecutingTheEditCommandNavigatesToTheEditScreen()
+{
+    var counter = new Counter();
+    var vm = new CounterViewModel(counter, _mockDatabaseHelper.Object, _mockDialogService.Object, _mockNavigationService.Object);
+    vm.EditCommand.Execute(null);
+
+    _mockNavigationService.Verify(n =&gt; n.NavigateTo(ViewModelLocator.EditCounterPageKey, counter));
+}
+</code></pre><p>Done. We now have everything in our ViewModels ready to start on the views.</p><h6 id=views>Views</h6><p>We need to do a few things with our views to get editing working - we need to handle the long press on the recycler view to launch the editing, then create a new activity and layout for the editing screen.</p><p>Lets start with the long press. This is easy enough to implement in our existing <code>CounterViewHolder</code> class - we just add an event handler and execute our command from there.</p><pre tabindex=0><code>public CounterViewHolder(View itemView) : base(itemView)
+{
+    ..
+    itemView.LongClick += ItemLongClick;
+}
+
+private void ItemLongClick(object sender, View.LongClickEventArgs e)
+{
+    _counterViewModel.EditCommand.Execute(null);
+}
+</code></pre><p>Android also supports a nice animation for this - tap and see a highlight starting at the touch point and spreading out.</p><div class=image-div style=width:600px><p><img src=AnimateLongPress-1.gif alt="Long press animation"></p></div><br><p>This is easy enough to implement, we just need to change the foreground of the <code>CardView</code> in the <code>counter_view.axml</code> layout file to use a stock Android selectable item background.</p><pre tabindex=0><code>&lt;android.support.v7.widget.CardView 
+...
+    android:foreground=&#34;?android:attr/selectableItemBackground&#34;&gt;
+</code></pre><p>We&rsquo;ve got the long click looking awesome, and we&rsquo;ve got the command executing. Now lest create an activity that the command can launch. For this we can create <code>EditCounterActivity</code>, and instead of deriving from <code>BaseActivity</code> like all the others, instead we can derive from <code>NewCounterActivity</code>. This activity already has most of what we need - it has a layout that shows the name and description in edit controls which we can reuse, it has a save button, it uses the right ViewModel type. All we need to change when we override it is how it creates the ViewModel, and add an extra menu item for the delete button.</p><p>Remember earlier we created a protected virtual method in the <code>NewCounterActvity</code> that creates a new <code>CounterViewModel</code>? Well the reason for creating it as a virtual is that we can override it in our <code>EditCounterViewModel</code> and create a new one wrapping the counter passed to our navigation call in the <code>EditCommand</code> of the <code>CounterViewModel</code>.</p><pre tabindex=0><code>protected override CounterViewModel GetCounterViewModel()
+{
+    var navigationService = ViewModelLocator.NavigationService;
+    var counter = (Counter) ((AppCompatNavigationService) navigationService).GetAndRemoveParameter(Intent);
+    return new CounterViewModel(counter,
+        ViewModelLocator.DatabaseHelper,
+        ViewModelLocator.DialogService,
+        navigationService);
+}
+</code></pre><p>We have to cate the <code>INavigationService</code> to a <code>AppCompatNavigationService</code> to get data out of it. This is because data passing is very platform specific, we need to give it the <code>Intent</code> that was used to launch the activity so that it can get the data out, and this is Android specific. The interface is designed to be portable so contains no platform specific code, so we cast to the Android variant to get the data out.</p><p>Next we need the delete button on the menu. For this we need a new menu called <code>edit_counter_menu.xml</code> containing this button.</p><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; ?&gt;
+&lt;menu xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+      xmlns:app=&#34;http://schemas.android.com/apk/res-auto&#34;&gt;
+  &lt;item android:id=&#34;@+id/action_delete_counter&#34;
+        app:showAsAction=&#34;always&#34;
+        android:icon=&#34;@drawable/ic_delete_white_48dp&#34;/&gt;
+&lt;/menu&gt;
+</code></pre><p>Th image here, <code>ic_delete_white_48dp</code> is once again dowloaded from <a href=https://design.google.com/icons/>Google&rsquo;s material icons</a> and dropped into all the drawable folders.</p><p>In our activity we now need to create the menu, and handle when it gets pressed.</p><pre tabindex=0><code>public override bool OnCreateOptionsMenu(IMenu menu)
+{
+    base.OnCreateOptionsMenu(menu);
+    Toolbar.InflateMenu(Resource.Menu.edit_counter_menu);
+    return true;
+}
+
+public override bool OnOptionsItemSelected(IMenuItem item)
+{
+    switch (item.ItemId)
+    {
+        case Resource.Id.action_delete_counter:
+            ViewModel.DeleteCommand.Execute(null);
+            return true;
+        default:
+            return base.OnOptionsItemSelected(item);
+    }
+}
+</code></pre><p>These work the same way as the <code>NewCounterActivity</code> described in an earlier post.. The base calls in both these methods call down to the <code>NewCounterActivity</code> so that the original menu with the save button is created and handled.</p><p>The last little but we need to do is a UI tweak. The <code>NewCounterActivity</code> sets the title to <strong>New Counter</strong>, but it would look nicer if we show that we are editing a counter. Also by default Android will set the focus on the first edit view, where MVVMLight sets the text, the focus ends up at the start of the text instead of the end. We can get round this by calling <code>SetSelection</code> on the <code>Name</code> edit view in our <code>OnCreate</code> method after we bind the data in the base <code>OnCreate</code> method.</p><pre tabindex=0><code>protected override void OnCreate(Bundle savedInstanceState)
+{
+    base.OnCreate(savedInstanceState);
+    Title = $&#34;Edit {ViewModel.Name}&#34;;
+    Name.SetSelection(Name.Text.Length);
+}
+</code></pre><p>The last thing we need to do is wire up this activity to the new key we created for navigation in the <code>ViewModelLocator</code>. All our wire ups are done in the <code>MainActivity</code> so lets add another entry.</p><pre tabindex=0><code>public MainActivity()
+{
+    ...
+    navigationService.Configure(ViewModelLocator.EditCounterPageKey, typeof(EditCounterActivity));
+}
+</code></pre><p>Done!</p><h6 id=lets-try-it-all-out>Lets try it all out</h6><p>We have our database code written, we have our ViewModels working and our UI wired up. Lets try it out.</p><div class=image-div style=width:400px><p><img src=AnimateLongPress-2.gif alt="Edit and delete demo"></p></div><br><p>The code for this can be found in GitHub on the Part6 branch at <a href=https://github.com/jimbobbennett/StupendousCounter/tree/Part6>https://github.com/jimbobbennett/StupendousCounter/tree/Part6</a></p><p>In the next part we&rsquo;ll look at showing the history information that we&rsquo;re storing against each counter.</p></article></div></div><div class="col-sm-12 col-md-12 col-lg-3"><div class=sticky-sidebar><aside class=toc><h5>Table Of Contents</h5><div class=toc-content><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></aside><aside class=tags><h5>Tags</h5><ul class="tags-ul list-unstyled list-inline"><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin target=_blank>xamarin</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin.android target=_blank>xamarin.android</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/mvvmlight target=_blank>mvvmlight</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/technology target=_blank>Technology</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/ui target=_blank>UI</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/tutorial target=_blank>tutorial</a></li></ul></aside></div></div></div><div class=row><div class="col-sm-12 col-md-12 col-lg-9 p-4"><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-6-2/",this.page.identifier="9bee0580c7cfc2da4ec98a0a8b5abda5"};(function(){if(window.location.hostname=="localhost")return;var e=document,t=e.createElement("script");t.src="https://jimbobbennett.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div><button class="p-2 px-3" onclick=topFunction() id=topScroll>
+<i class="fas fa-angle-up"></i></button></section><script>var topScroll=document.getElementById("topScroll");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?topScroll.style.display="block":topScroll.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script></div><footer><div class="container py-4"><div class="row justify-content-center"><div class="col-md-4 text-center">&copy; 2022 All Rights Reserved</div></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js integrity=sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13 crossorigin=anonymous></script>
+<script>document.body.className.includes("light")&&(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))</script><script>let loadingIcons;function loading(){myVar=setTimeout(showPage,100)}function showPage(){try{document.getElementById("loading-icons").style.display="block"}catch{}}</script><script>function createCopyButton(e,t){const n=document.createElement("button");n.className="copy-code-button",n.type="button",n.innerText="Copy",n.addEventListener("click",()=>copyCodeToClipboard(n,e,t)),addCopyButtonToDom(n,e)}async function copyCodeToClipboard(e,t,n){const s=t.querySelector("pre > code").innerText;try{n.writeText(s)}finally{codeWasCopied(e)}}function codeWasCopied(e){e.blur(),e.innerText="Copied!",setTimeout(function(){e.innerText="Copy"},2e3)}function addCopyButtonToDom(e,t){t.insertBefore(e,t.firstChild);const n=document.createElement("div");n.className="highlight-wrapper",t.parentNode.insertBefore(n,t),n.appendChild(t)}if(navigator&&navigator.clipboard)document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,navigator.clipboard));else{var script=document.createElement("script");script.src="https://cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js",script.integrity="sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94=",script.crossOrigin="anonymous",script.onload=function(){addCopyButtons(clipboard)},document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,script)),document.body.appendChild(script)}</script></body></html>

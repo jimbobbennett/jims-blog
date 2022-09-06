@@ -1,0 +1,212 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=icon href=/fav.png type=image/png><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Alata&family=Lora&family=Muli:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto&family=Muli:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/font.css media=all><meta property="og:title" content="Building a Xamarin Android app - part 4"><meta property="og:description" content="This is the fourth part in the my series about building an Android app using Xamarin.Android. You can find the first part here, the second part here and the third part here, and I highly recommend reading these first.
+Binding our view models to the UI We have our models, we have our view models, now to work on the views! First thing we need to do is a bit of a tidy up - the default UI code we&rsquo;ve picked up from our templates doesn&rsquo;t match what we want to show in screen, so lets start by clearing everything up a bit."><meta property="og:type" content="article"><meta property="og:url" content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-4/"><meta property="og:image" content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-4/banner.png"><meta property="article:section" content="blogs"><meta property="article:published_time" content="2016-02-01T07:36:22+00:00"><meta property="article:modified_time" content="2016-02-01T07:36:22+00:00"><meta property="og:site_name" content="JimBobBennett"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-4/banner.png"><meta name=twitter:title content="Building a Xamarin Android app - part 4"><meta name=twitter:description content="This is the fourth part in the my series about building an Android app using Xamarin.Android. You can find the first part here, the second part here and the third part here, and I highly recommend reading these first.
+Binding our view models to the UI We have our models, we have our view models, now to work on the views! First thing we need to do is a bit of a tidy up - the default UI code we&rsquo;ve picked up from our templates doesn&rsquo;t match what we want to show in screen, so lets start by clearing everything up a bit."><meta name=twitter:site content="@jimbobbennett"><meta name=twitter:creator content="@jimbobbennett"><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous><link rel=stylesheet href=/css/header.css media=all><link rel=stylesheet href=/css/footer.css media=all><link rel=stylesheet href=/css/theme.css media=all><link rel="shortcut icon" type=image/png href=/fav.png><link rel="shortcut icon" sizes=192x192 href=/fav.png><link rel=apple-touch-icon href=/fav.png><script type=text/javascript>(function(e,t,n,s,o,i,a){e[n]=e[n]||function(){(e[n].q=e[n].q||[]).push(arguments)},i=t.createElement(s),i.async=1,i.src="https://www.clarity.ms/tag/"+o,a=t.getElementsByTagName(s)[0],a.parentNode.insertBefore(i,a)})(window,document,"clarity","script","dctc2ydykv")</script><style>:root{--text-color:#343a40;--text-secondary-color:#6c757d;--background-color:#000;--secondary-background-color:#64ffda1a;--primary-color:#007bff;--secondary-color:#f8f9fa;--text-color-dark:#e4e6eb;--text-secondary-color-dark:#b0b3b8;--background-color-dark:#000000;--secondary-background-color-dark:#212529;--primary-color-dark:#ffffff;--secondary-color-dark:#212529}body{background-color:#000;font-size:1rem;font-weight:400;line-height:1.5;text-align:left}</style><meta name=description content><link rel=stylesheet href=/css/index.css><link rel=stylesheet href=/css/single.css><link rel=stylesheet href=/css/projects.css media=all><script defer src=/fontawesome-5/all-5.15.4.js></script><title>Building a Xamarin Android app - part 4 | JimBobBennett</title></head><body class=light onload=loading()><header><nav class="pt-3 navbar navbar-expand-lg"><div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5"><a class="navbar-brand primary-font text-wrap" href=/><img src=/fav.png width=30 height=30 class="d-inline-block align-top">
+JimBobBennett</a>
+<button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarContent aria-controls=navbarContent aria-expanded=false aria-label="Toggle navigation"><svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" data-view-component="true"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button><div class="collapse navbar-collapse text-wrap primary-font" id=navbarContent><ul class="navbar-nav ms-auto text-center"><li class="nav-item navbar-text"><a class=nav-link href=/ aria-label=home>Home</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#about aria-label=about>About</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#projects aria-label=projects>Recent Highlights</a></li><li class="nav-item navbar-text"><a class=nav-link href=/blogs title="Blog posts">Blog</a></li><li class="nav-item navbar-text"><a class=nav-link href=/videos title=Videos>Videos</a></li><li class="nav-item navbar-text"><a class=nav-link href=/livestreams title=Livestreams>Livestreams</a></li><li class="nav-item navbar-text"><a class=nav-link href=/conferences title=Conferences>Conferences</a></li><li class="nav-item navbar-text"><a class=nav-link href=/resume title=Resume>Resume</a></li></ul></div></div></nav></header><div id=content><section id=projects><div class="container pt-5" id=list-page><div class="row justify-content-center px-3 px-md-5"><h1 class="text-left pb-2 content">Building a Xamarin Android app - part 4</h1><div class="text-left content">Jim Bennett
+<small>|</small>
+Feb 1, 2016</div></div></div></section><section id=single><div class=container><div class="row justify-content-center"><div class="col-sm-12 col-md-12 col-lg-9"><div class=pr-lg-4><article class="page-content p-2"><p>This is the fourth part in the my series about building an Android app using Xamarin.Android. You can find the first part <a href=/blogs/building-an-android-app-part-1/>here</a>, the second part <a href=/blogs/building-an-android-app-part-2/>here</a> and the third part <a href=/blogs/building-a-xamarin-android-app-part-3/>here</a>, and I highly recommend reading these first.</p><h4 id=binding-our-view-models-to-the-ui>Binding our view models to the UI</h4><p>We have our models, we have our view models, now to work on the views!
+First thing we need to do is a bit of a tidy up - the default UI code we&rsquo;ve picked up from our templates doesn&rsquo;t match what we want to show in screen, so lets start by clearing everything up a bit.</p><p>The UI we have has a navigation drawer with 2 screens you can select, as well as some sub menu options. The screen selection options load one of two possible fragments into our UI. We can repurpose these - one fragment to show our counters and one to show an about screen so we can tell the world who created such a stupendous counter app!</p><p>Stating with the first fragment we can rename the class from <code>Fragment1</code> to <code>CountersFragment</code>, as well as renaming the associated layout from <code>fragment1.axml</code> to <code>counters_fragment.axml</code>. After renaming the layout file we also need to change the id that is used in the <code>CountersFragment.OnCreateView</code> method to reflect the new name:</p><pre tabindex=0><code>return inflater.Inflate(Resource.Layout.counters_fragment, null);
+</code></pre><p>For the second one we can rename it from <code>Fragment2</code> to <code>AboutFragment</code> and <code>fragment2.axml</code> to <code>about_fragment.axml</code>, and again updating the id:</p><pre tabindex=0><code>return inflater.Inflate(Resource.Layout.about_fragment, null);
+</code></pre><div class=image-div style=width:300px><p><img src=RenamedFragments.png alt="Renamed fragments"></p></div><br><p>Now is also a good time to update the menu in <code>menu\nav_menu.xml</code> to remove the unwanted sub items and rename the main items:</p><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;
+&lt;menu xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;&gt;
+
+  &lt;group android:checkableBehavior=&#34;single&#34;&gt;
+    &lt;item
+        android:id=&#34;@+id/nav_counters&#34;
+        android:icon=&#34;@drawable/ic_add_circle_black_48dp&#34;
+        android:title=&#34;Counters&#34; /&gt;
+    &lt;item
+        android:id=&#34;@+id/nav_about&#34;
+        android:icon=&#34;@drawable/ic_settings_black_48dp&#34;
+        android:title=&#34;About&#34; /&gt;
+  &lt;/group&gt;
+
+&lt;/menu&gt;
+</code></pre><p>You&rsquo;ll notice the icons have changed to items not in our drawables folder, so we&rsquo;ll need to add these. The icons we&rsquo;re using are from the Google material icons - you can download them from <a href=https://design.google.com/icons/>https://design.google.com/icons/</a>. You&rsquo;ll need to download the &lsquo;add circle&rsquo; and &lsquo;settings&rsquo; icons as pngs and copy them from the drawables folders of the downloads to the same named drawables folders locally, then add them to the project.</p><div class=image-div style=width:300px><p><img src=Screen-Shot-2016-02-01-at-17-53-47.png alt="Icons added to the drawables"></p></div><br><p>Changing the menu ids will break our <code>MainActivity</code> so we need to fix the <code>OnCreate</code> method by changing the subscription to the <code>NavigationView.NavigationItemSelected</code> event. At the same time we can remove the snack bar call as we don&rsquo;t want one popping up when we change the fragment.</p><pre tabindex=0><code>navigationView.NavigationItemSelected += (sender, e) =&gt;
+{
+    e.MenuItem.SetChecked(true);
+
+    switch (e.MenuItem.ItemId)
+    {
+        case Resource.Id.nav_counters:
+            ListItemClicked(0);
+            break;
+        case Resource.Id.nav_about:
+            ListItemClicked(1);
+            break;
+    }
+
+    drawerLayout.CloseDrawers();
+};
+</code></pre><h6 id=countersfragment>CountersFragment</h6><p>In this fragment we want to display a list of all the counters that we have stored. The latest and greates way to do this is with a <code>RecyclerView</code> which is documented <a href=https://developer.xamarin.com/guides/android/user_interface/recyclerview/>here on the Xamarin docs</a>. This is like a list view but enforces good design and ensures the views created are always re-used when they go off screen reducing the memory footprint. It also enforces the use of the <a href=https://blog.xamarin.com/creating-highly-performant-smooth-scrolling-android-listviews/>view holder pattern</a> to futher improve performance.</p><p>To use the recycler view we need to add a nuget package to our <code>StupendoudCounter.Droid</code> project - <code>Xamarin.Android.Support.v7.RecyclerView</code>. This provides the recycler view for all versions of Android from API level 7 and above.</p><div class=image-div style=width:600px><p><img src=RecyclerView-nuget.png alt="Recycler view nuget package"></p></div><br><p>Once we have our nuget package installed we can add the recycler view to our UI and create it&rsquo;s backing field. In <code>counters_fragment.axml</code> add the recycler view:</p><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+&lt;LinearLayout xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    android:orientation=&#34;vertical&#34;
+    android:layout_width=&#34;fill_parent&#34;
+    android:layout_height=&#34;fill_parent&#34;&gt;
+  &lt;android.support.v7.widget.RecyclerView
+      android:id=&#34;@+id/countersRecyclerView&#34;
+      android:scrollbars=&#34;vertical&#34;
+      android:layout_width=&#34;fill_parent&#34;
+      android:layout_height=&#34;fill_parent&#34; /&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>In <code>CountersFragment</code> add a field for the recycler view and find it from the view in the <code>OnCreateView</code> method:</p><pre tabindex=0><code>using Android.Support.V7.Widget;
+
+...
+
+private RecyclerView _recyclerView;
+
+public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+{
+    var ignored = base.OnCreateView(inflater, container, savedInstanceState);
+    var view = inflater.Inflate(Resource.Layout.counters_fragment, null);
+    _recyclerView = view.FindViewById&lt;RecyclerView&gt;(Resource.Id.countersRecyclerView);
+    return view;
+}
+</code></pre><p>To use this recycler view we need to use or implement a few things:</p><ul><li>A layout manager</li><li>An adapter</li><li>A view holder</li></ul><h6 id=layout-manager>Layout manager</h6><p>Each instance of a recycler view has a layout manager - this determines how the items in the view are laid out. Android provides 3 basic ones which are good enough for most cases, but you can implement your own if you wish. There&rsquo;s <code>LinearLayoutManager</code> which displays the items in a horizontal or vertical list, <code>GridLayoutManager</code> that displayes the items in a grid and <code>StaggeredGridLayoutManager</code> which displays them in a grid with uneven rows or columns.
+For what we need the <code>LinearLayoutManager</code> is good enough, so we can create one and set it on our recycler view:</p><pre tabindex=0><code>_recyclerView.SetLayoutManager(new LinearLayoutManager(Context, LinearLayoutManager.Vertical, false));
+</code></pre><p>The three parameters for the constructor are the current context which we can get from the <code>Context</code> property, the orientation for which we are using the <code>Vertical</code> constant defined on <code>LinearLayoutManager</code>, and a boolean to say if the items should be reveresed or not when we show them - so should we show the items in our list from top to bottom, or bottom to top (reverse is useful when adding new items to the end of a list but showing them in latest-first order, such as an email client order by date).</p><h6 id=adapter>Adapter</h6><p>The adapter&rsquo;s job is to act like a view model for the recycler view - it needs to know about the collection of items we are showing in the list and be able to tell the recycler view how many there are and needs to be able to create the views for items in the collection where necessary or recycle them to be used by other items in the collection.
+All adapters need three things - a class derived from <code>RecyclerView.Adapter</code>, a view to create to show the item and a view holder that maps the items in the collection to the view. To create the adapter create a class called <code>CountersAdapter</code>:</p><pre tabindex=0><code>using Android.Support.V7.Widget;
+using Android.Views;
+using StupendousCounter.Core.ViewModel;
+
+namespace StupendousCounter.Droid.Fragments
+{
+    public class CountersAdapter : RecyclerView.Adapter
+    {
+        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+        {
+            var item = ViewModelLocator.Counters.Counters[position];
+            ((CounterViewHolder) holder).BindCounterViewModel(item);
+        }
+
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            var itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.counter_view, parent, false);
+            return new CounterViewHolder(itemView);
+        }
+
+        public override int ItemCount =&gt; ViewModelLocator.Counters.Counters.Count;
+    }
+}
+</code></pre><p>When we override <code>RecyclerView.Adapter</code> we have to implement three things - <code>ItemCount</code>, <code>OnCreateViewHolder</code> and <code>OnBindVewHolder</code>.</p><p><code>ItemCount</code> just needs to return the number of items in the collection. This just returns the count from the <code>CountersViewModel</code> instance from the static <code>ViewModelLocator</code>.</p><p><code>OnCreateViewHolder</code> is called whenever an item in the recycler view is created for the first time. This needs to create a view and wrap it in a class derived from <code>RecyclerView.ViewHolder</code>.</p><p><code>OnBindViewHolder</code> is responsible for updating the view holder to reflect the relevant item in the collection. The item is given by the <code>position</code> parameter - this indicates the position in the collection of the item we need to show in the view. In our code we are using this to get the item from our view model which we access using the static <code>ViewModelLocator</code>, and this is passed to a method on the view holder to populate it. In a lot of code you will see the view holder updated directly here with the controls in the view holder exposed as public properties, but I prefer to encapsulate the controls inside the view holder and have a single method to call to update the view. This means if the view changes the adapter doesn&rsquo;t need to change.</p><p>These last two are the basis of how the recycler view works - it calls <code>OnCreateViewHolder</code> to create just enough views to fill the screen, then calls <code>OnBingViewHolder</code> to show the data. As the collection is scrolled instead of creating new views, the views that are no longer visible are re-used. So if you scroll down a a view disappears off the top it is moved to the bottom to remove the overhead of creating a new view. To make sure it shows the right data <code>OnBindViewHolder</code> is called to update the view to show the correct data.</p><p>To create the view add a new layout called <code>counter_view.xml</code>:</p><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+&lt;android.support.v7.widget.CardView xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    xmlns:card_view=&#34;http://schemas.android.com/apk/res-auto&#34;
+    android:layout_width=&#34;match_parent&#34;
+    android:layout_height=&#34;wrap_content&#34;
+    card_view:cardElevation=&#34;8dp&#34;
+    card_view:cardCornerRadius=&#34;8dp&#34;
+    android:layout_marginLeft=&#34;8dp&#34;
+    android:layout_marginRight=&#34;8dp&#34;
+    android:layout_marginTop=&#34;8dp&#34;&gt;
+    &lt;GridLayout
+        android:minWidth=&#34;25px&#34;
+        android:minHeight=&#34;25px&#34;
+        android:layout_width=&#34;match_parent&#34;
+        android:layout_height=&#34;wrap_content&#34;
+        android:columnCount=&#34;3&#34;
+        android:rowCount=&#34;1&#34;&gt;
+        &lt;TextView
+            android:id=&#34;@+id/counter_value&#34;
+            android:layout_width=&#34;wrap_content&#34;
+            android:layout_height=&#34;wrap_content&#34;
+            android:text=&#34;10&#34;
+            android:layout_row=&#34;0&#34;
+            android:layout_column=&#34;1&#34;
+            android:textSize=&#34;48sp&#34;
+            android:layout_gravity=&#34;center_vertical&#34;
+            android:layout_marginRight=&#34;16sp&#34;
+            android:textColor=&#34;@color/primaryDark&#34; /&gt;
+        &lt;ImageButton
+            android:id=&#34;@+id/counter_increment&#34;
+            android:layout_width=&#34;wrap_content&#34;
+            android:layout_height=&#34;wrap_content&#34;
+            android:layout_row=&#34;0&#34;
+            android:layout_column=&#34;2&#34;
+            android:layout_gravity=&#34;center_vertical&#34;
+            android:layout_margin=&#34;16sp&#34;             
+            android:src=&#34;@drawable/ic_add_circle_black_48dp&#34;
+            android:background=&#34;#00000000&#34;/&gt;
+        &lt;LinearLayout
+            android:orientation=&#34;vertical&#34;
+            android:layout_gravity=&#34;fill&#34;
+            android:layout_row=&#34;0&#34;
+            android:layout_column=&#34;0&#34;
+            android:padding=&#34;16sp&#34;&gt;
+            &lt;TextView
+                android:id=&#34;@+id/counter_name&#34;
+                android:layout_width=&#34;wrap_content&#34;
+                android:layout_height=&#34;wrap_content&#34;
+                android:text=&#34;Name&#34;
+                android:padding=&#34;4sp&#34;
+                android:textSize=&#34;24sp&#34; 
+                android:textColor=&#34;@color/primaryText&#34; /&gt;
+            &lt;TextView
+                android:id=&#34;@+id/counter_description&#34;
+                android:layout_width=&#34;wrap_content&#34;
+                android:layout_height=&#34;wrap_content&#34;
+                android:text=&#34;The counters description&#34;
+                android:padding=&#34;4sp&#34;
+                android:textSize=&#34;16sp&#34; /&gt;
+        &lt;/LinearLayout&gt;
+    &lt;/GridLayout&gt;
+&lt;/android.support.v7.widget.CardView&gt;
+</code></pre><p>This view uses a <code>CardView</code> which is documented <a href=https://developer.xamarin.com/guides/android/user_interface/cardview/>here on the Xamarin docs</a>. Inside the <code>CardView</code> there is a <code>GridLayout</code> and <code>LinearLayout</code> to layout the various widgets, three <code>TextViews</code> to show the counter details and value, and an <code>ImageButton</code> to allow the counter to be incremented. The view looks like this:</p><div class=image-div style=width:400px><p><img src=Screen-Shot-2016-02-01-at-18-38-10.png alt="Item view"></p></div><br><p>The <code>GridLayout</code> is used to layout 3 columns - one for the counter details, one for the count and one for the increment button. Inside the first column is the <code>LinearLayout</code> that shows the counters name and description as a vertical layout.</p><h6 id=viewholder>ViewHolder</h6><p>The view holder&rsquo;s job is to create backing fields for the controls in the view to improve performance by only having to find the controls by id once per instance of the view. To create the view holder create a class called <code>CounterViewHolder</code>:</p><pre tabindex=0><code>using System;
+using System.ComponentModel;
+using Android.App;
+using Android.Graphics;
+using Android.Support.V4.Content;
+using Android.Support.V7.Widget;
+using Android.Views;
+using Android.Widget;
+using StupendousCounter.Core.ViewModel;
+
+namespace StupendousCounter.Droid.Fragments
+{
+    public class CounterViewHolder : RecyclerView.ViewHolder
+    {
+        private readonly TextView _name;
+        private readonly TextView _description;
+        private readonly TextView _value;
+
+        private CounterViewModel _counterViewModel;
+
+        public CounterViewHolder(View itemView) : base(itemView)
+        {
+            _name = itemView.FindViewById&lt;TextView&gt;(Resource.Id.counter_name);
+            _description = itemView.FindViewById&lt;TextView&gt;(Resource.Id.counter_description);
+            _value = itemView.FindViewById&lt;TextView&gt;(Resource.Id.counter_value);
+
+            var increment = itemView.FindViewById&lt;ImageButton&gt;(Resource.Id.counter_increment);
+            increment.SetColorFilter(new Color(ContextCompat.GetColor(Application.Context, Resource.Color.primaryDark)));
+            increment.Click += IncrementOnClick;
+        }
+
+        private void IncrementOnClick(object sender, EventArgs eventArgs)
+        {
+            _counterViewModel.IncrementCommand.Execute(null);
+        }
+
+        public void BindCounterViewModel(CounterViewModel counterViewModel)
+        {
+            if (_counterViewModel != null)
+                _counterViewModel.PropertyChanged -= CounterViewModelOnPropertyChanged;
+
+            _counterViewModel = counterViewModel;
+            _counterViewModel.PropertyChanged += CounterViewModelOnPropertyChanged;
+
+            _name.Text = counterViewModel.Name;
+            _description.Text = counterViewModel.Description;
+            _value.Text = counterViewModel.Value;
+        }
+
+        private void CounterViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == nameof(CounterViewModel.Value))
+                _value.Text = _counterViewModel.Value;
+        }
+    }
+}
+</code></pre><p>This class derives from <code>RecyclerView.ViewHolder</code>. In the constructor a view is passed in - and this is the view created by our adapter. In here we are manually going to wire up the values for the counter view model to the view. Although we are using MVVMLight for our view models which exposes a binding mechanism this currently doesn&rsquo;t work with view holders (although Laurent tells me it should do in a couple of weeks time so stay tuned for an update), so we have to do it all manually.</p><p>The first thing we do is grab the name, description and value text edit fields and store these. <code>FindById</code> is slow, hence why we only want to do this once per view instance and store the found controls.
+For the image button we don&rsquo;t need to store it in our class, we just need to wire up the <code>Click</code> event so we can respond to it. We also call <code>SetColorFilter</code> on the button - this is because the icon that was downloaded from Google material design images is a black button and we want it to match our theme. <code>SetColorFilter</code> will change the colour of the button to the given colour, giving a nice purple button.</p><p>In the adapter in the <code>OnBindViewHolder</code> method we delegated the updating of the UI to a method on the view holder, and this is implemented here in the <code>BindCounterViewModel</code> method. This method takes a <code>CounterViewModel</code> that refers to the item in the relevant position in the collection, and this is stored in a field. The name, description and value controls are updated to match the view model. We also subscribe to the <code>PropertyChanged</code> event so that the value can be updated when it changes on the view model - such as when the increment button is pressed. To avoid the wrong counters being incremented we also unsubscribe from this event from the view model stored in our field if it is set before we update it to store the one passed in.</p><p>Once the view model is stored, we can increment it when the increment button is clicked. In the click event handler (<code>IncrementOnClick</code>) we execute the <code>IncrementCommand</code> which will cause the value to increment and be updated in SQLite as shown in the previous post. This will also cause the <code>PropertyChange</code> event to be fired for the <code>Value</code> property, which we handle and update the UI to reflect the new value.</p><h4 id=lets-try-it-out>Lets try it out</h4><p>That should be everything we need to do to show some dummy data and increment the counters, so lets build it, run it and try it out. Click on the plus button to increment each counter, then try closing and re-opening the app - you&rsquo;ll notice the values are persisted thanks to our SQLite db.</p><div class=image-div style=width:400px><p><img src=IncrementingCounter.gif alt="Incrementing counters"></p></div><br><p>The code for this can be found in GitHub on the Part4 branch at <a href=https://github.com/jimbobbennett/StupendousCounter/tree/Part4>https://github.com/jimbobbennett/StupendousCounter/tree/Part4</a></p><p>In the next part we&rsquo;ll work on adding an Add button to add a new counter.</p><hr><p><table cellspacing=0 cellpadding=0 style=border:none;border-collapse:collapse><tr style=padding:0><td style=padding:0;vertical-align:top><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ss&ref=ss_til&ad_type=product_link&tracking_id=expecti-21&marketplace=amazon&region=GB&placement=B00L1WB9H4&asins=B00L1WB9H4&linkId=&show_border=false&link_opens_in_new_window=true"></iframe></td><td style='padding:0 30px'><p style=color:#686868;!important>Continuing on from the last post where I mentioned what I was listening to whilst developing, today I'm listening to <a href=http://sleepingatlast.com>Sleeping at Last</a></p><p style=color:#686868;!important>Note - these are an affiliate links - if you click them and buy I get a small cut.</p></td></tr></table></p></article></div></div><div class="col-sm-12 col-md-12 col-lg-3"><div class=sticky-sidebar><aside class=toc><h5>Table Of Contents</h5><div class=toc-content><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></aside><aside class=tags><h5>Tags</h5><ul class="tags-ul list-unstyled list-inline"><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin target=_blank>xamarin</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/xamarin.android target=_blank>xamarin.android</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/tutorial target=_blank>tutorial</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/mvvmlight target=_blank>mvvmlight</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/technology target=_blank>Technology</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/recycler-view target=_blank>recycler view</a></li><li class=list-inline-item><a href=https://jimbobbennett.dev/tags/ui target=_blank>UI</a></li></ul></aside></div></div></div><div class=row><div class="col-sm-12 col-md-12 col-lg-9 p-4"><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://jimbobbennett.dev/blogs/building-a-xamarin-android-app-part-4/",this.page.identifier="7d87e4757da51f22a044c8d9b5586dc9"};(function(){if(window.location.hostname=="localhost")return;var e=document,t=e.createElement("script");t.src="https://jimbobbennett.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div><button class="p-2 px-3" onclick=topFunction() id=topScroll>
+<i class="fas fa-angle-up"></i></button></section><script>var topScroll=document.getElementById("topScroll");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?topScroll.style.display="block":topScroll.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script></div><footer><div class="container py-4"><div class="row justify-content-center"><div class="col-md-4 text-center">&copy; 2022 All Rights Reserved</div></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js integrity=sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13 crossorigin=anonymous></script>
+<script>document.body.className.includes("light")&&(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))</script><script>let loadingIcons;function loading(){myVar=setTimeout(showPage,100)}function showPage(){try{document.getElementById("loading-icons").style.display="block"}catch{}}</script><script>function createCopyButton(e,t){const n=document.createElement("button");n.className="copy-code-button",n.type="button",n.innerText="Copy",n.addEventListener("click",()=>copyCodeToClipboard(n,e,t)),addCopyButtonToDom(n,e)}async function copyCodeToClipboard(e,t,n){const s=t.querySelector("pre > code").innerText;try{n.writeText(s)}finally{codeWasCopied(e)}}function codeWasCopied(e){e.blur(),e.innerText="Copied!",setTimeout(function(){e.innerText="Copy"},2e3)}function addCopyButtonToDom(e,t){t.insertBefore(e,t.firstChild);const n=document.createElement("div");n.className="highlight-wrapper",t.parentNode.insertBefore(n,t),n.appendChild(t)}if(navigator&&navigator.clipboard)document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,navigator.clipboard));else{var script=document.createElement("script");script.src="https://cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js",script.integrity="sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94=",script.crossOrigin="anonymous",script.onload=function(){addCopyButtons(clipboard)},document.querySelectorAll(".highlight").forEach(e=>createCopyButton(e,script)),document.body.appendChild(script)}</script></body></html>
