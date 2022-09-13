@@ -299,18 +299,6 @@ params:
       series:
       - title: "IoT for Beginners - Project 2, digital agriculture"
         videos:
-          - title: Episode 1 – detect soil moisture
-            time: 9AM PT Thursday 1st Sep
-            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. This lesson convers monitoring soil moisture using a soil moisture sensor, and in doing so dives more into how IoT devices communicate with sensors."
-            image: /images/livestreams/iot-for-beginners-proj-2-ep-1.jpeg
-            registrationLink: https://developer.microsoft.com/reactor/events/16970/
-
-          - title: Episode 2 – automate plant watering
-            time: 9AM PT Thursday 8th Sep
-            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. This lesson covers controlling a water pump from your IoT device based off sensor data from the soil moisture sensor."
-            image: /images/livestreams/iot-for-beginners-proj-2-ep-2.jpeg
-            registrationLink: https://developer.microsoft.com/reactor/events/16971/
-
           - title: Episode 3 – migrate your plant to the cloud
             time: 9AM PT Thursday 15th Sep
             description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. In this lesson we look at migrating your plant to the cloud. We will dive into what the cloud is, and how to set up an IoT service in the cloud to listen to telemetry data. "
@@ -344,27 +332,33 @@ params:
           - title: "Lesson 1: Introduction to IoT"
             id: bVFfcYh6UBw
             description: This lesson covers some of the introductory topics around the Internet of Things, and shows a basic ‘Hello World’ project with a microcontroller.
-          - title: "Lesson 1: Introduction to IoT office hours"
+          - title: "Lesson 1: Introduction to IoT - office hours"
             id: YI772q5v3yI
             description: As a follow up to what was covered in the last ‘IoT for beginners’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
           - title: "Lesson 2: A Deeper Dive into IoT"
             id: bVFfcYh6UBw
             description: This lesson dives deeper into some of the concepts covered in the last lesson. The two components of an IoT application are the Internet and the thing, and this lesson dives deeper into both of these, covering different types of ‘things’, including microcontrollers and single-board computers. It then looks at the  different ways these ‘things’ can use the Internet.
-          - title: "Lesson 2: A Deeper Dive into IoT office hours"
+          - title: "Lesson 2: A Deeper Dive into IoT - office hours"
             id: YI772q5v3yI
             description: As a follow up to what was covered in the last ‘Introduction to dev kit hardware’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
           - title: "Lesson 3: Interact with the Physical World with Sensors and Actuators"
             id: Lqalu1v6aF4
             description: This lesson introduces two of the important concepts for your IoT device - sensors and actuators. Sensors read data from the physical world, actuators control it, and this lesson looks in more depth at how this happens, covering analog and digital hardware (and what these terms mean). You will also see how to build a nightlight with a microcontroller, using sensor data to control an actuator.
-          - title: "Lesson 3: Interact with the Physical World with Sensors and Actuators office hours"
+          - title: "Lesson 3: Interact with the Physical World with Sensors and Actuators - office hours"
             id: qR3ekcMlLWA
             description: As a follow up to what was covered in the last ‘ Interacting with the Physical World with sensors and Actuators’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
           - title: "Lesson 4: Connect your Device to the Internet"
             id: O4dd172mZhs
             description: This lesson introduces some of the communication protocols IoT devices can use to connect to the cloud, and the types of data they might send or receive. It will also show how to control a microcontroller over MQTT.
-          - title: "Lesson 4: Connect your Device to the Internet office hours"
+          - title: "Lesson 4: Connect your Device to the Internet - office hours"
             id: j-cVCzRDE2Q
             description: As a follow up to what was covered in the last ‘Communicating with Devices’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
+          - title: "Lesson 5: Soil moisture sensors and digital agriculture"
+            id: ZzpTu3x4c6M
+            description: "This new 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. This lesson covers monitoring soil moisture using a soil moisture sensor, and in doing so dives more into how IoT devices communicate with sensors."
+          - title: "Lesson 6: IoT powered automated plant watering"
+            id: g9FfZwv9R58
+            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. This lesson covers controlling a water pump from your IoT device based off sensor data from the soil moisture sensor."
 
       - title: On Wednesdays we wear tech
         videos:
