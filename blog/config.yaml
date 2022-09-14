@@ -218,6 +218,12 @@ params:
   
   videos:
     series:
+    - title: "Welcome to Microsoft Reactor"
+      videos:
+      - title: "Welcome to Microsoft Reactor"
+        id: 7NTJW4Bm710
+        description: Welcome to the Microsoft Reactor! Reactors are community spaces where technology professionals meet, learn, and connect. Learn more in our #retro Infomercial from @JimBobBennett about how the Reactor spaces can help with your tech community event.
+        
     - title: "Let's get personal: Computing"
       videos:
       - title: "Build your own pocket sized Altair 8800!"
