@@ -305,12 +305,6 @@ params:
       series:
       - title: "IoT for Beginners - Project 2, digital agriculture"
         videos:
-          - title: Episode 3 – migrate your plant to the cloud
-            time: 9AM PT Thursday 15th Sep
-            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. In this lesson we look at migrating your plant to the cloud. We will dive into what the cloud is, and how to set up an IoT service in the cloud to listen to telemetry data. "
-            image: /images/livestreams/iot-for-beginners-proj-2-ep-3.jpeg
-            registrationLink: https://developer.microsoft.com/reactor/events/16972/
-
           - title: Episode 4 – control watering from the cloud
             time: 9AM PT Thursday 22nd Sep
             description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. We now have our telemetry going to the cloud. In this lesson we will migrate the watering control logic to the cloud, taking advantage of the power of serverless computing!"
@@ -365,6 +359,9 @@ params:
           - title: "Lesson 6: IoT powered automated plant watering"
             id: g9FfZwv9R58
             description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. This lesson covers controlling a water pump from your IoT device based off sensor data from the soil moisture sensor."
+          - title: "Lesson 7: Connect your device to the cloud with Azure IoT Hub"
+            id: bNxjopXkhvk
+            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. In this lesson we look at migrating your plant to the cloud. We will dive into what the cloud is, and how to set up an IoT service in the cloud to listen to telemetry data."
 
       - title: On Wednesdays we wear tech
         videos:
