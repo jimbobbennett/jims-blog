@@ -303,14 +303,7 @@ params:
   livestreams:
     upcoming:
       series:
-      - title: "IoT for Beginners - Project 2, digital agriculture"
-        videos:
-          - title: Episode 4 – control watering from the cloud
-            time: 9AM PT Thursday 22nd Sep
-            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. We now have our telemetry going to the cloud. In this lesson we will migrate the watering control logic to the cloud, taking advantage of the power of serverless computing!"
-            image: /images/livestreams/iot-for-beginners-proj-2-ep-4.jpeg
-            registrationLink: https://developer.microsoft.com/reactor/events/16973/
-
+     
     previous:
       series:
       - title: "Tech Career Tips - Sea of Nerds"
@@ -362,6 +355,9 @@ params:
           - title: "Lesson 7: Connect your device to the cloud with Azure IoT Hub"
             id: bNxjopXkhvk
             description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. In this lesson we look at migrating your plant to the cloud. We will dive into what the cloud is, and how to set up an IoT service in the cloud to listen to telemetry data."
+          - title: "Lesson 8:Control your IoT device with serverless code"
+            id: VVZDcs5u1_I
+            description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. In this lesson we will look indo controlling the automated watering system using serverless event driven code."
 
       - title: On Wednesdays we wear tech
         videos:
