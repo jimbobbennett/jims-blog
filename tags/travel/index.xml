@@ -1,4 +1,135 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>travel on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in travel on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Tue, 22 Jan 2019 11:34:28 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/travel/index.xml" rel="self" type="application/rss+xml"/><item><title>Led Ticker Tape</title><link>https://jimbobbennett.dev/blogs/led-ticker-tape/</link><pubDate>Fri, 25 Feb 2022 17:01:05 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/led-ticker-tape/</guid><description>&lt;p>&lt;img src="hello-lights.png" alt="An LED panel showing Hello in green">&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>travel on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in travel on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Tue, 22 Jan 2019 11:34:28 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/travel/index.xml" rel="self" type="application/rss+xml"/><item><title>Connect a Raspberry Pi to an iRobot Create 3</title><link>https://jimbobbennett.dev/blogs/irobot-create3-connect-a-pi/</link><pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/irobot-create3-connect-a-pi/</guid><description>&lt;p>&lt;img src="banner.png" alt="An iRobot create with a Raspberry Pi">&lt;/p>
+&lt;p>iRobot, the makers of robotic vacuum cleaners also make educational robots designed for learning how to do robotics programming. I recently managed to get my hands on one of their &lt;a href="https://edu.irobot.com/what-we-offer/create3">new Create3 robots&lt;/a> as part of the Microsoft Global Hackathon, one of the cool perks of working for Microsoft.&lt;/p>
+&lt;p>These robots are the same as the vacuum cleaners, except without the vacuum part. They have all the same sensors, with extra connectivity for you to program yourself. The beginner option is to program them in Python using their browser-based tooling that connects using bluetooth, but I wanted to do something more advanced and learn a bit about ROS!&lt;/p>
+&lt;h2 id="ros">ROS&lt;/h2>
+&lt;p>&lt;a href="https://www.ros.org">ROS, short for Robot Operating System&lt;/a> is, as the name suggests, an &amp;lsquo;operating system&amp;quot; for robots. Despite the name, it&amp;rsquo;s not so much an operating system, more a set of software libraries and tools for building and controlling robots that runs on top of Windows or Linux. It&amp;rsquo;s fully open source and free to use.&lt;/p>
+&lt;blockquote>
+&lt;p>The downside to ROS is that the documentation needs some love. It covers in great detail how to do things, but not the why, so anything I write in this post is based off my understanding from my couple of days working with ROS, and could be completely wrong! If so, please correct me in the comments.&lt;/p>
+&lt;/blockquote>
+&lt;p>ROS has a concept of a graph of nodes that connect to each other, nodes can be actuators, sensors, or parts of the control code. Nodes communicate by sending messages on named topics to any other node that is listening.&lt;/p>
+&lt;p>The iRobot Create3 runs ROS2, the current version of ROS. ROS has version names for the minor versions, and my Create3 runs &lt;a href="https://docs.ros.org/en/galactic/index.html">Galactic Geochelone&lt;/a> 🤷. The Create3 can connect to a compute board running ROS that can be programmed to receive messages from the sensors on the Create3, or send messages to the actuators. The compute board can be a Raspberry Pi, a NVIDIA Jetson Nano, or an NXP NavQ+. This compute board can then connect to additional sensors or actuators (for example LIDAR or a camera), add control logic for the robot, and connect to the internet such as to IoT or AI services.&lt;/p>
+&lt;p>In my case, I want to connect a Raspberry Pi 4. The goal is to start by sending status data to an IoT Central dashboard, then expand to add a camera and code to detect and find objects using image-based AI. Maybe get it to play chase with my daughters cats.&lt;/p>
+&lt;h2 id="connect-a-raspberry-pi-4">Connect a Raspberry Pi 4&lt;/h2>
+&lt;p>To connect a Raspberry Pi, first you need to install Ubuntu, then connect it over USB-C, then configure the robot. All the instructions are in the &lt;a href="https://iroboteducation.github.io/create3_docs/hw/rpi_hookup/">Create3 compute board documentation&lt;/a>, but I&amp;rsquo;ve included a basic run through here with some additional observations of things that caught me out!&lt;/p>
+&lt;h3 id="install-and-configure-ubuntu">Install and configure Ubuntu&lt;/h3>
+&lt;p>ROS runs on Ubuntu, not on the default Raspberry Pi OS, so you need to start with a clean install of Ubuntu server on an SD card. From the Raspberry Pi imager you can create an image of Ubuntu Server 20.04. As I am using a Raspberry Pi 4, I used the 64-bit version. You can find this under &lt;em>Other general purpose OS -&amp;gt; Ubuntu&lt;/em>&lt;/p>
+&lt;p>&lt;img src="rpi-imager-ubuntu.png" alt="Selecting the Ubuntu image">&lt;/p>
+&lt;p>Once the image is created, you need to update some configuration on the image before you insert it into your Pi. The &lt;a href="https://iroboteducation.github.io/create3_docs/setup/pi4/">documentation&lt;/a> tells you the changes to make, but the important gotcha is that the &lt;code>network-config&lt;/code> file that you update to set your WiFi details will get copied on first boot into a &lt;code>yaml&lt;/code> file, so you &lt;strong>must&lt;/strong> get the indentation correct:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">eth0&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">optional&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">usb0&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">192.168.186.3&lt;/span>&lt;span style="color:#ae81ff">/24&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">optional&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">wifis&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">wlan0&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access-points&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;SSID&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;password&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">optional&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>I found the first time the Pi boots it won&amp;rsquo;t connect, it needs to boot a second time. Not sure why or if you will get the same.&lt;/p>
+&lt;p>It&amp;rsquo;s worth having a monitor and keyboard at the ready in case the Pi doesn&amp;rsquo;t automatically connect to your network. If it doesn&amp;rsquo;t, you will need to update the network configuration. To do this from the Pi, edit the &lt;code>/etc/netplan/50-cloud-init.yaml&lt;/code> file, &lt;strong>not&lt;/strong> the &lt;code>network-config&lt;/code> in the root of the SD card - this file is only read the first time. Once you have updated the &lt;code>/etc/netplan/50-cloud-init.yaml&lt;/code> file, reload the network plan using this command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo netplan apply
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If you configured everything correctly you should be able to connect to the internet. You can test this out by pinging a website.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ubuntu@ubuntu:~$ ping google.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PING google.com &lt;span style="color:#f92672">(&lt;/span>142.251.211.238&lt;span style="color:#f92672">)&lt;/span> 56&lt;span style="color:#f92672">(&lt;/span>84&lt;span style="color:#f92672">)&lt;/span> bytes of data.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">64&lt;/span> bytes from sea30s13-in-f14.1e100.net &lt;span style="color:#f92672">(&lt;/span>142.251.211.238&lt;span style="color:#f92672">)&lt;/span>: icmp_seq&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> ttl&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">117&lt;/span> time&lt;span style="color:#f92672">=&lt;/span>9.30 ms
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">64&lt;/span> bytes from sea30s13-in-f14.1e100.net &lt;span style="color:#f92672">(&lt;/span>142.251.211.238&lt;span style="color:#f92672">)&lt;/span>: icmp_seq&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span> ttl&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">117&lt;/span> time&lt;span style="color:#f92672">=&lt;/span>7.76 ms
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">64&lt;/span> bytes from sea30s13-in-f14.1e100.net &lt;span style="color:#f92672">(&lt;/span>142.251.211.238&lt;span style="color:#f92672">)&lt;/span>: icmp_seq&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span> ttl&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">117&lt;/span> time&lt;span style="color:#f92672">=&lt;/span>8.48 ms
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once you have network connectivity, continue installing all the required software listed in the &lt;a href="https://iroboteducation.github.io/create3_docs/setup/pi4/">documentation&lt;/a>.&lt;/p>
+&lt;h3 id="configure-the-ros-middleware-rmw">Configure the ROS middleware (RMW)&lt;/h3>
+&lt;p>One of the last steps is to configure the ROS middleware, known as the RMW. This middleware is responsible for networking, and transmitting messages around. There are 2 options that the Create supports - CycloneDDS and FastDDS. I&amp;rsquo;d recommend FastDDS as it works with multiple networks out of the box. Your Pi will be configured with 2 network connections - a WiFi connection so you can program it, and a USB connection so it can talk to the Create3 robot. Out the box FastDDS can work with both of these, CycloneDDS does not unless you configure it.&lt;/p>
+&lt;p>Run this command to configure the Pi to use FastDDS.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;export RMW_IMPLEMENTATION=rmw_fastrtps_cpp&amp;#34;&lt;/span> &amp;gt;&amp;gt; ~/.bashrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once the Pi is configured, you will need to configure the RMW on the Create3. To do this:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Set the robot into WiFi access point mode by pressing and holding buttons 1 and 2 at the same time till the LED flashed blue and the robot plays its happy noise.&lt;/p>
+&lt;p>&lt;img src="irobot-wifi-mode.gif" alt="Putting the Create 3 in WiFi mode">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect your computer to the WiFi from the Create3. It will be called &lt;code>Create-xxxx&lt;/code> where &lt;code>xxxx&lt;/code> is a mix of numbers and letters. The robot will play its happy noise when you connect.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Navigate to &lt;code>192.168.10.1&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Select &lt;strong>Connect&lt;/strong> and set the WiFi so the Robot can connect to the internet. If you don&amp;rsquo;t do this, you will need to install an NTP server on your Pi to ensure the robot has the correct time. Messages are time based, so the robot and the Pi needs to have the same time. The &lt;a href="https://iroboteducation.github.io/create3_docs/setup/compute-ntp/">network time documentation&lt;/a> has the instructions for setting this up if needed. Note that running &lt;code>sudo chronyc clients&lt;/code> to see the connected clients will return nothing if the Pi is not plugged in to the robot, and may take a while to show a connection the first time.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Select &lt;em>Application -&amp;gt; Configuration&lt;/em>&lt;/p>
+&lt;p>&lt;img src="irobot-app-config.png" alt="The configuration option in the application menu">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Set the value of &lt;code>RMW_IMPLEMENTATION&lt;/code> to &lt;code>rwm_fastrtps_cpp&lt;/code>&lt;/p>
+&lt;p>&lt;img src="irobot-ros-rmw.png" alt="The RWM settings">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Select &lt;strong>Save&lt;/strong> then &lt;strong>Restart Application&lt;/strong>. The robot will reboot.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="connect-and-test-the-pi">Connect and test the Pi&lt;/h3>
+&lt;p>Once the robot reboots, you can connect the Pi using a USB-C cable.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Open the top of the robot and ensure the USB/Bluetooth switch is set to USB. Then close the top.&lt;/p>
+&lt;p>&lt;img src="irobot-usb-switch.png" alt="The USB bluetooth switch set to USB">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open the cargo bay to access the USB-C socket, and insert a USB-C cable.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect the other end of the cable to the USB-C socket on the Pi. This socket provides both power and connectivity.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you want the Pi to be screwed in place, you can &lt;a href="https://iroboteducation.github.io/create3_docs/hw/print_compute/#large-mount">3D print a caddy&lt;/a> that the Pi connects to.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Close the cargo bay and wait for the Pi to boot up.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>The default hostname for the Pi is &lt;code>ubuntu&lt;/code>, but I&amp;rsquo;ve not been able to connect from macOS by sshing into &lt;code>ubuntu.local&lt;/code>, so you will need the IP address. Either using your routers software to find it, or connect the Pi to a monitor/keyboard, boot it up and run &lt;code>ip a&lt;/code> to get the IP address of the &lt;code>wlan0&lt;/code> network.&lt;/p>
+&lt;p>Connect to the Pi over SSH using the username &lt;code>ubuntu&lt;/code> and password &lt;code>ubuntu&lt;/code>. You will need to change the password the first time you log in.&lt;/p>
+&lt;p>Once you are in, you can verify the Pi is talking to the robot successfully buy running the following command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ros2 topic list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This command lists all the topics that the Pi is able to see from the robot. These topics are how you can receive sensor data by subscribing to messages, and send commands to actuators.&lt;/p>
+&lt;p>The output should be:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>/battery_state
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/cmd_audio
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/cmd_lightring
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/cmd_vel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/dock
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/hazard_detection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/imu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/interface_buttons
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/ir_intensity
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/ir_opcode
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/kidnap_status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/mobility_monitor/transition_event
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/mouse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/odom
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/parameter_events
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/robot_state/transition_event
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/rosout
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/slip_status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/static_transform/transition_event
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/stop_status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/tf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/tf_static
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/wheel_status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/wheel_ticks
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/wheel_vels
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Pi can only see the topics if it was connected and booted when the robot boots up. If most of the topics are missing and you only see this list of topics:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>/parameter_events
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/rosout
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then you need to reboot your robot. The easiest way is to press buttons 1 and 2 to start the WiFi access point, then connect to it and select &lt;em>Application -&amp;gt; Reboot robot&lt;/em>.&lt;/p>
+&lt;p>Your Pi is now connected and ready to program your first ROS application!&lt;/p></description></item><item><title>Led Ticker Tape</title><link>https://jimbobbennett.dev/blogs/led-ticker-tape/</link><pubDate>Fri, 25 Feb 2022 17:01:05 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/led-ticker-tape/</guid><description>&lt;p>&lt;img src="hello-lights.png" alt="An LED panel showing Hello in green">&lt;/p>
 &lt;p>Anyone who knows me knows I&amp;rsquo;m a big fan of IoT and LEDs. I love using IoT devices to control lights, from the LEDs behind my desk to &lt;a href="https://www.youtube.com/watch?v=h5ETn4PTdQA">smart pumpkins&lt;/a>!&lt;/p>
 &lt;p>I&amp;rsquo;ve been giving the .NET IoT libraries a spin for an upcoming project using a Raspberry Pi Zero W 2. I&amp;rsquo;m usually a Python person when using a Pi, but the project I&amp;rsquo;m working on needs a service that doesn&amp;rsquo;t have Python libraries that run on a Pi. Instead it has a .NET library, so it was time to break out my C# skills for the first time in years.&lt;/p>
 &lt;p>I wanted to build an LED panel that can display text, either static text or scrolling text. So I picked up this &lt;a href="https://amzn.to/3sVjF7M">WS2812B panel from Amazon (affiliate link)&lt;/a>, and started to dig into the .NET IoT libraries. WS2818b LEDs are also known as NeoPixels, and are addressable multicolor LEDs, so you can light up individual ones in any color you like. They are addressed based on the order they are connected to your device, so the first pixel in a string of LEDs is 0, the next is 1 and so on. You can add as many as you like, and the addresses just keep going up.&lt;/p>
