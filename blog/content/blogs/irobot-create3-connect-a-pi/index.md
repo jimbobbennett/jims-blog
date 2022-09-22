@@ -2,7 +2,7 @@
 author: "Jim Bennett"
 date: 2022-09-21
 description: "The iRobot Create3 programmable robot can be expanded with a Raspberry Pi. In this post, Jim shows you how to connect one!"
-draft: true
+draft: false
 tags: ["irobot", "ros", "ros2", "raspberry-pi", "create3"]
 title: "Connect a Raspberry Pi to an iRobot Create 3"
 
