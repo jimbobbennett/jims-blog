@@ -1,4 +1,150 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>xamarin.ios on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in xamarin.ios on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Thu, 05 Jul 2018 14:39:40 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/xamarin.ios/index.xml" rel="self" type="application/rss+xml"/><item><title>Connect a Raspberry Pi to an iRobot Create 3</title><link>https://jimbobbennett.dev/blogs/irobot-create3-connect-a-pi/</link><pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/irobot-create3-connect-a-pi/</guid><description>&lt;p>&lt;img src="banner.png" alt="An iRobot create with a Raspberry Pi">&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>xamarin.ios on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in xamarin.ios on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Thu, 05 Jul 2018 14:39:40 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/xamarin.ios/index.xml" rel="self" type="application/rss+xml"/><item><title>Subscribe to messages from an iRobot Create3 using ROS</title><link>https://jimbobbennett.dev/blogs/irobot-create3-subscribe-to-messages/</link><pubDate>Thu, 22 Sep 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/irobot-create3-subscribe-to-messages/</guid><description>&lt;p>&lt;img src="banner.png" alt="An iRobot create with a Raspberry Pi">&lt;/p>
+&lt;p>In my &lt;a href="../irobot-create3-connect-a-pi/">last post&lt;/a> I showed how I connected a Raspberry Pi to an iRobot Crete3 robot. In this post I show how to subscribe to messages sent by the robot to the Pi using &lt;a href="https://github.com/ros2/rclpy">rclpy&lt;/a>, the ROS Python library.&lt;/p>
+&lt;blockquote>
+&lt;p>One downside to ROS is that the documentation needs some love. It covers in great detail how to do things, but not the why, so anything I write in this post is based off my understanding from my couple of days working with ROS, and could be completely wrong! If so, please correct me in the comments.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="ros2-applications">ROS2 applications&lt;/h2>
+&lt;p>ROS applications are based around a graph of &lt;em>nodes&lt;/em> that can publish and subscribe to messages on different topics. Each node can be a separate process, can run on a separate machine connected to the network, or you can have multiple nodes running in the same process.&lt;/p>
+&lt;p>The robot is a node that published messages on various topics, and can listen to messages on other topics. If you read the last post, you will know that the robot has a range of topics that you can see by running &lt;code>ros2 topic list&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>/battery_state
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/cmd_audio
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/cmd_lightring
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/cmd_vel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/dock
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/hazard_detection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/imu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/interface_buttons
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/ir_intensity
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/ir_opcode
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/kidnap_status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/mobility_monitor/transition_event
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/mouse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/odom
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/parameter_events
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/robot_state/transition_event
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/rosout
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/slip_status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/static_transform/transition_event
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/stop_status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/tf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/tf_static
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/wheel_status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/wheel_ticks
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/wheel_vels
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The majority of these topics contain sensor data published by the robot with the exception of the 3 &lt;code>cmd&lt;/code> topics - &lt;code>cmd_audio&lt;/code>, &lt;code>cmd_lightring&lt;/code> and &lt;code>cmd_vel&lt;/code>. You can publish data to these topics to play audio, configure the light ring, or move the robot.&lt;/p>
+&lt;p>Topics are designed to have continuous streams of data. For example if you subscribe to the &lt;code>/battery_state&lt;/code> topic, you will get a continuous stream of battery data updated every few seconds.&lt;/p>
+&lt;p>Robots can also have services and actions. These are abstractions that make it easier to program a robot. Services are designed for quick calls to do calculations or get states, maybe to query a sensor or take advantage of onboard processing such as a built-in image processor. Actions are commands you can send to a robot to do something, for example with the Create3 there are actions to dock and undock, so drive the robot to the docking station and connect it to recharge, or drive off the docking station.&lt;/p>
+&lt;p>You can test the actions using the following run from your Raspberry Pi.&lt;/p>
+&lt;p>Run this command to undock the robot:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ros2 action send_goal /undock irobot_create_msgs/action/Undock &lt;span style="color:#e6db74">&amp;#34;{}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then run this command to re-dock the robot:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ros2 action send_goal /dock irobot_create_msgs/action/DockServo &lt;span style="color:#e6db74">&amp;#34;{}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>All the topics, services and actions are documented in the &lt;a href="https://iroboteducation.github.io/create3_docs/api/ros2/">iRobot ROS2 API docs&lt;/a>.&lt;/p>
+&lt;h2 id="subscribing-to-messages-using-rclpy">Subscribing to messages using rclpy&lt;/h2>
+&lt;p>&lt;a href="https://github.com/ros2/rclpy">rclpy&lt;/a> is the ROS Python library and has all the functionality you need to interact with a robot. But there is a catch - you can&amp;rsquo;t just create a Python script and use rclpy, you have to build a ROS2 application inside a ROS2 workspace.&lt;/p>
+&lt;h3 id="ros2-workspaces">ROS2 workspaces&lt;/h3>
+&lt;p>ROS applications are compiled inside a workspace - a folder with a predefined structure containing your code. You write your code, compile a ROS application using a tool called &lt;a href="https://colcon.readthedocs.io/en/released/">&lt;code>colcon&lt;/code>&lt;/a>, configure your environment by sourcing a file created by the build, then run your code using ROS.&lt;/p>
+&lt;p>There is a core ROS workspace provided by the install, known as an underlay, and you can have multiple versions installed. You then stack additional workspaces on top with your own code, called overlays. No, I still don&amp;rsquo;t understand this and I can&amp;rsquo;t find good documentation to explain why.&lt;/p>
+&lt;p>To use Python to developer ROS applications, you need to create a Python package inside your workspace, and this package contains the code for your executable. This is similar to creating a pip package, with &lt;code>setup.py&lt;/code> and &lt;code>setup.cfg&lt;/code> files, but with the addition of a &lt;code>package.xml&lt;/code> file to help &lt;code>colcon&lt;/code> build the package.&lt;/p>
+&lt;p>You can find an example as a template repo on my GitHub at &lt;a href="https://github.com/jimbobbennett/irobot_create3_ros_workspace">github.com/jimbobbennett/irobot_create3_ros_workspace&lt;/a>. You can use this as a template to create your own workspace.&lt;/p>
+&lt;h3 id="structure-of-the-workspace">Structure of the workspace&lt;/h3>
+&lt;p>You can see the structure detailed blow by creating a new repo using the &lt;a href="https://github.com/jimbobbennett/irobot_create3_ros_workspace">github.com/jimbobbennett/irobot_create3_ros_workspace&lt;/a> template repo.&lt;/p>
+&lt;p>The workspace consists of a &lt;code>src&lt;/code> folder where the source code for your application lives. This &lt;code>src&lt;/code> folder contains the Python package as a folder. This package folder contains &lt;code>setup.py&lt;/code> and &lt;code>setup.cfg&lt;/code> files. These files define any extra pip packages needed by your code, the location of the &lt;code>package.xml&lt;/code> file needed by &lt;code>colcon&lt;/code>, and the entry point for the ROS application.&lt;/p>
+&lt;p>The &lt;code>package.xml&lt;/code> file details the ROS package, including dependencies on other packages. These include the ROS packages that define message formats. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;depend&amp;gt;&lt;/span>rclpy&lt;span style="color:#f92672">&amp;lt;/depend&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;depend&amp;gt;&lt;/span>geometry_msgs&lt;span style="color:#f92672">&amp;lt;/depend&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;depend&amp;gt;&lt;/span>sensor_msgs&lt;span style="color:#f92672">&amp;lt;/depend&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;depend&amp;gt;&lt;/span>irobot_create_msgs&lt;span style="color:#f92672">&amp;lt;/depend&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This dependency list shows a dependency on the &lt;code>rclpy&lt;/code> ROS python package, as well as the packages for the generic geometry messages used to control a robot (&lt;code>geometry_msgs&lt;/code>), generic sensor messages used to gather standard sensor data such as battery state (&lt;code>sensor_msgs&lt;/code>), and the specific messages for the iRobot Create3 (&lt;code>irobot_create_msgs&lt;/code>).&lt;/p>
+&lt;p>Inside the package folder is a folder containing your code, along with a &lt;code>resource&lt;/code> folder with a single file with the same name as the folder containing your code. No idea why, but it seems to be needed&amp;hellip;&lt;/p>
+&lt;p>The code folder is a Python package, and needs an &lt;code>__init__.py&lt;/code> file, though this can be empty. Inside the code folder is another folder with your actual package code, again containing an &lt;code>__init__.py&lt;/code> file that can be empty, and a code file that contains your &lt;code>main&lt;/code> method, along with any other code files you need. Your &lt;code>setup.py&lt;/code> needs to point to this &lt;code>main&lt;/code> method as its entry point.&lt;/p>
+&lt;h3 id="subscribing-to-messages">Subscribing to messages&lt;/h3>
+&lt;p>If you look at the template repo, particularly the &lt;a href="https://github.com/jimbobbennett/irobot_create3_ros_workspace/blob/main/src/irobot_create3_example_py/irobot_create3_example_py/control_robot/control_robot.py">&lt;code>control_robot.py&lt;/code> file&lt;/a> you will see an example &lt;code>main&lt;/code> method.&lt;/p>
+&lt;p>This method starts by initializing the ROS application with &lt;code>rclpy.init(args=args)&lt;/code>, passing any args sent to the application. It then creates a subscriber, in this case a subscriber to the battery state to get the percentage charge in the robots battery.&lt;/p>
+&lt;p>Subscribers are ROS nodes - ROS applications are graphs of nodes that publish and subscribe messages, and your application can contain one oe more nodes, and nodes can publish and subscribe to as many topics as needed. In the template repo, the node in question is a battery state subscriber, implemented in the &lt;code>BatteryStateSubscriber&lt;/code> class:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">BatteryStateSubscriber&lt;/span>(Node):
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>All nodes need to derive from the &lt;code>rclpy.node.Node&lt;/code> base class, and this has functionality to manage subscriptions, logging, execution and more.&lt;/p>
+&lt;p>In the &lt;code>__init__&lt;/code> method, the node creates a subscription to the battery state:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>self&lt;span style="color:#f92672">.&lt;/span>subscription_battery_state &lt;span style="color:#f92672">=&lt;/span> self&lt;span style="color:#f92672">.&lt;/span>create_subscription(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BatteryState,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;/battery_state&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>get_battery_state,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> qos_profile)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>create_subscription&lt;/code> method on the base &lt;code>Node&lt;/code> class takes a number of options:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>BatteryState&lt;/code> - This is the message type. Messages can be raw strings, or typed. The &lt;code>sensor_msgs&lt;/code>, &lt;code>sensor_msgs&lt;/code> and &lt;code>irobot_create_msgs&lt;/code> packages described earlier contain the types for these messages. In this case, we want battery information, so the type is &lt;code>sensor_msgs.msg.BatteryState&lt;/code>, a ROS defined message for battery states.&lt;/li>
+&lt;li>&lt;code>'/battery_state'&lt;/code> - This is the topic name used by the robot to publish the battery state&lt;/li>
+&lt;li>&lt;code>self.get_battery_state&lt;/code> - This is the callback method called whenever a message is received by the subscription&lt;/li>
+&lt;li>&lt;code>qos_profile&lt;/code> - This is the quality of service profile defined by the subscriber. This is covered &lt;a href="#quality-of-service">below&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;p>Once this subscription is created, every time a message is published on this topic, the callback method is called. The callback method has this signature:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">get_battery_state&lt;/span>(self, msg: BatteryState):
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>msg&lt;/code> passed is an instance of &lt;code>sensor_msgs.msg.BatteryState&lt;/code>, so the properties on this message can be queried to get the state of the battery. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>self&lt;span style="color:#f92672">.&lt;/span>get_logger()&lt;span style="color:#f92672">.&lt;/span>info(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;Battery percentage:&lt;/span>&lt;span style="color:#e6db74">{:.0%}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(msg&lt;span style="color:#f92672">.&lt;/span>percentage))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>uses the logger on the node to log out the current percentage charge on the battery.&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-output" data-lang="output">[INFO] [1663974929.958794823] [battery_state_subscriber]: Subscribing to battery state
+[INFO] [1663974930.072528455] [battery_state_subscriber]: Subscribed!
+[INFO] [1663974931.658984386] [battery_state_subscriber]: Battery percentage:98%
+&lt;/code>&lt;/pre>&lt;h3 id="quality-of-service">Quality of service&lt;/h3>
+&lt;p>ROS ia based around sending messages to topics, and can be considered to be a message broker. Like all message brokers, there is a quality of service (QoS) that defines when a topic can be considered stale, how messages are stored if a subscriber is offline, things like that. You can read more in the &lt;a href="https://docs.ros.org/en/galactic/Concepts/About-Quality-of-Service-Settings.html">ROS quality of service documentation&lt;/a>, but the important point is that the subscriber &lt;strong>must&lt;/strong> subscribe with the same quality of service settings as the publisher or no messages will be received.&lt;/p>
+&lt;p>You can find the QoS settings from a topic using this command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ros2 topic info -v &amp;lt;topic&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Where &lt;code>&amp;lt;topic&amp;gt;&lt;/code> is the name of the topic to query. In the case of the &lt;code>/battery_state&lt;/code> topic, the results of this call are:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-output" data-lang="output">Type: sensor_msgs/msg/BatteryState
+Publisher count: 1
+Node name: robot_state
+Node namespace: /
+Topic type: sensor_msgs/msg/BatteryState
+Endpoint type: PUBLISHER
+GID: 01.0f.34.90.5c.09.ad.d2.01.00.00.00.00.01.4f.03.00.00.00.00.00.00.00.00
+QoS profile:
+Reliability: BEST_EFFORT
+Durability: VOLATILE
+Lifespan: 9223372036854775807 nanoseconds
+Deadline: 9223372036854775807 nanoseconds
+Liveliness: AUTOMATIC
+Liveliness lease duration: 9223372036854775807 nanoseconds
+Subscription count: 0
+&lt;/code>&lt;/pre>&lt;p>The relevant details are the &lt;code>QoS profile&lt;/code>, particularly the &lt;code>Reliability&lt;/code>, &lt;code>Durability&lt;/code>, and the &lt;code>Liveliness&lt;/code>. To subscribe to these messages, the subscriber needs to create a &lt;code>QoSProfile&lt;/code> object with the same settings, and pass this to the &lt;code>create_subscription&lt;/code> call:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> rclpy.qos &lt;span style="color:#f92672">import&lt;/span> QoSProfile, ReliabilityPolicy, LivelinessPolicy, DurabilityPolicy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>qos_profile &lt;span style="color:#f92672">=&lt;/span> QoSProfile(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> reliability&lt;span style="color:#f92672">=&lt;/span>ReliabilityPolicy&lt;span style="color:#f92672">.&lt;/span>BEST_EFFORT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> liveliness&lt;span style="color:#f92672">=&lt;/span>LivelinessPolicy&lt;span style="color:#f92672">.&lt;/span>AUTOMATIC,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> durability&lt;span style="color:#f92672">=&lt;/span>DurabilityPolicy&lt;span style="color:#f92672">.&lt;/span>VOLATILE,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> depth&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>self&lt;span style="color:#f92672">.&lt;/span>subscription_battery_state &lt;span style="color:#f92672">=&lt;/span> self&lt;span style="color:#f92672">.&lt;/span>create_subscription(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BatteryState,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;/battery_state&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>get_battery_state,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> qos_profile)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>If you subscribe to a ROS topic and don&amp;rsquo;t receive any messages, check your QoS settings&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="running-the-ros-application">Running the ROS application&lt;/h2>
+&lt;p>Once you have your ROS workspace with your code, you can run it.&lt;/p>
+&lt;p>The first step is to build the workspace:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>colcon build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This command builds the package and creates 3 directories:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>build&lt;/code> - This contains the compiled Python package&lt;/li>
+&lt;li>&lt;code>install&lt;/code> - This contains the application that can be installed and run on another device&lt;/li>
+&lt;li>&lt;code>log&lt;/code> - This contains the build logs&lt;/li>
+&lt;/ul>
+&lt;p>To run the code, first you need to source an install script to set the environment:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>source ./install/local_setup.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finally run the ROS package:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ros2 run &amp;lt;package name&amp;gt; &amp;lt;application&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For example, if you use the template repo mentioned earlier in this post, you can run with:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ros2 run irobot_create3_example_py control_robot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will run the &lt;code>control_robot&lt;/code> module in the &lt;code>irobot_create3_example_py&lt;/code> package, subscribing to the battery state and printing it to the console:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-output" data-lang="output">ubuntu@ubuntu:~/irobot_create3_ros_workspace$ ros2 run irobot_create3_example_py control_robot
+[INFO] [1663974929.958794823] [battery_state_subscriber]: Subscribing to battery state
+[INFO] [1663974930.072528455] [battery_state_subscriber]: Subscribed!
+&lt;/code>&lt;/pre></description></item><item><title>Connect a Raspberry Pi to an iRobot Create 3</title><link>https://jimbobbennett.dev/blogs/irobot-create3-connect-a-pi/</link><pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/irobot-create3-connect-a-pi/</guid><description>&lt;p>&lt;img src="banner.png" alt="An iRobot create with a Raspberry Pi">&lt;/p>
 &lt;p>iRobot, the makers of robotic vacuum cleaners also make educational robots designed for learning how to do robotics programming. I recently managed to get my hands on one of their &lt;a href="https://edu.irobot.com/what-we-offer/create3">new Create3 robots&lt;/a> as part of the Microsoft Global Hackathon, one of the cool perks of working for Microsoft.&lt;/p>
 &lt;p>These robots are the same as the vacuum cleaners, except without the vacuum part. They have all the same sensors, with extra connectivity for you to program yourself. The beginner option is to program them in Python using their browser-based tooling that connects using bluetooth, but I wanted to do something more advanced and learn a bit about ROS!&lt;/p>
 &lt;h2 id="ros">ROS&lt;/h2>
