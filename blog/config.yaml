@@ -163,7 +163,7 @@ params:
         image: https://raw.githubusercontent.com/microsoft/IoT-For-Beginners/main/images/iot-for-beginners.png
         featured:
           name: Get started
-          link: https:/aka.ms/iot-beginners
+          link: https://aka.ms/iot-beginners
         # badges:
         #   - "Hugo"
         #   - "Bootstrap"
