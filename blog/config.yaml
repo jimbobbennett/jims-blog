@@ -363,6 +363,16 @@ params:
             id: VVZDcs5u1_I
             description: "This 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. In this lesson we will look indo controlling the automated watering system using serverless event driven code."
 
+      - title: #JulyOT 2022
+        videos:
+          - title: Counting bears with TinyML
+            id: bq44gRWO30Y
+            description: Jim left the UK a few years ago to move to the Pacific North West of the US. Back in the UK the scariest animal he might have encountered would be a sudden hedgehog, but in Washington State where he lives it seems there are bears! He even lost an apple tree and a fence to one once. A useful tool for him would be a bear detector – a device to alert him if there are bears in the garden.
+
+          - title: "AMA: IoT, cows, AI and 💩 - Jim discusses IoT in farming with Bryn Lewis"
+            id: EkCygi4o2rM
+            description: In this session, Jim is joined by Bryn Lewis, a Microsoft MVP and IoT expert who is working with farms in New Zealand to implement solutions using AI and IoT. Jim and Bryn will dive into some of the cool projects that Bryn is working on, discussing how AI and IoT can improve cow health, make milking easier, and even reduce water usage for cleanup, all within a hostile environment with wide temperature variances throughout the year, and way too much poop.
+
       - title: On Wednesdays we wear tech
         videos:
           - title: Subtitle shirt
