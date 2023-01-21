@@ -158,6 +158,21 @@ params:
     enable: true
     title: "Recent highlights"
     items:
+      - title: "Let's get personal: Computing"
+        content: On-demand interview series with cool projects that you can build.
+        image: /images/jpg/lets-get-personal-computing.jpg
+        featured:
+          name: Watch now
+          link: https://youtube.com/playlist?list=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
+        # badges:
+        #   - "Django"
+        #   - "Bootstrap"
+        links:
+          - icon: fab fa-youtube
+            url: https://youtube.com/playlist?list=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
+          - icon: fab fa-twitter
+            url: https://twitter.com/intent/tweet?text=Let's+get+personal:+Computing.+Join+@JimBobBennett+as+he+interviews+guests+who+have+built+cool+projects+you+car+recreate+at+home.&url=https%3A%2F%2Fyoutube.com%2Fplaylist%3Flist=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
+
       - title: IoT for Beginners
         content: 12 Weeks, 24 Lessons. IoT for All!
         image: https://raw.githubusercontent.com/microsoft/IoT-For-Beginners/main/images/iot-for-beginners.png
@@ -174,21 +189,16 @@ params:
           - icon: fab fa-twitter
             url: https://twitter.com/intent/tweet?text=IoT+for+beginners!+Learn+IoT+with+24+free+lessons+from+@jimbobbennett+and+friends:&url=https%3A%2F%2Fgithub.com%2FMicrosoft%2FIoT-for-beginners
 
-      - title: "Let's get personal: Computing"
-        content: On-demand interview series with cool projects that you can build.
-        image: /images/jpg/lets-get-personal-computing.jpg
+      - title: Open Source Bootcamp
+        content: A 2-day open source bootcamp to skill folks in Git and open source
+        image: /images/png/reactor-bootcamp-aug-2022.png
         featured:
-          name: Watch now
-          link: https://youtube.com/playlist?list=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
-        # badges:
-        #   - "Django"
-        #   - "Bootstrap"
+          name: Learn more
+          link: https://github.com/open-source-bootcamp
         links:
-          - icon: fab fa-youtube
-            url: https://youtube.com/playlist?list=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
-          - icon: fab fa-twitter
-            url: https://twitter.com/intent/tweet?text=Let's+get+personal:+Computing.+Join+@JimBobBennett+as+he+interviews+guests+who+have+built+cool+projects+you+car+recreate+at+home.&url=https%3A%2F%2Fyoutube.com%2Fplaylist%3Flist=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
-
+          - icon: fab fa-github
+            url: https://github.com/open-source-bootcamp
+            
       - title: "#JulyOT 2022"
         content: Celebrate 31 days of IoT!
         image: /images/gif/julyot.gif
@@ -200,13 +210,6 @@ params:
             url: https://github.com/JulyOT/JulyOT
           - icon: fab fa-twitter
             url: https://twitter.com/intent/tweet?text=%23JulyOT+is+here!+Celebrate+%23IoT+with+31+days+of+content.&url=https%3A%2F%2Fjulyot.dev
-
-      - title: Xamarin in Action
-        content: Create native cross-platform apps. Published by Manning Publications.
-        image: /images/jpg/XamarinInActionFinal.jpg
-        featured:
-          name: Buy a copy
-          link: https://www.manning.com/books/xamarin-in-action
 
   footer:
     # recentPosts: false
@@ -307,9 +310,22 @@ params:
   livestreams:
     upcoming:
       series:
-     
+      - title: "Crack code interview problems in Rust"
+        videos:
+          - title: "Episode 3"
+            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust!"
+            registrationLink: https://developer.microsoft.com/reactor/events/17774/
+            image: https://img.youtube.com/vi/ugz1YgoZmzI/0.jpg
     previous:
       series:
+      - title: "Crack code interview problems in Rust"
+        videos:
+          - title: "Episode 1 - Number of Islands problem"
+            id: ugz1YgoZmzI
+            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Ryan Levick from the Rust Foundation board and together they try to crack the number of islands problem."
+          - title: "Episode 2 - Conway's game of life"
+            id: 0jKSfKqOoFc
+            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Ryan Levick from the Rust Foundation board and together they try to implement Conway's game of life."
       - title: "Tech Career Tips - Sea of Nerds"
         videos:
           - title: "Tech career tips from educators at Microsoft – Sea of Nerds"
