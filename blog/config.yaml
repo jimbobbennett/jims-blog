@@ -460,16 +460,13 @@ params:
 
   conferences:
     upcoming:
+    previous:
       series:
       - title: "Edge Impulse Imagine"
         videos:
           - title: What’s new with Azure IoT to get you building solutions faster
-            time: Friday 30th Sep
+            id: AP5ZWreMhC8?start=10814
             description: "We all know IoT is hard! So many different tools to use with different boards, so many ways to build out the cloud side of the solution. This is why the IoT teams at Microsoft have been working hard to simplify this process and allow you to go from unboxing an IoT board to a fully working IoT application in as little time as possible."
-            image: /images/conferences/edge-impulse-imagine.png
-            registrationLink: https://www.edgeimpulse.com/imagine
-    previous:
-      series:
       - title: NDC
         videos:
         - title: How thanking people can lead to a better culture
