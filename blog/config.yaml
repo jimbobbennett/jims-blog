@@ -123,7 +123,7 @@ params:
     enable: true
     title: "Hi, I'm Jim."
     subtitle: "I do developer advocacy"
-    content: "Regional Cloud Advocate at Microsoft focusing on communities in the Pacific North West and the [Redmond Reactor](http://developer.microsoft.com/reactor). <br>Particularly excited by the Internet of Things and edge computing."
+    content: "Regional Cloud Advocate at Microsoft focusing on communities in the Pacific North West and the [Redmond Reactor](http://developer.microsoft.com/reactor). <br>Particularly excited by open source software, upskilling students and early in career developers, the Internet of Things, and edge computing."
     image: /images/png/jim-portrait-circle.png
     socialNetworks:
       github: https://github.com/JimBobBennett
