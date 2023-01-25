@@ -1,4 +1,43 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>azure on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in azure on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Subscribe to messages from an iRobot Create3 using ROS</title><link>https://jimbobbennett.dev/blogs/irobot-create3-subscribe-to-messages/</link><pubDate>Thu, 22 Sep 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/irobot-create3-subscribe-to-messages/</guid><description>&lt;p>&lt;img src="banner.png" alt="An iRobot create with a Raspberry Pi">&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>azure on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in azure on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Run an Ubuntu VM on your Mac with a single command</title><link>https://jimbobbennett.dev/blogs/running-ubuntu-on-a-mac/</link><pubDate>Tue, 24 Jan 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/running-ubuntu-on-a-mac/</guid><description>&lt;p>I recently needed to run Linux so I could test out what Python version was installed, and how to upgrade it for some documentation I&amp;rsquo;m creating.&lt;/p>
+&lt;p>I don&amp;rsquo;t have a spare machine to set up as a Linux box, and didn&amp;rsquo;t want to use a Raspberry Pi, I wanted a clean Ubuntu install.&lt;/p>
+&lt;p>My original thought was to use VMWare Fusion Player, and spin up a VM, but things got a bit tricky - I installed it, created a new Ubuntu VM, and it just didn&amp;rsquo;t work. It didn&amp;rsquo;t have any install media, and just failed to boot. I&amp;rsquo;m not sure why, I just assumed &amp;lsquo;Create an Ubuntu VM&amp;rsquo; would just work&amp;hellip;&lt;/p>
+&lt;p>So digging for an ISO, I cam across another method to install - &lt;a href="https://multipass.run">Multipass from Canonical&lt;/a>. No, this isn&amp;rsquo;t cheap movie tickets, instead its a free way to manage VMs using the hypervisor built into your OS - Hyper-V on Windows, QEMU and HyperKit on macOS and LXD on Linux.&lt;/p>
+&lt;h2 id="installing-multipass">Installing Multipass&lt;/h2>
+&lt;p>Multipass was easy to install on my Mac - it can be installed via homebrew:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>brew install --cask multipass
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code class="language-output" data-lang="output">==&amp;gt; Downloading https://github.com/canonical/multipass/releases/download/v1.11.0
+==&amp;gt; Downloading from https://objects.githubusercontent.com/github-production-rel
+######################################################################## 100.0%
+==&amp;gt; Installing Cask multipass
+==&amp;gt; Running installer for multipass; your password may be necessary.
+Package installers may write to any location; options such as `--appdir` are ignored.
+Password:
+installer: Package name is multipass
+installer: Installing at base path /
+installer: The install was successful.
+🍺 multipass was successfully installed!
+&lt;/code>&lt;/pre>&lt;p>I had to enter my password (which makes sense as this installs some OS level stuff), but in a few seconds it was installed.&lt;/p>
+&lt;h2 id="creating-a-vm">Creating a VM&lt;/h2>
+&lt;p>Creating a new VM is easy - just one command to create and launch it:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>multipass launch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This takes a loooooooong time the first time as it needs to download an image and create the new VM. Once the VM is created it will launched given a two-word name.&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-output" data-lang="output">➜ ~ multipass launch
+Launched: disarming-woodcock
+&lt;/code>&lt;/pre>&lt;p>You can get more info on the VM using the &lt;code>info&lt;/code> command with the instance name:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>➜ ~ multipass info disarming-woodcock
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code class="language-output" data-lang="output">Name: disarming-woodcock
+State: Running
+IPv4: 192.168.64.2
+Release: Ubuntu 22.04.1 LTS
+Image hash: 8593ce1c6bbd (Ubuntu 22.04 LTS)
+CPU(s): 1
+Load: 0.27 0.17 0.07
+Disk usage: 1.4GiB out of 4.7GiB
+Memory usage: 149.2MiB out of 962.7MiB
+Mounts: --
+&lt;/code>&lt;/pre>&lt;p>Once the VM is running, you can log in to it using the &lt;code>shell&lt;/code> command with the instance name:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>multipass shell disarming-woodcock
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Done! I now have an Ubuntu VM ready to play with.&lt;/p></description></item><item><title>Subscribe to messages from an iRobot Create3 using ROS</title><link>https://jimbobbennett.dev/blogs/irobot-create3-subscribe-to-messages/</link><pubDate>Thu, 22 Sep 2022 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/irobot-create3-subscribe-to-messages/</guid><description>&lt;p>&lt;img src="banner.png" alt="An iRobot create with a Raspberry Pi">&lt;/p>
 &lt;p>In my &lt;a href="../irobot-create3-connect-a-pi/">last post&lt;/a> I showed how I connected a Raspberry Pi to an iRobot Crete3 robot. In this post I show how to subscribe to messages sent by the robot to the Pi using &lt;a href="https://github.com/ros2/rclpy">rclpy&lt;/a>, the ROS Python library.&lt;/p>
 &lt;blockquote>
 &lt;p>One downside to ROS is that the documentation needs some love. It covers in great detail how to do things, but not the why, so anything I write in this post is based off my understanding from my couple of days working with ROS, and could be completely wrong! If so, please correct me in the comments.&lt;/p>
