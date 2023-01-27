@@ -309,13 +309,13 @@ params:
         
   livestreams:
     upcoming:
-      series:
-      - title: "Crack code interview problems in Rust"
-        videos:
-          - title: "Episode 3"
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust!"
-            registrationLink: https://developer.microsoft.com/reactor/events/17774/
-            image: https://img.youtube.com/vi/ugz1YgoZmzI/0.jpg
+      # series:
+      # - title: "Crack code interview problems in Rust"
+      #   videos:
+      #     - title: "Episode 3"
+      #       description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust!"
+      #       registrationLink: https://developer.microsoft.com/reactor/events/17774/
+      #       image: https://img.youtube.com/vi/ugz1YgoZmzI/0.jpg
     previous:
       series:
       - title: "Crack code interview problems in Rust"
@@ -326,6 +326,9 @@ params:
           - title: "Episode 2 - Conway's game of life"
             id: 0jKSfKqOoFc
             description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Ryan Levick from the Rust Foundation board and together they try to implement Conway's game of life."
+          - title: "Episode 3 - Conway's game of life continues"
+            id: 2Dd6wACDna8
+            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Yosh Wuyrt, a Rust developer advocate and together they try to finish the implementation of Conway's game of life from last week."
       - title: "Tech Career Tips - Sea of Nerds"
         videos:
           - title: "Tech career tips from educators at Microsoft – Sea of Nerds"
