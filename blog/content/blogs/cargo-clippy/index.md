@@ -11,6 +11,10 @@ images:
 featured_image: banner.png
 ---
 
+> This blog post was a fun one to write - cos I didn't! I actually learned about `cargo clippy` on a recent [Crack the code interview with Rust live stream](https://www.youtube.com/watch?v=2Dd6wACDna8) and decided a quick blog post would be fun.
+>
+> So I launched [ChatGPT](https://chat.openai.com/chat) and asked it to write this post! This is one of 2 posts written this way, so you will notice how similar this is to my [`cargo fmt`](/blogs/cargo-fmt) post.
+
 Rust is a powerful programming language known for its safety and performance. One of the great things about Rust is the abundance of tools available to make development easier and more efficient. One such tool is cargo clippy, which is a command-line utility for linting Rust code. In this blog post, we'll show you how to use cargo clippy to identify and fix potential errors in your Rust code.
 
 First, make sure that you have Rust and Cargo installed on your machine. If you don't, you can download and install them from the official Rust website. Once you have Rust and Cargo set up, you can use the cargo clippy command to lint your code.
@@ -38,8 +42,3 @@ You can also configure cargo clippy to check for specific types of errors. For e
 In addition to linting your code, cargo clippy also provides options to customize its behavior. For example, you can configure the level of verbosity or the maximum number of suggestions to display. You can find more information about these options in the official Cargo Clippy documentation.
 
 In conclusion, cargo clippy is a powerful tool that can help you to identify and fix potential errors in your Rust code. It's easy to use and provides a lot of options to customize its behavior. By using cargo clippy, you can spend less time worrying about errors and more time focusing on writing great code.
-
-
-> This blog post was a fun one to write - cos I didn't! I actually learned about `cargo clippy` on a recent [Crack the code interview with Rust live stream](https://www.youtube.com/watch?v=2Dd6wACDna8) and decided a quick blog post would be fun.
->
-> So I launched [ChatGPT](https://chat.openai.com/chat) and asked it to write this post! This is one of 2 posts written this way, so you will notice how similar this is to my [`cargo fmt`](/blogs/cargo-fmt) post.
