@@ -46,4 +46,4 @@ In conclusion, cargo fmt is a powerful tool that can help you to make your Rust 
 
 > This blog post was a fun one to write - cos I didn't! I actually learned about `cargo fmt` on a recent [Crack the code interview with Rust live stream](https://www.youtube.com/watch?v=2Dd6wACDna8) and decided a quick blog post would be fun.
 >
-> So I launched [ChatGPT](https://chat.openai.com/chat) and asked it to write this post!
+> So I launched [ChatGPT](https://chat.openai.com/chat) and asked it to write this post! This is one of 2 posts written this way, so you will notice how similar this is to my [`cargo clippy`](/blogs/cargo-clippy) post.
