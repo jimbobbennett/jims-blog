@@ -1,4 +1,55 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>canon on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in canon on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Tue, 02 Apr 2019 09:38:50 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/canon/index.xml" rel="self" type="application/rss+xml"/><item><title>Format Rust code with cargo format</title><link>https://jimbobbennett.dev/blogs/cargo-fmt/</link><pubDate>Thu, 26 Jan 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/cargo-fmt/</guid><description>&lt;blockquote>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>canon on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in canon on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Tue, 02 Apr 2019 09:38:50 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/canon/index.xml" rel="self" type="application/rss+xml"/><item><title>Control Microsoft Teams with a Stream Deck</title><link>https://jimbobbennett.dev/blogs/teams-streamdeck/</link><pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/teams-streamdeck/</guid><description>&lt;blockquote>
+&lt;p>Already have a Stream Deck and just want to get it working with Teams? &lt;a href="#set-up-your-stream-deck-for-teams">Jump to the instructions to set this up&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Like a lot of folks, I spend time in Microsoft Teams. It&amp;rsquo;s where I chat to my team and others at Microsoft, and it&amp;rsquo;s where I take most of my meetings.&lt;/p>
+&lt;p>Although Teams has a lot of good features, the UI can sometimes be a pain to use in meetings - especially as a Microsoft employee where we get to try the dogfood versions and things move all the time. There have been loads of occasions where I have tried to give a reaction and put up my hand by mistake, or tried to mute and left the call. WHat I really need is a tool to allow me to control teams without using the UI.&lt;/p>
+&lt;p>Makers have worked on hacks for this. For example, the key combination &lt;code>ctrl+shift+m&lt;/code> toggles muting on teams. Add a big red button that simulates this key press and you have a quick way to mute or unmute. Here&amp;rsquo;s one example of this from &lt;a href="https://www.hackster.io/jenfoxbot/microsoft-teams-mute-button-7e9186">Jen Fox on Hackster&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="https://hackster.imgix.net/uploads/attachments/1234030/_5g18grpTco.blob?auto=compress%2Cformat&amp;amp;w=900&amp;amp;h=675&amp;amp;fit=min" alt="A white box with a big red button on top with a hand about to press the button. On the front of the bix is a circuit playground express with crocodile clips connecting it to the white box. In the background is a laptop showing a Microsoft teams meeting">&lt;/p>
+&lt;p>For those with a less maker mindset, there&amp;rsquo;s now a new way to do this - using a Stream deck!&lt;/p>
+&lt;p>&lt;img src="stream-deck-teams.png" alt="A stream deck with Teams buttons">&lt;/p>
+&lt;p>If you&amp;rsquo;ve not come across a Stream Deck before, its a neat little gadget that comes in different sizes and has an array of LCD buttons. You can set these buttons up to do things like control apps, or make REST requests, and as each button is an LCD screen you can fully customize what is displayed. For example, you can use one of these to control apps like OBS to switch scenes, or start streaming to Twitch.&lt;/p>
+&lt;p>There&amp;rsquo;s a whole Stream Deck store with plugins to extend the capabilities by controlling other apps or hardware (such as Phillips Hue lights). A Teams plugin has just been released!&lt;/p>
+&lt;h2 id="set-up-your-stream-deck-for-teams">Set up your Stream Deck for Teams&lt;/h2>
+&lt;p>To set up the Stream Deck, you need an API key for Teams to allow external apps to control it - makes sense really as Teams gives access to confidential work stuff, so you don&amp;rsquo;t want any app to be able to get access. Then you install the plug in, and set it up.&lt;/p>
+&lt;h3 id="get-an-api-key">Get an API key&lt;/h3>
+&lt;p>To get an API key:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Select the ellipses from the top-right corner of Teams, then select &lt;strong>Settings&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="./teams-elipses.png" alt="The settings menu in Teams under the ellipses">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Select the &lt;em>Privacy&lt;/em> tab, then scroll down to the &lt;em>Third-party app API section&lt;/em> and select &lt;strong>Manage API&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="./teams-privacy-tab.png" alt="The privacy tab">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>From the API settings, copy the API token. Use the &lt;strong>Generate&lt;/strong> button to generate a new API key if needed. And yes, the UI is terrible and the key wraps out of the text box&amp;hellip; 🤷&lt;/p>
+&lt;p>&lt;img src="./teams-api-key.png" alt="The Teams API key dialog">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Now you have your key, you can set up your Stream Deck!&lt;/p>
+&lt;h3 id="set-up-the-stream-deck">Set up the Stream Deck&lt;/h3>
+&lt;p>Teams is managed from a plugin from the Stream Deck store.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Open the Stream Deck store from the menu/taskbar icon&lt;/p>
+&lt;p>&lt;img src="stream-deck-store.png" alt="The store menu item">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Search for Teams in the store, and install the Microsoft Teams plugin with the &lt;strong>install&lt;/strong> button&lt;/p>
+&lt;p>&lt;img src="stream-deck-store-teams.png" alt="The Teams item in the store">&lt;/p>
+&lt;p>You might also see this on the Store discover page - at the time of writing it&amp;rsquo;s the first item there.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once installed, configure your Stream Deck using the Teams options. I did mine by creating a new profile that is activated when Teams is active.&lt;/p>
+&lt;p>&lt;img src="./stream-deck-teams-profile.png" alt="Stream deck configuration showing a profile called Teams that is set to activate when Microsoft Teams is active">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once your profile is ready, select it then add buttons by dragging them from the Microsoft Teams group in the menu. After adding each button, you will need to set the &lt;em>API token&lt;/em> field to the API key you copied from Teams.&lt;/p>
+&lt;p>&lt;img src="stream-deck-teams-profile-buttons.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Done! You can now control Teams using your Stream Deck.&lt;/p></description></item><item><title>Format Rust code with cargo format</title><link>https://jimbobbennett.dev/blogs/cargo-fmt/</link><pubDate>Thu, 26 Jan 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/cargo-fmt/</guid><description>&lt;blockquote>
 &lt;p>This blog post was a fun one to write - cos I didn&amp;rsquo;t! I actually learned about &lt;code>cargo fmt&lt;/code> on a recent &lt;a href="https://www.youtube.com/watch?v=2Dd6wACDna8">Crack the code interview with Rust live stream&lt;/a> and decided a quick blog post would be fun.&lt;/p>
 &lt;p>So I launched &lt;a href="https://chat.openai.com/chat">ChatGPT&lt;/a> and asked it to write this post! This is one of 2 posts written this way, so you will notice how similar this is to my &lt;a href="https://jimbobbennett.dev/blogs/cargo-clippy">&lt;code>cargo clippy&lt;/code>&lt;/a> post.&lt;/p>
 &lt;/blockquote>
