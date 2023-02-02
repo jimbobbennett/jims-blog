@@ -9,6 +9,7 @@ title: "Lint Rust code with cargo clippy"
 images:
   - /blogs/cargo-clippy/banner.png
 featured_image: banner.png
+image: banner.png
 ---
 
 > This blog post was a fun one to write - cos I didn't! I actually learned about `cargo clippy` on a recent [Crack the code interview with Rust live stream](https://www.youtube.com/watch?v=2Dd6wACDna8) and decided a quick blog post would be fun.
