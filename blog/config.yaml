@@ -152,6 +152,8 @@ params:
         - "TinyML"
         - "C++"
         - "Python"
+        - "C#"
+        - "Rust"
 
   # projects
   projects:
