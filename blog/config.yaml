@@ -317,13 +317,17 @@ params:
         
   livestreams:
     upcoming:
-      # series:
-      # - title: "Crack code interview problems in Rust"
-      #   videos:
-      #     - title: "Episode 3"
-      #       description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust!"
-      #       registrationLink: https://developer.microsoft.com/reactor/events/17774/
-      #       image: https://img.youtube.com/vi/ugz1YgoZmzI/0.jpg
+      series:
+      - title: "Crack code interview problems"
+        videos:
+          - title: "Crack code interview problems in Rust - Season 2"
+            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust!"
+            registrationLink: https://developer.microsoft.com/reactor/series/S-1110/
+            image: /images/livestreams/crack-code-interviews-rust-thumb.png
+          - title: "Crack code interview problems in Python"
+            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Python!"
+            registrationLink: https://developer.microsoft.com/reactor/series/S-1111/
+            image: /images/livestreams/crack-code-interviews-python-thumb.png
     previous:
       series:
       - title: "Crack code interview problems in Rust"
