@@ -130,6 +130,7 @@ params:
       linkedin: https://linkedin.com/in/JimBobBennett
       twitter: https://twitter.com/JimBobBennett
       instagram: https://instagram.com/JimBobBennett
+      mastodon: https://hachyderm.io/@JimBobBennett
 
   # About
   about:
@@ -330,12 +331,8 @@ params:
   livestreams:
     upcoming:
       series:
-      - title: "Crack code interview problems"
+      - title: "Machine Learning for Beginners"
         videos:
-          - title: "Crack code interview problems in Python"
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Python!"
-            registrationLink: https://developer.microsoft.com/reactor/series/S-1111/
-            image: /images/livestreams/crack-code-interviews-python-thumb.png
           - title: "ML for Beginners"
             description: "Learn all about classical ML from experts"
             registrationLink: https://developer.microsoft.com/reactor/series/S-1127/
@@ -350,6 +347,9 @@ params:
           - title: "Episode 2 - Sudoku validator continues"
             id: PI19epT_JZA
             description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Dr Sarah Kaiser, a Python developer advocate at Microsoft and together they continue to try to crack the sudoku validator problem from last week."
+          - title: "Episode 3 - Sudoku validator continues"
+            id: 794Rpb9TjPo
+            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Jay Miller and Dr Sarah Kaiser, both Python developer advocates at Microsoft and together they continue to try to finish the sudoku validator problem from the last two weeks."
 
       - title: "Crack code interview problems in Rust"
         videos:
