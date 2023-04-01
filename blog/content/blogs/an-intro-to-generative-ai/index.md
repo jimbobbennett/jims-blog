@@ -96,7 +96,7 @@ Instead I used [Eleven Labs](https://elevenlabs.io) which has a free tier for up
 
 Here is the generated audio:
 
-{{< audio src="intro-to-generative-ai.m4a" class="something" >}}
+{{< audio src="intro-to-generative-ai.m4a" >}}
 
 ### Create a video speaking the audio
 
