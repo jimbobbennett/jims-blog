@@ -1,4 +1,128 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>custom vision on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in custom vision on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 20 Jul 2018 16:29:53 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/custom-vision/index.xml" rel="self" type="application/rss+xml"/><item><title>An intro to generative AI created by generative AI!</title><link>https://jimbobbennett.dev/blogs/an-intro-to-generative-ai/</link><pubDate>Fri, 31 Mar 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/an-intro-to-generative-ai/</guid><description>&lt;p>Generative AI is the new hotness - using AI models trained on a huge amount of data that can generate new data. This includes generating text or images. I decided to create a video giving an explanation of generative AI using - you guessed it, generative AI!&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>custom vision on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in custom vision on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 20 Jul 2018 16:29:53 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/custom-vision/index.xml" rel="self" type="application/rss+xml"/><item><title>Build a ChatGPT clone in .NET using OpenAI and Semantic Kernel</title><link>https://jimbobbennett.dev/blogs/chatgpt-with-semantic-kernel/</link><pubDate>Tue, 11 Apr 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/chatgpt-with-semantic-kernel/</guid><description>&lt;p>ChatGPT is the latest big thing, reaching over 100 million users in just 2 months. It&amp;rsquo;s being used by millions of people for all manner of tasks, and it feels like every day there are 10 new startups leveraging either ChatGPT or the large language models (LLMs) that power it.&lt;/p>
+&lt;p>&lt;img src="chat-gpt-hot.png" alt="Mugatu meme of Chat GPT, so hot right now">&lt;/p>
+&lt;p>So what if you want to build your own version of ChatGPT, or another app that leverages an LLM? Out of the box, LLMs just provide an API to send a prompt and get a response, so what tools are there to help?&lt;/p>
+&lt;p>One tool is Semantic Kernel, an open source .NET library from Microsoft that is designed to do a lot of the heavy lifting when it comes to interacting with LLMs.&lt;/p>
+&lt;p>&lt;img src="skpatternlarge.png" alt="THe sematic kernel pattern of pink circles with different shades for each quadrant">&lt;/p>
+&lt;p>&lt;strong>If you prefer video, here&amp;rsquo;s a 10 minute video version of this blog post&lt;/strong>&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/Pg-9W0a1OXw" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;h2 id="how-does-chatgpt-work-with-an-llm">How does ChatGPT work with an LLM?&lt;/h2>
+&lt;p>ChatGPT allows you to have a conversation with a large language model, with ChatGPT being able to base the response to one question on the results of previous questions.&lt;/p>
+&lt;p>For example, if you ask it:&lt;/p>
+&lt;blockquote>
+&lt;p>What is the most recent star wars movie?&lt;/p>
+&lt;/blockquote>
+&lt;p>It will respond something like:&lt;/p>
+&lt;blockquote>
+&lt;p>The most recent Star Wars movie is &amp;ldquo;Star Wars: The Rise of Skywalker,&amp;rdquo; which was released in December 2019. It is the ninth and final installment in the Skywalker saga.&lt;/p>
+&lt;/blockquote>
+&lt;p>If you then ask a follow up question such as:&lt;/p>
+&lt;blockquote>
+&lt;p>Who is the main character?&lt;/p>
+&lt;/blockquote>
+&lt;p>The response will &amp;lsquo;know&amp;rsquo; that the question refers to the movie the Rise of Skywalker:&lt;/p>
+&lt;blockquote>
+&lt;p>The main character in &amp;ldquo;Star Wars: The Rise of Skywalker&amp;rdquo; is Rey, played by Daisy Ridley. She is a powerful Jedi who is trying to find her place in the galaxy and confronts the evil First Order, led by Kylo Ren, played by Adam Driver. The movie also features other beloved characters from the Star Wars franchise, such as Finn, Poe Dameron, Chewbacca, and C-3PO.&lt;/p>
+&lt;/blockquote>
+&lt;p>LLMs, the core technology behind ChatGPT, don’t chat – they take a prompt and return a response, that’s all. To chat, they need to be guided by having access to the previous questions and responses.&lt;/p>
+&lt;p>ChatGPT works by doing the following:&lt;/p>
+&lt;ul>
+&lt;li>The user enters a question, referred to as a prompt&lt;/li>
+&lt;li>This prompt is enriched by a system prompt that helps guide the LLM, such as &amp;lsquo;you are a helpful chatbot&amp;rsquo;&lt;/li>
+&lt;li>The prompt is sent to the LLM and the response is returned to the user&lt;/li>
+&lt;li>The user enters a second question&lt;/li>
+&lt;li>This time the prompt is enriched by the system prompt as well as the previous question and response&lt;/li>
+&lt;li>The prompt is sent to the LLM and the response is returned to the user&lt;/li>
+&lt;/ul>
+&lt;p>For example, when the second question is sent, the full prompt might be:&lt;/p>
+&lt;blockquote>
+&lt;p>You are a helpful chatbot. You were asked &amp;lsquo;What is the most recent star wars movie?&amp;rsquo; and you answered &amp;lsquo;The most recent Star Wars movie is &amp;ldquo;Star Wars: The Rise of Skywalker,&amp;rdquo; which was released in December 2019. It is the ninth and final installment in the Skywalker saga&amp;rsquo;. Who is the main character?&lt;/p>
+&lt;/blockquote>
+&lt;p>To implement your own ChatGPT you need to implement code to get the prompt from the user, enrich it with a system prompt, send it to the LLM, get the response, then enrich further questions with the previous questions and responses.&lt;/p>
+&lt;h2 id="how-can-semantic-kernel-help">How can semantic kernel help?&lt;/h2>
+&lt;p>Semantic Kernel provides a load of features to help you implement this:&lt;/p>
+&lt;ul>
+&lt;li>Services to interact with LLMs from OpenAI either directly or via the Azure OpenAI service&lt;/li>
+&lt;li>System prompts to pre-configure the conversation&lt;/li>
+&lt;li>Chat history, or &amp;lsquo;memory&amp;rsquo;&lt;/li>
+&lt;li>Semantic functions that can be defined in code such as getting user input and returning the response, or defined as prompts that can be sent to the LLM&lt;/li>
+&lt;li>Function pipelines to chain semantic functions&lt;/li>
+&lt;li>Core skills such as interacting with HTTP APIs or files.&lt;/li>
+&lt;/ul>
+&lt;h3 id="semantic-functions-and-pipelines">Semantic functions and pipelines&lt;/h3>
+&lt;p>The core of semantic kernel is a pipeline that runs a series of functions. These functions either take text, return text, or both. Large language models work with text, so text is the main way to interact. The idea of the pipeline is text is passed through from function to function.&lt;/p>
+&lt;p>For example, for a ChatGPT clone, you could have a pipeline that gets input from the user, sends it to the LLM with the previous questions and responses, then send the response back to the user.&lt;/p>
+&lt;p>For a sample project, check out &lt;a href="https://github.com/jimbobbennett/console-gpt">github.com/jimbobbennett/console-gpt&lt;/a>.&lt;/p>
+&lt;p>In this code, there is a &lt;code>ConsoleGPTService&lt;/code> that has a pipeline:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>ISKFunction[] pipeline = {_speechSkill[&lt;span style="color:#e6db74">&amp;#34;Listen&amp;#34;&lt;/span>], _chatSkill[&lt;span style="color:#e6db74">&amp;#34;Prompt&amp;#34;&lt;/span>], _speechSkill[&lt;span style="color:#e6db74">&amp;#34;Respond&amp;#34;&lt;/span>]};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">await&lt;/span> _semanticKernel.RunAsync(pipeline);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This pipeline runs 3 semantic functions, routing the output of one into the input of the other. Semantic functions are C# functions that are marked with an attribute and loaded into the pipeline.&lt;/p>
+&lt;p>The &lt;code>Listen&lt;/code> function in this code is defined in the &lt;code>ConsoleSkill&lt;/code> and gets data from the console:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">[SKFunction(&amp;#34;Get console input.&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">[SKFunctionName(&amp;#34;Listen&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> Task&amp;lt;&lt;span style="color:#66d9ef">string&lt;/span>&amp;gt; Listen(SKContext context)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> Task.Run(() =&amp;gt; Console.ReadLine());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This returns what the used inputs, and this is passed to the &lt;code>Prompt&lt;/code> semantic function in the &lt;code>ChatSkill&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">[SKFunction(&amp;#34;Send a prompt to the LLM.&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">[SKFunctionName(&amp;#34;Prompt&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">async&lt;/span> Task&amp;lt;&lt;span style="color:#66d9ef">string&lt;/span>&amp;gt; Prompt(&lt;span style="color:#66d9ef">string&lt;/span> prompt)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _chatHistory.AddUserMessage(prompt);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> reply = &lt;span style="color:#66d9ef">await&lt;/span> _chatCompletion.GenerateMessageAsync(_chatHistory, _chatRequestSettings);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Add the interaction to the chat history.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _chatHistory.AddAssistantMessage(reply);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> reply;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This uses the &lt;code>AddOpenAIChatCompletionService&lt;/code>, a service provided by the semantic kernel to interact with OpenAI. This service is a chat service, so manages history - when you call it you pass the complete chat history including a system prompt that sets up the conversation, and all the prompts and responses.&lt;/p>
+&lt;p>The output of this is then passed to a &lt;code>Respond&lt;/code> semantic function to write it to the console:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">[SKFunction(&amp;#34;Write a response to the console.&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">[SKFunctionName(&amp;#34;Respond&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> Task&amp;lt;&lt;span style="color:#66d9ef">string&lt;/span>&amp;gt; Respond(&lt;span style="color:#66d9ef">string&lt;/span> message, SKContext context)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> Task.Run(() =&amp;gt; Console.WriteLine(message));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>By using semantic functions you can quickly swap out functions by implementing the same signature in multiple places and bringing the one you want into the semantic kernel. You can also construct pipelines on the fly, adding sections if you need.&lt;/p>
+&lt;p>Semantic functions can also be created using prompts rather than code. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> poemPrompt = &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&lt;/span> Take &lt;span style="color:#66d9ef">this&lt;/span> &lt;span style="color:#e6db74">&amp;#34;{{$INPUT}}&amp;#34;&lt;/span> and convert it to a poem &lt;span style="color:#66d9ef">in&lt;/span> iambic pentameter.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>_poemFunction = _semanticKernel.CreateSemanticFunction(poemPrompt);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can then add this to the pipeline, and the output from the previous function in the pipeline is passed to the &lt;code>{{$INPUT}}&lt;/code> variable in the prompt. In this case using the LLM to convert to a poem.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>ISKFunction[] pipeline = {_speechSkill[&lt;span style="color:#e6db74">&amp;#34;Listen&amp;#34;&lt;/span>], _chatSkill[&lt;span style="color:#e6db74">&amp;#34;Prompt&amp;#34;&lt;/span>], _poemFunction, _speechSkill[&lt;span style="color:#e6db74">&amp;#34;Respond&amp;#34;&lt;/span>]};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">await&lt;/span> _semanticKernel.RunAsync(pipeline);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This means for the prompt:&lt;/p>
+&lt;blockquote>
+&lt;p>What is the most recent star wars movie?&lt;/p>
+&lt;/blockquote>
+&lt;p>You might get this poem:&lt;/p>
+&lt;blockquote>
+&lt;p>The Force of Fate has brought us here,&lt;/p>
+&lt;p>To see the Rise of Skywalker near,&lt;/p>
+&lt;p>The ninth and final part of this tale,&lt;/p>
+&lt;p>Released in December, &amp;rsquo;twas no fail.&lt;/p>
+&lt;p>Star Wars, the movie, we all know,&lt;/p>
+&lt;p>The saga of the Skywalkers show,&lt;/p>
+&lt;p>The Force will live on, we can see,&lt;/p>
+&lt;p>In this movie, &amp;rsquo;tis our destiny.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="get-the-code">Get the code&lt;/h2>
+&lt;p>You can get the code on my &lt;a href="https://github.com/jimbobbennett/console-gpt">console-gpt repo on GitHub&lt;/a>.&lt;/p>
+&lt;div class="github-card" data-github="jimbobbennett/console-gpt" data-width="400" data-height="" data-theme="default">&lt;/div>
+&lt;script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">&lt;/script>
+&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>Here are some more resources for Semantic Kernel&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://learn.microsoft.com/semantic-kernel">The Semantic Kernel documentation on Microsoft Learn&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/microsoft/semantic-kernel">The Semantic Kernel repo on GitHub&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aka.ms/sk/discord">The Semantic Kernel Discord&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://devblogs.microsoft.com/semantic-kernel/">The Semantic Kernel blog&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>An intro to generative AI created by generative AI!</title><link>https://jimbobbennett.dev/blogs/an-intro-to-generative-ai/</link><pubDate>Fri, 31 Mar 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/an-intro-to-generative-ai/</guid><description>&lt;p>Generative AI is the new hotness - using AI models trained on a huge amount of data that can generate new data. This includes generating text or images. I decided to create a video giving an explanation of generative AI using - you guessed it, generative AI!&lt;/p>
 &lt;p>Check out the video here:&lt;/p>
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
 &lt;iframe src="https://www.youtube.com/embed/OUpW9O3zabs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
