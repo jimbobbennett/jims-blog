@@ -231,7 +231,11 @@ params:
         description: "Reactors are community spaces where technology professionals meet, learn, and connect - to both their local peers as well as industry-leading ideas and technology from Microsoft, partners, and the open source community."
         
     - title: "Let's get personal: Computing"
-      videos:
+      videos:      
+      - title: "Build an Object Detector Running on a Microcontroller Using Edge Impulse FOMO and Azure IoT"
+        id: bpVejDLZxYY
+        description: "On today's show, Jim is joined by Shawn Hymel a developer relations engineer from Edge Impulse. Shawn has been playing with FOMO, an object detection AI model that runs on microcontrollers using TinyML, and has built a bolt and screw counter that not only runs on a low-powered device, but sends the data up to the cloud to monitor via Azure IoT."
+        
       - title: "Make Friends Literally with a FriendBot Powered by GPT-3 from OpenAI and Azure Cognitive Services"
         id: mS_R7TVH3G0
         description: "On today’s show, Jim is joined by Adrian Bonar, a maker who likes to make friends, literally! Adrian has brought FriendBot with him, a conversational robot powered by Azure Cognitive Services and Open AI's GPT-3 that wants to chat with you. This is built around a Raspberry Pi with a conference room speaker in a 3D printed case, running C# .NET code."
