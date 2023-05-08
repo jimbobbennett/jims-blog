@@ -343,6 +343,15 @@ params:
             image: /images/livestreams/ml-beginners-thumb.png
     previous:
       series:
+      - title: "Machine Learning for Beginners"
+        videos:
+          - title: "ML for Beginners - introduction to Machine Learning"
+            id: vHSctz01IFY
+            description: "🤖 Welcome to the first of our Machine Learning livestreams! In this episode, Jim and Bea Stollnitz from Microsoft introduce Machine Learning, covering the basics of what it is, what you need to know to be successful in learning ML, and answering real-world questions from our live audience."
+          - title: "ML for Beginners - introduction to Machine Learning Q&A"
+            id: BbwaxmLHpuU
+            description: "🤖 Welcome to the second of our Machine Learning livestreams! In this episode, Jim and Bea Stollnitz from Microsoft continue to introduce Machine Learning, answering real-world questions from our live audience around careers, responsible AI, and more."
+
       - title: "Crack code interview problems in Python"
         videos:
           - title: "Episode 1 - Sudoku validator"

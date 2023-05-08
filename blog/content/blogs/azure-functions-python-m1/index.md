@@ -3,7 +3,7 @@ author: "Jim Bennett"
 categories: ["apple", "azure", "azurefunctions", "functions", "m1", "m2", "applesilicon"]
 date: 2023-05-08
 description: ""
-draft: true
+draft: false
 slug: "azure-functions-python-m1"
 tags: ["apple", "azure", "azurefunctions", "functions", "m1", "m2", "applesilicon"]
 title: "Run Azure Functions with Python on Apple Silicon"
@@ -53,4 +53,62 @@ You need [docker](https://www.docker.com) installed, so get this installed first
 - From the docker menu item, select **Settings**
 - From the **General** section, ensure *Use Virtualization framework* is selected
 
-    ![The Use Virtualization framework in the general tab of the settings dialog](docker-general-virtualization.png)
+  ![The Use Virtualization framework in the general tab of the settings dialog](docker-general-virtualization.png)
+
+- From the **Features in development** section, select the **Beat Features** and select *Use Rosetta for x86/amd64 emulation on Apple Silicon*
+
+  ![The Use Rosetta for x86/amd64 emulation on Apple Silicon setting from the Features in development section](docker-rosetta.png)
+
+- Apply these changes and docker desktop will restart.
+
+## Create the dev container
+
+The default Azure Functions and Python3 dev container is ideal for this as it is an x86/x64 container.
+
+- Make sure docker is running.
+- Create a folder for your Azure Functions app and open it in VS Code (or open the one you already have created)
+- Ensure you have the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) installed. This also comes with the [Remote Development extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack).
+- Open the command palette and select *Dev Containers: Add Dev Container configuration files...*
+
+    ![The Dev Containers: Add Dev Container configuration files command palette option](dev-containers-add-files.png)
+
+- Select *Show all definitions* to see all the dev container options
+
+    ![The show all definitions option](dev-containers-show-all.png)
+
+- Search for and select *Azure Functions & Python 3*
+
+    ![The definitions filtered by Azure Functions with the cursor over Azure Functions & Python 3](dev-containers-func-python.png)
+
+- Select any other features you want. You don't need any for Azure Functions to work.
+
+- The container files will be built, and an option will pop up to re-open the folder in the container. Select **Reopen in Container**
+
+    ![The reopen in container popup](reopen-in-container.png)
+
+- Once the repo has been re-opened in the container, open the terminal and you will see it marked as running under Rosetta
+
+    ![The terminal with an indicator on the toolbar showing it is running under Rosetta](rosetta-terminal.png)
+
+- If you don't already have an Azure Functions app, you can now create one.
+- Run your Azure Functions app!
+
+    ```bash
+    vscode ➜ /workspaces/functions-arm $ func start
+    Found Python version 3.9.16 (python3).
+    
+    Azure Functions Core Tools
+    Core Tools Version:       4.0.5148 Commit hash: N/A  (64-bit)
+    Function Runtime Version: 4.17.3.20392
+    
+    
+    Functions:
+    
+            HttpTrigger: [GET,POST] http://localhost:7071/api/HttpTrigger
+    
+    For detailed output, run func with --verbose flag.
+    [2023-05-08T22:07:35.900Z] Worker process started and initialized.
+    [2023-05-08T22:07:38.282Z] Host lock lease acquired by instance ID '0000000000000000000000008A10FEBD'.
+    ```
+
+Once you commit the devcontainer files to GitHub, you will also be able to open this in a Codespace and have it pre-configured with everything you need. You can also add more things to the container depending on your needs, such as extensions that are automatically loaded when the container is loaded, install things, whatever you need! Check out the [the VS Code developing inside containers documentation](https://code.visualstudio.com/docs/devcontainers/containers) to learn more.
