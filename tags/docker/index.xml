@@ -1,4 +1,102 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docker on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in docker on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Wed, 08 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Build a ChatGPT clone in .NET using OpenAI and Semantic Kernel</title><link>https://jimbobbennett.dev/blogs/chatgpt-with-semantic-kernel/</link><pubDate>Tue, 11 Apr 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/chatgpt-with-semantic-kernel/</guid><description>&lt;p>ChatGPT is the latest big thing, reaching over 100 million users in just 2 months. It&amp;rsquo;s being used by millions of people for all manner of tasks, and it feels like every day there are 10 new startups leveraging either ChatGPT or the large language models (LLMs) that power it.&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docker on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in docker on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Wed, 08 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Run Azure Functions with Python on Apple Silicon</title><link>https://jimbobbennett.dev/blogs/azure-functions-python-m1/</link><pubDate>Mon, 08 May 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/azure-functions-python-m1/</guid><description>&lt;p>If you are an Apple user and you want to build Azure Functions using Python, then you&amp;rsquo;ve been out of luck. The Azure Functions core tools don&amp;rsquo;t support Python functions on Arm64. There is a workaround, and this post shows you how.&lt;/p>
+&lt;h2 id="arm64-support-in-azure-functions">Arm64 support in Azure Functions&lt;/h2>
+&lt;p>Apple moved to an Arm64 architecture with their Apple Silicon processors (currently M1 and M2) back in November 2020, with their entire linup now using Apple Silicon, except for the rather outdated Mac Pro. Despite this, support for running Python functions on Arm64 has not yet materialized. You can create functions with &lt;code>func init&lt;/code> and &lt;code>func new&lt;/code>, but when you run them, you get an error:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>➜ functions-m1 func start
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Found Python version 3.10.11 &lt;span style="color:#f92672">(&lt;/span>python3&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Azure Functions Core Tools
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Core Tools Version: 4.0.5095 Commit hash: N/A &lt;span style="color:#f92672">(&lt;/span>64-bit&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Function Runtime Version: 4.16.5.20396
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T21:29:33.030Z&lt;span style="color:#f92672">]&lt;/span> Failed to initialize worker provider &lt;span style="color:#66d9ef">for&lt;/span>: /opt/homebrew/Cellar/azure-functions-core-tools@4/4.0.5095/workers/python
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T21:29:33.030Z&lt;span style="color:#f92672">]&lt;/span> Microsoft.Azure.WebJobs.Script: Architecture Arm64 is not supported &lt;span style="color:#66d9ef">for&lt;/span> language python.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T21:29:33.409Z&lt;span style="color:#f92672">]&lt;/span> Failed to initialize worker provider &lt;span style="color:#66d9ef">for&lt;/span>: /opt/homebrew/Cellar/azure-functions-core-tools@4/4.0.5095/workers/python
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T21:29:33.409Z&lt;span style="color:#f92672">]&lt;/span> Microsoft.Azure.WebJobs.Script: Architecture Arm64 is not supported &lt;span style="color:#66d9ef">for&lt;/span> language python.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T21:29:33.558Z&lt;span style="color:#f92672">]&lt;/span> A host error has occurred during startup operation &lt;span style="color:#e6db74">&amp;#39;2a13f8c8-f2e4-4da0-a88c-205dbd3065c2&amp;#39;&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T21:29:33.558Z&lt;span style="color:#f92672">]&lt;/span> Microsoft.Azure.WebJobs.Script: Did not find functions with language &lt;span style="color:#f92672">[&lt;/span>python&lt;span style="color:#f92672">]&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T21:29:33.564Z&lt;span style="color:#f92672">]&lt;/span> Failed to stop host instance &lt;span style="color:#e6db74">&amp;#39;1e7799d1-a87f-404a-9bc1-858c7724aeec&amp;#39;&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T21:29:33.564Z&lt;span style="color:#f92672">]&lt;/span> Microsoft.Azure.WebJobs.Host: The host has not yet started.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Value cannot be null. &lt;span style="color:#f92672">(&lt;/span>Parameter &lt;span style="color:#e6db74">&amp;#39;provider&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Microsoft originally targeted support for their Python 3.10 release, but missed this. Currently they are saying it will come with Python 3.11 support, as documented in &lt;a href="https://github.com/Azure/azure-functions-python-worker/issues/915">this GitHub issue&lt;/a>. Their suggested workaround involves changing your Terminal to always run under Rosetta 2 which feels like a bad way to do things. There is a better workaround, leveraging dev containers.&lt;/p>
+&lt;h2 id="dev-containers">Dev containers&lt;/h2>
+&lt;p>Dev containers are docker containers that you run and connect to from VS Code. As a user these are seamless - you can still access the file system from outside of VS Code, but internally the dev environment runs in the container, with all your dependencies installed in the container instead of on your host OS. You can read about these on &lt;a href="https://code.visualstudio.com/docs/devcontainers/containers">the VS Code developing inside containers documentation&lt;/a>.&lt;/p>
+&lt;p>Docker supports running x86 and x64 containers on Apple Silicon Macs using either QEMU emulation, or using Rosetta 2. This means you can create an x64 container and run this on your Mac, running the Azure Functions core tools inside the container! Pretty cool, hey!&lt;/p>
+&lt;h2 id="configure-docker">Configure docker&lt;/h2>
+&lt;p>You need &lt;a href="https://www.docker.com">docker&lt;/a> installed, so get this installed first. Once installed, you need to configure a few things.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>From the docker menu item, select &lt;strong>Settings&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>From the &lt;strong>General&lt;/strong> section, ensure &lt;em>Use Virtualization framework&lt;/em> is selected&lt;/p>
+&lt;p>&lt;img src="docker-general-virtualization.png" alt="The Use Virtualization framework in the general tab of the settings dialog">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>From the &lt;strong>Features in development&lt;/strong> section, select the &lt;strong>Beat Features&lt;/strong> and select &lt;em>Use Rosetta for x86/amd64 emulation on Apple Silicon&lt;/em>&lt;/p>
+&lt;p>&lt;img src="docker-rosetta.png" alt="The Use Rosetta for x86/amd64 emulation on Apple Silicon setting from the Features in development section">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Apply these changes and docker desktop will restart.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="create-the-dev-container">Create the dev container&lt;/h2>
+&lt;p>The default Azure Functions and Python3 dev container is ideal for this as it is an x86/x64 container.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Make sure docker is running.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a folder for your Azure Functions app and open it in VS Code (or open the one you already have created)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ensure you have the &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Dev Containers extension&lt;/a> installed. This also comes with the &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">Remote Development extension Pack&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open the command palette and select &lt;em>Dev Containers: Add Dev Container configuration files&amp;hellip;&lt;/em>&lt;/p>
+&lt;p>&lt;img src="dev-containers-add-files.png" alt="The Dev Containers: Add Dev Container configuration files command palette option">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Select &lt;em>Show all definitions&lt;/em> to see all the dev container options&lt;/p>
+&lt;p>&lt;img src="dev-containers-show-all.png" alt="The show all definitions option">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Search for and select &lt;em>Azure Functions &amp;amp; Python 3&lt;/em>&lt;/p>
+&lt;p>&lt;img src="dev-containers-func-python.png" alt="The definitions filtered by Azure Functions with the cursor over Azure Functions &amp;amp; Python 3">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Select any other features you want. You don&amp;rsquo;t need any for Azure Functions to work.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The container files will be built, and an option will pop up to re-open the folder in the container. Select &lt;strong>Reopen in Container&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="reopen-in-container.png" alt="The reopen in container popup">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once the repo has been re-opened in the container, open the terminal and you will see it marked as running under Rosetta&lt;/p>
+&lt;p>&lt;img src="rosetta-terminal.png" alt="The terminal with an indicator on the toolbar showing it is running under Rosetta">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you don&amp;rsquo;t already have an Azure Functions app, you can now create one.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Run your Azure Functions app!&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vscode ➜ /workspaces/functions-arm $ func start
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Found Python version 3.9.16 &lt;span style="color:#f92672">(&lt;/span>python3&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Azure Functions Core Tools
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Core Tools Version: 4.0.5148 Commit hash: N/A &lt;span style="color:#f92672">(&lt;/span>64-bit&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Function Runtime Version: 4.17.3.20392
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Functions:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HttpTrigger: &lt;span style="color:#f92672">[&lt;/span>GET,POST&lt;span style="color:#f92672">]&lt;/span> http://localhost:7071/api/HttpTrigger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>For detailed output, run func with --verbose flag.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T22:07:35.900Z&lt;span style="color:#f92672">]&lt;/span> Worker process started and initialized.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>2023-05-08T22:07:38.282Z&lt;span style="color:#f92672">]&lt;/span> Host lock lease acquired by instance ID &lt;span style="color:#e6db74">&amp;#39;0000000000000000000000008A10FEBD&amp;#39;&lt;/span>.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;p>Once you commit the devcontainer files to GitHub, you will also be able to open this in a Codespace and have it pre-configured with everything you need. You can also add more things to the container depending on your needs, such as extensions that are automatically loaded when the container is loaded, install things, whatever you need! Check out the &lt;a href="https://code.visualstudio.com/docs/devcontainers/containers">the VS Code developing inside containers documentation&lt;/a> to learn more.&lt;/p></description></item><item><title>Build a ChatGPT clone in .NET using OpenAI and Semantic Kernel</title><link>https://jimbobbennett.dev/blogs/chatgpt-with-semantic-kernel/</link><pubDate>Tue, 11 Apr 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/chatgpt-with-semantic-kernel/</guid><description>&lt;p>ChatGPT is the latest big thing, reaching over 100 million users in just 2 months. It&amp;rsquo;s being used by millions of people for all manner of tasks, and it feels like every day there are 10 new startups leveraging either ChatGPT or the large language models (LLMs) that power it.&lt;/p>
 &lt;p>&lt;img src="chat-gpt-hot.png" alt="Mugatu meme of Chat GPT, so hot right now">&lt;/p>
 &lt;p>So what if you want to build your own version of ChatGPT, or another app that leverages an LLM? Out of the box, LLMs just provide an API to send a prompt and get a response, so what tools are there to help?&lt;/p>
 &lt;p>One tool is Semantic Kernel, an open source .NET library from Microsoft that is designed to do a lot of the heavy lifting when it comes to interacting with LLMs.&lt;/p>
