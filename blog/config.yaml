@@ -232,6 +232,10 @@ params:
         
     - title: "Let's get personal: Computing"
       videos:      
+      - title: "Learn About Windows on Arm with the NPU-accelerated Windows Arm Developer Kit"
+        id: jV5M-3sCEqI
+        description: "On today’s show, Jim is joined by Ivette Carreras, a software development manager on the team bringing Windows to Arm devices. Ivette has a cool dev kit to show off that combines not only Windows running on an Arm64 processor with an emulation layer for x86 and x64 applications, but also adds a dedicated NPU for AI workloads. To top it all off, it's wrapped in ocean recycled plastic."
+           
       - title: "Build an Object Detector Running on a Microcontroller Using Edge Impulse FOMO and Azure IoT"
         id: bpVejDLZxYY
         description: "On today's show, Jim is joined by Shawn Hymel a developer relations engineer from Edge Impulse. Shawn has been playing with FOMO, an object detection AI model that runs on microcontrollers using TinyML, and has built a bolt and screw counter that not only runs on a low-powered device, but sends the data up to the cloud to monitor via Azure IoT."
