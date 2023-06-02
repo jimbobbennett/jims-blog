@@ -123,7 +123,7 @@ params:
     enable: true
     title: "Hi, I'm Jim."
     subtitle: "I do developer advocacy"
-    content: "Regional Cloud Advocate at Microsoft focusing on communities in the Pacific North West and the [Redmond Reactor](http://developer.microsoft.com/reactor). <br>Particularly excited by open source software, upskilling students and early in career developers, the Internet of Things, and edge computing."
+    content: "Developer Advocate. Award winning YouTuber."
     image: /images/png/jim-portrait-circle.png
     socialNetworks:
       github: https://github.com/JimBobBennett
@@ -162,7 +162,7 @@ params:
     title: "Recent highlights"
     items:
       - title: "Let's get personal: Computing"
-        content: On-demand interview series with cool projects that you can build.
+        content: On-demand Telly Award winning interview series with cool projects that you can build at home.
         image: /images/jpg/lets-get-personal-computing.jpg
         featured:
           name: Watch now
