@@ -123,7 +123,7 @@ params:
     enable: true
     title: "Hi, I'm Jim."
     subtitle: "I do developer advocacy"
-    content: "Developer Advocate. Award winning YouTuber."
+    content: "Principal Developer Advocate as LibLab. Award winning YouTuber."
     image: /images/png/jim-portrait-circle.png
     socialNetworks:
       github: https://github.com/JimBobBennett
@@ -138,7 +138,7 @@ params:
     title: "About Me"
     image: "/images/jpg/jim-portrait-2-square.jpg"
     content: |-
-      I am a Regional Cloud Advocate focusing on building out and skilling communities in the Pacific North West, with a focus on the Microsoft Reactor in Redmond, Washington, as well as a passion for the internet of things, edge computing and TinyML. I'm British, so I sound way smarter than I actually am.
+      I am a Principal Developer Advocate at LibLab helping API developers create the SDKs they need. I'm British, so I sound way smarter than I actually am.
       
       In the past I've lived in 4 continents working as a developer in the mobile, desktop, and scientific space. I've spoken at conferences and events all around the globe, organised meetup groups and communities, and written a book on mobile development.
 
