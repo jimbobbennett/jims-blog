@@ -1,4 +1,70 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>adafruit on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in adafruit on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Tue, 21 Apr 2020 18:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/adafruit/index.xml" rel="self" type="application/rss+xml"/><item><title>Let's get personal: computing has won a Telly award</title><link>https://jimbobbennett.dev/blogs/telly-award/</link><pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/telly-award/</guid><description>&lt;p>This year is the 44th annual &lt;a href="https://www.tellyawards.com">Telly Awards&lt;/a>. The Telly Awards honor excellence in video and television across all screens.&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>adafruit on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in adafruit on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Tue, 21 Apr 2020 18:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/adafruit/index.xml" rel="self" type="application/rss+xml"/><item><title>Installing LibLab into a devcontainer using NPM</title><link>https://jimbobbennett.dev/blogs/liblab-in-a-devcontainer/</link><pubDate>Fri, 04 Aug 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/liblab-in-a-devcontainer/</guid><description>&lt;blockquote>
+&lt;p>In this post we look at how to add NPM packages to a devcontainer to use in VS Code locally or in a GitHub codespace&lt;/p>
+&lt;/blockquote>
+&lt;p>I recently started at &lt;a href="https://liblab.com">LibLab&lt;/a> as a Principal Developer Advocate. LibLab is a tool that converts APIs into language SDKs, something I&amp;rsquo;m a big fan of as I love typesafety and the inherent documentation that comes with a good SDK. Obviously my first job was to dive into building out an API and creating an SDK from it.&lt;/p>
+&lt;h2 id="devcontainers">Devcontainers&lt;/h2>
+&lt;p>I love &lt;a href="https://containers.dev/">devcontainers&lt;/a> - they allow me to create a repo that anyone can open and instantly have a fully configured environment that just works! My standard process when creating any sample code is to start with a devcontainer. In this case, I&amp;rsquo;m creating a &lt;a href="https://fastapi.tiangolo.com/">FastAPI&lt;/a> application, and building an SDK from that.&lt;/p>
+&lt;p>I start with a Python container - this is a pre-configured container that I can just spin up inside VS Code.&lt;/p>
+&lt;p>&lt;img src="python3-devcontainer.png" alt="The Python 3 devcontainers option in the vs code select dev container configuration">&lt;/p>
+&lt;p>Once in this container I can create my API, then build the SDK using LibLab.&lt;/p>
+&lt;h2 id="add-liblab-to-the-container">Add LibLab to the container&lt;/h2>
+&lt;p>LibLab is available as a &lt;a href="https://developers.liblab.com/docs/getting-started">CLI that you install via NPM&lt;/a>. There are a number of ways you can install NPM packages in the container:&lt;/p>
+&lt;ul>
+&lt;li>Install it manually in the &lt;code>postCreateCommand&lt;/code>&lt;/li>
+&lt;li>Use a &lt;code>DOCKERFILE&lt;/code> and install it there&lt;/li>
+&lt;li>Use the NPM package feature&lt;/li>
+&lt;/ul>
+&lt;p>I went for option 3 - use the NPM package feature. This avoids having to create a &lt;code>DOCKERFILE&lt;/code> and configure my &lt;code>devcontainer.json&lt;/code> to use it, and means I don&amp;rsquo;t have to add more to my &lt;code>postCreateCommand&lt;/code> which already installs pip packages.&lt;/p>
+&lt;p>You can add this feature manually into the &lt;code>devcontainer.json&lt;/code> file, or use the command palette:&lt;/p>
+&lt;p>&lt;img src="devcontainer-feature-command-palette.png" alt="The configure container features command palette option">&lt;/p>
+&lt;p>&lt;img src="devcontainer-add-feature.png" alt="Selecting the NPM package feature from the command palette">&lt;/p>
+&lt;p>To add manually, add the &lt;code>ghcr.io/devcontainers-contrib/features/npm-package:1&lt;/code> feature:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;features&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ghcr.io/devcontainers-contrib/features/npm-package:1&amp;#34;&lt;/span>: {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once added, the feature is configured using the &lt;code>package&lt;/code> and &lt;code>version&lt;/code> parameters. THe &lt;code>package&lt;/code> should be set to &lt;code>liblab&lt;/code>, the name of the NPM package for LibLab. The &lt;code>version&lt;/code> parameter defaults to &lt;code>latest&lt;/code> and I always want the latest LibLab CLI installed, so this can be left out.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;features&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ghcr.io/devcontainers-contrib/features/npm-package:1&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;package&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;liblab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="rebuild-the-container">Rebuild the container&lt;/h2>
+&lt;p>Once this is set up you can rebuild the container and the LibLab SDK will be available in your terminal!&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vscode ➜ /workspaces/python $ liblab
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The offical LibLab CLI
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VERSION
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> liblab/0.9.20 linux-arm64 node-v18.17.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>USAGE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> $ liblab &lt;span style="color:#f92672">[&lt;/span>COMMAND&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TOPICS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hooks Bootstrap an SDKs hooks.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COMMANDS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> build Build SDK&lt;span style="color:#f92672">(&lt;/span>s&lt;span style="color:#f92672">)&lt;/span> and Docs &lt;span style="color:#66d9ef">for&lt;/span> your API.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> help Display help &lt;span style="color:#66d9ef">for&lt;/span> liblab.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> init Create a liblab folder &lt;span style="color:#66d9ef">for&lt;/span> housing files relevant to SDK and Doc generation.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> login Login to your account.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logout Logout of your account.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> post-build Run extra tasks after code generation.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pr Create a PR &lt;span style="color:#66d9ef">for&lt;/span> all the generated SDKs.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> register Register &lt;span style="color:#66d9ef">for&lt;/span> a new liblab account.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> reset-password Reset your password.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> token Create a new login token &lt;span style="color:#66d9ef">for&lt;/span> CI/CD.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="learn-more">Learn more&lt;/h2>
+&lt;p>Want to learn more about LibLab for automating the generation of SDKs from your APIs? Get in touch.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://linktr.ee/JimBobBennett">Contact me via social&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://discord.gg/F8aECHbRkV">Join our Discord&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Let's get personal: computing has won a Telly award</title><link>https://jimbobbennett.dev/blogs/telly-award/</link><pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/telly-award/</guid><description>&lt;p>This year is the 44th annual &lt;a href="https://www.tellyawards.com">Telly Awards&lt;/a>. The Telly Awards honor excellence in video and television across all screens.&lt;/p>
 &lt;p>The Telly Awards was founded in 1979 to honor excellence in local, regional and cable television commercials with non-broadcast video and television programming added soon after. With the recent evolution and rise of digital video (web series, VR, 360 and beyond), the Telly Awards today also reflects and celebrates this exciting new era of the moving image on and offline.&lt;/p>
 &lt;p>The Telly Awards annually showcases the best work created within television and across video, for all screens. Receiving over 12,000 entries from all 50 states and 5 continents, Telly Award winners represent work from some of the most respected advertising agencies, television stations, production companies and publishers from around the world. The Telly Awards recognizes work that has been created on the behalf of a client, for a specific brand and/or company (including your own) or self-directed as a creative endeavor.&lt;/p>
 &lt;p>This year we entered the &lt;strong>Build a 3D Printed Clippy Powered by ChatGPT from OpenAI, Azure Cognitive Services&lt;/strong> episode of Let&amp;rsquo;s get personal: computing, and we won a &lt;a href="https://www.tellyawards.com/winners/2023/online/general-talk-show-interview">Silver award in the online talk show/interview category&lt;/a>!&lt;/p>
