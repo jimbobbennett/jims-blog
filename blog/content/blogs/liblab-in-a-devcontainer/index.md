@@ -2,7 +2,7 @@
 author: "Jim Bennett"
 date: 2023-08-04
 description: "Installing LibLab into a devcontainer using NPM"
-draft: true
+draft: false
 tags: ["liblab", "devcontainer", "codespace", "vscode", "npm"]
 title: "Installing LibLab into a devcontainer using NPM"
 
