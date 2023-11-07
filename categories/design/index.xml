@@ -1,4 +1,49 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>design on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in design on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Wed, 13 Jan 2016 17:26:15 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/design/index.xml" rel="self" type="application/rss+xml"/><item><title>Installing LibLab into a devcontainer using NPM</title><link>https://jimbobbennett.dev/blogs/liblab-in-a-devcontainer/</link><pubDate>Fri, 04 Aug 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/liblab-in-a-devcontainer/</guid><description>&lt;blockquote>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>design on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in design on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Wed, 13 Jan 2016 17:26:15 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/design/index.xml" rel="self" type="application/rss+xml"/><item><title>Avoiding automation to keep your job</title><link>https://jimbobbennett.dev/blogs/fear-of-automation/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/fear-of-automation/</guid><description>&lt;p>Will technology, automation, or AI take our jobs? This is something we hear a lot at the moment - but it&amp;rsquo;s always been this way. Right back at the start of my career I automated something that was canned the moment I left as folks were afraid of their job.&lt;/p>
+&lt;p>Some background to why I am writing this post. I was reading a tweet today from &lt;a href="https://twitter.com/MichelleBakels">Michelle Bakels&lt;/a> that was a cautionary tale from her enterprise days.&lt;/p>
+&lt;blockquote class="twitter-tweet">&lt;p lang="en" dir="ltr">Cautionary tale from enterprise days re: AI/automation:&lt;br>&lt;br>Company touted big Innovation Week where IT interviewed other depts (accounting, marketing, etc.) to find workflow optimizations for the business.&lt;br>&lt;br>After 3 years, the other depts shut down when IT would come for interviews.…&lt;/p>&amp;mdash; Michelle Bakels (@MichelleBakels) &lt;a href="https://twitter.com/MichelleBakels/status/1721597776893489190?ref_src=twsrc%5Etfw">November 6, 2023&lt;/a>&lt;/blockquote> &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8">&lt;/script>
+&lt;p>I&amp;rsquo;m not going to dump the entire text here - go read the tweet as it&amp;rsquo;s fascinating, but the TL;DR is folks are scared of telling IT what they do in case it is automated and they are out of a job.&lt;/p>
+&lt;h2 id="will-technology-replace-thing">Will technology replace &amp;lt;thing&amp;gt;?&lt;/h2>
+&lt;p>This is something that is constantly talked about in the tech world, though feels like it has really come to the surface recently with the rise of AI. Will technology replace us? Will AI take our jobs (one of the catalysts of the recent SAG-AFTRA strikes in the TV and movie industry)? Will self-driving cars replace taxies? Will cars replace horses? Will movable type replace handwritten books? The list goes on.&lt;/p>
+&lt;p>Rather than dive into this discussion, I thought it would be fun to tell a story of my own - of how I automated something during an internship, and how it got killed the minute I left as folks were worried it would replace their jobs.&lt;/p>
+&lt;h2 id="jim-gets-an-internship-at-marconi">Jim gets an internship at Marconi&lt;/h2>
+&lt;p>This was just after I graduated in 1999 - I started working on a summer internship at Marconi (&lt;a href="https://youtu.be/K1b8AhIsSYQ?si=i5wCmF8Y2Vbin0cn">plays the mamba, listen to the radio&lt;/a>) in their underwater weapons division. This was probably the start of my route towards being a pacifist and hating all weapons and the military industrial complex.&lt;/p>
+&lt;p>&lt;img src="spearfish-torpedo.webp" alt="A spearfish torpedo">&lt;/p>
+&lt;p>My job was to analyze torpedo data. Marconi built these $1M Spearfish torpedoes that didn&amp;rsquo;t work very well, and they would do trials on them in various parts of the world (Faslane in Scotland, deep water testing in the Caribbean). The testing torpedoes would record data about their decisions, as well as telemetry such as depth, speed, location etc. They would also record radar data and what they identified in the way of ships. The goal was to drop a torpedo in the water and send it at a ship, then gather the data afterwards to see if it did the right thing. Not quite testing in production as the torpedoes had no explosives, but the closest you can get.&lt;/p>
+&lt;h3 id="the-reporting-process">The reporting process&lt;/h3>
+&lt;p>Once the trails were over, someone had to analyze the results, and this was the team I was on. The process was horribly manual:&lt;/p>
+&lt;ul>
+&lt;li>Remotely log into a mainframe and request a printout of the data from the torpedo trial as a hex dump on green and white continuous feed paper.&lt;/li>
+&lt;li>Work through the hex dump using highlighters to &amp;lsquo;read&amp;rsquo; what was happening. Hex codes marked the steps in the output, and each one had so many bytes of information. For example, one hex code was for direction and you knew that meant the next X bytes were the direction information, then the next character was the next set of data. Very laborious and error prone&lt;/li>
+&lt;li>Enter all this data into an Excel spreadsheet showing each step&lt;/li>
+&lt;li>Extract location and direction data and put this into another page on the spreadsheet&lt;/li>
+&lt;li>Generate a chart to show the torpedo&amp;rsquo;s movements&lt;/li>
+&lt;li>Create a word doc with all the steps that the torpedo did, along with the charts.&lt;/li>
+&lt;li>Actually do the analysis and look for issues for the software teams to investigate&lt;/li>
+&lt;/ul>
+&lt;p>(There are probably more steps which I have forgotten as it was 24 years ago)&lt;/p>
+&lt;p>Apart from the last step which actually used your brain, the rest was repetitive and dull. It could easily take a week or to to get a report ready to be able to do the final analysis step. And there was a whole team doing this, most of them ex-Ministry of Defense folks who just wanted to get their pension.&lt;/p>
+&lt;h3 id="in-comes-jim-with-an-idea">In comes Jim with an idea!&lt;/h3>
+&lt;p>So I had an idea! I was an engineer after all. I could automate all the things, I&amp;rsquo;d be the hero, save the company money and everyone would love me.&lt;/p>
+&lt;iframe src="https://giphy.com/embed/PoHTJgxBHCCJ2zCbvf" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen>&lt;/iframe>&lt;p>&lt;a href="https://giphy.com/gifs/outlander-season-4-starz-PoHTJgxBHCCJ2zCbvf">via GIPHY&lt;/a>&lt;/p>
+&lt;p>So I set about doing this whilst I was working on a report.&lt;/p>
+&lt;h3 id="automate-all-the-things">Automate all the things&lt;/h3>
+&lt;p>Firstly I had to automate getting the data - can&amp;rsquo;t do this from a printer. Luckily the mainframe that I logged into to print could just dump the data to the screen. How could I get this in a way I could do things with it? Excel!&lt;/p>
+&lt;p>So I wrote some good old VBA in Excel to connect over SSH to the mainframe and download all the data. I had one control sheet that you enter the trial number into, a button to click and away it would go downloading the data and filling out a second sheet.&lt;/p>
+&lt;p>Next was replacing the highlighter pen! Easy to do in Excel, work through each cell to get the action for each step, highlight the cells as if I was using a highlighter pen and paper, and extract the data for each action.&lt;/p>
+&lt;p>Once I had the actions, it was easy to convert from the hex codes to the steps information that was wanted. Same with locations - easy to extract and plot the chart.&lt;/p>
+&lt;p>Finally it was time to create a word doc - and VBA can do this nicely.&lt;/p>
+&lt;h3 id="the-result">The result&lt;/h3>
+&lt;p>All in all I spent about 4 weeks on this, and was able to generate a report ready for analysis in about 10 minutes, as opposed to 1-2 weeks. I packaged this as an add-in, so anyone could use it - just add the add-in, enter the trial number and away it went and spat out the doc.&lt;/p>
+&lt;p>I even gave it a cool name: Spearfish Trials Analysis Report Writers Automated Reporting Suite - or STAR WARS for short (this was a few months after Episode 1 came out after all).&lt;/p>
+&lt;p>I was impressed, I could save everyone time!&lt;/p>
+&lt;h3 id="the-reception">The reception&lt;/h3>
+&lt;p>Everyone hated it. Simple as that. I was told there was no way it could be better than a human, and one of the top report writers challenged me to produce a better report. In 10 minutes I had one, in 4 days she had her version, and she&amp;rsquo;d made some mistakes - which made her hate it (and me) even more.&lt;/p>
+&lt;p>After I left, it was deleted and everyone forgot about its existence. It took me a while to figure out why - everyone was afraid. This one spreadsheet could replace almost the entire team of 7 people. You&amp;rsquo;d just need this spreadsheet and 1 person to do the analysis as the bulk of the job was manually processing reports. I could have put 6 people out of work in just 4 weeks.&lt;/p>
+&lt;p>Regardless of how you feel about waste in enterprises, this was 6 humans, with families who had houses, mortgages, rent, bills, who needed to eat and to live. The lives of 6 families who could have been destroyed with one spreadsheet.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>Yes, automation is coming. Yes, technology can solve so many things. Yes, in theory if a job is replaced by automation then folks can focus their knowledge and energy onto solving bigger problems. But the reality is business is run by people who want to make as much money as possible, so automation is a way they can cut jobs and boost shareholder value, whatever that is (I&amp;rsquo;m guessing making rich folks richer).&lt;/p>
+&lt;p>This is not always the case, and this is a very cynical and dystopian view, but in most cases this is the truth. Even in the high-paying tech world of multi-trillion dollar companies, folks are dropped in an instant to boost share prices.&lt;/p>
+&lt;p>So it&amp;rsquo;s not surprising folks are worried about computers taking their jobs. If we are in the throes of an AI revolution, then maybe we need to really push the conversations around &lt;a href="https://en.wikipedia.org/wiki/Universal_basic_income">universal basic income&lt;/a>, and taxing large corporations and billionaires to pay for it.&lt;/p></description></item><item><title>Installing LibLab into a devcontainer using NPM</title><link>https://jimbobbennett.dev/blogs/liblab-in-a-devcontainer/</link><pubDate>Fri, 04 Aug 2023 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/liblab-in-a-devcontainer/</guid><description>&lt;blockquote>
 &lt;p>In this post we look at how to add NPM packages to a devcontainer to use in VS Code locally or in a GitHub codespace&lt;/p>
 &lt;/blockquote>
 &lt;p>I recently started at &lt;a href="https://liblab.com">LibLab&lt;/a> as a Principal Developer Advocate. LibLab is a tool that converts APIs into language SDKs, something I&amp;rsquo;m a big fan of as I love typesafety and the inherent documentation that comes with a good SDK. Obviously my first job was to dive into building out an API and creating an SDK from it.&lt;/p>
@@ -3345,9 +3390,9 @@ this is a live caption text
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>We want the &lt;code>Console.WriteLine&lt;/code> call in the markdown, but not the rest of the code, so what do we do?&lt;/p>
 &lt;p>Well we add a region! Wrap the line in a named region block, using a name that makes sense.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># region HelloWorld&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># region&lt;/span> HelloWorld
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Console.WriteLine(&lt;span style="color:#e6db74">&amp;#34;Hello World!&amp;#34;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># endregion HelloWorld&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># endregion&lt;/span> HelloWorld
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Next, add an empty code block to your markdown:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>```cs --region HelloWorld --source-file .\Program.cs --project .\TryDotNetDemo.csproj
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>
@@ -3398,19 +3443,19 @@ These are the open and closing sections of the code block, shown by three back t
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> HelloWorld()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#region HelloWorld&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#region&lt;/span> HelloWorld
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Console.WriteLine(&lt;span style="color:#e6db74">&amp;#34;Hello World!&amp;#34;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#endregion HelloWorld&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#endregion&lt;/span> HelloWorld
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> Addition()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#region Addition&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#region&lt;/span> Addition
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> a = &lt;span style="color:#ae81ff">1&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> b = &lt;span style="color:#ae81ff">2&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> c = a + b;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Console.WriteLine(&lt;span style="color:#e6db74">$&amp;#34;{a} + {b} = {c}&amp;#34;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#endregion Addition&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#endregion&lt;/span> Addition
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can then surface both methods in the markdown:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span># A try .NET demo
@@ -4584,7 +4629,7 @@ He knows if you&amp;rsquo;re awake&amp;hellip;&lt;/em>&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">partial&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">StdMapWStringWStringMapIterator&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">static&lt;/span> Delegate cb_next;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pragma warning disable 0169&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pragma&lt;/span> warning disable &lt;span style="color:#ae81ff">0169&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">static&lt;/span> Delegate GetNextHandler()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (cb_next == &lt;span style="color:#66d9ef">null&lt;/span>)
@@ -4597,7 +4642,7 @@ He knows if you&amp;rsquo;re awake&amp;hellip;&lt;/em>&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> __this = Object.GetObject&amp;lt;StdMapWStringWStringMapIterator&amp;gt;(jnienv, native__this, JniHandleOwnership.DoNotTransfer);
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> JNIEnv.NewString(__this.Next()?.ToString()); &lt;span style="color:#75715e">// ToString called on the object.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pragma warning restore 0169&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pragma&lt;/span> warning restore &lt;span style="color:#ae81ff">0169&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [Register(&amp;#34;next&amp;#34;, &amp;#34;()Ljava/lang/String;&amp;#34;, &amp;#34;GetNextHandler&amp;#34;)]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">virtual&lt;/span> &lt;span style="color:#66d9ef">unsafe&lt;/span> Java.Lang.Object Next() &lt;span style="color:#75715e">// Return type changed from string to object&lt;/span>
