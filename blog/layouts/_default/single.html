@@ -19,7 +19,9 @@
             <h1 class="text-left pb-2 content">{{.Title}}</h1>
             {{ if .Params.showAuthor | default true}}
             <div class="text-left content">
-              {{ .Params.author }} 
+              <a href="https://linkedin.com/in/jimbobbennett">
+                Jim Bennett
+              </a>
               <small>|</small>
               {{ .Date.Format "Jan 2, 2006" }}
             </div>
