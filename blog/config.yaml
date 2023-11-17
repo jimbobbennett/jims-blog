@@ -167,9 +167,6 @@ params:
         featured:
           name: Watch now
           link: https://youtube.com/playlist?list=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
-        # badges:
-        #   - "Django"
-        #   - "Bootstrap"
         links:
           - icon: fab fa-youtube
             url: https://youtube.com/playlist?list=PLlrxD0HtieHgv_WcR8HNQqrUPmJW9UybL
@@ -182,10 +179,6 @@ params:
         featured:
           name: Get started
           link: https://aka.ms/iot-beginners
-        # badges:
-        #   - "Hugo"
-        #   - "Bootstrap"
-        #   - "Javascript"
         links:
           - icon: fab fa-github
             url: https://github.com/Microsoft/iot-for-beginners
@@ -224,6 +217,11 @@ params:
   
   videos:
     series:
+    - title: "liblab"
+      videos:
+      - title: "What is liblab?"
+        id: fCW44itE4kw
+        description: "What is liblab? liblab is a service that quickly generates SDKs in multiple programming languages from your APIs. In this video, Jim walks through what liblab is and the process to create an SDK."
     - title: "Welcome to Microsoft Reactor"
       videos:
       - title: "Welcome to Microsoft Reactor"
@@ -338,13 +336,6 @@ params:
         
   livestreams:
     upcoming:
-      series:
-      - title: "Machine Learning for Beginners"
-        videos:
-          - title: "ML for Beginners"
-            description: "Learn all about classical ML from experts"
-            registrationLink: https://developer.microsoft.com/reactor/series/S-1127/
-            image: /images/livestreams/ml-beginners-thumb.png
     previous:
       series:
       - title: "Machine Learning for Beginners"
@@ -525,6 +516,11 @@ params:
     upcoming:
     previous:
       series:
+      - title: "API World 2023"
+        videos:
+          - title: From APIs to SDKs - elevating your developer experience with automated SDK generation
+            id: kKOu_4TYHII
+            description: "APIs are everywhere and are a great way for developers to access your service. But not all developers want to access APIs directly. Most want to use SDKs in their preferred programming language using the tools they already know and use everyday. These not only feel more intuitive to a developer, but bring features like type safety, documentation, and code completion."
       - title: "Edge Impulse Imagine"
         videos:
           - title: What’s new with Azure IoT to get you building solutions faster
