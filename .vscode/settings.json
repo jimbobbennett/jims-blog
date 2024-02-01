@@ -2,6 +2,7 @@
     "cSpell.words": [
         "Adafruit",
         "Appwrite",
+        "boto",
         "Codespace",
         "Codespaces",
         "devcontainer",
@@ -13,6 +14,7 @@
         "milliwatts",
         "Miniforge",
         "numpy",
+        "plushie",
         "raspberrypi",
         "roadmap",
         "Scikit",
@@ -20,6 +22,7 @@
         "shortcode",
         "shortcodes",
         "TLDR",
-        "undock"
+        "undock",
+        "webp"
     ]
 }

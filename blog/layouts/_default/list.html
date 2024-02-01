@@ -32,11 +32,11 @@
                         <h5 class="card-title bg-transparent" title="{{ .Title }}">{{ .Title }}</h5>
                     </a>
                     <div class="card-text secondary-font">
-                        <p>{{ .Summary | truncate 300}}</p>
+                        <p>{{ .Summary | truncate 100}}</p>
                     </div>
                 </div>
                 <div class="mt-auto post-footer bg-transparent py-3">
-                    <span class="float-start bg-transparent">{{ .Date.Format "January 2, 2006" }}</span>
+                    <span class="float-start bg-transparent">{{ .Date.Format "Jan 2, 2006" }}</span>
                     <a href="{{ .RelPermalink }}" class="float-end btn btn-outline-info btn-sm">Read</a>
                 </div>
             </div>
