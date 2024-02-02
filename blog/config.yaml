@@ -27,23 +27,29 @@ Menus:
       url: /videos
       weight: 2
     
+    - identifier: podcasts
+      name: Podcasts
+      title: Podcasts
+      url: /podcasts
+      weight: 3
+    
     - identifier: livestreams
       name: Livestreams
       title: Livestreams
       url: /livestreams
-      weight: 3
+      weight: 4
     
     - identifier: conferences
       name: Conferences
       title: Conferences
       url: /conferences
-      weight: 4
+      weight: 5
     
     - identifier: resume
       name: Resume
       title: Resume
       url: /resume
-      weight: 5
+      weight: 6
 
     #Dropdown menu
     # - identifier: dropdown
@@ -130,7 +136,7 @@ params:
       linkedin: https://linkedin.com/in/JimBobBennett
       twitter: https://twitter.com/JimBobBennett
       instagram: https://instagram.com/JimBobBennett
-      mastodon: https://hachyderm.io/@JimBobBennett
+      youtube: https://youtube.com/@JimBobBennett
 
   # About
   about:
@@ -147,10 +153,10 @@ params:
       enable: true
       title: "Here are a few technologies I've been working with recently:"
       items:
-        - "IoT"
-        - "Edge computing"
+        - "APIs"
+        - "SDKs"
+        - "IoT/Edge computing"
         - "AI"
-        - "TinyML"
         - "C++"
         - "Python"
         - "C#"
@@ -214,6 +220,7 @@ params:
       linkedin: https://linkedin.com/in/JimBobBennett
       twitter: https://twitter.com/JimBobBennett
       instagram: https://instagram.com/JimBobBennett
+      youtube: https://youtube.com/@JimBobBennett
   
   videos:
     series:
@@ -316,24 +323,27 @@ params:
         id: DEIB8PyBVP4
         description: In this GlobalXR community talk, learn about the Industrial Metaverse from Thomas Wisniewski, and data visualization from clay tablets to the industrial metaverse with Jim Bennett
 
-    - title: "JonnyChipz - In conversation"
-      videos:
-      - title: In Conversation with Jim Bennett
-        id: tzVYf6cXNjo
-        description: Join John Lunn aka Jonnychipz as he is joined by Microsoft Regional Cloud Advocate Jim Bennett.
-
-    - title: "8 bits with PJ and Brandon"
-      videos:
-      - title: 8 bits with Jim Bennett
-        id: eksa-EnKIfE
-        description: We chat with Jim Bennett, Developer Advocate at Microsoft, about tech, life, and anything in between.
-
     - title: "University of Lincoln Christmas Lectures 2020"
       videos:
       - title: It's the most Cloudful time of the year
         id: 6hTUNE1oqYY
         description:  Jim Bennett from Microsoft will talk about how free cloud services can be used to make a computer science Christmas. This workshop will cover using speech to control Christmas lights, and how to translate holiday wishes into different languages, and using image recognition to see if you are a grinch!
-        
+
+  podcasts:
+    videos:
+    - title: Coffee and Open Source Conversation - Jim Bennett
+      id: NFumJv3f2JY
+      description: Jim talks dev rel, career history and more wih Isaac Levin
+    - title: "DevRel show Episode 7 - Jim Bennett from liblab"
+      id: mDfzgHR9w6w
+      description: "Join Fred, and his guest Jim Bennett, Principal Developer Advocate at liblab, while they discuss all things developer relations, and learn more about converting APIs into SDKs in multiple languages easily."
+    - title: JonnyChipz - In Conversation with Jim Bennett
+      id: tzVYf6cXNjo
+      description: Join John Lunn aka Jonnychipz as he is joined by Microsoft Regional Cloud Advocate Jim Bennett.
+    - title: 8 bits with PJ and Brandon - with Jim Bennett
+      id: eksa-EnKIfE
+      description: We chat with Jim Bennett, Developer Advocate at Microsoft, about tech, life, and anything in between.
+
   livestreams:
     upcoming:
     previous:
