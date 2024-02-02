@@ -331,6 +331,9 @@ params:
 
   podcasts:
     videos:
+    - title: "Impact DevRel Podcast Ep 2: Jim Bennett | Value of DevRel from Big Tech (Microsoft) to Startups"
+      id: zG10GwxqM9A
+      description: Join Joshua Poddoku and Jim Bennett as they unravel the expectations, goals, and business value of Developer Relations across various businesses.
     - title: Coffee and Open Source Conversation - Jim Bennett
       id: NFumJv3f2JY
       description: Jim talks dev rel, career history and more wih Isaac Levin
