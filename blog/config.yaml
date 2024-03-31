@@ -331,6 +331,9 @@ params:
 
   podcasts:
     videos:
+    - title: "Free SDK generation for open source software with Jim Bennett | nickytonline"
+      id: JgTiVxZGeeg
+      desctiption: "Jim Bennett, Principal Developer Advocate at liblab, joins Nick to discuss free SDK generation for open source software using liblab!"
     - title: "Impact DevRel Podcast Ep 2: Jim Bennett | Value of DevRel from Big Tech (Microsoft) to Startups"
       id: zG10GwxqM9A
       description: Join Joshua Poddoku and Jim Bennett as they unravel the expectations, goals, and business value of Developer Relations across various businesses.
@@ -349,6 +352,13 @@ params:
 
   livestreams:
     upcoming:
+      series:
+      - title: "liblab live"
+        videos:
+        - title: "liblab live March 2024 | Our first monthly livestream of all things new in SDK generation"
+          description: "On this episode, Jim is joined by Dales, an engineer at liblab to talk about our newly released v2 Python SDK generation."
+          registrationLink: https://www.youtube.com/watch?v=LEv5Q11G_A0
+          image: /images/livestreams/liblab-live.png
     previous:
       series:
       - title: "Machine Learning for Beginners"
