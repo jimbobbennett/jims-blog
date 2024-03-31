@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>control on JimBobBennett</title><link>https://jimbobbennett.dev</link><description>Recent content in control on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Wed, 27 Aug 2014 05:02:19 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/control/index.xml" rel="self" type="application/rss+xml"/><item><title>How to generate pre-signed URLs to get and put objects in S3 with Boto3 in Python</title><link>https://jimbobbennett.dev/blogs/get-put-s3-boto/</link><pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/get-put-s3-boto/</guid><description>&lt;p>&lt;img src="banner.webp" alt="A plushie llama putting blocks into a bucket">&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Control on JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content in Control on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Wed, 27 Aug 2014 05:02:19 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/control/index.xml" rel="self" type="application/rss+xml"/><item><title>How to generate pre-signed URLs to get and put objects in S3 with Boto3 in Python</title><link>https://jimbobbennett.dev/blogs/get-put-s3-boto/</link><pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/get-put-s3-boto/</guid><description>&lt;p>&lt;img src="banner.webp" alt="A plushie llama putting blocks into a bucket">&lt;/p>
 &lt;blockquote>
 &lt;p>TL;DR: If your &lt;code>put_object&lt;/code> boto3 pre-signed URLs are failing with access denied errors, add &lt;code>config=Config(signature_version=&amp;quot;s3v4&amp;quot;)&lt;/code> when creating the boto3 client to get a working URL.&lt;/p>
 &lt;/blockquote>
@@ -1254,8 +1254,8 @@ You can also read more on the great &lt;a href="https://docs.github.com/actions"
 &lt;iframe src="https://www.youtube.com/embed/X9Z-rUixnzk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
 &lt;/div></description></item><item><title>New year - new me!</title><link>https://jimbobbennett.dev/blogs/new-year-new-me/</link><pubDate>Fri, 14 Jan 2022 22:44:32 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/new-year-new-me/</guid><description>&lt;p>🧀 Ah yes, a post title that&amp;rsquo;s cheesier than the best Parisian Fromageries.&lt;/p>
 &lt;p>Actually it&amp;rsquo;s not a new me, I&amp;rsquo;m still the same old me, but I have changed jobs! I&amp;rsquo;ve just started as a Regional Cloud Advocate working for the Microsoft Reactor team, based in Redmond, WA, USA.&lt;/p>
-&lt;figure>&lt;img src="IMG_6008.png"
-alt="A red neon sign saying Reactor Fun Zone"/>&lt;figcaption>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/new-year-new-me/IMG_6008.png"
+alt="A red neon sign saying Reactor Fun Zone">&lt;figcaption>
 &lt;p>A red neon sign saying Reactor Fun Zone&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -1267,30 +1267,30 @@ alt="A red neon sign saying Reactor Fun Zone"/>&lt;figcaption>
 &lt;/div>
 &lt;h2 id="but-theres-no-masks-in-that-video">But there&amp;rsquo;s no masks in that video?&lt;/h2>
 &lt;p>Don&amp;rsquo;t worry, we&amp;rsquo;re all safe. That video was recorded pre-COVID, and to ensure the safety of our communities our Reactor spaces have pivoted to on-line. You may have watched some of our events already streamed on our &lt;a href="https://www.youtube.com/channel/UCkm6luGCS3hD25jcEhvRMIA/playlists">YouTube&lt;/a> or &lt;a href="https://www.twitch.tv/microsoftdeveloper">Twitch&lt;/a> channels, or on &lt;a href="https://docs.microsoft.com/learn/tv/?WT.mc_id=academic-0000-jabenn">LearnTV&lt;/a>. Currently our locations are closed, but we are very much on-line, streaming a huge range of content from both Microsoft folks and community members.&lt;/p>
-&lt;figure>&lt;img src="image-1.png"
-alt="Reactor landing page for a live streamed Global AI bootcamp in Toronto"/>&lt;figcaption>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/new-year-new-me/image-1.png"
+alt="Reactor landing page for a live streamed Global AI bootcamp in Toronto">&lt;figcaption>
 &lt;p>Reactor landing page for a live streamed Global AI bootcamp in Toronto&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;h2 id="so-whats-the-new-job-about">So what&amp;rsquo;s the new job about?&lt;/h2>
 &lt;p>My new job is to support communities, both on-line and in the local area. Redmond in Washington State, USA is the home of Microsoft, but in the surrounding Seattle area and beyond there are a huge array of tech communities thanks to the draw of tech companies both large and small, from Amazon to Zulily.&lt;/p>
-&lt;figure>&lt;img src="BIT_COMMUNITY-copy.png"
-alt="Cartoon racoons holding a laptop saying Community"/>&lt;figcaption>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/new-year-new-me/BIT_COMMUNITY-copy.png"
+alt="Cartoon racoons holding a laptop saying Community">&lt;figcaption>
 &lt;p>Cartoon racoons holding a laptop saying Community&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;p>I&amp;rsquo;ll be doing this in a number of ways. I&amp;rsquo;ll be running on-line streams to grow our Reactor meetup channel, with me learning or building with various technologies, I&amp;rsquo;ll be hosting community members and supporting their events, and I&amp;rsquo;ll be helping to grow out our Reactor as a space for communities to come together. I believe the the move from in-person to virtual, and the current thoughts on hybrid has given us the perfect opportunity to reset the traditional Meetup model, and build truly inclusive experiences for everyone - not just those who can make it to a venue at 6pm to drink beer, eat pizza and talk tech. I&amp;rsquo;ve had &lt;a href="https://github.com/jimbobbennett/MakingMeetupsMoreAccessible">thoughts on this in the past&lt;/a>, but really feel now we can all build more inclusive communities.&lt;/p>
 &lt;h2 id="reactor-redmond">Reactor Redmond&lt;/h2>
-&lt;figure>&lt;img src="IMG_6028.png"
-alt="The Reactor logo on the door of the Reactor in Redmond"/>&lt;figcaption>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/new-year-new-me/IMG_6028.png"
+alt="The Reactor logo on the door of the Reactor in Redmond">&lt;figcaption>
 &lt;p>The Reactor logo on the door of the Reactor in Redmond&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;p>The Reactor in Redmond, in Building 20 on the Microsoft campus is my home base. It&amp;rsquo;s a great space for events both small and medium sized, with a range of options for space to use. As we get more of a plan on re-opening I&amp;rsquo;ll post more with details on how you can sign up to use the space.&lt;/p>
 &lt;h2 id="how-can-i-use-the-reactors">How can I use the Reactors?&lt;/h2>
 &lt;p>Right now the Reactors are closed for events, but what we can offer is world class streaming facilities! We&amp;rsquo;ve been building out our AV (audio visual) tech to support streaming, so although we can&amp;rsquo;t bring your communities into our space, we can broadcast you from there to your communties. Get in touch if you live near a Reactor and want to discuss how we can support your streaming.&lt;/p>
-&lt;figure>&lt;img src="IMG_6014.png"
-alt="A panoramic view of the Reactor showing desks and Surface Hubs"/>&lt;figcaption>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/new-year-new-me/IMG_6014.png"
+alt="A panoramic view of the Reactor showing desks and Surface Hubs">&lt;figcaption>
 &lt;p>A panoramic view of the Reactor showing desks and Surface Hubs&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -2853,14 +2853,14 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;li>Select &lt;strong>+ Create a resource&lt;/strong> from the menu on the left or the dashboard&lt;/li>
 &lt;li>Search for &lt;em>Stream Analytics job&lt;/em>, select it and select &lt;strong>Create&lt;/strong>&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-12-05_14-28-07.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/storing-iot-data-in-a-database/2019-12-05_14-28-07.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Give the job a name, select your subscription, select or create a new resource group and set the location closest to you.&lt;/li>
 &lt;li>Stream Analytics jobs can be hosted in the cloud, or run on the edge via an IoT Edge Gateway device. For now, select &lt;em>Cloud&lt;/em>, but you can learn more about running on the edge in &lt;a href="https://docs.microsoft.com/azure/stream-analytics/stream-analytics-edge/?WT.mc_id=streamanalytics-blog-jabenn">the documentation&lt;/a>.&lt;/li>
 &lt;li>Set the number of Streaming units you need - the more data coming in, the larger the number of streaming units you need. You can read more about streaming units in &lt;a href="https://docs.microsoft.com/azure/stream-analytics/stream-analytics-streaming-unit-consumption/?WT.mc_id=streamanalytics-blog-jabenn">the documentation&lt;/a>, and learn about pricing on our &lt;a href="https://azure.microsoft.com/pricing/details/stream-analytics/?WT.mc_id=streamanalytics-blog-jabenn">pricing page&lt;/a>. For now leave this as the default of 3.&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-12-05_14-37-25-1.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/storing-iot-data-in-a-database/2019-12-05_14-37-25-1.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Select &lt;strong>Create&lt;/strong>.&lt;/li>
@@ -2873,7 +2873,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;li>Head to the &lt;strong>Inputs&lt;/strong> tab&lt;/li>
 &lt;li>Select &lt;strong>+ Add stream input&lt;/strong>, then select &lt;em>IoT Hub&lt;/em>&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-12-05_14-47-41.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/storing-iot-data-in-a-database/2019-12-05_14-47-41.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Give the input an alias - this is the name you will use in your queries&lt;/li>
@@ -2885,7 +2885,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;li>Head to the &lt;strong>Outputs&lt;/strong> tab&lt;/li>
 &lt;li>Select &lt;strong>+ Add&lt;/strong>, then select &lt;em>Cosmos DB&lt;/em>&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-12-05_14-52-46.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/storing-iot-data-in-a-database/2019-12-05_14-52-46.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Give the output an alias - this is the name you will use in your queries&lt;/li>
@@ -2942,38 +2942,38 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;li>Log into the &lt;a href="https://portal.azure.com/?WT.mc_id=domaincom-blog-jabenn">Azure Portal&lt;/a>, and find your App Service resource.&lt;/li>
 &lt;li>Select the &lt;strong>Custom domains&lt;/strong> menu item. From here, copy the IP address.&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-11-26_17-25-57-3.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_17-25-57-3.png">
 &lt;/figure>
 &lt;h4 id="from-the-command-line">From the command line:&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>nslookup &amp;lt;your-app-service&amp;gt;.azurewebsites.net
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Substitute &lt;code>&amp;lt;your-app-service&amp;gt;&lt;/code> with the name of your App Service.&lt;/p>
-&lt;figure>&lt;img src="2019-11-26_18-12-44.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_18-12-44.png">
 &lt;/figure>
 &lt;p>Next you need to configure domain.com to point to this IP address.&lt;/p>
 &lt;ul>
 &lt;li>Log in to Domain.com and select the &lt;strong>Domains&lt;/strong> tab. Then click the &lt;strong>Manage&lt;/strong> button for the domain you want to manage.&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-11-26_17-18-46-1.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_17-18-46-1.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Select the &lt;strong>DNS and Nameservers&lt;/strong> option from the menu on the left&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-11-26_17-22-18.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_17-22-18.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Under the &lt;strong>DNS Records&lt;/strong> section there will be a number of records. One will have a &lt;strong>Record&lt;/strong> of &lt;em>A&lt;/em>, a &lt;strong>Name&lt;/strong> of &lt;em>@&lt;/em> and the &lt;strong>Content&lt;/strong> set to an IP address. Click the three downwards ellipses at the end of the row and select &lt;strong>Edit&lt;/strong>.&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-11-26_17-29-08.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_17-29-08.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Set the &lt;strong>IP address&lt;/strong> to be the IP address you copied from the Azure portal, then select &lt;strong>Update DNS&lt;/strong>.&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-11-26_17-31-44-1.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_17-31-44-1.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Look for a &lt;strong>TXT&lt;/strong> record with a name of &lt;em>@&lt;/em>. Edit this record and update the &lt;strong>Content&lt;/strong> to be the URL of your App Service which will be &lt;code>&amp;lt;your-app-name&amp;gt;.azurewebsites.net&lt;/code>.&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-11-26_17-35-02.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_17-35-02.png">
 &lt;/figure>
 &lt;h2 id="configuring-app-service">Configuring App Service&lt;/h2>
 &lt;p>Once Domain.com has been configured, you need to tell your App Service to use it. This can be done from the Azure Portal, or the cli.&lt;/p>
@@ -2982,7 +2982,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;li>Select the &lt;strong>Custom domains&lt;/strong> tab&lt;/li>
 &lt;li>Select &lt;strong>+ Add custom domain&lt;/strong>&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-11-26_17-37-44.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_17-37-44.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>In the blade that pops up, enter your domain name that you registered with Domain.com. Then select &lt;strong>Validate&lt;/strong>. This will validate that the records are set up correctly and the hostname is available. If everything is valid you will see two green ticks at the bottom.&lt;/li>
@@ -2990,7 +2990,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;blockquote>
 &lt;p>In theory the DNS record updates can take up to 48 hours to propagate, but in my experience it happens in a few minutes. If the validation fails then wait a minute and try again.&lt;/p>
 &lt;/blockquote>
-&lt;figure>&lt;img src="2019-11-26_17-40-39.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-your-domain-com-domain-name-to-azure-app-services/2019-11-26_17-40-39.png">
 &lt;/figure>
 &lt;ul>
 &lt;li>Once everything has been validated, select &lt;strong>Add custom domain&lt;/strong>.&lt;/li>
@@ -3052,17 +3052,17 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;li>Adding pins to the map to show locations&lt;/li>
 &lt;li>Adding a path to the map&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-09-20_16-46-39.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-20_16-46-39.png">
 &lt;/figure>
 &lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;ul>
 &lt;li>Start by signing up for Azure if you don&amp;rsquo;t have an account:If you are a student, sign up at &lt;a href="https://azure.microsoft.com/free/students/?WT.mc_id=azuremaps-blog-jabenn">azure.microsoft.com/free/students&lt;/a> to get US$100 of free credit and free services for a year.Otherwise sign up at &lt;a href="https://azure.microsoft.com/free/?WT.mc_id=azuremaps-blog-jabenn">azure.microsoft.com/free&lt;/a> to get US$200 of credit for 30 days and a year of free services.&lt;/li>
 &lt;li>Sign into Azure and create an Azure Maps resource by following &lt;a href="https://ms.portal.azure.com/?WT.mc_id=azuremaps-blog-jabenn%2F#create/Microsoft.Maps">this link&lt;/a>.&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-09-06_16-51-33-2.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-06_16-51-33-2.png">
 &lt;/figure>
 &lt;p>Once you have your Maps resource created, head to the &lt;strong>Shared Key Authentication&lt;/strong> section of the _&lt;em>Settings -&amp;gt; Authentication&lt;/em> _ tab in the map blade in the Azure portal and take a copy of your &lt;strong>Primary Key&lt;/strong>.&lt;/p>
-&lt;figure>&lt;img src="2019-09-09_16-13-17-1.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-09_16-13-17-1.png">
 &lt;/figure>
 &lt;h2 id="showing-the-azure-maps-control-in-a-web-page">Showing the Azure Maps control in a web page&lt;/h2>
 &lt;p>Create a web site using your favorite tooling - I personally have been using &lt;a href="https://flask.palletsprojects.com/">Flask&lt;/a> as I&amp;rsquo;m getting into Python. Create an HTML page. To the &lt;code>&amp;lt;head&amp;gt;&lt;/code> section add the following to add support for the Azure Maps control:&lt;/p>
@@ -3093,7 +3093,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">style&lt;/span>&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will give a nice, full size map showing the whole world.&lt;/p>
-&lt;figure>&lt;img src="2019-09-23_12-33-40.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-23_12-33-40.png">
 &lt;/figure>
 &lt;p>You can read more about getting started with the Map control in the &lt;a href="https://docs.microsoft.com/azure/azure-maps/how-to-use-map-control/?WT.mc_id=azuremaps-blog-jabenn">Getting started docs&lt;/a>.&lt;/p>
 &lt;h2 id="zooming-into-a-certain-area">Zooming into a certain area&lt;/h2>
@@ -3115,7 +3115,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">padding&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#ae81ff">50&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="2019-09-23_12-48-30.png"/>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-23_12-48-30.png">
 &lt;/figure>
 &lt;p>You can read more about this method in the &lt;a href="https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map?WT.mc_id=azuremaps-blog-jabenn&amp;amp;view=azure-maps-typescript-latest#setcamera-cameraoptions---cameraboundsoptions---animationoptions-">Map class docs&lt;/a>.&lt;/p>
 &lt;h2 id="adding-pins-for-a-location">Adding pins for a location&lt;/h2>
@@ -3130,7 +3130,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">atlas&lt;/span>.&lt;span style="color:#a6e22e">data&lt;/span>.&lt;span style="color:#a6e22e">Point&lt;/span>([{&lt;span style="color:#a6e22e">longitude&lt;/span>}, {&lt;span style="color:#a6e22e">latitude&lt;/span>}])));
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this code, &lt;code>{longitude}&lt;/code> needs to be set to the longitude of the point, and &lt;code>{latitude}&lt;/code> set to the latitude. Finally a symbol layer is added to show the pins, and this symbol layer wraps the data source:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">map&lt;/span>.&lt;span style="color:#a6e22e">layers&lt;/span>.&lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">atlas&lt;/span>.&lt;span style="color:#a6e22e">layer&lt;/span>.&lt;span style="color:#a6e22e">SymbolLayer&lt;/span>(&lt;span style="color:#a6e22e">dataSource&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>));
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="2019-09-23_13-39-19.png"/>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-23_13-39-19.png">
 &lt;/figure>
 &lt;p>There&amp;rsquo;s loads more you can do with these symbol layers, including customizing the symbols using images. You can read more and try some of these out in the &lt;a href="https://docs.microsoft.com/azure/azure-maps/map-add-pin/?WT.mc_id=azuremaps-blog-jabenn">Azure Maps Symbol Layer docs&lt;/a>.&lt;/p>
 &lt;h2 id="showing-a-path-on-the-map">Showing a path on the map&lt;/h2>
@@ -3146,10 +3146,10 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>])));
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Each point is added to the array passed into the &lt;code>LineString&lt;/code>, in the order that you want the points to be connected. Finally a line layer is added to the map:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">map&lt;/span>.&lt;span style="color:#a6e22e">layers&lt;/span>.&lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">atlas&lt;/span>.&lt;span style="color:#a6e22e">layer&lt;/span>.&lt;span style="color:#a6e22e">LineLayer&lt;/span>(&lt;span style="color:#a6e22e">line_datasource&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>));
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="2019-09-23_13-57-47.png"/>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-23_13-57-47.png">
 &lt;/figure>
 &lt;p>You can add multiple data sources to the map, and use them for multiple layers. For example you can have a data source for a line, and another for a point at the end of the line.&lt;/p>
-&lt;figure>&lt;img src="2019-09-23_13-58-54.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-23_13-58-54.png">
 &lt;/figure>
 &lt;p>You can customize the line, such as the stroke size or color, including having color gradients to indicate the start and end of the line, by passing options when creating the layer. For example, to have a blue to red gradient, with red showing the end of the line (the last coordinate in the array passed to the data source), use the following:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">map&lt;/span>.&lt;span style="color:#a6e22e">layers&lt;/span>.&lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">atlas&lt;/span>.&lt;span style="color:#a6e22e">layer&lt;/span>.&lt;span style="color:#a6e22e">LineLayer&lt;/span>(&lt;span style="color:#a6e22e">line_datasource&lt;/span>, &lt;span style="color:#66d9ef">null&lt;/span>, {
@@ -3162,11 +3162,11 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;red&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}));
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="2019-09-23_14-02-22.png"/>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/visualising-locations-and-paths-on-a-map/2019-09-23_14-02-22.png">
 &lt;/figure>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>In this post we learned how to add an Azure Maps control to a web page, position the camera, add pins and add lines. Head to the &lt;a href="https://docs.microsoft.com/azure/azure-maps/?WT.mc_id=azuremaps-blog-jabenn">official documentation&lt;/a> to learn more about the capabilities of Azure Maps.&lt;/p></description></item><item><title>Are you where you should be? Checking Geofences using Azure Maps</title><link>https://jimbobbennett.dev/blogs/are-you-where-you-should-be-checking-geofences-using-azure-maps/</link><pubDate>Tue, 10 Sep 2019 00:08:58 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/are-you-where-you-should-be-checking-geofences-using-azure-maps/</guid><description>&lt;p>&lt;strong>A Geofence is a virtual boundary defined using an area on a map. Azure Maps has tools for checking if a coordinate is inside that Geofence. This post looks at how to do these checks.&lt;/strong>&lt;/p>
-&lt;figure>&lt;img src="stephen-monroe-yg8Cz-i5U30-unsplash.jpg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/are-you-where-you-should-be-checking-geofences-using-azure-maps/stephen-monroe-yg8Cz-i5U30-unsplash.jpg">
 &lt;/figure>
 &lt;p>There are many use cases for tracking where an item is, and if it moves into or out of a defined location. One great example is legal compliance - for example has an asset crossed an international or state boundary, is a vehicle on roads that require road tax to be paid (for example &lt;a href="https://www.nzta.govt.nz/vehicles/licensing-rego/road-user-charges/">New Zealand&amp;rsquo;s RUC&lt;/a>) or is a ship near a port.&lt;/p>
 &lt;p>One use case I&amp;rsquo;ve been thinking about recently is wildlife tracking. I&amp;rsquo;m building a sample app that can be used to track animal sightings including a GPS device that could be attached to an animal to provide 24/7 tracking (I&amp;rsquo;m not really going to put it on a real animal, this is just for demo purposes, so will be using a plushie bear). As well as knowing where an animal is, it would also be good to have an alert if the animal enters certain areas, for example if a bear goes near a center of population. This post shows how to create and check geofences using Azure Maps.&lt;/p>
@@ -3175,7 +3175,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;li>Start by signing up for Azure if you don&amp;rsquo;t have an account:If you are a student, sign up at &lt;a href="https://azure.microsoft.com/free/students/?WT.mc_id=azuremaps-blog-jabenn">azure.microsoft.com/free/students&lt;/a> to get US$100 of free credit and free services for a year.Otherwise sign up at &lt;a href="https://azure.microsoft.com/free/?WT.mc_id=azuremaps-blog-jabenn">azure.microsoft.com/free&lt;/a> to get US$200 of credit for 30 days and a year of free services.&lt;/li>
 &lt;li>Sign into Azure and create an Azure Maps resource by following &lt;a href="https://ms.portal.azure.com/?WT.mc_id=azuremaps-blog-jabenn%2F#create/Microsoft.Maps">this link&lt;/a>.&lt;/li>
 &lt;/ul>
-&lt;figure>&lt;img src="2019-09-06_16-51-33.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/are-you-where-you-should-be-checking-geofences-using-azure-maps/2019-09-06_16-51-33.png">
 &lt;/figure>
 &lt;h2 id="defining-a-geofence">Defining a Geofence&lt;/h2>
 &lt;p>Once you have an Azure Maps resource you need to define a geofence. These are defined using GeoJSON - a JSON document designed for geographic information. TO create a simple geofence for the Seattle/Redmond area, you would define it like this:&lt;/p>
@@ -3208,7 +3208,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This defines a geometric feature, that is a polygon using the coordinates given, with the last coordinate being the same as the first to close the shape - in this case a rectangle.&lt;/p>
-&lt;figure>&lt;img src="response.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/are-you-where-you-should-be-checking-geofences-using-azure-maps/response.png">
 &lt;/figure>
 &lt;p>You can do a lot with GeoJson, and you can read more in the &lt;a href="https://docs.microsoft.com/azure/azure-maps/geofence-geojson/?WT.mc_id=azuremaps-blog-jabenn">GeoJSON docs&lt;/a>.&lt;/p>
 &lt;p>To set the geofence, you need to send this JSON to a call to the Azure Maps REST API. There aren&amp;rsquo;t any SDKs available for this service yet, but hopefully should be some soon.&lt;/p>
@@ -3219,11 +3219,11 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;amp;api-version&lt;span style="color:#f92672">=&lt;/span>1.0
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;amp;dataFormat&lt;span style="color:#f92672">=&lt;/span>geojson
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You will need to replace &lt;code>{subscription-key}&lt;/code> with your primary or secondary key from the &lt;em>Shared Key Authentication&lt;/em> section of the &lt;em>Settings -&amp;gt; Authentication&lt;/em> tab in the map blade in the Azure portal.&lt;/p>
-&lt;figure>&lt;img src="2019-09-09_16-13-17.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/are-you-where-you-should-be-checking-geofences-using-azure-maps/2019-09-09_16-13-17.png">
 &lt;/figure>
 &lt;p>The body of the request will need to be set to &lt;code>application/json&lt;/code> and contain the GeoJSON for your geofence.&lt;/p>
 &lt;p>When you call this end point you should get back a status of &lt;strong>202 - Accepted&lt;/strong>. In the headers will be a &lt;code>Location&lt;/code> containing an end point to call to get the Id of the geofence.&lt;/p>
-&lt;figure>&lt;img src="2019-09-09_16-23-18.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/are-you-where-you-should-be-checking-geofences-using-azure-maps/2019-09-09_16-23-18.png">
 &lt;/figure>
 &lt;p>To get the Id, call the &lt;code>Location&lt;/code> endpoint, adding your subscription key as an additional parameter:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>https://atlas.microsoft.com/mapData/&lt;span style="color:#f92672">{&lt;/span>location&lt;span style="color:#f92672">}&lt;/span>/status?api-version&lt;span style="color:#f92672">=&lt;/span>1.0
@@ -3273,16 +3273,16 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;blockquote>
 &lt;p>TL;DR - connect the TXD on the module to 1 on the MXChip, RXD to 2, then create a new Serial using &lt;code>UARTClass Serial1(UART_1);&lt;/code> You can then call this in the same way as the Arduino &lt;code>Serial&lt;/code> class.&lt;/p>
 &lt;/blockquote>
-&lt;figure>&lt;img src="devkit-board-vector@2x-2-1.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/streaming-serial-data-using-an-mxchip/devkit-board-vector@2x-2-1.png">
 &lt;/figure>
 &lt;p>I&amp;rsquo;ve spent a lot of time working with the &lt;a href="https://microsoft.github.io/azure-iot-developer-kit/v1/">Azure IoT Dev Kit&lt;/a>, also known as the MXChip. This is a great prototyping board that works seamlessly with Azure IoT Hub and comes with a stack of sensors built in. But what happens if you want to attach another device to it?&lt;/p>
 &lt;p>I&amp;rsquo;ve recently started creating a demo app based around a wildlife tracker - both spotting with a phone and an actual GSP collar. Not serious, not planning on putting it on an actual animal, just for a nice end to end demo of a scenario. Honestly - this is the bear that I&amp;rsquo;ll be tracking.&lt;/p>
-&lt;figure>&lt;img src="IMG_4484.JPG"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/streaming-serial-data-using-an-mxchip/IMG_4484.JPG">
 &lt;/figure>
 &lt;h3 id="hardware">Hardware&lt;/h3>
 &lt;p>The hardware I&amp;rsquo;m using for this is a cheap &lt;a href="https://amzn.to/2ZP03lb">GPS module&lt;/a> (note - mine didn&amp;rsquo;t come with mounting pins or an antenna). It sends serial data over UART at 9600 baud, and this data uses &lt;a href="https://en.wikipedia.org/wiki/NMEA_0183">NMEA sentences&lt;/a> - ASCII codes that contain GPS information including position, speed, satellite information and other data.&lt;/p>
 &lt;p>I plugged my GPS sensor into my &lt;a href="https://amzn.to/2Lsagif">Kitronic Inventors Kit&lt;/a>, a breakout board for the BBC micro:bit that uses the same finger connector as the MXChip, found out which pins do serial data and connected some wires.&lt;/p>
-&lt;figure>&lt;img src="PinMappings.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/streaming-serial-data-using-an-mxchip/PinMappings.png">
 &lt;/figure>
 &lt;p>TXD on the GPS connects to Pin 1 on the Kitronic Inventors kit - the RXD pin (transmission on the module connects to receive on the MXChip and vice versa), RXD connects to Pin 2, the TXD pin. Power and ground comes from the chip as well, but can also come over USB if needed.&lt;/p>
 &lt;p>If you want to connect to the MXChip directly using crocodile clips, TXD connects to the large connector labelled &lt;strong>1,&lt;/strong> RXD connects to the one labelled &lt;strong>2&lt;/strong>, GND connects to the connected labelled &lt;strong>GND&lt;/strong>, and VCC connects to the connector labelled &lt;strong>3V&lt;/strong>.&lt;/p>
@@ -3304,7 +3304,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once done I was able to read serial data from the GPS sensor. I then sent it to &lt;a href="https://github.com/mikalhart/TinyGPSPlus">TinyGPS++&lt;/a> which I was able to install from the Android Library manager in VSCode. This decoded the data into latitude and longitude that I can then send to IoT Hub!&lt;/p></description></item><item><title>Save your users from typing with AI 🤖</title><link>https://jimbobbennett.dev/blogs/save-your-users-from-typing-with-ai/</link><pubDate>Sun, 21 Jul 2019 21:52:08 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/save-your-users-from-typing-with-ai/</guid><description>&lt;p>I&amp;rsquo;ve been playing a lot with the &lt;a href="https://customvision.ai/?WT.mc_id=textrecogniser-blog-jabenn">Azure Custom Vision Service&lt;/a> - a great service to build image classification and object detection models with just a few images. To make it easier to test my models, I wanted to build a mobile app that connects to a custom vision project and uses that to classify or detect objects in images captured using the camera.&lt;/p>
-&lt;figure>&lt;img src="IMG_1383-1.PNG"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/save-your-users-from-typing-with-ai/IMG_1383-1.PNG">
 &lt;/figure>
 &lt;p>The app is pretty simple, it&amp;rsquo;s a &lt;a href="https://dotnet.microsoft.com/apps/xamarin/?WT.mc_id=textrecogniser-blog-jabenn">Xamarin&lt;/a> app that uses a camera plugin and the Custom Vision SDKs. There is a problem with it&amp;hellip; Configuration.&lt;/p>
 &lt;p>To use a model you need four pieces of information:&lt;/p>
@@ -3316,7 +3316,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/ul>
 &lt;p>To use my model, I need to configure my app with all for of these pieces of information. I didn&amp;rsquo;t want to hard code them - I don&amp;rsquo;t want to have to rebuild my app every time I change project or iteration. Ideally I should be able to set these at runtime and store them between sessions.&lt;/p>
 &lt;p>I started off with a simple settings screen to type these 4 values in. I made a &lt;strong>&lt;strong>LOT&lt;/strong>&lt;/strong> of mistakes doing this as the values are long and complex. I needed to make my app more usable and find a way to avoid errors&amp;hellip;&lt;/p>
-&lt;figure>&lt;img src="IMG_91CBC50D535B-1-1.jpeg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/save-your-users-from-typing-with-ai/IMG_91CBC50D535B-1-1.jpeg">
 &lt;/figure>
 &lt;p>The solution was to use OCR - optical character recognition, using AI to convert text in an image to a string value.&lt;/p>
 &lt;p>Microsoft has a text recognition service available as part of the &lt;a href="https://azure.microsoft.com/services/cognitive-services/?WT.mc_id=textrecogniser-blog-jabenn">Azure Cognitive Services&lt;/a>. This service takes an image, then detects text in it and returns that text.&lt;/p>
@@ -3358,10 +3358,10 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This code loops whilst the status is &lt;code>NotStarted&lt;/code> or &lt;code>Running&lt;/code>, pausing for 100ms then requesting the new status. Ideally you would also limit the retries and check for a &lt;code>Failed&lt;/code> status.&lt;/p>
 &lt;h3 id="get-the-text">Get the text&lt;/h3>
 &lt;p>Once the status is &lt;code>Succeeded&lt;/code>, the results will be available. The results come back as a list of &lt;code>TextRecognitionResult&lt;/code>, each one referring to an area of text in the image. Each &lt;code>TextRecognitionResult&lt;/code> contains one or more lines of text in the &lt;code>Lines&lt;/code> property, and each line of text is accompanied by extra details such as the bounding box of the text. The lines are from top to bottom, so the topmost line of text would be the first entry in the &lt;code>Lines&lt;/code> property, the next line down the next entry and so on.For my purposes, the settings page on the custom vision service has the data I need in a vertical list with the title of the field above the value, such as for the &lt;strong>Project Id&lt;/strong> shown below.&lt;/p>
-&lt;figure>&lt;img src="ProjectId.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/save-your-users-from-typing-with-ai/ProjectId.png">
 &lt;/figure>
 &lt;p>In this case if I photographed these values and detected the text I would have one line containing the text &lt;code>&amp;quot;Project Id&amp;quot;&lt;/code> with the next line being the GUID for the project Id.&lt;/p>
-&lt;figure>&lt;img src="ProjectIdImmediate.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/save-your-users-from-typing-with-ai/ProjectIdImmediate.png">
 &lt;/figure>
 &lt;p>I can now extract this value and use it in my app.&lt;/p>
 &lt;h3 id="done">Done&lt;/h3>
@@ -3376,7 +3376,7 @@ Done! I could then run my Python script as normal, and it all worked nicely. And
 &lt;blockquote>
 &lt;p>If you don&amp;rsquo;t have an Azure account you can create a free account at &lt;a href="?WT.mc_id=twitchcaptions-blog-jabenn">azure.microsoft.com/free&lt;/a> and get $200 of free credit for the first 30 days and a host of services free for a year. Students and academic faculty can sign up at &lt;a href="https://azure.microsoft.com/free/students/?WT.mc_id=livecaption-blog-jabenn">azure.microsoft.com/free/students&lt;/a> and get $100 that lasts a year as well as 12 months of free services, and this can be renewed every year that you are a student.&lt;/p>
 &lt;/blockquote>
-&lt;figure>&lt;img src="2019-07-02_11-21-40.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/building-a-live-caption-tool/2019-07-02_11-21-40.png">
 &lt;/figure>
 &lt;p>When the resource is created, note down the first part of the endpoint from the &lt;strong>Overview&lt;/strong> tab. The endpoint will be something like &lt;code>https://uksouth.api.cognitive.microsoft.com/sts/v1.0/issuetoken&lt;/code>, and the bit you want is the part before &lt;code>api.microsoft.com&lt;/code>, so in my case &lt;code>uksouth&lt;/code>. This will be the name of the region you created your resource in. You all also need to grab a key from the &lt;strong>Keys&lt;/strong> tab.&lt;/p>
 &lt;p>Once you have your Speech resource the next step is to use it to create captions.&lt;/p>
@@ -3447,7 +3447,7 @@ this is a live caption text
 &lt;h3 id="mix-code-and-markdown">Mix code and markdown&lt;/h3>
 &lt;p>Imagine you wanted to create a tutorial project to show how to do something in C#. In the past, you would write the instructions and provide code snippets for the reader to run by creating a project, then adding the code to a &lt;code>.cs&lt;/code> file in that project, then running it from the command line.&lt;/p>
 &lt;p>With Try .NET, you can create a markdown file that links to a piece of code in an existing project. The reader can then run that code from inside the browser. They can also edit the code with full intellisense, get compiler errors if something isn&amp;rsquo;t write and generally play with the code.&lt;/p>
-&lt;figure>&lt;img src="TryDotNetRunMarkdownAndCode.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/trying-out-try-net/TryDotNetRunMarkdownAndCode.png">
 &lt;/figure>
 &lt;h3 id="only-surface-what-you-need">Only surface what you need&lt;/h3>
 &lt;p>When running code, you normally need some boiler plate stuff - a &lt;code>main&lt;/code> method, some &lt;code>using&lt;/code> directives, that sort of thing. If you want to run more advanced code that relies on external packages or setup code you need a way to bring those packages in or run the setup code. This can be complex, and fill up the code window with code that really isn&amp;rsquo;t relevant to what you want to teach.&lt;/p>
@@ -3472,7 +3472,7 @@ this is a live caption text
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>From the Visual Studio Code terminal run the following:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>dotnet try
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Your code will be compiled, and launched in a browser where you will see your markdown rendered.&lt;/p>
-&lt;figure>&lt;img src="TryDotNetFirstRun-1.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/trying-out-try-net/TryDotNetFirstRun-1.png">
 &lt;/figure>
 &lt;h3 id="add-some-code">Add some code&lt;/h3>
 &lt;p>Now we have some markdown, lets add some code. A simple &lt;em>Hello World&lt;/em> will do for now.&lt;/p>
@@ -3512,10 +3512,10 @@ These are the open and closing sections of the code block, shown by three back t
 &lt;p>Kill the running session in the Visual Studio Code terminal if it is still running, and relaunch it.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>dotnet try
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You will now see your code in the browser, and you can run it using the purple run button.&lt;/p>
-&lt;figure>&lt;img src="TryDotNetFirstRunWithCode.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/trying-out-try-net/TryDotNetFirstRunWithCode.png">
 &lt;/figure>
 &lt;p>This is cool - but what&amp;rsquo;s even cooler is you can edit this code. Have a play - you get full intellisense and &lt;em>ctrl+space&lt;/em> autocomplete, and if your code doesn&amp;rsquo;t compile you get proper compiler errors - with line numbers based off the code in the browser, not in the &lt;code>.cs&lt;/code> file.&lt;/p>
-&lt;figure>&lt;img src="TryDotNetRunMarkdownAndCodeAndError.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/trying-out-try-net/TryDotNetRunMarkdownAndCodeAndError.png">
 &lt;/figure>
 &lt;h3 id="whats-happening">What&amp;rsquo;s happening&lt;/h3>
 &lt;p>When your code runs, it will compile the console app with any code changes you&amp;rsquo;ve made included. If it fails to compile, you see the errors, otherwise the console app runs as normal - the &lt;code>main&lt;/code> method is run and any output to the console is shown below your code.&lt;/p>
@@ -3523,7 +3523,7 @@ These are the open and closing sections of the code block, shown by three back t
 &lt;p>This first example runs one bit of code, but what if you wanted to have multiple methods that can be edited, for example in a multi part or multi page tutorial? How would that work as the &lt;code>main&lt;/code> method is run every time?&lt;/p>
 &lt;p>The answer comes in the form of command line parameters. When Try .NET runs your console app, it passes the region name, source file and project file as command line parameters to the app. To see this in action you can dump the parameters to the console and relaunch the code.-&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>Console.WriteLine(&lt;span style="color:#66d9ef">string&lt;/span>.Join(&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>, args));
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="TryNetCommandLIneParams.png"/>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/trying-out-try-net/TryNetCommandLIneParams.png">
 &lt;/figure>
 &lt;p>You will see 6 parameters:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>--region HelloWorld --source-file .&lt;span style="color:#ae81ff">\P&lt;/span>rogram.cs --project .&lt;span style="color:#ae81ff">\T&lt;/span>ryDotNetDemo.csproj
@@ -3586,7 +3586,7 @@ Console.WriteLine(json);
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>```cs --region Json --source-file .\Program.cs --project .\TryDotNetDemo.csproj
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>
 When you run this code in the browser it will use `Newtonsoft.Json.JsonConvert` to serialize an anonymous object to a string. You even get full intellisense for this package in the editor.
-&lt;figure>&lt;img src="JsonHandling.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/trying-out-try-net/JsonHandling.png">
 &lt;/figure>
 ---
 All the code for this is available on GitHub here - [github.com/jimbobbennett/TryDotNetDemo](https://github.com/jimbobbennett/TryDotNetDemo).
@@ -3600,23 +3600,23 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;h3 id="unpack-the-board">Unpack the board&lt;/h3>
 &lt;p>We were given a big box of kit to try out before the hackathon. It had a range of boards and shields inside.&lt;/p>
-&lt;figure>&lt;img src="IMG_0290.jpg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/IMG_0290.jpg">
 &lt;/figure>
 &lt;p>I grabbed a WiPy and a Pysense board.&lt;/p>
 &lt;p>The &lt;a href="https://pycom.io/product/wipy-3-0/">WiPy&lt;/a> is a WiFi and BLE enabled board running an ESP32 micro controller. It doesn&amp;rsquo;t have any sensors or USB connectivity, it needs to be added to an expansion board.&lt;/p>
-&lt;figure>&lt;img src="IMG_0286.jpg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/IMG_0286.jpg">
 &lt;/figure>
 &lt;p>The &lt;a href="https://pycom.io/product/pysense/">PySense&lt;/a> is an expansion board that the WiPy plugs into. It has a load of sensors as well as a USB port you can use to program the micro controller.&lt;/p>
-&lt;figure>&lt;img src="IMG_0287.jpg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/IMG_0287.jpg">
 &lt;/figure>
 &lt;h3 id="plug-it-in">Plug it in&lt;/h3>
 &lt;p>The boards fit together, with the WiPy plugging into the socket on the Pysense. It took a bit of research to determine which way round to plug it in. Next I connected a WiFi antenna. Once it was all plugged together I connected the USB port to my Mac and an LED started flashing! Everyone loves blinking LEDs.&lt;/p>
-&lt;figure>&lt;img src="IMG_0293.jpg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/IMG_0293.jpg">
 &lt;/figure>
 &lt;p>I then did the usual dance to upgrade the firmware by following the &lt;a href="https://docs.pycom.io/gettingstarted/installation/firmwaretool.html">PyCom docs&lt;/a>. As a heads up, if you are using a Mac, unplug everything from the USB ports first otherwise you&amp;rsquo;ll get errors as it tried to push the firmware to the wrong device!&lt;/p>
 &lt;h3 id="configure-the-software">Configure the software&lt;/h3>
 &lt;p>Like a lot of developers, I love &lt;a href="https://code.visualstudio.com/?WT.mc_id=pycom-blog-jabenn">Visual Studio Code&lt;/a>! PyCom provides an &lt;a href="https://marketplace.visualstudio.com/itemdetails?itemName=pycom.Pymakr&amp;amp;WT.mc_id=pycom-blog-jabenn">extension for Code&lt;/a> that can talk to their boards.&lt;/p>
-&lt;figure>&lt;img src="2019-04-10_10-39-54.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/2019-04-10_10-39-54.png">
 &lt;/figure>
 &lt;h3 id="write-some-code">Write some code!&lt;/h3>
 &lt;p>These boards run &lt;a href="https://www.micropython.org">MicroPython&lt;/a>, an implementation of Python designed to run on micro controllers. MicroPython projects have the following structure:&lt;/p>
@@ -3646,7 +3646,7 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;p>Python is different to a lot of other languages in that &lt;code>sleep&lt;/code> takes a time in seconds, not milliseconds.&lt;/p>
 &lt;/blockquote>
 &lt;p>To deploy the code, launch the command palette and select &lt;em>Pymakr-&amp;gt;Run current file&lt;/em>. This will compile the code and run it to the device. Once done, the LED will start to flash red, then green, then blue.&lt;/p>
-&lt;figure>&lt;img src="2019-04-10_11-06-04.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/2019-04-10_11-06-04.png">
 &lt;/figure>
 &lt;p>This only runs the code on the device, it doesn&amp;rsquo;t store it permanently, so once the device is rebooted, the code is wiped. To upload the code so that it is maintained between reboots, use &lt;em>Pymakr -&amp;gt; Upload project&lt;/em>.&lt;/p>
 &lt;h2 id="send-data-to-the-cloud-using-pybytes">Send data to the cloud using PyBytes&lt;/h2>
@@ -3655,12 +3655,12 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;p>PyBytes makes it easy to configure your device. You add a new device from their Web dashboard, set up a unique name for it and the WiFi details for the WiFi you want the PyCom device to connect to. You then get an activation token that you can use when flashing the firmware to push these details to the device.&lt;/p>
 &lt;p>Flash the firmware, and configure it for PyBytes, setting the activation token.&lt;/p>
 &lt;p>Once the firmware is updated, the device will appear in the PyBytes dashboard.&lt;/p>
-&lt;figure>&lt;img src="2019-04-10_11-30-17.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/2019-04-10_11-30-17.png">
 &lt;/figure>
 &lt;h3 id="set-up-the-dashboard-to-receive-some-data">Set up the dashboard to receive some data&lt;/h3>
 &lt;p>PyBytes manages data as signals. A signal is data sent from the device, identified by a unique number. The PyBytes dashboard takes the signal data, enriches it with a name and unit and allows it to be displayed on a dashboard.&lt;/p>
 &lt;p>From the &lt;strong>Data&lt;/strong> tab on the dashboard, I defined a new signal called &lt;strong>Temperature&lt;/strong> for ID &lt;code>0&lt;/code>, with the unit set to °C.&lt;/p>
-&lt;figure>&lt;img src="2019-04-10_11-34-34.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/2019-04-10_11-34-34.png">
 &lt;/figure>
 &lt;h3 id="send-some-data">Send some data&lt;/h3>
 &lt;p>Once the signal was created, I needed to send data to it from the PySense temperature sensor. There are libraries for accessing the PyBytes API, and the PySense board, and these need to be grabbed from the &lt;a href="https://github.com/pycom/pycom-libraries">PyCom GitHub repo&lt;/a> and dropped in the &lt;code>lib&lt;/code> folder. I grabbed the &lt;code>[pysense.py](https://github.com/pycom/pycom-libraries/blob/master/pybytes/pysense/lib/pysense.py)&lt;/code> and &lt;code>[pycoproc.py](https://github.com/pycom/pycom-libraries/blob/master/pybytes/pysense/lib/pycoproc.py)&lt;/code> libraries to talk to the PySense board, and the &lt;code>[SI7006A20.py](https://github.com/pycom/pycom-libraries/blob/master/pybytes/pysense/lib/SI7006A20.py)&lt;/code> library to access the temperature sensor.&lt;/p>
@@ -3683,7 +3683,7 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pycom&lt;span style="color:#f92672">.&lt;/span>rgbled(&lt;span style="color:#ae81ff">0x000000&lt;/span>) &lt;span style="color:#75715e"># Turn off the LED&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sleep(&lt;span style="color:#ae81ff">5&lt;/span>) &lt;span style="color:#75715e"># Sleep for 5 seconds&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This uses the &lt;code>SI7006A20&lt;/code> temperature sensor to get the temperature, then sends a signal to PyBytes, using a signal id of &lt;code>0&lt;/code>. This data then appears on the PyBytes dashboard.&lt;/p>
-&lt;figure>&lt;img src="2019-04-10_12-04-12.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/2019-04-10_12-04-12.png">
 &lt;/figure>
 &lt;h2 id="integrate-pybytes-with-iot-hub">Integrate PyBytes with IoT Hub&lt;/h2>
 &lt;p>PyBytes supports integrations with &lt;a href="https://azure.microsoft.com/services/iot-hub/?WT.mc_id=pycom-blog-jabenn">Azure IoT Hub&lt;/a>, and it can push the data received from the device into IoT Hub.&lt;/p>
@@ -3692,20 +3692,20 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;p>From the command palette, selecting &lt;em>Azure IoT Hub -&amp;gt; Create IoT Hub&lt;/em> allows you to create a new IoT Hub. Follow the instructions, and you get a new IoT Hub set up.&lt;/p>
 &lt;h3 id="integrate-the-iot-hub-into-pybytes">Integrate the IoT Hub into PyBytes&lt;/h3>
 &lt;p>When the IoT Hub is running, open it up in the &lt;a href="https://portal.azure.com/?WT.mc_id=pycom-blog-jabenn">Azure Portal.&lt;/a> Head to &lt;em>Settings -&amp;gt; Shared Access Policies&lt;/em>, select the &lt;em>registryReadWrite&lt;/em> policy and copy the &lt;em>Connection string - Primary key&lt;/em>. PyBytes needs read and write permissions on the registry to register devices for you - each device configured in PyBytes becomes a device in IoT Hub.&lt;/p>
-&lt;figure>&lt;img src="2019-04-10_12-31-07.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/2019-04-10_12-31-07.png">
 &lt;/figure>
 &lt;p>From PyBytes, select &lt;em>Integrations -&amp;gt; New Integration&lt;/em>. Select &lt;em>Microsoft Azure&lt;/em>, then paste the connection string and select &lt;em>Login&lt;/em>. Give the integration a name, enter a topic for the messages and select the devices you want to include. Then select &lt;strong>Create&lt;/strong>. Once the integration is created, you can send a test message, then check for this in the IoT Hub.&lt;/p>
-&lt;figure>&lt;img src="2019-04-10_13-01-16.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/2019-04-10_13-01-16.png">
 &lt;/figure>
 &lt;p>You will also be able to see the device in the devices list both in the IoT Hub list, and in the &lt;em>Azure IoT Hub Devices&lt;/em> section in the explorer. You can right-click on the device in the explorer and select &lt;em>Start monitoring D2C messages&amp;hellip;&lt;/em> to see a stream of the messages in the output window.&lt;/p>
-&lt;figure>&lt;img src="2019-04-10_13-02-35.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/connecting-pycom-boards-to-azure-iot-hub/2019-04-10_13-02-35.png">
 &lt;/figure>
 &lt;p>The data is raw, unenriched data showing the signal id and value.&lt;/p>
 &lt;h2 id="next-steps">Next steps&lt;/h2>
 &lt;p>Now that the data is flowing into IoT Hub, you can do anything you want with it - enrich it using &lt;a href="https://azure.microsoft.com/services/stream-analytics/?WT.mc_id=pycom-blog-jabenn">stream analytics&lt;/a> or an &lt;a href="https://azure.microsoft.com/services/functions/?WT.mc_id=pycom-blog-jabenn">Azure function&lt;/a>, do &lt;a href="https://azure.microsoft.com/services/time-series-insights/?WT.mc_id=pycom-blog-jabenn">time series insights&lt;/a> on it, anything you want!&lt;/p>
 &lt;hr>
 &lt;p>All the code for this project is available on GitHub here: &lt;a href="https://github.com/jimbobbennett/PyCom-AzureIoTHub">github.com/jimbobbennett/PyCom-AzureIoTHub&lt;/a>&lt;/p></description></item><item><title>Python on a Raspberry Pi using VS Code</title><link>https://jimbobbennett.dev/blogs/python-on-a-raspberry-pi-using-vs-code/</link><pubDate>Tue, 02 Apr 2019 14:32:05 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/python-on-a-raspberry-pi-using-vs-code/</guid><description>&lt;p>I&amp;rsquo;ve recently been playing with a Raspberry Pi with the aim of learning Python. These are great little computers and have been an amazing success, selling 19 million as of March 2018, and kids everywhere are using them to learn to code with &lt;a href="https://scratch.mit.edu">Scratch&lt;/a> and Python.&lt;/p>
-&lt;figure>&lt;img src="IMG_0252.jpg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/python-on-a-raspberry-pi-using-vs-code/IMG_0252.jpg">
 &lt;/figure>
 &lt;p>The IDE for Python that is shipped by default is IDLE. This is a great IDE that comes as part of the standard Python install - it has an interactive shell and file editor, debugger and everything you need. It&amp;rsquo;s good enough, but not quite on par with the world class editor that is &lt;a href="https://code.visualstudio.com/?WT.mc_id=vscodepi-blog-jabenn">Visual Studio Code&lt;/a>.&lt;/p>
 &lt;p>Currently there aren&amp;rsquo;t any official builds for VS Code for ARM processors, although there is a request for it on GitHub. Please head to this link and upvote it:&lt;/p>
@@ -3726,22 +3726,22 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once a fix has been released, you can remove the version lock with:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>apt-mark unhold code-oss
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once you launch code you will be able to install the extensions you need. In my case, I wanted the Python extension.&lt;/p>
-&lt;figure>&lt;img src="2019-04-02_15-22-17.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/python-on-a-raspberry-pi-using-vs-code/2019-04-02_15-22-17.png">
 &lt;/figure>
 &lt;p>Quick restart later and I&amp;rsquo;m up and running with a full Python environment inside VS Code, with a full debugger and all the goodies I could ever want!&lt;/p></description></item><item><title>Jim made some dumb mistakes when recording a video. You won't believe how he fixed it with Azure Media Services!</title><link>https://jimbobbennett.dev/blogs/making-video-editing-easier-with-azure-media-services/</link><pubDate>Tue, 02 Apr 2019 09:38:50 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/making-video-editing-easier-with-azure-media-services/</guid><description>&lt;p>I was at a recent &lt;a href="https://www.meetup.com/Reading-NET-Meetup/">Reading .NET Meetup&lt;/a>, and wanted to record the event to make it available to members of the group who couldn&amp;rsquo;t attend the event in person. This is part of my aim to &lt;a href="https://github.com/jimbobbennett/MakingMeetupsMoreAccessible">make meetups more accessible&lt;/a>.&lt;/p>
-&lt;figure>&lt;img src="IMG_0187.jpg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/making-video-editing-easier-with-azure-media-services/IMG_0187.jpg">
 &lt;/figure>
 &lt;p>We have a cool box of recording git, courtesy of the &lt;a href="https://twitter.com/ch9">Channel9&lt;/a> team at Microsoft, including a Canon XC10 camera. This camera records using the Canon MXF format, a propriety format that doesn&amp;rsquo;t work with my video editing app of choice, &lt;a href="https://www.techsmith.com/video-editor.html">Camtasia&lt;/a>. I also made a basic video recording error, I recorded the video at 30fps, and the audio using a separate recorder at 60fps!&lt;/p>
-&lt;figure>&lt;img src="IMG_0192.jpg"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/making-video-editing-easier-with-azure-media-services/IMG_0192.jpg">
 &lt;/figure>
 &lt;p>This needed to be fixed - I needed to align the frame rates, and convert the MXF files to MP4 to work with Camtasia. And this is where Azure Media services comes in.&lt;/p>
 &lt;p>&lt;a href="https://azure.microsoft.com/services/media-services/?WT.mc_id=azuremedia-blog-jabenn">Azure Media Services&lt;/a> is a suite of services that can encode and stream media. You create a media services resource, then you can use it to encode video either via the portal, or via &lt;a href="https://docs.microsoft.com/azure/media-services/latest/?WT.mc_id=azuremedia-blog-jabenn">the SDK&lt;/a>.&lt;/p>
 &lt;h3 id="getting-started">Getting started&lt;/h3>
 &lt;p>The first thing to do is to launch the &lt;a href="https://portal.azure.com/?WT.mc_id=azuremedia-blog-jabenn">Azure Portal&lt;/a> and create a &lt;strong>Media Service&lt;/strong> resource.&lt;/p>
-&lt;figure>&lt;img src="2019-03-29_11-13-38.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/making-video-editing-easier-with-azure-media-services/2019-03-29_11-13-38.png">
 &lt;/figure>
 &lt;p>Once created, upload an asset - a video file to encode. From the Media Service resource, go to the &lt;em>Assets&lt;/em> tab and select &lt;em>Upload&lt;/em>. Point it to your .MXF file and it will start uploading. You can upload more than one file at once if needed.&lt;/p>
-&lt;figure>&lt;img src="2019-04-02_10-31-09.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/making-video-editing-easier-with-azure-media-services/2019-04-02_10-31-09.png">
 &lt;/figure>
 &lt;blockquote>
 &lt;p>Video files are huge - my smallest one was 6GB, so it takes a loooooooong time to upload if like me you have crappy bandwidth. Don&amp;rsquo;t let your computer go to sleep as this interrupts the upload and you have to delete the asset and start again.&lt;/p>
@@ -3750,41 +3750,41 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;p>From the &lt;strong>Encode an asset&lt;/strong> tab, select the preset you want to use. The default is &lt;em>Content Adaptive Multiple Bitrate MP4&lt;/em>, which provides adaptive streaming, changing the bitrate to match the streaming speed. This is great for content published on the net where viewers will be streaming it using different download speeds, but not so great for just re-encoding to bring into a video editing tool. Select an appropriate preset - I went for H264 Single Bitrate 1080p as I just want the highest bitrate and full size video. You can encode a video that is uploading - it will just queue the encoding job until the video is fully uploaded.&lt;/p>
 &lt;p>Again, this will take a long time!&lt;/p>
 &lt;p>Once the job is complete, head to the &lt;em>Assets&lt;/em> tab and select the encoded asset. Before you can download the video file you need to publish the asset using a progressive encoder. Click the &lt;strong>Publish&lt;/strong> button, set the encoder as &lt;em>Progressive&lt;/em> and click &lt;strong>Add&lt;/strong>.&lt;/p>
-&lt;figure>&lt;img src="2019-04-02_13-24-13.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/making-video-editing-easier-with-azure-media-services/2019-04-02_13-24-13.png">
 &lt;/figure>
 &lt;p>The files for the asset wil be listed at the bottom, and one file will be a &lt;code>video/mp4&lt;/code> file. Select this file, and the details on it will expand out the side, including a download link. Use this link to download the encoded file.&lt;/p>
-&lt;figure>&lt;img src="2019-04-02_10-36-48.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/making-video-editing-easier-with-azure-media-services/2019-04-02_10-36-48.png">
 &lt;/figure>
 &lt;p>Done! You can now import this file into tools like Camtasia.&lt;/p></description></item><item><title>Screen sharing a Raspberry Pi from a Mac</title><link>https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/</link><pubDate>Sun, 31 Mar 2019 22:34:10 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/</guid><description>&lt;p>I&amp;rsquo;ve been playing with a Raspberry Pi for a while, and I&amp;rsquo;m getting fed up with changing the input to my monitor and using a second keyboard/mouse (yeah, yeah, 1st World Problem I know). I decided to set up a remote screen share so I can share the screen. This means I can use the same monitor/keyboard/mouse that I use for my Mac, but it also means I can un-cable myself and use my Pi from anywhere in the house, and even grab screenshots - useful for some upcoming blog posts I&amp;rsquo;m planning.&lt;/p>
 &lt;p>As it turns out, it&amp;rsquo;s really simple to get this set up.&lt;/p>
 &lt;h2 id="configure-the-pi">Configure the Pi&lt;/h2>
 &lt;p>Start by enabling VNC on the Pi. To do this, click the Raspberry Menu and select &lt;em>Raspberry Pi Configuration&lt;/em>. From the configuration tool, select the &lt;em>Interfaces&lt;/em> tab, then check the &lt;em>Enabled&lt;/em> option next to &lt;em>VNC&lt;/em>. Click &lt;strong>OK&lt;/strong>, then restart the Pi when prompted.&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-12-31.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-12-31.png">
 &lt;/figure>
 &lt;p>Once the Pi reboots, you need to configure VNC. Click the VNC icon in the menu bar.&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-15-58.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-15-58.png">
 &lt;/figure>
 &lt;p>This will launch the &lt;em>VNC Server&lt;/em> tool. Click the hamburger and select &lt;em>Options&lt;/em>.&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-19-22.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-19-22.png">
 &lt;/figure>
 &lt;p>In the &lt;em>Security&lt;/em> tab, set the &lt;em>Encryption&lt;/em> to &lt;code>Prefer off&lt;/code> and the &lt;em>Authentication&lt;/em> to &lt;code>VNC Password&lt;/code>.&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-21-21.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-21-21.png">
 &lt;/figure>
 &lt;p>In the &lt;em>Users &amp;amp; Permissions&lt;/em> tab, select the &lt;em>Standard user (user)&lt;/em>, and click the &lt;strong>Password&amp;hellip;&lt;/strong> button. Set the password then click &lt;strong>OK&lt;/strong>, then click &lt;strong>OK.&lt;/strong>&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-22-52-1.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-22-52-1.png">
 &lt;/figure>
 &lt;p>Finally you need the IP address of the Raspberry Pi. Launch a terminal, and type &lt;code>ifconfig&lt;/code>. Find the &lt;code>inet&lt;/code> address from &lt;code>wlan0&lt;/code> and note this down.&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-25-59.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-25-59.png">
 &lt;/figure>
 &lt;h2 id="connecting-from-the-mac">Connecting from the Mac&lt;/h2>
 &lt;p>To connect from the Mac, open Finder, then select &lt;em>Go -&amp;gt; Connect to server&amp;hellip;&lt;/em>. Enter the address as &lt;code>vnc://&amp;lt;ip address of the Pi&amp;gt;&lt;/code>, for example &lt;code>vnc://192.168.2.10&lt;/code>. Click &lt;strong>Connect&lt;/strong>.&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-28-04.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-28-04.png">
 &lt;/figure>
 &lt;p>You will be prompted for a password. Enter the password you set up for your VNC standard user and check the box to remember this password. Click &lt;strong>Sign In&lt;/strong>.&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-30-00.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-30-00.png">
 &lt;/figure>
 &lt;p>Screen sharing will launch, showing your Raspberry PI desktop!&lt;/p>
-&lt;figure>&lt;img src="2019-03-31_23-33-15.png"/>
+&lt;figure>&lt;img src="https://jimbobbennett.dev/blogs/screen-sharing-a-raspberry-pi-from-a-mac/2019-03-31_23-33-15.png">
 &lt;/figure></description></item><item><title>Xamarin ❤ F#</title><link>https://jimbobbennett.dev/blogs/xamarin-f/</link><pubDate>Sat, 16 Feb 2019 20:35:51 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/xamarin-f/</guid><description>&lt;p>&lt;a href="aka.ms/XamDocs">Xamarin&lt;/a> and &lt;a href="aka.ms/XamFormsDocs">Xamarin.Forms&lt;/a> need no introduction. I&amp;rsquo;m sure by now you are well aware of these technologies and have seen many examples of building cross-platform mobile apps using C#. If not, I can highly recommend my book &lt;a href="xam.jbb.io">Xamarin in Action&lt;/a> which if you follow &lt;a href="xam.jbb.io">this link&lt;/a> and use code &amp;lsquo;xamarininaction&amp;rsquo; you can get 40% off the cover price.&lt;/p>
 &lt;p>What you many not realize however, is you don&amp;rsquo;t have to just use C#. Yes, C# is a fantastic object-oriented language, but what if you like functional programming?&lt;/p>
 &lt;p>The answer is &lt;a href="https://aka.ms/learnfs">F#&lt;/a>. F# is a functional-first programming language that is fully compatible with the .NET stack. What does &amp;lsquo;functional-first&amp;rsquo; mean? Well it means it is a functional programming language that also supports object-orientation, classes and inheritance and whatnot. Essentially it encourages function programming whilst still supporting enough to interact with the OO world of the .NET framework.&lt;/p>
@@ -3805,13 +3805,13 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;p>This project detects the current temperature using the MSChips on-board temperature sensor, and if it is above a threshold, it will turn the fan on. It will also send telemetry data with the current temperature to an Azure IoT hub, which in turn triggers an Azure Function to save the temperature into a CosmosDB instance.&lt;/p>
 &lt;p>This project has a Xamarin mobile app that will poll another Azure Function to get the temperature and show it on screen. It also shows the threshold for turning on the fan, and this threshold can be configured from the app. Setting the value will call another Azure Function that updates the &lt;a href="https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-device-twins/?WT.mc_id=iotfan-github-jabenn">device twin&lt;/a> for the device - a JSON document that is kept in sync between the device and the IoT hub. When the value on the hub is updated, it syncs to the device and the temperature threshold is updated, starting the fan if necessary.&lt;/p>
 &lt;h2 id="hardware">Hardware&lt;/h2>
-&lt;figure>&lt;img src="https://github.com/jimbobbennett/InternetConnectedFan/raw/master/Images/PhotoOfFinalHardware.jpg"/>
+&lt;figure>&lt;img src="https://github.com/jimbobbennett/InternetConnectedFan/raw/master/Images/PhotoOfFinalHardware.jpg">
 &lt;/figure>
 &lt;p>The hardware for this project is based around the MXChip which you can buy from &lt;a href="https://amzn.to/2Bguvem">here&lt;/a> for around £40. This is an Arduino-compatible prototyping board that comes with a range of sensors, LEDs, buttons, a screen and other capabilities, as well as connectivity to Azure IoT Hub built in.&lt;/p>
 &lt;p>This then needs to be attached to a relay and a fan. For the fan, I used a simple battery powered fan that works with 2 AA batteries that is available &lt;a href="https://amzn.to/2CYVQlm">here&lt;/a>. I removed the batteries and connected wires instead, removing the on/off switch and running the cables through the hole. The fan runs on 3V so I was able to use power from the MXChip instead of batteries, as this board can supply 3V.&lt;/p>
 &lt;p>The relay I used was one that came with an Intel Edison kit, but any 3V relay will do. To make wiring easier, I used the &lt;a href="https://amzn.to/2BgtRxs">Inventors Kit for the BBC Micro:bit&lt;/a> - the MXChip has the same connector as the &lt;a href="https://microbit.org/">Micro:bit&lt;/a>, and this kit converts the connector to a set of GPIO pins with a built in breadboard for easy prototyping.&lt;/p>
 &lt;p>Power to the relay poles was wired to the 3V/0V pins on the board, with PIN0 wired to the relay control. The input to the contacts was wired to 3V from the board, with the output connected to the +ve input on the fan. Finally the -ve input on the fan was wired to the 0V connection on the board.&lt;/p>
-&lt;figure>&lt;img src="https://github.com/jimbobbennett/InternetConnectedFan/raw/master/Images/Wiring.png"/>
+&lt;figure>&lt;img src="https://github.com/jimbobbennett/InternetConnectedFan/raw/master/Images/Wiring.png">
 &lt;/figure>
 &lt;h2 id="software">Software&lt;/h2>
 &lt;p>The software for this is in 3 parts - firmware for the device, some Azure Functions to work with device data and configure the device, and client code in the form of a mobile app.&lt;/p>
@@ -3844,7 +3844,7 @@ You can also read more on the [.NET blog](https://devblogs.microsoft.com/dotnet/
 &lt;p>The device twin callback function, &lt;code>DeviceTwinCallback&lt;/code>, is called whenever an update to the device twin is received by the board. This callback parses the JSON that is sent, extracting the threshold value.&lt;/p>
 &lt;p>When you worked through the setup, you would have deployed the code to the device, so this should be running already. If you want to re-deploy, use the &lt;em>Azure IoT Device Workbench: Upload Device Code&lt;/em> option from the Command Palette.&lt;/p>
 &lt;p>When this app is running, you will be able to see telemetry on the messages received by navigating to your IoT hub in the &lt;a href="https://portal.azure.com/?WT.mc_id=iotfan-github-jabenn">Azure Portal&lt;/a>.&lt;/p>
-&lt;figure>&lt;img src="https://github.com/jimbobbennett/InternetConnectedFan/raw/master/Images/Telemetry.png"/>
+&lt;figure>&lt;img src="https://github.com/jimbobbennett/InternetConnectedFan/raw/master/Images/Telemetry.png">
 &lt;/figure>
 &lt;h3 id="azure-function-app">Azure Function App&lt;/h3>
 &lt;p>The Azure Function app lives in the &lt;code>Functions&lt;/code> folder, and has 3 functions:&lt;/p>
