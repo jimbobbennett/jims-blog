@@ -239,7 +239,7 @@ params:
       videos:      
       - title: "Learn About Windows on Arm with the NPU-accelerated Windows Arm Developer Kit"
         id: jV5M-3sCEqI
-        description: "On today’s show, Jim is joined by Ivette Carreras, a software development manager on the team bringing Windows to Arm devices. Ivette has a cool dev kit to show off that combines not only Windows running on an Arm64 processor with an emulation layer for x86 and x64 applications, but also adds a dedicated NPU for AI workloads. To top it all off, it's wrapped in ocean recycled plastic."
+        description: "On today's show, Jim is joined by Ivette Carreras, a software development manager on the team bringing Windows to Arm devices. Ivette has a cool dev kit to show off that combines not only Windows running on an Arm64 processor with an emulation layer for x86 and x64 applications, but also adds a dedicated NPU for AI workloads. To top it all off, it's wrapped in ocean recycled plastic."
            
       - title: "Build an Object Detector Running on a Microcontroller Using Edge Impulse FOMO and Azure IoT"
         id: bpVejDLZxYY
@@ -247,15 +247,15 @@ params:
         
       - title: "Make Friends Literally with a FriendBot Powered by GPT-3 from OpenAI and Azure Cognitive Services"
         id: mS_R7TVH3G0
-        description: "On today’s show, Jim is joined by Adrian Bonar, a maker who likes to make friends, literally! Adrian has brought FriendBot with him, a conversational robot powered by Azure Cognitive Services and Open AI's GPT-3 that wants to chat with you. This is built around a Raspberry Pi with a conference room speaker in a 3D printed case, running C# .NET code."
+        description: "On today's show, Jim is joined by Adrian Bonar, a maker who likes to make friends, literally! Adrian has brought FriendBot with him, a conversational robot powered by Azure Cognitive Services and Open AI's GPT-3 that wants to chat with you. This is built around a Raspberry Pi with a conference room speaker in a 3D printed case, running C# .NET code."
         
       - title: "Learn IoT with Kid-Friendly Plug-and-Play IoT Devices for Class or Home, Powered by JacDac"
         id: HDMKxoaDq2I
-        description: "On today’s show, Jim is joined by Peli De Halleux, a research software engineer at Microsoft who has been working on simplifying IoT devices to not only make programming them much, much easier, but also more robust and kid friendly."
+        description: "On today's show, Jim is joined by Peli De Halleux, a research software engineer at Microsoft who has been working on simplifying IoT devices to not only make programming them much, much easier, but also more robust and kid friendly."
 
       - title: "Build a 3D Printed Clippy Powered by ChatGPT from OpenAI, Azure Cognitive Services"
         id: 6OYGeOwd6RY
-        description: "On today’s show, Jim is joined by David Packman, a maker who loves building social robots. Inspired by the memes that ChatGPT is really Clippy under the hood, David has built a Raspberry Pi  powered, 3D printed #clippy you can ask questions to using ChatGPT."
+        description: "On today's show, Jim is joined by David Packman, a maker who loves building social robots. Inspired by the memes that ChatGPT is really Clippy under the hood, David has built a Raspberry Pi  powered, 3D printed #clippy you can ask questions to using ChatGPT."
         
       - title: "Build your own pocket sized Altair 8800!"
         id: 2yyBfw3CARc
@@ -263,15 +263,15 @@ params:
         
       - title: "Build a bionic hand using open source prosthetics"
         id: 60XyevlK2GI
-        description: On today’s show, Jim is joined by Cliff Agius, a pilot and IoT and mobile developer from the UK. He’s mixed the power of 3D modeling software, consumer 3D printers, low priced IoT hardware and a mobile app to build an open source bionic hand that can be customized for a range of tasks, from picking things up, to playing Xbox.
+        description: On today's show, Jim is joined by Cliff Agius, a pilot and IoT and mobile developer from the UK. He's mixed the power of 3D modeling software, consumer 3D printers, low priced IoT hardware and a mobile app to build an open source bionic hand that can be customized for a range of tasks, from picking things up, to playing Xbox.
         
       - title: "Build an IoT solution in under 5 minutes!"
         id: XPK3RUUPbjA
-        description: On today’s show, Jim is joined by Vanessa, an IoT program manager from Microsoft, who's reduced the journey to IoT Wow to less than 5 minutes for some of the most popular developer kits from the manufacturers of the hardware you find in today's production IoT deployments.
+        description: On today's show, Jim is joined by Vanessa, an IoT program manager from Microsoft, who's reduced the journey to IoT Wow to less than 5 minutes for some of the most popular developer kits from the manufacturers of the hardware you find in today's production IoT deployments.
 
       - title: Build Your Own Retro Toy Robot
         id: oG8SLTT2NLg
-        description: On today’s show, Jim is joined by John Kennedy, a retro computer and IoT enthusiast who has a fascination for classic robot toys from the 80s. He’s finally got his hands on the toy he wanted from his youth, but instead of being content there, he’s given it a brain!
+        description: On today's show, Jim is joined by John Kennedy, a retro computer and IoT enthusiast who has a fascination for classic robot toys from the 80s. He's finally got his hands on the toy he wanted from his youth, but instead of being content there, he's given it a brain!
 
       - title: Build an Augmented Reality App to Shoot Hoops Anywhere
         id: iKnMvYOsyyY
@@ -311,7 +311,7 @@ params:
       videos:
       - title: "Custom Vision 1 – Machine Learning Made Easy"
         id: TETcDLJlWR4
-        description: This week James is joined by friend of the show Jim Bennett, a Cloud Developer Advocate at Microsoft, who shows us how to use AI inside a mobile app to identify his daughters’ toys. He walks through using the Azure custom vision service to generate a model to identify different toys, then shows how you can use these models from inside your app, both remotely by calling an Azure service, or locally by running the model on your device using CoreML and Tensorflow.
+        description: This week James is joined by friend of the show Jim Bennett, a Cloud Developer Advocate at Microsoft, who shows us how to use AI inside a mobile app to identify his daughters' toys. He walks through using the Azure custom vision service to generate a model to identify different toys, then shows how you can use these models from inside your app, both remotely by calling an Azure service, or locally by running the model on your device using CoreML and Tensorflow.
         
       - title: "Custom Vision 2 - Object Detection Made Easy "
         id: wtTYSyBUpFc
@@ -374,34 +374,34 @@ params:
         videos:
           - title: "Episode 1 - Sudoku validator"
             id: bUAYiqKP2II
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Jay Miller, a Python developer advocate at Microsoft and together they try to crack a sudoku validator problem."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Jay Miller, a Python developer advocate at Microsoft and together they try to crack a sudoku validator problem."
           - title: "Episode 2 - Sudoku validator continues"
             id: PI19epT_JZA
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Dr Sarah Kaiser, a Python developer advocate at Microsoft and together they continue to try to crack the sudoku validator problem from last week."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Dr Sarah Kaiser, a Python developer advocate at Microsoft and together they continue to try to crack the sudoku validator problem from last week."
           - title: "Episode 3 - Sudoku validator continues"
             id: 794Rpb9TjPo
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Jay Miller and Dr Sarah Kaiser, both Python developer advocates at Microsoft and together they continue to try to finish the sudoku validator problem from the last two weeks."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Jay Miller and Dr Sarah Kaiser, both Python developer advocates at Microsoft and together they continue to try to finish the sudoku validator problem from the last two weeks."
 
       - title: "Crack code interview problems in Rust"
         videos:
           - title: "Season 1, Episode 1 - Number of Islands problem"
             id: ugz1YgoZmzI
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Ryan Levick from the Rust Foundation board and together they try to crack the number of islands problem."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Ryan Levick from the Rust Foundation board and together they try to crack the number of islands problem."
           - title: "Season 1, Episode 2 - Conway's game of life"
             id: 0jKSfKqOoFc
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Ryan Levick from the Rust Foundation board and together they try to implement Conway's game of life."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Ryan Levick from the Rust Foundation board and together they try to implement Conway's game of life."
           - title: "Season 1, Episode 3 - Conway's game of life continues"
             id: 2Dd6wACDna8
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Yosh Wuyrt, a Rust developer advocate and together they try to finish the implementation of Conway's game of life from last week."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Yosh Wuyrt, a Rust developer advocate and together they try to finish the implementation of Conway's game of life from last week."
           - title: "Season 2, Episode 1 - Word Search problem"
             id: rJyeQ4tIv5s
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Nell Shamrell-Harrington from the Rust Foundation board and together they try to crack a word search problem."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Nell Shamrell-Harrington from the Rust Foundation board and together they try to crack a word search problem."
           - title: "Season 2, Episode 2 - Word Search continues"
             id: eYCxaTpeflU
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Nell Shamrell-Harrington from the Rust Foundation board and together they try to finish their word search problem from last week."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Nell Shamrell-Harrington from the Rust Foundation board and together they try to finish their word search problem from last week."
           - title: "Season 2, Episode 3 - Word Search refactoring and can CoPilot solve the problem?"
             id: -Gz5NcnM3B8
-            description: "Come watch ‘experts’ try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Nell Shamrell-Harrington, a Rust developer advocate and together they refactor their solution to the word search problem from last week, and see if GitHub CoPilot can do a better job."
+            description: "Come watch ‘experts' try (and possibly fail) to solve coding challenges in Rust! In this episode, Jim is joined by Nell Shamrell-Harrington, a Rust developer advocate and together they refactor their solution to the word search problem from last week, and see if GitHub CoPilot can do a better job."
 
       - title: "Tech Career Tips - Sea of Nerds"
         videos:
@@ -410,7 +410,7 @@ params:
             description: For this session, our crew is joined by Jennifer Ritzinger, the General Manager of the Next Generation Experiences team at Microsoft, and Pablo Veramendi, director of audience evangelism and the brains behind the Microsoft Learn Student Ambassador and Imagine Cup programs.
           - title: "Tech career tips from graduate hires at Microsoft – Sea of Nerds"
             id: 1PuP6JHxtwA
-            description: For this session, our crew is joined by a couple of young pirates who interned at Microsoft in different ways before taking graduate roles with the company. Tessa Wiedmann started as an engineer, but being a former Student Ambassador jumped at the chance to help grow this program! Gustavo Cordido joined under more locked down circumstances, doing a virtual internship at the start of the pandemic. That experience didn’t put him off a life on the ocean waves, and he joined Microsoft as a developer advocate when he graduated.
+            description: For this session, our crew is joined by a couple of young pirates who interned at Microsoft in different ways before taking graduate roles with the company. Tessa Wiedmann started as an engineer, but being a former Student Ambassador jumped at the chance to help grow this program! Gustavo Cordido joined under more locked down circumstances, doing a virtual internship at the start of the pandemic. That experience didn't put him off a life on the ocean waves, and he joined Microsoft as a developer advocate when he graduated.
           - title: "Tech career tips from interns at Microsoft – Sea of Nerds"
             id: An5lBy_zTe0
             description: For this session, our crew is joined by a group of young pirates who recently interned at Microsoft.
@@ -421,28 +421,28 @@ params:
         videos:
           - title: "Lesson 1: Introduction to IoT"
             id: bVFfcYh6UBw
-            description: This lesson covers some of the introductory topics around the Internet of Things, and shows a basic ‘Hello World’ project with a microcontroller.
+            description: This lesson covers some of the introductory topics around the Internet of Things, and shows a basic ‘Hello World' project with a microcontroller.
           - title: "Lesson 1: Introduction to IoT - office hours"
             id: YI772q5v3yI
-            description: As a follow up to what was covered in the last ‘IoT for beginners’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
+            description: As a follow up to what was covered in the last ‘IoT for beginners' session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
           - title: "Lesson 2: A Deeper Dive into IoT"
             id: bVFfcYh6UBw
-            description: This lesson dives deeper into some of the concepts covered in the last lesson. The two components of an IoT application are the Internet and the thing, and this lesson dives deeper into both of these, covering different types of ‘things’, including microcontrollers and single-board computers. It then looks at the  different ways these ‘things’ can use the Internet.
+            description: This lesson dives deeper into some of the concepts covered in the last lesson. The two components of an IoT application are the Internet and the thing, and this lesson dives deeper into both of these, covering different types of ‘things', including microcontrollers and single-board computers. It then looks at the  different ways these ‘things' can use the Internet.
           - title: "Lesson 2: A Deeper Dive into IoT - office hours"
             id: YI772q5v3yI
-            description: As a follow up to what was covered in the last ‘Introduction to dev kit hardware’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
+            description: As a follow up to what was covered in the last ‘Introduction to dev kit hardware' session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
           - title: "Lesson 3: Interact with the Physical World with Sensors and Actuators"
             id: Lqalu1v6aF4
             description: This lesson introduces two of the important concepts for your IoT device - sensors and actuators. Sensors read data from the physical world, actuators control it, and this lesson looks in more depth at how this happens, covering analog and digital hardware (and what these terms mean). You will also see how to build a nightlight with a microcontroller, using sensor data to control an actuator.
           - title: "Lesson 3: Interact with the Physical World with Sensors and Actuators - office hours"
             id: qR3ekcMlLWA
-            description: As a follow up to what was covered in the last ‘ Interacting with the Physical World with sensors and Actuators’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
+            description: As a follow up to what was covered in the last ‘ Interacting with the Physical World with sensors and Actuators' session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
           - title: "Lesson 4: Connect your Device to the Internet"
             id: O4dd172mZhs
             description: This lesson introduces some of the communication protocols IoT devices can use to connect to the cloud, and the types of data they might send or receive. It will also show how to control a microcontroller over MQTT.
           - title: "Lesson 4: Connect your Device to the Internet - office hours"
             id: j-cVCzRDE2Q
-            description: As a follow up to what was covered in the last ‘Communicating with Devices’ session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
+            description: As a follow up to what was covered in the last ‘Communicating with Devices' session, join Jim for an open office hour where you can ask questions relating to the material that has been covered in the series so far, getting explanations of the concepts taught, diving deeper into theory or practice, or getting troubleshooting help on your IoT journey.
           - title: "Lesson 5: Soil moisture sensors and digital agriculture"
             id: ZzpTu3x4c6M
             description: "This new 4-part series is a continuation of IoT for Beginners run throughout September based off the second project in the 24-lesson series – digital agriculture. This lesson covers monitoring soil moisture using a soil moisture sensor, and in doing so dives more into how IoT devices communicate with sensors."
@@ -494,14 +494,14 @@ params:
         videos:
           - title: "Python Episode 1: Ancient Cryptography"
             id: Qlboizb7WHc
-            description: In this episode, Jim explores some classic cryptography and builds out tools in Python to not only encrypt messages, but also to try to decrypt them! he’ll be travelling around the ancient world from India, to Rome, Sparta and Baghdad, learning about their techniques for encrypting and decrypting all manner of secrets. 
+            description: In this episode, Jim explores some classic cryptography and builds out tools in Python to not only encrypt messages, but also to try to decrypt them! he'll be travelling around the ancient world from India, to Rome, Sparta and Baghdad, learning about their techniques for encrypting and decrypting all manner of secrets. 
           - title: "Python Episode 2: Python in the browser"
             id: 8XS5ui2Ko-o
-            description: In this episode, Jim learns all about PyScript, putting the early alpha versions through their paces to build out a simple web app. He’ll be seeing if he can do web development without JavaScript.
+            description: In this episode, Jim learns all about PyScript, putting the early alpha versions through their paces to build out a simple web app. He'll be seeing if he can do web development without JavaScript.
             
           - title: "C++ Episode 1: Intro to modern C++"
             id: jW34S1Twtxk
-            description: In this first episode, Jim is joined by Sy Brand, a developer advocate on the Microsoft C++ team, to learn about the basics of C++. Jim will be drawing on his knowledge from years ago of both the good and the bad parts of traditional C++, but rather than lead you down the wrong path, Sy will be on hand to share all about modern C++, and they are more than ready to correct Jim’s mistakes! 
+            description: In this first episode, Jim is joined by Sy Brand, a developer advocate on the Microsoft C++ team, to learn about the basics of C++. Jim will be drawing on his knowledge from years ago of both the good and the bad parts of traditional C++, but rather than lead you down the wrong path, Sy will be on hand to share all about modern C++, and they are more than ready to correct Jim's mistakes! 
           - title: "C++ Episode 2: C++ Tooling"
             id: 5avhM8IqA40
             description: Every good programming language has great tools to help you get the most of it, and C++ is no exception. 25 years ago, Jim first used Microsoft Visual C++ 1.52 which came on a CD-ROM (if any of you remember those). Now C++ is supported by a range of developer tools. 
@@ -513,7 +513,7 @@ params:
         videos:
           - title: "Episode 1: Time for Tea"
             id: 8QWI7qkuFBM
-            description: In this episode Jim and Sam introduce themselves and the problem at hand – tracking Sam’s tea. They will talk about the architecture they are planning on implementing, then they will build and live code a scale and get the data into the cloud via IoT Hub.
+            description: In this episode Jim and Sam introduce themselves and the problem at hand – tracking Sam's tea. They will talk about the architecture they are planning on implementing, then they will build and live code a scale and get the data into the cloud via IoT Hub.
             
           - title: "Episode 2: Teaing up New Devices"
             id: j7Kixa8Wy9c
@@ -525,7 +525,7 @@ params:
             
           - title: "Episode 4: Dashboards and Darjeeling"
             id: WGfVxCvMaD0
-            description: Reporting time! Sam loves dashboards so our intrepid developers look at reporting and dashboarding tools to build a dashboard so Sam can quickly see how much tea he has at any given time. These dashboards will let them track metrics and create reports from the data they’re collecting. 
+            description: Reporting time! Sam loves dashboards so our intrepid developers look at reporting and dashboarding tools to build a dashboard so Sam can quickly see how much tea he has at any given time. These dashboards will let them track metrics and create reports from the data they're collecting. 
             
           - title: "Episode 5: Leaves and Logistics"
             id: AaG9Iaw59JI
@@ -537,16 +537,31 @@ params:
 
   conferences:
     upcoming:
+      series:
+        - title: "apidays New York"
+          videos:
+          - title: Build a Terrible API for People You Hate
+            description: "Here's your chance to get revenge on someone you hate by building the Worst. API. Ever. This session will show you how, covering some of the nastiest ways to create an API that is terrible to use. From lack of discoverability, to inconsistent naming, this session will have it all!"
+            registrationLink: https://www.apidays.global/new-york/
+            image: /images/conferences/apidays-newyork.webp
     previous:
       series:
+      - title: "NordicAPIs API Summit Austin 2024"
+        videos:
+        - title: Build a Terrible API for People You Hate
+          id: h6JUdMrraCk
+          description: "Here's your chance to get revenge on someone you hate by building the Worst. API. Ever. This session will show you how, covering some of the nastiest ways to create an API that is terrible to use. From lack of discoverability, to inconsistent naming, this session will have it all!"
+        - title: "From APIs to SDKs: Elevating Your Developer Experience with Automated SDK Generation"
+          id: DfK5a8b79K0
+          description: "APIs are everywhere and are a great way for developers to access your service. But not all developers want to access APIs directly. Most want to use SDKs in their preferred programming language using the tools they already know and use everyday. These not only feel more intuitive to a developer, but bring features like type safety, documentation, and code completion."
       - title: "API World 2023"
         videos:
-          - title: From APIs to SDKs - elevating your developer experience with automated SDK generation
-            id: kKOu_4TYHII
-            description: "APIs are everywhere and are a great way for developers to access your service. But not all developers want to access APIs directly. Most want to use SDKs in their preferred programming language using the tools they already know and use everyday. These not only feel more intuitive to a developer, but bring features like type safety, documentation, and code completion."
+        - title: From APIs to SDKs - elevating your developer experience with automated SDK generation
+          id: kKOu_4TYHII
+          description: "APIs are everywhere and are a great way for developers to access your service. But not all developers want to access APIs directly. Most want to use SDKs in their preferred programming language using the tools they already know and use everyday. These not only feel more intuitive to a developer, but bring features like type safety, documentation, and code completion."
       - title: "Edge Impulse Imagine"
         videos:
-          - title: What’s new with Azure IoT to get you building solutions faster
+          - title: What's new with Azure IoT to get you building solutions faster
             id: AP5ZWreMhC8?start=10814
             description: "We all know IoT is hard! So many different tools to use with different boards, so many ways to build out the cloud side of the solution. This is why the IoT teams at Microsoft have been working hard to simplify this process and allow you to go from unboxing an IoT board to a fully working IoT application in as little time as possible."
       - title: NDC
