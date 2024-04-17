@@ -22,13 +22,8 @@ jobs:
           # extended: true
 
       - name: Build
-        uses: trunk-io/breakpoint@v1
-        with:
-          breakpoint-id: DEPLOY_TEST
-          working-directory: ./blog
-          run: hugo --minify
-          trunk-token: ${{ secrets.TRUNK_TOKEN }}
-          org: jimbobbennett
+        working-directory: ./blog
+        run: hugo --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
