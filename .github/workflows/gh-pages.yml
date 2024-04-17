@@ -25,7 +25,6 @@ jobs:
         uses: trunk-io/breakpoint@v1
         with:
           breakpoint-id: DEPLOY_TEST
-          run: ./run_tests.sh
           working-directory: ./blog
           run: hugo --minify
           trunk-token: ${{ secrets.TRUNK_TOKEN }}
