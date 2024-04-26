@@ -1,4 +1,188 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mvvm on JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content in Mvvm on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 24 Feb 2017 17:55:54 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/mvvm/index.xml" rel="self" type="application/rss+xml"/><item><title>How to correctly review a pull request</title><link>https://jimbobbennett.dev/blogs/how-to-review-a-pr/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/how-to-review-a-pr/</guid><description>&lt;p>One of my popular sayings is that development is a team sport. We don&amp;rsquo;t code in isolation, instead engineers are part of a team that delivers value to users and customers, often made up of software. And for a team to deliver its best code, there needs to be shared ownership of the code. This means that more than one developer is involved in each code change to ensure that it is correct, appropriate, and that the knowledge of this change is shared amongst the team. While there are many techniques for this (such as pair and mob programming), the most popular one is a simple pull request, or PR.&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mvvm on JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content in Mvvm on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 24 Feb 2017 17:55:54 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/mvvm/index.xml" rel="self" type="application/rss+xml"/><item><title>So what exactly is Dev Rel?</title><link>https://jimbobbennett.dev/blogs/so-what-is-devrel/</link><pubDate>Thu, 25 Apr 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/so-what-is-devrel/</guid><description>&lt;p>I work in developer relations - usually abbreviated to dev rel. Despite this being a popular field, with a lot of companies hiring dev rel folks such as developer advocates, there is still a lot of confusion around what developer relations actually is. In this post, I want to give my opinion on what it is, how it can contribute to your companies success, and also a little bit of what it isn&amp;rsquo;t.&lt;/p>
+&lt;p>Before we dive in, I do want to note that dev rel can be many, many things. Although there are similarities in what dev rel folks do, I think &lt;a href="https://twitter.com/kelseyhightower">Kelsey Hightower&lt;/a> sums it up best:&lt;/p>
+&lt;blockquote class="twitter-tweet">&lt;p lang="en" dir="ltr">I don&amp;#39;t know.&lt;br>&lt;br>DevRel is whatever who is paying you wants it to be. &lt;a href="https://t.co/rgMaXNYiLq">https://t.co/rgMaXNYiLq&lt;/a>&lt;/p>&amp;mdash; Kelsey Hightower (@kelseyhightower) &lt;a href="https://twitter.com/kelseyhightower/status/1742380457801711678?ref_src=twsrc%5Etfw">January 3, 2024&lt;/a>&lt;/blockquote>
+&lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8">&lt;/script>
+&lt;p>Developer relations is about building relations with developers, and covers a multitude of roles. I&amp;rsquo;ve written this post more from the perspective of developer advocacy, but I do give a call out to the rest of the folks who help build relationships with developers later in this post.&lt;/p>
+&lt;p>So let&amp;rsquo;s dig in to this fun topic! This is a long post and a bit of a brain dump, so please share feedback! Oh, and I won&amp;rsquo;t be covering metrics, that is a &lt;a href="https://www.amazon.com/Business-Value-Developer-Relations-Communities/dp/1484237471/ref=sr_1_1">book in itself&lt;/a>&amp;hellip;&lt;/p>
+&lt;h2 id="how-do-i-describe-my-job">How do I describe my job&lt;/h2>
+&lt;p>One lesson I&amp;rsquo;ve learned from famed tech storyteller &lt;a href="https://twitter.com/docjamesw">James Whittaker&lt;/a> is to have a story that describes what you do. This is currently mine:&lt;/p>
+&lt;blockquote>
+&lt;p>I help developers be successful with liblab&lt;/p>
+&lt;/blockquote>
+&lt;p>Prior to my current role, I was at Microsoft, where it was &amp;lsquo;I help developers be successful with microsoft technologies&amp;rsquo;&lt;/p>
+&lt;p>This is a very simple statement but a lot to unpack, and I feel it sums up developer relations in very broad strokes.&lt;/p>
+&lt;blockquote>
+&lt;p>I &lt;strong>help developers&lt;/strong> be &lt;strong>successful&lt;/strong> with &lt;strong>liblab&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>I help developers&lt;/strong> - The core of developer relations is helping. I used to work for &lt;a href="https://twitter.com/chadfowler">Chad Fowler&lt;/a> at Microsoft, and he gave a guiding principle for the team that I still follow today. &amp;ldquo;Help first, sell last&amp;rdquo;. Dev rel focuses on &lt;strong>helping&lt;/strong> developers. By &lt;strong>helping&lt;/strong> we can have an authentic relationship as we are here to help, not to convince you to buy anything. By &lt;strong>helping&lt;/strong> we can solve your problems and make you more productive, or help you ship what you need. Sell last, not because sales are not important - they are, I like getting paid as Lego is expensive, but sales will happen because the product you are advocating for solves their needs and they or their company decide to buy or expand their usage. I&amp;rsquo;ll come back to sales later.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>be successful&lt;/strong> - Developers often don&amp;rsquo;t often care about your product or company. Some do (and these are your source of community heros), but most want to build the thing and go home. Anything you can do to help this happen is a good thing. Sometimes this is awareness of your product and how it can help their particular case, other times it&amp;rsquo;s content to show them how to do the thing, be it docs, videos, tutorials or other types of content. Sometimes it&amp;rsquo;s hand-holding where you work one-on-one with the developer. As a dev rel, your content helps them be successful so they can finish their work and go home.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>with liblab&lt;/strong> - Insert your company or product here. At the end of the day you work for someone, they are paying the bills, and you need developers to use their technology so you can get paid. If they are successful with your technology, your company gets paid and you get paid. Sometimes the &lt;strong>successful with&lt;/strong> part is just using your technology, but most of the time it is integrating your technology with another technology. For example, liblab is an SDK generation tool, but is most powerful integrated into a CI/CD pipeline so developers can update their API spec, have their SDKs generated automatically, and, yes, go home.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="what-does-be-successful-look-like">What does &amp;lsquo;be successful&amp;rsquo; look like?&lt;/h2>
+&lt;p>As I mentioned earlier - developers want to do their job and go home, so being successful is about empowering developers to do just that by using your tool or product. To achieve this success, they need to take a number of steps:&lt;/p>
+&lt;ol>
+&lt;li>Discover&lt;/li>
+&lt;li>Evaluate&lt;/li>
+&lt;li>Learn&lt;/li>
+&lt;li>Build&lt;/li>
+&lt;li>Scale&lt;/li>
+&lt;/ol>
+&lt;p>This list is taken from &lt;a href="https://www.devrel.agency/developerjourney">the Developer Journey&lt;/a> from &lt;a href="https://www.devrel.agency/">DevRel.Agency&lt;/a> which is an excellent resource for planning your dev rel strategy. I like to split this list into 2 sections - outbound and inbound. Advocating to, and advocating for. Discover and to some degree Evaluate are about outbound advocacy, you enable these by advocating to the developer. For sales and marketing folks, this is the top of the funnel. Evaluate, Learn, Build and Scale are more focused on inbound advocacy, or advocating for the developer. This is the middle to the bottom of the funnel.&lt;/p>
+&lt;ul>
+&lt;li>Outbound advocacy/Advocating to - providing a mix of first and third party content to drive awareness. This is how you help your company be successful.&lt;/li>
+&lt;li>Inbound advocacy/Advocating for - providing first party content to help the developer learn, and providing product feedback to help the product be successful. This is how you help your users be successful.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>In a perfect world you go where developers are (Discover), and bring them back to you (Evaluate, Learn, Build, Scale).&lt;/p>
+&lt;/blockquote>
+&lt;p>At every step you will lose developers, just like a typical sales funnel. Your goal as dev rel is to ensure that as much is in place as possible to avoid developers falling out of the funnel.&lt;/p>
+&lt;h3 id="discover">Discover&lt;/h3>
+&lt;p>To be successful with your product, developers need to be aware of it! Put simply if they don&amp;rsquo;t know about your product, they will never use it. This is your job as dev rel to raise awareness. You do this by going where developers are, and raising awareness of your product.&lt;/p>
+&lt;p>Now who are these &amp;lsquo;developers&amp;rsquo;? A lot of that depends on your product. Ideally you should define one or more &amp;lsquo;ideal customer profiles&amp;rsquo; or ICPs that provide a rough summary of who your users might be. You can then target content to these.&lt;/p>
+&lt;p>For smaller companies, this awareness is around both product and company. For larger companies, this awareness is usually around product. For example, with liblab I have to raise awareness of the company and the product. At Microsoft I was raising awareness of individual products or product areas - after all, most developers have heard of Microsoft.&lt;/p>
+&lt;p>&lt;strong>Going where developers are, and raising awareness of your product&lt;/strong> - again, a &amp;lsquo;simple` sentence that has a lot of meaning.&lt;/p>
+&lt;h4 id="go-where-developers-are">Go where developers are&lt;/h4>
+&lt;p>Developers will not come to your docs, blog, LinkedIn page or Discord server if they don&amp;rsquo;t know about you. You need to share your message in places where those developers are. There are a lot of places, some where developers are seeking answers, some where discovery is more organic. The main thing here though is to be authentic! Help first, sell last.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Conferences - Developers come to these to learn, often with specific problems in mind from their job. The reach is small, but you can have deeper conversations, learn what their problems or use cases are, and show how your product can help. Conferences are &lt;em>very&lt;/em> expensive when you count travel, time and sponsorship, but can lead to some big deals if, and only if, you meet the right people there. The return on investment (ROI) can vary dramatically. It&amp;rsquo;s also hard to measure the ROI as someone who you didn&amp;rsquo;t track as a lead may be responsible for a huge sale!&lt;/p>
+&lt;p>Conferences can also help with other parts of your job, such as validating your customer base for product market fit, and testing out product messaging&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Workshops - Workshops are an interesting way to reach developers. Often these take up a large amount of a developers time, or even cost money. If a developer is wiling to make that kind of commitment, then they are interested in solving a problem that your product might help with. Small turn out, but very engaged.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Meetups and smaller community events - These are events usually with a technology focus. If your product fits into that technology (such as talking about Python SDK generation at a Python meetup), they can be a relatively cheap and low lift way to put your message to the audience. In person meetups might come with travel cost and maybe pizza and drinks, remote ones can be done from home. The audiences are typically small, and the ROI can vary. Meetup organizers are always looking for speakers - they are the commodity in the shortest supply, so it is relatively easy to get a speaking slot.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Podcasts and live streams - There is a wealth of podcasts and livestreams out there, some focusing on specific technologies, some very general. The hosts of these shows are always on the lookout for new guests and in return let you promote your product.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Blog posts - Although your first party blog might be ok for organic search, third party blogs are a great place to put content. They likely have a large readership, and allow you to put your message across to their audience. I can cross post to a popular tech blog from the liblab blog and get 100x or even 1000x views in a few days!&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Tech communities - If you are a large company, you may already have a first party tech community that you can promote your product to. For smaller companies there are third party communities you can reach out to. Get involved, show how your product can help, and that can drive awareness.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Organic search - There are a huge number of &lt;a href="https://www.hanselman.com/blog/dark-matter-developers-the-unseen-99">dark matter developers&lt;/a> who will not see your product at conferences or communities, instead they will search for a solution to their problem. This is where good web properties with good SEO can help.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="raise-awareness">Raise awareness&lt;/h4>
+&lt;p>To raise awareness of your product you have to help first, sell last. What I mean by this is when you go where developers are, they have problems to solve so they can go home. You have to ensure the message you have is about how your product can solve their problem. This is the focus of your content, and where storytelling is important. Tell the stories of how your product can solve similar problems and you will hook the developer in.&lt;/p>
+&lt;ul>
+&lt;li>Bring an authentic message - Your product is the hero in a story starring the developer who is trying to defeat the monster that is a problem. The developer wants to fight the ogre in the swamp that is manually creating and maintaining SDKs, and on their journey to the ogre&amp;rsquo;s lair discovers liblab which gives them the magic to do this. OK - not a talk you would give, but linking it back to the classic storytelling - a protagonist, an antagonist, a journey, a &lt;a href="https://en.wikipedia.org/wiki/MacGuffin">MacGuffin&lt;/a>, and a happy ending. Your product is the MacGuffin, your content is the guide on the journey.&lt;/li>
+&lt;li>Know your audience - The most important thing about content creation is knowing your audience. If you are reaching out to a Python community, then don&amp;rsquo;t show off your TypeScript SDK. Talking about API governance at a conference focusing on UI design is a waste of time. Pick the places where developers are who your product can help.&lt;/li>
+&lt;li>Reuse content - Content creation is hard and time consuming. Always think about how you can re-use content to get more mileage. You have a tutorial on using yor product with AI? Can you make a workshop, video or conference talk out of this? You are going to a conference to give a talk? Are there any meetups local to the conference where you can give the same talk at?&lt;/li>
+&lt;/ul>
+&lt;h3 id="evaluate">Evaluate&lt;/h3>
+&lt;p>Once developers are aware of your product, they want to evaluate it. This will be where you can start to bring them back to your first party content.&lt;/p>
+&lt;p>To evaluate your product, a developer may do one or more of the following:&lt;/p>
+&lt;ul>
+&lt;li>Consume more content to see if your product matches their use case&lt;/li>
+&lt;li>Sign up for/install your product&lt;/li>
+&lt;li>Work through a &amp;lsquo;hello world&amp;rsquo;, a tutorial, quickstart or other getting started guide&lt;/li>
+&lt;li>Join your community, such as your Discord server&lt;/li>
+&lt;/ul>
+&lt;p>Most of this is content. If you are a developer advocate, you might be responsible for creating this content, or you may have a technical writing team to do it for you.&lt;/p>
+&lt;p>The goal here is to get the developer quickly to a point where they feel your product can solve their problem. You need to provide a mixture of content so that the developer can see something that is close to their use case so they can do a relevant evaluation. Obviously this is hard as there are infinite use cases, but you should be able to pick a few broad topics that cover most, especially if you have defined a number of ICPs.&lt;/p>
+&lt;p>To evaluate, you need as few gates as possible. Yeah, an email address to sign up is normal, but if a developer has to talk to a person to get a trial then it won&amp;rsquo;t happen. Your product needs to be self service, with a free tier that is enough to fully evaluate. As a dev rel, you are responsible for product feedback, and that includes feedback on the size of this trial. As an engineer yourself, can you evaluate with the available trial? If not, it needs to be changed.&lt;/p>
+&lt;h3 id="learn">Learn&lt;/h3>
+&lt;p>Once the developer has evaluated your product an decided it is for them, they need to learn more. This is where good documentation is vital. If the developer cannot find out how to solve their problems, then they will go elsewhere. As a dev rel you may be responsible for the docs, or you may have a team to do this. At the very least, you are responsible for product feedback, and that includes feedback on documentation. Yes - documentation &lt;strong>is&lt;/strong> a product and anyone who says different is very, very wrong.&lt;/p>
+&lt;blockquote>
+&lt;p>If it&amp;rsquo;s not documented it doesn&amp;rsquo;t exist.&lt;/p>
+&lt;/blockquote>
+&lt;p>In dev rel, you should always be reading and using your docs. Any thing missing or wrong - you should work to get it fixed, whether that is writing those docs yourself, or working with the documentation team to get them fixed.&lt;/p>
+&lt;p>Your documentation needs to help the developer learn all they need. This means you need a mixture of docs - reference documentation, tutorials, concepts, all packaged up in a way that quickly allows the developer to get their answers.&lt;/p>
+&lt;h3 id="build">Build&lt;/h3>
+&lt;p>After learning what they need, the developer will start building with your product. Learn and Build usually go hand in hand - reading docs whilst building out with your product. Building is the phase where they are in proof-of-concept (PoC), or even production mode. By now they may have paid you a little, or have approval to pay you once their trial runs out. For your company to get the bigger payout, they need to be successful.&lt;/p>
+&lt;p>This is where support, community and documentation are important. You don&amp;rsquo;t want the developer to get stuck on the build out, not complete, and not convert from a free trial. You may have a support team to help, but dev rel folks should be monitoring the popular support requests and use that as feedback on what content to create. How you do this depends on your support team - maybe a meeting once a month to get the most popular issues, then you write docs for these.&lt;/p>
+&lt;p>Developers like communities - they want to ask questions on stack overflow or a Discord server. Again, in dev rel part of this sits on your shoulders. Even if you have a support team to do this, you need to be aware of the trends to build content. If you don&amp;rsquo;t have a support team then set aside some time each day or week to scan stack overflow and your community tools to provide help, and encourage engineers to do this to!&lt;/p>
+&lt;p>If you see developers being active with your product then dropping off, don&amp;rsquo;t be afraid to reach out to them. Help first and all that. &amp;lsquo;Hey, I saw you were using our tool then stopped at this point, are you stuck on something that I can help with?&amp;rsquo; type messages can achieve a lot. Often providing a simple answer or guidance can unblock them and get them back building. And of course, update this into your documentation!&lt;/p>
+&lt;h3 id="scale">Scale&lt;/h3>
+&lt;p>By scale, I mean developers scaling out what they have built. Using your product more, using it in different ways, using different parts of it. Taking what they have built and moving it to production.&lt;/p>
+&lt;p>Hopefully by this point, your job is pretty much done. The main responsibility you have here is to ensure the content is available to show how to scale. For example, with liblab, scale to me is taking their SDK generation and setting it up in a CI/CD pipeline so that they can forget about it and get new SDKs when they update their API specs. This is a relatively complicated thing to set up (relative to generating an SDK as there are a few moving parts, but not complicated compared to kubernetes).&lt;/p>
+&lt;p>For developers to scale like this, they need to know how. Not just the steps to take, but the why of each step so they can apply it to their use case. For example, if you have developers deploying your product to public clouds, then you want docs on how to do it on AWS, Azure and GCP. If you only have AWS docs and they use Azure, then they will struggle to scale.&lt;/p>
+&lt;h3 id="whats-after-scale">What&amp;rsquo;s after scale?&lt;/h3>
+&lt;p>At this point the developer journey is not done. Yes they have their problem solved and they can go home, but a new day is a new problem. The cycle starts again with whatever new problem they have, or whatever new product you have for them.&lt;/p>
+&lt;h2 id="scaling-dev-rel">Scaling dev rel&lt;/h2>
+&lt;p>So far I&amp;rsquo;ve talked about the journey developers take and how dev rel fits in. The biggest issue dev rels have with this is one of scale. You likely have a small dev rel team, but a huge user base, so how do you scale?&lt;/p>
+&lt;p>As a note, and I did say I won&amp;rsquo;t cover metrics here, you can only scale if you can show you are scaling. And that means metrics and tracking. You do need to be able to show that scaling is working.&lt;/p>
+&lt;p>There are a number of ways to scale, and here are a few.&lt;/p>
+&lt;h3 id="reduce-reuse-recycle">Reduce, reuse, recycle&lt;/h3>
+&lt;p>A lot of dev rel time is spent on content, be that writing talks, creating videos, writing sample code, or writing blog posts. The most effective thing you can do is re-use as much as possible. Spend less time creating, more time sharing. The downside is that a lot of dev rel folks love building the new shiny thing, but you need to avoid the temptation to create a new talk every time.&lt;/p>
+&lt;p>For example - back at Microsoft I created a sample mobile app with Xamarin to show some of the Azure AI services. Here&amp;rsquo;s how I scaled it:&lt;/p>
+&lt;ul>
+&lt;li>A GitHub repo with code samples shared on social and blogs&lt;/li>
+&lt;li>Feedback on the docs based off building this app&lt;/li>
+&lt;li>A video showing the app and code on a popular show&lt;/li>
+&lt;li>A workshop that taught people to build the app.
+&lt;ul>
+&lt;li>Gave this to team mates to run&lt;/li>
+&lt;li>Ran this at multiple events&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>One code sample became a lot of content, reaching probably at least 500 workshop attendees - and if someone is attending a workshop then they are very engaged and less likely to fall out of the funnel. Oh, and in the case of this workshop, one group of attendees went on to build an app in production for &lt;a href="https://devblogs.microsoft.com/xamarin/customer-showcase-the-academy-of-motion-picture-arts-sciences/">the Oscars&lt;/a>!&lt;/p>
+&lt;h3 id="online-vs-in-person">Online vs in-person&lt;/h3>
+&lt;p>This is a thorny topic as there are very different opinions and data, but online reaches orders of magnitude more people than in-person for the same amount of effort. I can go to a conference, spend 2 days traveling and 2 days at the event to reach maybe 100 people with a talk. Or I can give that same talk 10 times in less time on-line to different communities and reach thousands. Microsoft saw this with MS Build - instead of 6,000 in-person attendees then had 160,000 online.&lt;/p>
+&lt;p>Now there are lies, damned lies, and statistics - so how important is this difference?&lt;/p>
+&lt;p>Well the jury is still out on that. In person means more engagement. If someone comes to a talk they are genuinely interested. If they are watching online are they actually watching? Or is it on in the background whilst they do something else.&lt;/p>
+&lt;p>I wish I had hard data for this, but I don&amp;rsquo;t so my gut feel is a mix of both. Having seen a good ROI from in-person events that are targeted to a relevant audience (for example talking about SDK generation for APIs at an API conference), there is benefit to in-person, but it doesn&amp;rsquo;t scale like on-line.&lt;/p>
+&lt;h3 id="reach-more-developers-by-going-where-developers-are">Reach more developers by going where developers are&lt;/h3>
+&lt;p>To scale well you need reach. I&amp;rsquo;ve seen for example the same post get 3,000 views on DZone, and less than 25 on dev.to. By putting your content where developers are it helps scale. This also means your content needs to be of the right type for where those developers are. There&amp;rsquo;s always debate on blogs vs video, but my take is both and measure. YouTube is the worlds number 2 search engine, so a well constructed video with a good description and title can reach a massive audience. But then there are those who prefer to read, or skim read, or want a TikTok.&lt;/p>
+&lt;p>And when I say measure - try to get good data. Views on a blog may mean a lot of engaged developers, or lots of quick view and bounce. Are you seeing folks following links from the blogs to your properties (you are tracking this right?).&lt;/p>
+&lt;p>Same with YouTube views. I remember back at Microsoft a load of congratulatory emails and lots of talk about an amazing video that a colleague did on generative AI that got 40,000 views. Even went way up the chain. Ignoring how 40K is a small number for a multi-trillion dollar company, no-one bothered to validate the views. If they had, they would have noticed that most of the 40k views were around 5 seconds and were from ads. Yup - there was an experiment done to run videos as ads to boost views, and that is why this had so many. Obviously for political reasons, when this was pointed out it was hushed up&amp;hellip;&lt;/p>
+&lt;p>So, go where developers are, validate your reach there, and use that data to help scale.&lt;/p>
+&lt;h3 id="follow-trends">Follow trends&lt;/h3>
+&lt;p>Another way to scale is to create content to &amp;lsquo;go viral&amp;rsquo;, that is follow trends, If a topic is getting a lot of interest, see how you can apply your product to that topic. LLMs and Generative AI is big, so I created a video using a popular AI framework from Microsoft just as that framework was getting promotion by them. It has my highest personal video views! This was simply by riding the promotional wave from Microsoft.&lt;/p>
+&lt;h3 id="community">Community&lt;/h3>
+&lt;p>Community is how you can really scale! A good community becomes almost like a volunteer dev rel team. Having been a Xamarin MVP and a Microsoft MVP I know well how community will promote a product in their own time and at their own expense - I&amp;rsquo;ve spent my own money on travel just to talk about a technology owned by a trillion dollar company.&lt;/p>
+&lt;p>Community helps with the scale simply by shear volume. A community of 10 heros can reach substantially more that 1 dev rel, including reaching geographies and time zones that are not easily available. A community hero in China giving a talk on your product in Mandarin can reach developers an English-only speaking developer advocate in the US simply cannot reach. The more you grow your community, the more they will promote your product.&lt;/p>
+&lt;p>The advantage of your community is they are already engaged. people join your community because at the very least they are aware of your product, though more likely a user. Folks don&amp;rsquo;t discover your slack by chance and hang out.&lt;/p>
+&lt;p>So how to do you grow your community? Well a &amp;lsquo;community&amp;rsquo; has 3 types of members:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Passive - these are the folks who join your slack to ask a question, maybe follow you on social and leave. You need to support them as they are users, but they won&amp;rsquo;t help you scale. What they are helpful for is product feedback - the questions they are asking, should they be answered in the docs? Are they reporting bugs or fewture requests?. Your goal here is to make them active, but be aware most of them simply won&amp;rsquo;t be.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Active - these are the folks who are active in your community space. They might be answering questions on your Discord, or maybe writing the odd blog post on your product. They can help you scale support, as well as driving some awareness. Your goal here is to convert these to heros.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Heros - these are your very active, highly engaged, community superstars. These are community members who actively promote your product. Maybe then run a user group, or regularly speak at events about your technology. Maybe they write blog posts, or create videos. Their message is the most authentic - they are talking about your product because they like it, not because they are paid (like you). Your goal here is to support them as much as possible. At the very least they should have free access to your product, along with swag. Ideally you should provide swag for them to distribute like bags of stickers, custom rewards like personal shirts, and a public way to highlight them. Recognition is usually the most valuable currency here, not just recognizing then publicly, but by gathering feedback from them. Getting time with product or engineering is a great way to not only make them feel special, but also can give you important feedback. If you have the budget, provide them sponsorship such as paying conference travel, or buying pizza for their user group. You can also help provide them with content, such as demos and slides for a talk.&lt;/p>
+&lt;p>Your goal here is to support them as much as possible. You want them to remain heros as long as possible, and not turn them into heros for your competition.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>I was listening to &lt;a href="https://www.youtube.com/live/VZWRLN6K65I?si=TplbU7SrRf0xGAci">an episode of Dev Relish today&lt;/a> that described community as a Tamagotchi. For it to live and thrive it takes regular feeding. Not much effort, but small and continual. You need to build that muscle of regularly &amp;lsquo;feeding&amp;rsquo; your community.&lt;/p>
+&lt;h2 id="what-else-is-dev-rel">What else is dev rel?&lt;/h2>
+&lt;p>I feel the focus of this post has been more on the advocacy side of dev rel, as that is the area I am in. I do want to acknowledge that there are many other facets to developer relations that help build a relationship with developers:&lt;/p>
+&lt;ul>
+&lt;li>Technical writing teams - dev rels sometimes own and write docs, other times there are dedicated teams. And this is not just docs, it can be online learning tools or other such learning materials&lt;/li>
+&lt;li>Content creators and supporters - some companies have dedicated studio teams, or storytellers, or demo writing teams&lt;/li>
+&lt;li>Developer-focused engineers - some engineers focus on helping developers directly, rather then by building products. This includes generating SDKs, or building helper scripts, sample code, or other tools&lt;/li>
+&lt;li>Community managers - in an ideal world you would have a community manager to feed the Tamagotchi. These are folks whose skills lie in managing communities, such as program management.&lt;/li>
+&lt;li>Marketing - marketing spread the word, and can be your friend. They also usually have money which helps with swag!&lt;/li>
+&lt;li>Events teams - if you are running an in-house event, or attending an external one, an event team can make this a much smoother process&lt;/li>
+&lt;/ul>
+&lt;p>I&amp;rsquo;m sure there are more. I know some will say &amp;rsquo;this is not dev rel&amp;rsquo;, but it is. It may not be dev advocacy, but dev rel is a whole world more than that.&lt;/p>
+&lt;h2 id="what-is-not-dev-rel">What is not dev rel?&lt;/h2>
+&lt;p>So far I&amp;rsquo;ve talked a lot about what is dev rel and how you can scale. Lets take a second to talk about what is not dev rel. This is another topic where there are many opinions, but my (potentially 🌶️) opinion is:&lt;/p>
+&lt;blockquote>
+&lt;p>If you are personally responsible for getting money then it is not dev rel&lt;/p>
+&lt;/blockquote>
+&lt;p>Now we all want to get paid, and really the end outcome of dev rel is more customers, so dev rel is part of the sales funnel. But to me the line is when money is involved, such as negotiating contracts, commissions etc. then that is sales. Help first, sell last - to authentically help someone it needs to come from a place of wanting to help, not from driving more sales. An authentic dev rel should be willing to help you spend less by optimizing what you use, or telling you outright if the product will not help you. Having worked in places where sales will sell something that doesn&amp;rsquo;t exist (yup, happened to me), I&amp;rsquo;ve seen that money and commission are not a good driver of the right behaviors, and do not help with authentic conversations.&lt;/p>
+&lt;p>I&amp;rsquo;m not covering metrics here, but dev rel should never be measured sales. Yes - tracking dev rel qualified leads is good, but not &amp;lsquo;dev advocate X made this $100K sale&amp;rsquo;&lt;/p>
+&lt;p>Help first, sell last - and let someone else sell.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>I hope this brain dump sheds some light on what I think dev rel is. As with anything, ask 10 dev rels what it is and you&amp;rsquo;ll get 12 answers at least. There&amp;rsquo;s so much I&amp;rsquo;ve missed - I literally could write a book on this topic, but I won&amp;rsquo;t - I&amp;rsquo;ll save that for the experts.&lt;/p>
+&lt;p>Remember: &lt;strong>Help first, sell last&lt;/strong>. Authentically go where developers are and bring them back to your product, content and communities.&lt;/p>
+&lt;p>I&amp;rsquo;d love your thoughts in the comments, or reach out to me on social: &lt;a href="https://linktr.ee/jimbobbennett">linktr.ee/jimbobbennett&lt;/a>.&lt;/p></description></item><item><title>How to correctly review a pull request</title><link>https://jimbobbennett.dev/blogs/how-to-review-a-pr/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/how-to-review-a-pr/</guid><description>&lt;p>One of my popular sayings is that development is a team sport. We don&amp;rsquo;t code in isolation, instead engineers are part of a team that delivers value to users and customers, often made up of software. And for a team to deliver its best code, there needs to be shared ownership of the code. This means that more than one developer is involved in each code change to ensure that it is correct, appropriate, and that the knowledge of this change is shared amongst the team. While there are many techniques for this (such as pair and mob programming), the most popular one is a simple pull request, or PR.&lt;/p>
 &lt;h2 id="what-is-a-pull-request">What is a pull request?&lt;/h2>
 &lt;p>A pull request, or PR, is a git feature that allows you to request that the owner of some code pulls your changes. You make a code change on a fork or branch, and raise a pull request to merge your code into the golden source, origin, or upstream repo. Essentially this is how you get your code published to the team ready to be deployed to production.&lt;/p>
 &lt;p>The aim of a pull request is to get another set of eyes over your code. Before a PR is merged, it is reviewed. The reviewer can check the code for correctness, style, if it actually implements the feature it&amp;rsquo;s meant to, things like that. This is the opportunity for a second pair of eyes to catch any errors, for knowledge sharing so more than one member of the team understands the new code, and a chance for more senior developers to help guide and upskill more junior developers.&lt;/p>
