@@ -1,10 +1,10 @@
 ---
 author: "Jim Bennett"
 date: 2023-08-04
-description: "Installing LibLab into a devcontainer using NPM"
+description: "Installing liblab into a devcontainer using NPM"
 draft: false
 tags: ["liblab", "devcontainer", "codespace", "vscode", "npm"]
-title: "Installing LibLab into a devcontainer using NPM"
+title: "Installing liblab into a devcontainer using NPM"
 
 images:
   - /blogs/liblab-in-a-devcontainer/banner.png
@@ -14,7 +14,7 @@ image: banner.png
 
 > In this post we look at how to add NPM packages to a devcontainer to use in VS Code locally or in a GitHub codespace
 
-I recently started at [LibLab](https://liblab.com) as a Principal Developer Advocate. LibLab is a tool that converts APIs into language SDKs, something I'm a big fan of as I love typesafety and the inherent documentation that comes with a good SDK. Obviously my first job was to dive into building out an API and creating an SDK from it.
+I recently started at [liblab](https://liblab.com) as a Principal Developer Advocate. liblab is a tool that converts APIs into language SDKs, something I'm a big fan of as I love typesafety and the inherent documentation that comes with a good SDK. Obviously my first job was to dive into building out an API and creating an SDK from it.
 
 ## Devcontainers
 
@@ -24,11 +24,11 @@ I start with a Python container - this is a pre-configured container that I can 
 
 ![The Python 3 devcontainers option in the vs code select dev container configuration](python3-devcontainer.png)
 
-Once in this container I can create my API, then build the SDK using LibLab.
+Once in this container I can create my API, then build the SDK using liblab.
 
-## Add LibLab to the container
+## Add liblab to the container
 
-LibLab is available as a [CLI that you install via NPM](https://developers.liblab.com/docs/getting-started). There are a number of ways you can install NPM packages in the container:
+liblab is available as a [CLI that you install via NPM](https://developers.liblab.com/docs/getting-started). There are a number of ways you can install NPM packages in the container:
 
 * Install it manually in the `postCreateCommand`
 * Use a `DOCKERFILE` and install it there
@@ -53,7 +53,7 @@ To add manually, add the `ghcr.io/devcontainers-contrib/features/npm-package:1` 
 }
 ```
 
-Once added, the feature is configured using the `package` and `version` parameters. THe `package` should be set to `liblab`, the name of the NPM package for LibLab. The `version` parameter defaults to `latest` and I always want the latest LibLab CLI installed, so this can be left out.
+Once added, the feature is configured using the `package` and `version` parameters. THe `package` should be set to `liblab`, the name of the NPM package for liblab. The `version` parameter defaults to `latest` and I always want the latest liblab CLI installed, so this can be left out.
 
 ```json
 {
@@ -68,11 +68,11 @@ Once added, the feature is configured using the `package` and `version` paramete
 
 ## Rebuild the container
 
-Once this is set up you can rebuild the container and the LibLab SDK will be available in your terminal!
+Once this is set up you can rebuild the container and the liblab SDK will be available in your terminal!
 
 ```bash
 vscode ➜ /workspaces/python $ liblab
-The offical LibLab CLI
+The offical liblab CLI
 
 VERSION
   liblab/0.9.20 linux-arm64 node-v18.17.0
@@ -98,7 +98,7 @@ COMMANDS
 
 ## Learn more
 
-Want to learn more about LibLab for automating the generation of SDKs from your APIs? Get in touch.
+Want to learn more about liblab for automating the generation of SDKs from your APIs? Get in touch.
 
 * [Contact me via social](https://linktr.ee/JimBobBennett)
 * [Join our Discord](https://discord.gg/F8aECHbRkV)
