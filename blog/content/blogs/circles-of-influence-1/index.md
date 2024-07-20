@@ -8,6 +8,7 @@ title: "Circles of DevRel part 1 - grow your circle of influence through collabo
 
 images:
   - /blogs/circles-of-influence-1/banner.webp
+featured_image: banner.webp
 image: banner.webp
 ---
 
