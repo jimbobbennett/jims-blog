@@ -13,7 +13,7 @@ image: banner.webp
 
 > This is the first part of a multipart blog post focusing on looking at DevRel through the idea of circles of influence.
 
-As dev rel people, part of our job is to drive awareness of our product. If you think in terms of sales/marketing, this is feeding the top of the funnel. If you think in terms of the [developer journey](https://www.devrel.agency/developerjourney), this is the discover phase.
+As [dev rel people](/blogs/so-what-is-devrel/), part of our job is to drive awareness of our product. If you think in terms of sales/marketing, this is feeding the top of the funnel. If you think in terms of the [developer journey](https://www.devrel.agency/developerjourney), this is the discover phase.
 
 ![A sales funnel - awareness, interest, decision, action](sales-funnel.webp)
 
