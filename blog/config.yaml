@@ -87,43 +87,6 @@ params:
     filename: "sitemap.xml"
     priority: 0.5
 
-  # font:
-  #   fontSize: 1.5rem # default: 1rem
-  #   fontWeight: 500 # default: 400
-  #   lineHeight: 1 # default: 1.5
-  #   textAlign: right # default: left
-
-  # color preference
-  # color:
-  #   textColor:
-  #   secondaryTextColor:
-  #   backgroundColor:
-  #   secondaryBackgroundColor:
-  #   primaryColor:
-  #   secondaryColor:
-
-  #   darkmode:
-  #     textColor:
-  #     secondaryTextColor:
-  #     backgroundColor:
-  #     secondaryBackgroundColor:
-  #     primaryColor:
-  #     secondaryColor:
-
-  # If you want to customize the menu, you can change it here
-  # navbar:
-  #   align: mx-auto # Left: ms-auto | center: mx-auto | right: me-auto | Default: ms-auto
-  #   brandLogo: "/logo.png" # Logo for the brand | default is the favicon variable
-  #   brandName: "Profile" # Brand name for the brand | default is the title variable
-
-  #   menus:
-  #     disableAbout: true
-  #     disableExperience: true
-  #     disableEducation: true
-  #     disableProjects: true
-  #     disableAchievements: true
-  #     disableContact: true
-
   # Hero
   hero:
     enable: true
@@ -328,9 +291,12 @@ params:
 
   podcasts:
     videos:
+    - title: "Coding in Context - Building a DevRel Team: The Intersection of Product, Community, and Growth"
+      id: KM-T2_rYAQM
+      description: "Join host Mason Williams in this episode of 'Coding in Context' as he delves into the world of Developer Relations with Cole Stark (CMO @ Pieces), Rosie Levy (CCO @ Pieces), and Jim (Head of Developer Advocacy @ Pieces). Explore the intricate process of building a DevRel team and the unique intersection of product, community, and growth."
     - title: "Free SDK generation for open source software with Jim Bennett | nickytonline"
       id: JgTiVxZGeeg
-      desctiption: "Jim Bennett, Principal Developer Advocate at liblab, joins Nick to discuss free SDK generation for open source software using liblab!"
+      description: "Jim Bennett, Principal Developer Advocate at liblab, joins Nick to discuss free SDK generation for open source software using liblab!"
     - title: "Impact DevRel Podcast Ep 2: Jim Bennett | Value of DevRel from Big Tech (Microsoft) to Startups"
       id: zG10GwxqM9A
       description: Join Joshua Poddoku and Jim Bennett as they unravel the expectations, goals, and business value of Developer Relations across various businesses.
@@ -350,14 +316,44 @@ params:
   livestreams:
     upcoming:
       series:
-      - title: "liblab live"
+      - title: Learning Pieces for Developers
         videos:
-        - title: "liblab live March 2024 | Our first monthly livestream of all things new in SDK generation"
-          description: "On this episode, Jim is joined by Dales, an engineer at liblab to talk about our newly released v2 Python SDK generation."
-          registrationLink: https://www.youtube.com/watch?v=LEv5Q11G_A0
-          image: /images/livestreams/liblab-live.png
+        - title: "Learning Pieces for Developers: JimBobBennett & Ben Dechrai"
+          description: "In today's live stream, Jim is joined by Ben Dechrai, Head of developer relations at Arcjet, a security layer for developers. Using Pieces as his trusty assistant as always, Jim will be learning how to add security to his APIs with Ben's help."
+          registrationLink: https://www.youtube.com/live/RTZypHe5p_I?si=9zGOknsMLYdeYps-
+          image: /images/livestreams/learning-pieces-ben.png
     previous:
       series:
+      - title: Learning Pieces for Developers
+        videos:
+          - title: "Learning Pieces for Developers: JimBobBennett & Daniel Maher"
+            id: PvP7xU9q-Qs
+            description: "In today's live stream, Jim learns about access control with Daniel 'Phrawzty' Maher, senior devrel manager at Carbos, a tool to implement, manage, and delegate fine-grained access control. Can Jim leverage Pieces to help him implement access control with Daniel's help? Come join us and find out!"
+          - title: "Learning Pieces for Developers: JimBobBennett & Dan Holdsworth"
+            id: wrj_plvF0V8
+            description: "In today's live stream Jim is joined by Dan Holdsworth, Dev Rel at roadmap.sh, a community effort to create roadmaps, guides and other educational content. Dan will be teaching Jim all about roadmap, and together they will try to create one for Pieces. If you are interested in creating roadmaps or other tech guides, or just want to geek out on learning content then come join us!"
+          - title: "Learning Pieces for Developers: JimBobBennett & Björn Büttner"
+            id: K3O0JTwz4JE
+            description: "In today's stream, Jim is joined by Björn Büttner a PHP developer from Germany. After joking that the last stream Jim did should have used a different language, Björn agreed to join Jim to teach him the basics of PHP. Jim will be using Pieces to help him learn as Björn shows that PHP is an amazing language as they try to build a ToDo app."
+          - title: "Learning Pieces for Developers: JimBobBennett & Rishab Kumar"
+            id: Yut0wOPGZKs
+            description: "In today's stream, Jim is joined by Rishab Kumar, Staff Developer Evangelist at Twilio. Twilio are running an AI challenge to build an AI powered app using Twilio services, so in this stream Jim and Rishab will try to build an SMS copilot!"
+          - title: "Learning Pieces for Developers: JimBobBennett & Bishwajeet Parhi"
+            id: FnzVBDoiTaQ
+            description: "On today's stream, Jim is joined by Bishwajeet Parhi, an AppWrite hero and Flutter developer. Jim is new to Flutter, the underlying UI tech stack for the Pieces apps, so in this stream Bishwajeet will be helping Jim to get started with Flutter, and obviously Pieces will be helping along the way!"
+          - title: "Learning Pieces for Developers: JimBobBennett & Ellie Zubrowski"
+            id: 0Jc-s1zGj5k
+            description: "Join JimBobBennett (Head of Developer Advocacy @ Pieces.app) & Ellie Zubrowski (Freelance Software Developer) as they learn the Pieces for Developers suite of products."
+      - title: "MLH Global hack week - AI/ML, August 2024"
+        videos:
+          - title: "Supercharge your Student Journey with AI using Pieces"
+            id: d_efp3c44pM
+            description: "Discover how to enhance your academic journey with Pieces for Developers. Learn to use Pieces to streamline your study habits, organize notes, and boost productivity, making your student life more efficient and enjoyable."
+      - title: "liblab live"
+        videos:
+          - title: "liblab live March 2024 | Our first monthly livestream of all things new in SDK generation"
+            id: LEv5Q11G_A0
+            description: "On this episode, Jim is joined by Dales, an engineer at liblab to talk about our newly released v2 Python SDK generation."
       - title: "Machine Learning for Beginners"
         videos:
           - title: "ML for Beginners - introduction to Machine Learning"
@@ -534,15 +530,13 @@ params:
 
   conferences:
     upcoming:
-      series:
-        - title: "apidays New York"
-          videos:
-          - title: Build a Terrible API for People You Hate
-            description: "Here's your chance to get revenge on someone you hate by building the Worst. API. Ever. This session will show you how, covering some of the nastiest ways to create an API that is terrible to use. From lack of discoverability, to inconsistent naming, this session will have it all!"
-            registrationLink: https://www.apidays.global/new-york/
-            image: /images/conferences/apidays-newyork.webp
     previous:
       series:
+      - title: "apidays New York"
+        videos:
+        - title: Build a Terrible API for People You Hate
+          id: zAOaynEQGbs
+          description: "Here's your chance to get revenge on someone you hate by building the Worst. API. Ever. This session will show you how, covering some of the nastiest ways to create an API that is terrible to use. From lack of discoverability, to inconsistent naming, this session will have it all!"
       - title: "NordicAPIs API Summit Austin 2024"
         videos:
         - title: Build a Terrible API for People You Hate
