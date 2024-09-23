@@ -20,6 +20,10 @@ There is! This post introduces [**act**](https://nektosact.com/introduction.html
 
 The goal of [**act**](https://nektosact.com/introduction.html) is to provide a way to spin up a GitHub action locally, running them in a container as if they were running in GitHub. It can handle environment variables, secrets, using external actions and more, with a file system setup that mimics what GitHub has. And best of all, this is a free, open source project!
 
+### Install act
+
+
+
 ## Use act to build an action
 
 I recently used act to help me build out a GitHub action to build and publish the [Pieces for Developers C# SDK](https://github.com/pieces-app/pieces-os-client-sdk-for-csharp). This action needs to do the following:
