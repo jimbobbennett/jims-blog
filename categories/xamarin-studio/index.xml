@@ -1,4 +1,99 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xamarin Studio on JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content in Xamarin Studio on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 01 Jul 2016 23:56:53 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/xamarin-studio/index.xml" rel="self" type="application/rss+xml"/><item><title>Circles of DevRel part 1 - grow your circle of influence through collaboration</title><link>https://jimbobbennett.dev/blogs/circles-of-influence-1/</link><pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/circles-of-influence-1/</guid><description>&lt;blockquote>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xamarin Studio on JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content in Xamarin Studio on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Fri, 01 Jul 2016 23:56:53 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/xamarin-studio/index.xml" rel="self" type="application/rss+xml"/><item><title>Build GitHub Actions faster with act</title><link>https://jimbobbennett.dev/blogs/build-github-actions-faster-with-act/</link><pubDate>Mon, 23 Sep 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/build-github-actions-faster-with-act/</guid><description>&lt;p>If I said to you that I made 34 commits to a repo, each one with small changes to a single file, with commit messages like &amp;ldquo;Hoping this works&amp;rdquo;, &amp;ldquo;Please work&amp;rdquo;, and &amp;ldquo;For f*cks sake, work this time&amp;rdquo;, you would know exactly why - I&amp;rsquo;m setting up a &lt;strong>CI/CD pipeline&lt;/strong>!&lt;/p>
+&lt;p>We&amp;rsquo;ve all been through this - having to commit our changes to GitHub to test them out as there is no way to do it locally, and ending up with way too many commits because our only feedback loop is to run and check the logs. Compound this with repo permissions where every commit needs to be a PR that is reviewed and approved, and you have way too much work and time spent working on what should be a simple task. If only there was a better way&amp;hellip;&lt;/p>
+&lt;p>There is! This post is all about &lt;a href="https://nektosact.com/introduction.html">&lt;strong>act&lt;/strong>&lt;/a>, a tool for running &lt;strong>GitHub Actions&lt;/strong> locally, so you can debug and fix them before committing to your repo. It shows act off using the real world example of the GitHub Action I created for the &lt;a href="https://github.com/pieces-app/pieces-os-client-sdk-for-csharp">Pieces for Developers C# SDK&lt;/a>.&lt;/p>
+&lt;h2 id="what-is-act">What is act&lt;/h2>
+&lt;blockquote>
+&lt;p>&amp;ldquo;Think globally, &lt;code>act&lt;/code> locally&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>The goal of &lt;a href="https://nektosact.com/introduction.html">&lt;strong>act&lt;/strong>&lt;/a> is to provide a way to spin up a GitHub Action locally, running them in a container as if they were running in GitHub. It can handle environment variables, secrets, using external actions and more, with a file system setup that mimics what GitHub has. And best of all, this is a free, open source project!&lt;/p>
+&lt;h3 id="install-act">Install act&lt;/h3>
+&lt;p>Installation of act is pretty simple. It uses &lt;a href="https://www.docker.com">Docker&lt;/a>, so you need that installed (or a compatible container engine), then after that you can install from your package manager of choice. All the options are listed in &lt;a href="https://nektosact.com/installation/index.html">the act installation guide&lt;/a>. I&amp;rsquo;m a mac user, so used &lt;a href="https://formulae.brew.sh/formula/act#default">homebrew&lt;/a>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>brew install act
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="run-act">Run act&lt;/h3>
+&lt;p>You can run act from the command line. When run, it will run all the jobs in your &lt;code>.github/workflows&lt;/code> folder.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>act
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The first time you run act, it will give you a choice of what type of container you want to run everything in - from huge with everything, to tiny with minimal support for external actions. I chose the middle ground, with a 500MB download (which conveniently enough I was able to do on airplane WiFi).&lt;/p>
+&lt;p>You can configure which jobs are run by passing &lt;a href="https://nektosact.com/usage/index.html#events">events&lt;/a> to the command line. This allows you to simulate a pull request, or a push to a branch. For example, to only run actions triggered by a push, run:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>act push
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="use-act-to-build-an-action">Use act to build an action&lt;/h2>
+&lt;p>I recently used act to help me build out a GitHub Action to build and publish the &lt;a href="https://github.com/pieces-app/pieces-os-client-sdk-for-csharp">Pieces for Developers C# SDK&lt;/a> to nuget. This action needs to do the following:&lt;/p>
+&lt;ol>
+&lt;li>Be triggered from a new tag&lt;/li>
+&lt;li>Install .NET 8 (the current LTS version)&lt;/li>
+&lt;li>Compile the SDK with a release build, passing the version from the tag to the build command&lt;/li>
+&lt;li>Sign the created nuget package (this is created on build) using a cert and password from the secrets&lt;/li>
+&lt;li>Push the package to nuget, using an API key that is a secret&lt;/li>
+&lt;/ol>
+&lt;h3 id="use-external-actions-with-act">Use external actions with act&lt;/h3>
+&lt;p>Act has full support for external actions made available with a &lt;code>uses&lt;/code> statement. It will clone the action locally, then run it with docker so that it runs as if it was in a GitHub Action. In my case, this means I can check out my code, and install .NET using the default GitHub &lt;code>actions/setup-dotnet&lt;/code> action.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Release&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">on&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">push&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tags&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#39;*&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">publish-to-nuget&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Setup .NET&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/setup-dotnet@v4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dotnet-version&lt;/span>: &lt;span style="color:#ae81ff">8.0&lt;/span>&lt;span style="color:#ae81ff">.*&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Top tip - running an action that installs a large tool like .NET on airplane WiFi is not recommended! Ask me how I know&amp;hellip;&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="use-a-tag-with-act">Use a tag with act&lt;/h3>
+&lt;p>The next step is to build the nuget package. As part of this, I want to set the version from the tag.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">working-directory&lt;/span>: &lt;span style="color:#ae81ff">./src/Client&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">dotnet build -c Release -p:Version=${GITHUB_REF#refs/tags/v}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>GitHub automatically passes this tag through to the action as a &lt;a href="https://docs.github.com/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables#default-environment-variables">default environment variable&lt;/a> when run inside GitHub Actions. With act, I can also set environment variables either by passing them into the command line, or adding them to a .env file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">GITHUB_REF&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">refs/tags/v0.0.7-beta&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This allows me to set the tag used for each run, in this example to &lt;code>refs/tags/v0.0.7-beta&lt;/code>. The syntax of my build command, &lt;code>${GITHUB_REF#refs/tags/v}&lt;/code> strips the &lt;code>refs/tags/v&lt;/code> section, so my build sets the version to &lt;code>0.0.7-beta&lt;/code>.&lt;/p>
+&lt;h3 id="use-secrets-with-act">Use secrets with act&lt;/h3>
+&lt;p>GitHub Actions supports &lt;a href="https://docs.github.com/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions">secrets&lt;/a> - special values you can configure as the owner of the repo that are surfaced to your actions, but not visible to anyone looking at the repo. These are great for things like API keys or passwords. In my case I need 3 secrets - a certificate to sign my nuget package, a password for the certificate, and an API key for nuget to show it&amp;rsquo;s me uploading the package.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Get the nuget signing certificate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">cert_file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">timheuer/base64-to-file@v1.2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">with&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">fileName&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;certfile.pfx&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">encodedString&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.NUGET_CERTIFICATE }}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Sign the nuget package&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">working-directory&lt;/span>: &lt;span style="color:#ae81ff">./src/Client&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">run&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> dotnet nuget sign ./bin/Release/Pieces.OS.Client.${GITHUB_REF#refs/tags/v}.nupkg
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> --certificate-path /tmp/certfile.pfx
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> --certificate-password ${{ secrets.NUGET_CERTIFICATE_PASSWORD }}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> --timestamper http://timestamp.digicert.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Push to NuGet&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">working-directory&lt;/span>: &lt;span style="color:#ae81ff">./src/Client&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">run&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> dotnet nuget push ./bin/Release/*.nupkg -k ${{ secrets.NUGET_API_KEY }}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> -s https://nuget.org&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With act, you can &lt;a href="https://nektosact.com/usage/index.html#secrets">pass secrets using a &lt;code>.secrets&lt;/code> file&lt;/a>. This is similar to the &lt;code>.env&lt;/code> file, just with your secrets in it. I created a local &lt;code>.secrets&lt;/code> file with the secrets I needed.&lt;/p>
+&lt;p>For the signing certificate, I need a &lt;code>.pfx&lt;/code> file, so my way to do this is to encode the contents of the file in base64, upload that as a secret, then use the &lt;code>timheuer/base64-to-file@v1.2&lt;/code> action to convert that secret to a file on the local file system. More details in &lt;a href="https://www.timheuer.com/blog/use-nuget-with-github-actions-github-packages/">this blog post from Tim&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">NUGET_API_KEY&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;key&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">NUGET_CERTIFICATE_PASSWORD&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;password&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">NUGET_CERTIFICATE&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;lt;base64 encoded cert&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Always add the &lt;code>.secrets&lt;/code> to your &lt;code>.gitignore&lt;/code> to avoid accidentally exposing them by adding this file to your repo!&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="test-it-out">Test it out&lt;/h2>
+&lt;p>With my environment variables and secrets all set up, I was able to test out my action. As always, things failed with each run, but I was able to iterate locally without needing to push my action, raise a PR, get it reviewed and approved, merge it, then tag each time.&lt;/p>
+&lt;p>The kind of errors I hit were:&lt;/p>
+&lt;ul>
+&lt;li>Not setting the working directory&lt;/li>
+&lt;li>Setting the version of the build wrong&lt;/li>
+&lt;li>Getting the path of the certificate file wrong&lt;/li>
+&lt;li>Inconsistent case of &lt;code>release&lt;/code> and &lt;code>Release&lt;/code> for the output folder&lt;/li>
+&lt;/ul>
+&lt;p>All these are easy mistakes to make when you can&amp;rsquo;t run locally, and would normally take multiple fixes. All fixed locally before I committed my code.&lt;/p>
+&lt;p>The action ran as if I was inside a GitHub Action - not only did it actually check out my code and build it, it also signed the nuget package and pushed it to the nuget repo. I could see the result with the new package visible inside nuget. This gave me the confidence to raise my PR.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>If you are using GitHub Actions, act is an invaluable tool to help you develop your actions and test them locally. Check it out at &lt;a href="https://github.com/nektos/act">github.com/nektos/act&lt;/a>.&lt;/p></description></item><item><title>Circles of DevRel part 1 - grow your circle of influence through collaboration</title><link>https://jimbobbennett.dev/blogs/circles-of-influence-1/</link><pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/circles-of-influence-1/</guid><description>&lt;blockquote>
 &lt;p>This is the first part of a multipart blog post focusing on looking at DevRel through the idea of circles of influence.&lt;/p>
 &lt;/blockquote>
 &lt;p>As &lt;a href="https://jimbobbennett.dev/blogs/so-what-is-devrel/">dev rel people&lt;/a>, part of our job is to drive awareness of our product. If you think in terms of sales/marketing, this is feeding the top of the funnel. If you think in terms of the &lt;a href="https://www.devrel.agency/developerjourney">developer journey&lt;/a>, this is the discover phase.&lt;/p>
