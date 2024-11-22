@@ -316,16 +316,19 @@ params:
   livestreams:
     upcoming:
       series:
-      - title: Learning Pieces for Developers
-        videos:
-        - title: "Learning Pieces for Developers: JimBobBennett & Ben Dechrai"
-          description: "In today's live stream, Jim is joined by Ben Dechrai, Head of developer relations at Arcjet, a security layer for developers. Using Pieces as his trusty assistant as always, Jim will be learning how to add security to his APIs with Ben's help."
-          registrationLink: https://www.youtube.com/live/RTZypHe5p_I?si=9zGOknsMLYdeYps-
-          image: /images/livestreams/learning-pieces-ben.png
+      # - title: Learning Pieces for Developers
+      #   videos:
+      #   - title: "Learning Pieces for Developers: JimBobBennett & Ben Dechrai"
+      #     description: "In today's live stream, Jim is joined by Ben Dechrai, Head of developer relations at Arcjet, a security layer for developers. Using Pieces as his trusty assistant as always, Jim will be learning how to add security to his APIs with Ben's help."
+      #     registrationLink: https://www.youtube.com/live/RTZypHe5p_I?si=9zGOknsMLYdeYps-
+      #     image: /images/livestreams/learning-pieces-ben.png
     previous:
       series:
       - title: Learning Pieces for Developers
         videos:
+          - title: "Learning Pieces for Developers: JimBobBennett & Ben Dechrai"
+            id: RTZypHe5p_I
+            description: "In today's live stream, Jim is joined by Ben Dechrai, Head of developer relations at Arcjet, a security layer for developers. Using Pieces as his trusty assistant as always, Jim will be learning how to add security to his APIs with Ben's help."
           - title: "Learning Pieces for Developers: JimBobBennett & Daniel Maher"
             id: PvP7xU9q-Qs
             description: "In today's live stream, Jim learns about access control with Daniel 'Phrawzty' Maher, senior devrel manager at Carbos, a tool to implement, manage, and delegate fine-grained access control. Can Jim leverage Pieces to help him implement access control with Daniel's help? Come join us and find out!"
@@ -532,6 +535,16 @@ params:
     upcoming:
     previous:
       series:
+      - title: "dotnetconf 2024"
+        videos:
+        - title: The force is strong in LLMs - building an open source Star Wars inspired copilot in .NET
+          id: orYbN8990dA
+          description: "Learn how to build a Star Wars inspired copilot using PiecesOS and .NET"
+      - title: "All Things Open 2024"
+        videos:
+        - title: The force is strong in LLMs - building an open source Star Wars inspired copilot in .NET
+          id: A-SZWJ-Ye7Q
+          description: "Learn how to build a Star Wars inspired copilot using PiecesOS and .NET"
       - title: "apidays New York"
         videos:
         - title: Build a Terrible API for People You Hate
