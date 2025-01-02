@@ -291,6 +291,9 @@ params:
 
   podcasts:
     videos:
+    - title: "Jim Bennett: Pieces for Developers and the Impact of AI tools - Imperial Security Bureau Podcast 19"
+      id: Cq8C2kNjN4A
+      description: Jim and Blake discuss AI and Star Wars!
     - title: "Coding in Context - Building a DevRel Team: The Intersection of Product, Community, and Growth"
       id: KM-T2_rYAQM
       description: "Join host Mason Williams in this episode of 'Coding in Context' as he delves into the world of Developer Relations with Cole Stark (CMO @ Pieces), Rosie Levy (CCO @ Pieces), and Jim (Head of Developer Advocacy @ Pieces). Explore the intricate process of building a DevRel team and the unique intersection of product, community, and growth."
