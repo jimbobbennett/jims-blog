@@ -538,6 +538,11 @@ params:
     upcoming:
     previous:
       series:
+      - title: "NDC London 2025"
+        videos:
+        - title: "Prove going for a walk makes you more productive by measuring CO2 with an IoT device"
+          id: upEgSfqDTIg
+          description: "Learn how falling asleep in meetings is all down to CO2 levels, and how you can measure this with an IoT device"
       - title: "dotnetconf 2024"
         videos:
         - title: The force is strong in LLMs - building an open source Star Wars inspired copilot in .NET
