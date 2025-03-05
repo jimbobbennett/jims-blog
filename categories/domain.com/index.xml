@@ -1,4 +1,229 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Domain.com on JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content in Domain.com on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Wed, 27 Nov 2019 01:55:32 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/domain.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Build GitHub Actions faster with act</title><link>https://jimbobbennett.dev/blogs/build-github-actions-faster-with-act/</link><pubDate>Mon, 23 Sep 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/build-github-actions-faster-with-act/</guid><description>&lt;p>If I said to you that I made 34 commits to a repo, each one with small changes to a single file, with commit messages like &amp;ldquo;Hoping this works&amp;rdquo;, &amp;ldquo;Please work&amp;rdquo;, and &amp;ldquo;For f*cks sake, work this time&amp;rdquo;, you would know exactly why - I&amp;rsquo;m setting up a &lt;strong>CI/CD pipeline&lt;/strong>!&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Domain.com on JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content in Domain.com on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jim@jimbobbennett.io (Jim Bennett)</managingEditor><webMaster>jim@jimbobbennett.io (Jim Bennett)</webMaster><lastBuildDate>Wed, 27 Nov 2019 01:55:32 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/categories/domain.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Can AI help with user personas</title><link>https://jimbobbennett.dev/blogs/can-ai-help-with-user-personas/</link><pubDate>Tue, 04 Mar 2025 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/can-ai-help-with-user-personas/</guid><description>&lt;p>I recently recorded an episode of the &lt;a href="https://youtube.com/playlist?list=PL3ufX1Aqkp14nCfVUrDjLD3_GTFN0bo95&amp;amp;si=I721SMH3kncXMe2c">Pieces AI productivity podcast&lt;/a> with &lt;a href="https://www.linkedin.com/in/jasonarbon/">Jason Arbon&lt;/a>, the CEO of &lt;a href="https://testers.ai/">Testers.ai&lt;/a> and &lt;a href="https://www.checkie.ai/">Checkie.ai&lt;/a>.&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/jCB_Xp-MdDs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;p>During this podcast we were discussing how well AI can do at replicating hte actions of humans, and I made the claim that AI will never be as good as humans as it lacks basic empathy. When we consider designing and testing a product, my position was that an AI will never be able to provide those human-level decisions that consider the needs of the individual users.&lt;/p>
+&lt;h2 id="example---a-mobile-app-for-truck-drivers">Example - a mobile app for truck drivers&lt;/h2>
+&lt;p>I gave an example of a mobile app I built at a company many years ago designed for truck drivers to inspect vehicles. The first ideas for the app failed to take into consideration the UX requirements of the audience. Truck drivers in New Zealand and the US (our audience) are typically:&lt;/p>
+&lt;ul>
+&lt;li>Older as this is not a career young people want to get into&lt;/li>
+&lt;li>Larger than average due to a sedentary job with poor food choices available at truck stops&lt;/li>
+&lt;li>Less tech savvy&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>This is the typical user, and doesn&amp;rsquo;t represent the entire user base, but we should always design for the least able users&lt;/p>
+&lt;/blockquote>
+&lt;p>The initial design for our app was sleek and modern, with small UI controls and an experience that used up to date mobile UI experiences. Which was great for the young, healthy, designers and developers, but would fall down when it hit our users.&lt;/p>
+&lt;p>We got to these considerations by discussing the app with some of the more customer focused members of the company, folks who were former truck drivers themselves, or folks who meet and work with drivers every day. These are the best people to work with - the ones who have access to the lived experience of the customer. This took days to get the data, with many meetings and discussions to drill down to a set of statements that we could verify the UI designs against.&lt;/p>
+&lt;p>&lt;strong>Our users are typically older&lt;/strong> - which means more potential for poor eyesight. Small controls and text are hard to read.&lt;/p>
+&lt;p>&lt;strong>Our users are typically larger than average&lt;/strong> - which means larger fingers. A tight UI makes it hard to select the right buttons.&lt;/p>
+&lt;p>&lt;strong>Our users are typically less tech savvy&lt;/strong> - which means they are not as used to mobile patterns as the young, tech friendly development team. The experience needs to be intuitive and guide them through the actions they need to do.&lt;/p>
+&lt;p>So it was back to the drawing board with these thoughts in mind, designing a UI that had larger controls, larger, shorter text, and a simpler flow guiding uses through it step by step.&lt;/p>
+&lt;h2 id="can-an-ai-empathize-like-this">Can an AI empathize like this?&lt;/h2>
+&lt;p>Now in my discussion with Jason, I argued that an AI would not make these design choices. It would not have enough empathy about the user to be able to consider aspects like larger fingers, or poorer eyesight. Jason on te other had disagreed - his experience shows that AI is surprisingly good at building user personas. It has access to such a huge corpus of information around many different characteristics of humans, that it is able to reason across these details and come up with recommendations that are accurate and detailed. AI also has the advantage that it can do this at scale, so when you are considering systems that might have multiple types of users, it can create multiple user personas much faster than a human would. You can then feed these personas into AI testing tools to quickly validate the UX of apps for these different users.&lt;/p>
+&lt;h2 id="what-considerations-are-there-for-creating-user-personas">What considerations are there for creating user personas?&lt;/h2>
+&lt;p>When you use an AI to create a user persona, the key point that Jason made was it is better to be vague rather than explicit. The more you guide the AI, the more bias you put into the system. You want an unbiased view, allowing the AI to consider areas you didn&amp;rsquo;t.&lt;/p>
+&lt;p>For example, if you prompt an AI with:&lt;/p>
+&lt;p>&amp;ldquo;I need to build a UI for an app for truck drivers. What design considerations should I have for the user experience based off truck drivers typically having poor eyesight and large fingers?&amp;rdquo;&lt;/p>
+&lt;p>You are going to get a response that focuses on poor eyesight and large fingers. Which is great, as you need to know what UX considerations there are for these situations, but misses out on any other situations you might consider.&lt;/p>
+&lt;p>Instead it is better to do some prompt chaining. Start by asking what design considerations I should have for the user interface first. Then when you have the list prompt again to get more information on each consideration. This way the AI is not biased by your thoughts in what is important, and it can add its own ideas.&lt;/p>
+&lt;h2 id="lets-put-it-to-the-test">Let&amp;rsquo;s put it to the test&lt;/h2>
+&lt;p>So based on Jason&amp;rsquo;s theory, I decided to put this to the test. Let&amp;rsquo;s see if an AI can help with user personas.&lt;/p>
+&lt;h3 id="prompt-1---get-the-ux-considerations">Prompt 1 - get the UX considerations&lt;/h3>
+&lt;p>Prompt 1: &amp;ldquo;I need to build a UI for an app for truck drivers. What design considerations should I have for an optimal user experience?&amp;rdquo;&lt;/p>
+&lt;p>This is a very generic statement. Let&amp;rsquo;s see how GPT-4o Mini handles this.&lt;/p>
+&lt;blockquote>
+&lt;p>When designing a UI for an app aimed at truck drivers, there are several key considerations to ensure an optimal user experience. Here are some important design considerations:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Simplicity and Clarity&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use a clean and straightforward layout. Avoid clutter and ensure that the most important features are easily accessible.&lt;/li>
+&lt;li>Use clear and concise language. Truck drivers may be on the road and need to quickly understand what to do.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Large Touch Targets&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Ensure buttons and interactive elements are large enough to be easily tapped while driving. This reduces the risk of accidental touches and improves usability.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Voice Commands&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Incorporate voice command functionality to allow drivers to interact with the app without taking their hands off the wheel or eyes off the road.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Offline Functionality&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Truck drivers may travel through areas with poor connectivity. Ensure that critical features of the app can function offline and sync data when a connection is available.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Navigation and Mapping&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Integrate reliable navigation features that provide real-time traffic updates, route optimization, and truck-specific routing (considering height, weight, and restrictions).&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Notifications and Alerts&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use non-intrusive notifications to alert drivers about important updates (e.g., delivery reminders, route changes) without being distracting.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Customization&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Allow users to customize their dashboard or main screen to prioritize the features they use most often.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Accessibility&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Ensure the app is accessible to all users, including those with disabilities. Consider color contrast, text size, and screen reader compatibility.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Safety Features&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Include features that promote safety, such as a &amp;ldquo;Do Not Disturb&amp;rdquo; mode while driving, which can limit notifications and interactions.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>User Feedback&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Provide a way for users to give feedback easily. This can help you improve the app based on real-world usage and needs.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Consistent Design Language&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Maintain a consistent design language throughout the app to help users navigate intuitively. Use familiar icons and terminology.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Testing in Real-World Scenarios&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Conduct usability testing with actual truck drivers to gather insights on how they interact with the app in real-world conditions.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>By focusing on these design considerations, you can create a user-friendly app that meets the needs of truck drivers while ensuring their safety and efficiency on the road.&lt;/p>
+&lt;/blockquote>
+&lt;p>So far this is pretty good. The focus is more around considerations when driving - so large touch targets because the user may be driving so can&amp;rsquo;t devote attention to looking at the app. It also highlighted connectivity - &amp;ldquo;Truck drivers may travel through areas with poor connectivity. Ensure that critical features of the app can function offline and sync data when a connection is available&amp;rdquo;. This is something that wasn&amp;rsquo;t considered initially, so bonus points to the AI.&lt;/p>
+&lt;p>So we have some good things here, and some we didn&amp;rsquo;t think off. But we can now take this and dig in further with more prompts.&lt;/p>
+&lt;h3 id="prompt-2---get-accessibility-considerations">Prompt 2 - get accessibility considerations&lt;/h3>
+&lt;p>The first response focused on driving, so let&amp;rsquo;s try a prompt that focuses more on accessibility.&lt;/p>
+&lt;p>&amp;ldquo;For this app, what accessibility considerations are there? What are the typical physical characteristics of a truck driver that may impact the design of the app.&amp;rdquo;&lt;/p>
+&lt;blockquote>
+&lt;p>When designing an app for truck drivers, it&amp;rsquo;s essential to consider accessibility to ensure that all users, including those with disabilities, can effectively use the app. Here are some key accessibility considerations:&lt;/p>
+&lt;h3 id="accessibility-considerations">Accessibility Considerations:&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Color Contrast&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Ensure sufficient contrast between text and background colors to aid users with visual impairments. Use tools to check color contrast ratios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Text Size and Scalability&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Allow users to adjust text size for better readability. Use scalable fonts that maintain clarity when resized.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Screen Reader Compatibility&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Ensure that all elements of the app are compatible with screen readers. Use semantic HTML and ARIA (Accessible Rich Internet Applications) roles to provide context.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Alternative Text for Images&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Provide descriptive alt text for images and icons to assist users who rely on screen readers.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Keyboard Navigation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Ensure that all interactive elements can be accessed and operated using a keyboard. This is crucial for users with mobility impairments.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Voice Control&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Incorporate voice control features to allow users to navigate the app without needing to use touch controls.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Clear and Simple Language&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use plain language and avoid jargon to make the app more understandable for users with cognitive disabilities.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Feedback Mechanisms&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Provide clear feedback for user actions (e.g., button presses, form submissions) to help users understand the results of their interactions.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Customizable UI&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Allow users to customize the interface to suit their needs, such as changing color schemes or layouts.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="typical-physical-characteristics-of-truck-drivers">Typical Physical Characteristics of Truck Drivers:&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Age Range&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Truck drivers can vary widely in age, which may affect their comfort with technology. Older drivers may prefer larger text and simpler interfaces.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Physical Stamina&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Truck drivers often spend long hours on the road, which can lead to fatigue. The app should minimize cognitive load and provide quick access to essential features.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Hand Dexterity&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Some drivers may have reduced dexterity due to age or physical conditions. Ensure that touch targets are large enough and spaced adequately to prevent accidental touches.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Visual Impairments&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Some drivers may experience vision issues, such as reduced acuity or color blindness. The app should accommodate these conditions through adjustable settings.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Hearing Impairments&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Consider drivers who may have hearing impairments by providing visual alerts and notifications in addition to audio cues.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cognitive Load&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Truck drivers need to manage multiple tasks while driving. The app should be designed to minimize distractions and present information clearly and concisely.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>By addressing these accessibility considerations and understanding the physical characteristics of truck drivers, you can create an app that is inclusive and user-friendly for a diverse audience.&lt;/p>
+&lt;/blockquote>
+&lt;p>Now we have more good stuff here. The AI has considered age and dexterity, focusing on large text, simpler interfaces, large targets, and adjustable text. The small worry is the AI is recommending thoughts for folks who use screen readers - unlikely to be the typical truck driver, if your eyesight is bad enough to use a screen reader it is unlikely you would be driving.&lt;/p>
+&lt;p>It also had recommendations around cognitive load - reducing the impact on drivers who are focusing on the road. Distractions are a major cause of accidents, so anything the app can do to reduce these is a benefit.&lt;/p>
+&lt;h2 id="who-wins-ai-or-humans">Who wins, AI or humans?&lt;/h2>
+&lt;p>So who is the better at empathizing about the human? Are humans better, or as the AI the winner.&lt;/p>
+&lt;p>As much as it pains me to say it, I think in this case the AI wins. We humans put together a small set of considerations in a matter of days with many back and forth discussions between teams. The AI however was able to replicate what we decided and more in only 2 prompts. About 1 minutes work.&lt;/p>
+&lt;p>Does this mean we should discount the human and go all in on AI? Absolutely not. AI makes mistakes. In this example the mistakes are few, just references to users who&amp;rsquo;s visual impairments need accommodations such as screen readers, far outside what is needed legally to drive.&lt;/p>
+&lt;p>Is this a great contribution? Very much so. To me if I was doing a similar exercise again I would run multiple prompts through the AI, gather data, then work through these with humans to build a final set of design considerations in a very short space of time, saving days.&lt;/p>
+&lt;p>Please let me know your thoughts? Have you used AI to design a product? Did it have the right design considerations for your user personas? Let me know in the comments.&lt;/p></description></item><item><title>Build GitHub Actions faster with act</title><link>https://jimbobbennett.dev/blogs/build-github-actions-faster-with-act/</link><pubDate>Mon, 23 Sep 2024 00:00:00 +0000</pubDate><author>jim@jimbobbennett.io (Jim Bennett)</author><guid>https://jimbobbennett.dev/blogs/build-github-actions-faster-with-act/</guid><description>&lt;p>If I said to you that I made 34 commits to a repo, each one with small changes to a single file, with commit messages like &amp;ldquo;Hoping this works&amp;rdquo;, &amp;ldquo;Please work&amp;rdquo;, and &amp;ldquo;For f*cks sake, work this time&amp;rdquo;, you would know exactly why - I&amp;rsquo;m setting up a &lt;strong>CI/CD pipeline&lt;/strong>!&lt;/p>
 &lt;p>We&amp;rsquo;ve all been through this - having to commit our changes to GitHub to test them out as there is no way to do it locally, and ending up with way too many commits because our only feedback loop is to run and check the logs. Compound this with repo permissions where every commit needs to be a PR that is reviewed and approved, and you have way too much work and time spent working on what should be a simple task. If only there was a better way&amp;hellip;&lt;/p>
 &lt;p>There is! This post is all about &lt;a href="https://nektosact.com/introduction.html">&lt;strong>act&lt;/strong>&lt;/a>, a tool for running &lt;strong>GitHub Actions&lt;/strong> locally, so you can debug and fix them before committing to your repo. It shows act off using the real world example of the GitHub Action I created for the &lt;a href="https://github.com/pieces-app/pieces-os-client-sdk-for-csharp">Pieces for Developers C# SDK&lt;/a>.&lt;/p>
 &lt;h2 id="what-is-act">What is act&lt;/h2>
