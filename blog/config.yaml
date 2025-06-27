@@ -538,6 +538,11 @@ params:
     upcoming:
     previous:
       series:
+      - title: "Ai Engineer World's Fair"
+        videos:
+        - title: Taming Rogue AI Agents with Observability-Driven Evaluation
+          id: xJXm4Wcw4m8
+          description: "LLM agents often drift into failure when prompts, retrieval, external data, and policies interact in unpredictable ways. This session introduces a repeatable, metric-driven framework for detecting, diagnosing, and correcting these undesirable behaviors in agentic systems at production scale."
       - title: "NDC London 2025"
         videos:
         - title: "Prove going for a walk makes you more productive by measuring CO2 with an IoT device"
