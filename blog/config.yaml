@@ -184,6 +184,11 @@ params:
   
   videos:
     series:
+    - title: "The AI Smiths"
+      videos:
+      - title: Why Every AI Company Needs an AI to Test Their AI
+        id: I2vRx5Ieak8
+        description: "In this episode of The AI Smiths, we sit down with Jim Bennett from Galileo fresh from DevRelCon 2025 in NYC. Jim delivers some of the spiciest takes on AI we've heard yet - including why he believes large language models are doomed and need to 'die a death.' But beyond the hot takes, Jim shares real war stories that every AI company needs to hear: Air Canada's chatbot that lost them a court case when it gave wrong refund advice, the Chicago Sun-Times publishing a list of made-up books, and why one wrong AI decision could cost you 4% of your entire revenue under GDPR."
     - title: "liblab"
       videos:
       - title: "What is liblab?"
