@@ -332,6 +332,23 @@ params:
       #     image: /images/livestreams/learning-pieces-ben.png
     previous:
       series:
+      - title: Eval Engineering for AI Developers
+        videos:
+          - title: "Lesson 1 - an intro to eval engineering"
+            id: HnDnMFUTj2Y
+            description: "Get an introduction to evals to test and fix your AI applications."
+          - title: "Lesson 2 - add observability to AI"
+            id: aZz3ncrafRw
+            description: "Learn how to add observability to your AI applications."
+          - title: "Lesson 3 - failure analysis"
+            id: lCAfEF_qQgQ
+            description: "Learn how to find, analyze, and categorize AI agent failures."
+          - title: "Lesson 4 - building custom metrics"
+            id: I9jSJ5_MobA
+            description: "Learn how to write custom metrics for evals."
+          - title: "Lesson 5 - evals in your SDLC"
+            id: RMF8tT-wo8U
+            description: "Learn how evala fit into your AI SDLC."
       - title: Learning Pieces for Developers
         videos:
           - title: "Learning Pieces for Developers: JimBobBennett & Ben Dechrai"
