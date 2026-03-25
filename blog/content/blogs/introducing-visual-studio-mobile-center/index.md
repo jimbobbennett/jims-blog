@@ -11,9 +11,6 @@ slug: "introducing-visual-studio-mobile-center"
 tags: ["xamarin", "uitest", "technology", "test", "mobile center"]
 title: "Introducing Visual Studio Mobile Center"
 
-images:
-  - /blogs/introducing-visual-studio-mobile-center/banner.png
-featured_image: banner.png
 ---
 
 

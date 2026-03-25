@@ -11,9 +11,6 @@ slug: "travelling-with-children"
 tags: ["flying", "children", "tips", "travel"]
 title: "Flying long haul with young children"
 
-images:
-  - /blogs/travelling-with-children/banner.png
-featured_image: banner.png
 ---
 
 

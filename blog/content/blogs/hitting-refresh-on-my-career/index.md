@@ -11,9 +11,6 @@ slug: "hitting-refresh-on-my-career"
 tags: ["xamarin", "technology", "Hit refresh"]
 title: "Hitting refresh on my career"
 
-images:
-  - /blogs/hitting-refresh-on-my-career/banner.png
-featured_image: banner.png
 ---
 
 

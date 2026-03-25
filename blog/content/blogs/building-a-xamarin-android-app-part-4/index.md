@@ -11,9 +11,6 @@ slug: "building-a-xamarin-android-app-part-4"
 tags: ["xamarin", "xamarin.android", "tutorial", "mvvmlight", "Technology", "recycler view", "UI"]
 title: "Building a Xamarin Android app - part 4"
 
-images:
-  - /blogs/building-a-xamarin-android-app-part-4/banner.png
-featured_image: banner.png
 ---
 
 

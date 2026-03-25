@@ -12,9 +12,6 @@ summary: "This project builds a wearable, cloud connected camera. This is useful
 tags: ["technology", "IoT", "azure", "maker"]
 title: "Raspberry Pi cloud-connected Hat Cam"
 
-images:
-  - /blogs/raspberry-pi-hat-cam/banner.png
-featured_image: banner.png
 ---
 
 

@@ -11,9 +11,6 @@ slug: "controlling-an-iot-device-from-your-phone"
 tags: ["Technology", "azure", "azure free", "functions", "xamarin", "xamarin.forms", "IoT", "GooGoo clusters"]
 title: "Controlling an IoT device from your phone"
 
-images:
-  - /blogs/controlling-an-iot-device-from-your-phone/banner.png
-featured_image: banner.png
 ---
 
 

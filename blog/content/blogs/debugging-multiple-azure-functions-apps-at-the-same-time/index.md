@@ -11,9 +11,6 @@ slug: "debugging-multiple-azure-functions-apps-at-the-same-time"
 tags: ["Technology", "azure", "functions", "Visual Studio", "debugging"]
 title: "Debugging multiple Azure Functions apps at the same time"
 
-images:
-  - /blogs/debugging-multiple-azure-functions-apps-at-the-same-time/banner.png
-featured_image: banner.png
 ---
 
 

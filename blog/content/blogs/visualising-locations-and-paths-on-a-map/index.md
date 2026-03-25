@@ -12,9 +12,6 @@ summary: "Learn how to show an Azure Maps control on a web page, and add pins an
 tags: ["technology", "azure", "Maps", "javascript", "Python"]
 title: "Visualizing locations and paths on a map with Azure Maps"
 
-images:
-  - /blogs/visualising-locations-and-paths-on-a-map/banner.png
-featured_image: banner.png
 ---
 
 

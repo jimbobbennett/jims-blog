@@ -11,9 +11,6 @@ slug: "firewall-issues-with-ios-simulators"
 tags: ["xamarin", "xamarin.ios", "Technology", "firewall"]
 title: "Firewall issues with iOS simulators"
 
-images:
-  - /blogs/firewall-issues-with-ios-simulators/banner.png
-featured_image: banner.png
 ---
 
 

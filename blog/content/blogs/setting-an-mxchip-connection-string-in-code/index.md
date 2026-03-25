@@ -12,9 +12,6 @@ summary: "Learn how to set the Azure IoT Hub connection string on an MXChip boar
 tags: ["technology", "mxchip", "IoT", "Iot Hub", "azure"]
 title: "Setting an Azure IoT Hub connection string in code on an MXChip"
 
-images:
-  - /blogs/setting-an-mxchip-connection-string-in-code/banner.png
-featured_image: banner.png
 ---
 
 

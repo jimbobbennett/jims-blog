@@ -12,9 +12,6 @@ summary: "Learn how to build an internet connected fan using the MXChip Azure Io
 tags: ["technology", "IoT", "xamarin"]
 title: "Prototyping your first cloud-connected IoT project using an MXChip board and Azure IoT hub."
 
-images:
-  - /blogs/internet-connected-fan/banner.png
-featured_image: banner.png
 ---
 
 

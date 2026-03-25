@@ -12,9 +12,6 @@ summary: "Learn how to build a live captioner using Python and the Azure Cogniti
 tags: ["technology", "Python", "azure", "cognitive services", "speech"]
 title: "Building a live caption tool - part 1"
 
-images:
-  - /blogs/building-a-live-caption-tool/banner.png
-featured_image: banner.png
 ---
 
 

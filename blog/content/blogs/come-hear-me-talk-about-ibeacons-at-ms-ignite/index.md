@@ -11,9 +11,6 @@ slug: "come-hear-me-talk-about-ibeacons-at-ms-ignite"
 tags: ["ibeacon", "xamarin", "xamarin.ios", "Technology", "igniteNZ"]
 title: "Come hear me talk about iBeacons at MS Ignite NZ"
 
-images:
-  - /blogs/come-hear-me-talk-about-ibeacons-at-ms-ignite/banner.png
-featured_image: banner.png
 ---
 
 

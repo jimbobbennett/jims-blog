@@ -11,9 +11,6 @@ slug: "building-a-xamarin-android-app-part-6-2"
 tags: ["xamarin", "xamarin.android", "mvvmlight", "Technology", "UI", "tutorial"]
 title: "Building a Xamarin Android app - part 6"
 
-images:
-  - /blogs/building-a-xamarin-android-app-part-6-2/banner.png
-featured_image: banner.png
 ---
 
 

@@ -11,9 +11,6 @@ slug: "using-livexaml-to-improve-your-xamarin-forms-uis"
 tags: ["xamarin", "xamarin.forms", "technology", "UI", "xaml"]
 title: "Using LiveXAML to improve your Xamarin Forms UIs"
 
-images:
-  - /blogs/using-livexaml-to-improve-your-xamarin-forms-uis/banner.png
-featured_image: banner.png
 ---
 
 
