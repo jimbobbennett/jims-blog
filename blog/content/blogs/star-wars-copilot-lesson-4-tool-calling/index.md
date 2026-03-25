@@ -1,6 +1,6 @@
 ---
 author: "Jim Bennett"
-date: 2026-03-23
+date: 2026-02-24
 description: "Add a web-search tool to your Star Wars copilot so it can fetch current knowledge instead of hallucinating."
 draft: false
 tags: ["ai", "copilot", "star wars", "dotnet", "c#", "tool calling", "function calling", "tavily"]
@@ -14,6 +14,44 @@ image: banner.png
 LLMs are smart, but they're also confidently wrong sometimes.
 
 Lesson 4 fixes that by giving the copilot a tool to query Wookieepedia via Tavily, so answers can be grounded in external data.
+
+## Lessons in this series
+
+| Lesson |
+|---|
+| [Lesson 0: Self-Setup](/blogs/star-wars-copilot-lesson-0-self-setup/) |
+| [Lesson 1: Chat with an LLM](/blogs/star-wars-copilot-lesson-1-chat-with-an-llm/) |
+| [Lesson 2: Chat History and System Prompts](/blogs/star-wars-copilot-lesson-2-chat-history-and-system-prompts/) |
+| [Lesson 3: Model Choice and Local Models](/blogs/star-wars-copilot-lesson-3-model-choice-and-local-models/) |
+| [Lesson 4: Tool Calling](/blogs/star-wars-copilot-lesson-4-tool-calling/) |
+| [Lesson 5: MCP (Model Context Protocol)](/blogs/star-wars-copilot-lesson-5-mcp/) |
+| [Lesson 6: RAG from a Database](/blogs/star-wars-copilot-lesson-6-rag-from-database/) |
+| [Lesson 7: Multimodal Image Generation](/blogs/star-wars-copilot-lesson-7-multimodal-image-generation/) |
+| [Lesson 8: Agents and Orchestration](/blogs/star-wars-copilot-lesson-8-agents-and-orchestration/) |
+
+## Before you start (self-setup)
+
+If you're following along on your own, complete [lesson 0](/blogs/star-wars-copilot-lesson-0-self-setup/) and [lesson 1](/blogs/star-wars-copilot-lesson-1-chat-with-an-llm/) first.
+
+This lesson adds one new external dependency: a Tavily API key.
+
+## Self-setup: Tavily API key
+
+1. Create a Tavily account at [tavily.com](https://www.tavily.com) (free tier is enough for this workshop).
+1. Generate an API key from the Tavily dashboard.
+1. Save it to user secrets:
+
+```bash
+dotnet user-secrets set "Tavily:ApiKey" "<your-tavily-api-key>"
+```
+
+Quick verification:
+
+```bash
+dotnet user-secrets list
+```
+
+Make sure `Tavily:ApiKey` is present before wiring the tool.
 
 ## Why tools
 
@@ -77,3 +115,5 @@ A cinematic digital artwork of an AI assistant in a starship briefing room reach
 Workshop source for this lesson: [Lesson 4 README](https://github.com/jimbobbennett/StarWarsCopilot/blob/main/4-call-tools/README.md).
 
 Next up: moving tools into an MCP server so they become reusable across clients.
+
+> **Note:** Original workshop repository: [jimbobbennett/StarWarsCopilot](https://github.com/jimbobbennett/StarWarsCopilot).

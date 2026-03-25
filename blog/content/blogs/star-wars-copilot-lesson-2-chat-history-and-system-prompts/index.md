@@ -1,6 +1,6 @@
 ---
 author: "Jim Bennett"
-date: 2026-03-23
+date: 2026-02-10
 description: "Add chat history and a system prompt to give your C# copilot memory, tone, and behavior."
 draft: false
 tags: ["ai", "copilot", "star wars", "dotnet", "c#", "prompt engineering", "chat history"]
@@ -20,6 +20,26 @@ Now we make it feel like an actual copilot by adding:
 - a system prompt
 
 This is where things get fun.
+
+## Lessons in this series
+
+| Lesson |
+|---|
+| [Lesson 0: Self-Setup](/blogs/star-wars-copilot-lesson-0-self-setup/) |
+| [Lesson 1: Chat with an LLM](/blogs/star-wars-copilot-lesson-1-chat-with-an-llm/) |
+| [Lesson 2: Chat History and System Prompts](/blogs/star-wars-copilot-lesson-2-chat-history-and-system-prompts/) |
+| [Lesson 3: Model Choice and Local Models](/blogs/star-wars-copilot-lesson-3-model-choice-and-local-models/) |
+| [Lesson 4: Tool Calling](/blogs/star-wars-copilot-lesson-4-tool-calling/) |
+| [Lesson 5: MCP (Model Context Protocol)](/blogs/star-wars-copilot-lesson-5-mcp/) |
+| [Lesson 6: RAG from a Database](/blogs/star-wars-copilot-lesson-6-rag-from-database/) |
+| [Lesson 7: Multimodal Image Generation](/blogs/star-wars-copilot-lesson-7-multimodal-image-generation/) |
+| [Lesson 8: Agents and Orchestration](/blogs/star-wars-copilot-lesson-8-agents-and-orchestration/) |
+
+## Before you start (self-setup)
+
+If you're following along on your own, complete [lesson 0](/blogs/star-wars-copilot-lesson-0-self-setup/) and [lesson 1](/blogs/star-wars-copilot-lesson-1-chat-with-an-llm/) first.
+
+Lesson 2 reuses the same Azure OpenAI endpoint, API key, and model deployment from lesson 1.
 
 ## Why follow-up questions failed
 
@@ -96,3 +116,5 @@ A stylized sci-fi scene showing layered chat bubbles orbiting around a glowing h
 Workshop source for this lesson: [Lesson 2 README](https://github.com/jimbobbennett/StarWarsCopilot/blob/main/2-chat-history-and-message-roles/README.md).
 
 Next up: swapping model providers, including local models with Foundry Local.
+
+> **Note:** Original workshop repository: [jimbobbennett/StarWarsCopilot](https://github.com/jimbobbennett/StarWarsCopilot).

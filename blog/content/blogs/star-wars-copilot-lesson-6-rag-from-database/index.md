@@ -1,6 +1,6 @@
 ---
 author: "Jim Bennett"
-date: 2026-03-23
+date: 2026-03-10
 description: "Use retrieval-augmented generation (RAG) with Azure Table Storage to answer Star Wars order questions."
 draft: false
 tags: ["ai", "copilot", "star wars", "dotnet", "c#", "rag", "azure table storage", "mcp"]
@@ -14,6 +14,45 @@ image: banner.png
 By lesson 6, we already have an MCP server and client working.
 
 Now we add a classic enterprise use case: retrieval from structured business data.
+
+## Lessons in this series
+
+| Lesson |
+|---|
+| [Lesson 0: Self-Setup](/blogs/star-wars-copilot-lesson-0-self-setup/) |
+| [Lesson 1: Chat with an LLM](/blogs/star-wars-copilot-lesson-1-chat-with-an-llm/) |
+| [Lesson 2: Chat History and System Prompts](/blogs/star-wars-copilot-lesson-2-chat-history-and-system-prompts/) |
+| [Lesson 3: Model Choice and Local Models](/blogs/star-wars-copilot-lesson-3-model-choice-and-local-models/) |
+| [Lesson 4: Tool Calling](/blogs/star-wars-copilot-lesson-4-tool-calling/) |
+| [Lesson 5: MCP (Model Context Protocol)](/blogs/star-wars-copilot-lesson-5-mcp/) |
+| [Lesson 6: RAG from a Database](/blogs/star-wars-copilot-lesson-6-rag-from-database/) |
+| [Lesson 7: Multimodal Image Generation](/blogs/star-wars-copilot-lesson-7-multimodal-image-generation/) |
+| [Lesson 8: Agents and Orchestration](/blogs/star-wars-copilot-lesson-8-agents-and-orchestration/) |
+
+## Before you start (self-setup)
+
+If you're following along on your own, complete [lesson 0](/blogs/star-wars-copilot-lesson-0-self-setup/) and [lesson 5](/blogs/star-wars-copilot-lesson-5-mcp/) first.
+
+This lesson introduces a new Azure dependency: Storage Tables.
+
+## Self-setup: Azure Table Storage + seed data
+
+1. Create a Storage account in Azure.
+1. In that account, create three tables:
+   - `Figurines`
+   - `Orders`
+   - `OrderFigurines`
+1. Get a connection string and save it:
+
+```bash
+dotnet user-secrets set "AzureStorage:ConnectionString" "<your-storage-connection-string>"
+```
+
+1. Seed the data.
+   - The workshop repo includes a dataloader project in `6-rag/dataloader` you can run to populate sample data.
+   - If you prefer, you can insert rows manually with Storage Explorer.
+
+Quick verification: confirm order `66` exists before testing `StarWarsPurchaseTool`.
 
 ## What this lesson adds
 
@@ -77,3 +116,5 @@ A high-detail sci-fi data-vault scene with holographic tables of orders and figu
 Workshop source for this lesson: [Lesson 6 README](https://github.com/jimbobbennett/StarWarsCopilot/blob/main/6-rag/README.md).
 
 Next up: multi-modal AI with image generation tools.
+
+> **Note:** Original workshop repository: [jimbobbennett/StarWarsCopilot](https://github.com/jimbobbennett/StarWarsCopilot).

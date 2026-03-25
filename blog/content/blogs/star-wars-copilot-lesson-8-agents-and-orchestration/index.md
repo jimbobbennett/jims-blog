@@ -1,6 +1,6 @@
 ---
 author: "Jim Bennett"
-date: 2026-03-23
+date: 2026-03-24
 description: "Build AI agents with Microsoft Agent Framework and orchestrate a multi-agent Star Wars storytelling workflow."
 draft: false
 tags: ["ai", "copilot", "star wars", "dotnet", "c#", "agents", "microsoft agent framework", "orchestration"]
@@ -14,6 +14,38 @@ image: banner.png
 Final lesson, and probably my favorite.
 
 We move from a copilot with tools to a system that also uses **agents** as composable specialists.
+
+## Lessons in this series
+
+| Lesson |
+|---|
+| [Lesson 0: Self-Setup](/blogs/star-wars-copilot-lesson-0-self-setup/) |
+| [Lesson 1: Chat with an LLM](/blogs/star-wars-copilot-lesson-1-chat-with-an-llm/) |
+| [Lesson 2: Chat History and System Prompts](/blogs/star-wars-copilot-lesson-2-chat-history-and-system-prompts/) |
+| [Lesson 3: Model Choice and Local Models](/blogs/star-wars-copilot-lesson-3-model-choice-and-local-models/) |
+| [Lesson 4: Tool Calling](/blogs/star-wars-copilot-lesson-4-tool-calling/) |
+| [Lesson 5: MCP (Model Context Protocol)](/blogs/star-wars-copilot-lesson-5-mcp/) |
+| [Lesson 6: RAG from a Database](/blogs/star-wars-copilot-lesson-6-rag-from-database/) |
+| [Lesson 7: Multimodal Image Generation](/blogs/star-wars-copilot-lesson-7-multimodal-image-generation/) |
+| [Lesson 8: Agents and Orchestration](/blogs/star-wars-copilot-lesson-8-agents-and-orchestration/) |
+
+## Before you start (self-setup)
+
+If you're following along on your own, complete [lesson 0](/blogs/star-wars-copilot-lesson-0-self-setup/) and [lesson 7](/blogs/star-wars-copilot-lesson-7-multimodal-image-generation/) first.
+
+This lesson does not require a brand-new Azure resource, but it does add framework dependencies and orchestrates all prior components.
+
+## Self-setup: agent dependencies and readiness checks
+
+1. Install the Microsoft Agent Framework packages used by the workshop in your copilot project.
+1. Keep package versions aligned with the workshop repo to avoid API mismatches.
+1. Verify your existing resources still work before introducing agents:
+   - chat model calls succeed
+   - Tavily tool calls succeed
+   - MCP server lists and runs tools
+   - image generation tool returns URLs
+
+Once these checks pass, add the agent orchestration code. Debugging is much easier when the underlying tools are already healthy.
 
 ## Copilot vs agent
 
@@ -67,3 +99,5 @@ A cinematic command-center scene with three specialized AI holograms (story writ
 Workshop source for this lesson: [Lesson 8 README](https://github.com/jimbobbennett/StarWarsCopilot/blob/main/8-agents/README.md).
 
 And that's the full 8-part journey: chat, memory, model choice, tools, MCP, RAG, multimodal, and agents.
+
+> **Note:** Original workshop repository: [jimbobbennett/StarWarsCopilot](https://github.com/jimbobbennett/StarWarsCopilot).

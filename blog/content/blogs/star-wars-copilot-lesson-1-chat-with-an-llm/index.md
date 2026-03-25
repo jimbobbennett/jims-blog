@@ -1,6 +1,6 @@
 ---
 author: "Jim Bennett"
-date: 2026-03-23
+date: 2026-02-03
 description: "Start a Star Wars Copilot in C# by connecting a console app to an LLM with Microsoft.Extensions.AI."
 draft: false
 tags: ["ai", "copilot", "star wars", "dotnet", "c#", "microsoft.extensions.ai", "azure openai"]
@@ -16,6 +16,58 @@ I recently put together a workshop called [StarWarsCopilot](https://github.com/j
 This is lesson 1 of 8.
 
 In this first step we build the foundation: a .NET console app that can send prompts to an LLM and print responses back to the terminal.
+
+## Lessons in this series
+
+| Lesson |
+|---|
+| [Lesson 0: Self-Setup](/blogs/star-wars-copilot-lesson-0-self-setup/) |
+| [Lesson 1: Chat with an LLM](/blogs/star-wars-copilot-lesson-1-chat-with-an-llm/) |
+| [Lesson 2: Chat History and System Prompts](/blogs/star-wars-copilot-lesson-2-chat-history-and-system-prompts/) |
+| [Lesson 3: Model Choice and Local Models](/blogs/star-wars-copilot-lesson-3-model-choice-and-local-models/) |
+| [Lesson 4: Tool Calling](/blogs/star-wars-copilot-lesson-4-tool-calling/) |
+| [Lesson 5: MCP (Model Context Protocol)](/blogs/star-wars-copilot-lesson-5-mcp/) |
+| [Lesson 6: RAG from a Database](/blogs/star-wars-copilot-lesson-6-rag-from-database/) |
+| [Lesson 7: Multimodal Image Generation](/blogs/star-wars-copilot-lesson-7-multimodal-image-generation/) |
+| [Lesson 8: Agents and Orchestration](/blogs/star-wars-copilot-lesson-8-agents-and-orchestration/) |
+
+## Before you start (self-setup)
+
+If you're following the series on your own, start with [lesson 0](/blogs/star-wars-copilot-lesson-0-self-setup/).
+
+For this lesson specifically, you need:
+
+- an Azure subscription with permission to create AI resources
+- Azure OpenAI access in a supported region
+- a deployed chat model (for example `gpt-5-mini`)
+- .NET 10 SDK installed locally
+
+## Setup notes for this lesson
+
+1. In the Azure portal, create an **Azure OpenAI** resource.
+1. Open the resource and launch **Azure AI Foundry** for that resource.
+1. Deploy a chat model (for example `gpt-5-mini`).
+1. Copy:
+   - your Azure OpenAI endpoint (for example `https://<your-resource>.openai.azure.com`)
+   - an API key
+   - your deployment name (used as model name in this lesson)
+
+Then configure your app secrets:
+
+```bash
+dotnet user-secrets init
+dotnet user-secrets set "OpenAI:Endpoint" "https://<your-resource>.openai.azure.com"
+dotnet user-secrets set "OpenAI:APIKey" "<your-api-key>"
+dotnet user-secrets set "OpenAI:ModelName" "<your-chat-deployment-name>"
+```
+
+Quick verification:
+
+```bash
+dotnet user-secrets list
+```
+
+You should see the three `OpenAI:*` keys before moving on.
 
 ## What we're building
 
@@ -102,3 +154,5 @@ A cinematic, retro-futuristic illustration of a developer at a terminal in a sta
 Workshop source for this lesson: [Lesson 1 README](https://github.com/jimbobbennett/StarWarsCopilot/blob/main/1-chat-with-copilot/README.md).
 
 Next up: chat history, message roles, and turning this into a true conversation.
+
+> **Note:** Original workshop repository: [jimbobbennett/StarWarsCopilot](https://github.com/jimbobbennett/StarWarsCopilot).
