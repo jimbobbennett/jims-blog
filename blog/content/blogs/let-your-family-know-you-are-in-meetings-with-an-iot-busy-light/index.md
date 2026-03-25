@@ -11,9 +11,6 @@ slug: "let-your-family-know-you-are-in-meetings-with-an-iot-busy-light"
 tags: ["technology", "IoT", "azure", "logic apps", "iot central"]
 title: "Let your family know you are in meetings with an IoT Busy light"
 
-images:
-  - /blogs/let-your-family-know-you-are-in-meetings-with-an-iot-busy-light/banner.png
-featured_image: banner.png
 ---
 
 

@@ -12,9 +12,6 @@ summary: "You're at an MLH Hackathon and you decide you want to win the Domain.c
 tags: ["technology", "azure", "app service", "domain.com", "dnsimple", "domain", "hackathon", "mlh", "prizes"]
 title: "Connecting your Domain.com domain name to your web app during an MLH hackathon"
 
-images:
-  - /blogs/connecting-your-domain-com-domain-name-to-azure-app-services/banner.png
-featured_image: banner.png
 ---
 
 

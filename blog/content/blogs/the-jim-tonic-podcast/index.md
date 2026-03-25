@@ -11,9 +11,6 @@ slug: "the-jim-tonic-podcast"
 tags: ["technology", "microsoft", "jim and tonic", "podcast", "cda"]
 title: "The Jim and Tonic show"
 
-images:
-  - /blogs/the-jim-tonic-podcast/banner.png
-featured_image: banner.png
 ---
 
 

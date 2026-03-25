@@ -11,9 +11,6 @@ slug: "open-anything-in-vs-code-using-a-macos-quick-action"
 tags: ["Technology", "vscode", "automator"]
 title: "Open anything in VS Code using a MacOS quick action"
 
-images:
-  - /blogs/open-anything-in-vs-code-using-a-macos-quick-action/banner.png
-featured_image: banner.png
 ---
 
 

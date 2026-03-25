@@ -11,9 +11,6 @@ slug: "xamarin-in-action"
 tags: ["xamarin", "xamarin.ios", "xamarin.android", "mvvm", "mvvmcross", "book", "Technology"]
 title: "Xamarin In Action"
 
-images:
-  - /blogs/xamarin-in-action/banner.png
-featured_image: banner.png
 ---
 
 

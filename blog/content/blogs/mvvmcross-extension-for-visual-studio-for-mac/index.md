@@ -11,9 +11,6 @@ slug: "mvvmcross-extension-for-visual-studio-for-mac"
 tags: ["xamarin", "xamarin.ios", "xamarin.android", "mvvmcross", "Visual Studio", "Mac", "Technology"]
 title: "MvvmCross Extension for Visual Studio for Mac"
 
-images:
-  - /blogs/mvvmcross-extension-for-visual-studio-for-mac/banner.png
-featured_image: banner.png
 ---
 
 

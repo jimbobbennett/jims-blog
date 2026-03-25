@@ -11,9 +11,6 @@ slug: "mvvm-the-design-pattern-for-xamarin-apps"
 tags: ["xamarin", "Technology", "mvvm", "xamarin in action"]
 title: "MVVM – the design pattern for Xamarin apps"
 
-images:
-  - /blogs/mvvm-the-design-pattern-for-xamarin-apps/banner.png
-featured_image: banner.png
 ---
 
 

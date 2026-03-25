@@ -11,9 +11,6 @@ slug: "getting-an-internship-at-microsoft"
 tags: ["microsoft", "internship"]
 title: "Getting an internship at Microsoft"
 
-images:
-  - /blogs/getting-an-internship-at-microsoft/banner.png
-featured_image: banner.png
 ---
 
 
