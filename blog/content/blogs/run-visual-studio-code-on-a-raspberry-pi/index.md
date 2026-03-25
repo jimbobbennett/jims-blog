@@ -11,7 +11,7 @@ description: It's finally here! An official supported version of VS Code that ru
 
 It's finally here! An official supported version of VS Code that runs on a Raspberry Pi!
 
-{{< tweet user="code" id="1315371339012739072" >}}
+{{< x user="code" id="1315371339012739072" >}}
 
 This to me is great news. [The Raspberry Pi](https://raspberrypi.org/) is a low-priced, small form factor computer that can run a full version of Linux. It's popular with hobbyists and kids - it was originally designed to be a cheap computer for kids to learn to code on. It has the same standard USB and HDMI ports that a PC or Mac would have, as well as GPIO (General Purpose Input Output) pins that can be used to work with a wide array of external electronic components, devices, sensors, machinery and robotics.
 

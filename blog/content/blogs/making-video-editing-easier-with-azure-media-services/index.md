@@ -12,9 +12,6 @@ summary: "Learn how Jim used Azure Media Services to fix his dumb mistakes when 
 tags: ["technology", "meetup", "video", "azure", "canon", "mxf", "encoding"]
 title: "Jim made some dumb mistakes when recording a video. You won't believe how he fixed it with Azure Media Services!"
 
-images:
-  - /blogs/making-video-editing-easier-with-azure-media-services/banner.png
-featured_image: banner.png
 ---
 
 

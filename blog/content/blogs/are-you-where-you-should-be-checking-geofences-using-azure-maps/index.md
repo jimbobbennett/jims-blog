@@ -11,10 +11,6 @@ slug: "are-you-where-you-should-be-checking-geofences-using-azure-maps"
 summary: "A Geofence is a virtual boundary defined using an area on a map. Azure Maps has tools for checking if a coordinate is inside that Geofence. This post looks at how to do these checks."
 tags: ["technology", "Spatial", "Maps", "azure", "REST"]
 title: "Are you where you should be? Checking Geofences using Azure Maps"
-
-images:
-  - /blogs/are-you-where-you-should-be-checking-geofences-using-azure-maps/banner.png
-featured_image: banner.png
 ---
 
 
@@ -160,4 +156,3 @@ If you want to learn more, check out these links:
 
 * [Azure maps docs](https://docs.microsoft.com/azure/azure-maps/?WT.mc_id=azuremaps-blog-jabenn)
 * [Azure Maps REST API docs](https://docs.microsoft.com/rest/api/maps/?WT.mc_id=azuremaps-blog-jabenn)
-

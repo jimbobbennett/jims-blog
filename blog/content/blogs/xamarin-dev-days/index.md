@@ -11,9 +11,6 @@ slug: "xamarin-dev-days"
 tags: ["Technology", "xamarin", "dev days"]
 title: "Xamarin Dev Days!"
 
-images:
-  - /blogs/xamarin-dev-days/banner.png
-featured_image: banner.png
 ---
 
 

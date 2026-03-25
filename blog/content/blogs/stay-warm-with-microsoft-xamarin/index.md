@@ -11,9 +11,6 @@ slug: "stay-warm-with-microsoft-xamarin"
 tags: ["xamarin", "Technology", "events", "socks", "prizes", "swag"]
 title: "Stay warm with Microsoft & Xamarin!"
 
-images:
-  - /blogs/stay-warm-with-microsoft-xamarin/banner.png
-featured_image: banner.png
 ---
 
 

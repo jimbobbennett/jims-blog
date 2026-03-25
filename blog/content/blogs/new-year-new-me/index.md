@@ -12,9 +12,6 @@ summary: "Jim's got a new job as a Regional Cloud Advocate in Redmond, Washingto
 tags: ["technology", "community", "job", "reactor", "microsoft"]
 title: "New year - new me!"
 
-images:
-  - /blogs/new-year-new-me/banner.png
-featured_image: banner.png
 ---
 
 

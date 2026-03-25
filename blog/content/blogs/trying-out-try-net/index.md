@@ -11,9 +11,6 @@ slug: "trying-out-try-net"
 tags: ["technology", ".net", "docs", "c#"]
 title: "Trying out Try .NET"
 
-images:
-  - /blogs/trying-out-try-net/banner.png
-featured_image: banner.png
 ---
 
 

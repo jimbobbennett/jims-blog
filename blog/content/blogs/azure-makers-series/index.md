@@ -11,9 +11,6 @@ slug: "azure-makers-series"
 tags: ["Technology", "xamarin", "azure", "AI", "cognitive services", "azure free"]
 title: "Azure makers series"
 
-images:
-  - /blogs/azure-makers-series/banner.png
-featured_image: banner.png
 ---
 
 

@@ -11,9 +11,6 @@ slug: "be-quick-50-off-xamarin-in-action-for-one-week"
 tags: ["Technology", "xamarin", "xamarin.ios", "xamarin.android", "xamarin in action", "mvvmcross", "mvvm"]
 title: "Be quick - 50% off Xamarin In Action for one week"
 
-images:
-  - /blogs/be-quick-50-off-xamarin-in-action-for-one-week/banner.png
-featured_image: banner.png
 ---
 
 
