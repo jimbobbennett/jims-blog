@@ -53,11 +53,44 @@ The skill instructs Copilot exactly what to do in this situation, so you get the
 ● General Kenobi.
 ```
 
+## More useful skills
 
-Vercel skills repo
+Now it's debatable how useful a Star Wars skill is. Some would say **very**, but others may disagree. Where skills become more powerful is when you add detailed useful instructions related to tools or services.
 
-Arize skills
+For example, if you have a SaaS product, and you want coding agents to interact with it, what do you do. You *could* create an MCP server, which is a lot of work, especially if you already have a CLI for your users to use. Instead you could write a skills file that instructs the agent on how to use your CLI tool. You can then release CLI updates along with skill updates, and the coding agents are ready to use it immediately.
 
-SpecKit skills
+## Skill standards
 
-Create your own skill
+To make skills work, there needs to be standards! The [Agent Skills](https://agentskills.io/home) standard has been created by Anthropic, and is used by pretty much all the agents. This spec defines how you define your own skills, the format for the documentation you provide with each skill, and so on.
+
+Skills can live in a folder, so can be installed for a single project, or at a user level so are available to all projects. For example, you might want a skill to interact with the GitHub CLI available everywhere, so you would install it at the user level. Then when working on an AI app, you would want the [Arize skill](https://github.com/Arize-ai/arize-skills) in the folder for your project so that it doesn't confuse a coding agent working on a non-AI project.
+
+The only non-standard is where skills live. Claude wants skills in the `.claude` folder. GitHub Copilot wants them in the `.copilot` folder, but will also use skills in the `.claude` folder, which makes it easier to migrate from Claude to Copilot.
+
+### Awesome Copilot
+
+The [Awesome Copilot](https://awesome-copilot.github.com) repo contains a mix of skills, agent definitions, plugins (containing multiple skills in one package), and more, that can be installed into any agent.
+
+You can install a plugin for example, using this command:
+
+```bash
+copilot plugin install <plugin-name>@awesome-copilot
+```
+
+Replacing `<plugin-name>` with the name of the relevant plugin.
+
+### Vercel skills package
+
+Vercel published an [open source tool for managing skills](https://github.com/vercel-labs/skills). This tool makes it easy to install tools from a repo into any project. They have a registry of skills you can reference, or you can install from anywhere.
+
+For example, to install skills from the [Arize skill](https://github.com/Arize-ai/arize-skills), use the following command:
+
+```bash
+npx skills add Arize-ai/arize-skills
+```
+
+You can then interactively choose which skills, which coding agent, and the scope (user or project).
+
+## Summary
+
+Skills are a really powerful way to expand the capabilities of your coding agent, or to make your product available to your users agents.
