@@ -12,9 +12,6 @@ summary: "Want to use VS Code on a Raspberry Pi to code in Python?\n\nHere's how
 tags: ["technology", "raspberry Pi", "Visual Studio Code", "invalid opcode ba", "vscode", "Python"]
 title: "Python on a Raspberry Pi using VS Code"
 
-images:
-  - /blogs/python-on-a-raspberry-pi-using-vs-code/banner.png
-featured_image: banner.png
 ---
 
 

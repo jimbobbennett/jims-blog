@@ -6,7 +6,8 @@ author:
   name: "Jim Bennett"
   email: "jim@jimbobbennett.io"
 
-Paginate: 12
+pagination:
+  pagerSize: 12
 
 markup:
   goldmark:
@@ -76,7 +77,6 @@ params:
   - twitter-card-site.png
   # staticPath: ""  # The path to serve the static files from
   favicon: "/fav.png"
-  DisqusShortname: jimbobbennett
 
   theme:
     disableThemeToggle: true

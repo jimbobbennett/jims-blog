@@ -11,9 +11,6 @@ slug: "more-upcoming-talks"
 tags: ["xamarin", "Technology", "talks"]
 title: "More upcoming talks"
 
-images:
-  - /blogs/more-upcoming-talks/banner.png
-featured_image: banner.png
 ---
 
 

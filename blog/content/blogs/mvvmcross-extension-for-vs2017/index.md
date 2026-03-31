@@ -11,9 +11,6 @@ slug: "mvvmcross-extension-for-vs2017"
 tags: ["Technology", "mvvmcross", "Visual Studio", "vs2017", "xamarin", "mvvm", "windows"]
 title: "MvvmCross extension for Visual Studio 2017"
 
-images:
-  - /blogs/mvvmcross-extension-for-vs2017/banner.png
-featured_image: banner.png
 ---
 
 

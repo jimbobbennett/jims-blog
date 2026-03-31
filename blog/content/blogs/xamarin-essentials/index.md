@@ -11,9 +11,6 @@ slug: "xamarin-essentials"
 tags: ["xamarin", "technology", "iOS", "Android", "nuget", "Xamarin.Essentials"]
 title: "Xamarin Essentials"
 
-images:
-  - /blogs/xamarin-essentials/banner.png
-featured_image: banner.png
 ---
 
 

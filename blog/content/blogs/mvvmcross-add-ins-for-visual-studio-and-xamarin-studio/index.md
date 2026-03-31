@@ -11,9 +11,6 @@ slug: "mvvmcross-add-ins-for-visual-studio-and-xamarin-studio"
 tags: ["xamarin", "Visual Studio", "mvvmcross", "add-in"]
 title: "MvvmCross add-ins for Visual Studio and Xamarin Studio"
 
-images:
-  - /blogs/mvvmcross-add-ins-for-visual-studio-and-xamarin-studio/banner.png
-featured_image: banner.png
 ---
 
 

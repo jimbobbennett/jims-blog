@@ -12,9 +12,6 @@ summary: "Learn how to connect a PyCom board to Azure IoT Hub"
 tags: ["technology", "Pycom", "Pymakr", "WiPy", "IoT", "azure", "Iot Hub", "Visual Studio Code", "vscode", "Python"]
 title: "Connecting Pycom boards to Azure IoT Hub"
 
-images:
-  - /blogs/connecting-pycom-boards-to-azure-iot-hub/banner.png
-featured_image: banner.png
 ---
 
 

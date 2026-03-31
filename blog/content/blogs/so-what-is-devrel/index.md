@@ -16,7 +16,7 @@ I work in developer relations - usually abbreviated to dev rel. Despite this bei
 
 Before we dive in, I do want to note that dev rel can be many, many things. Although there are similarities in what dev rel folks do, I think [Kelsey Hightower](https://twitter.com/kelseyhightower) sums it up best:
 
-{{< tweet user="code" id="1742380457801711678" >}}
+{{< x user="code" id="1742380457801711678" >}}
 
 Developer relations is about building relations with developers, and covers a multitude of roles. I've written this post more from the perspective of developer advocacy, but I do give a call out to the rest of the folks who help build relationships with developers later in this post.
 

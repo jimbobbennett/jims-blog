@@ -11,9 +11,6 @@ slug: "authenticating-your-xamarin-app-with-azure-and-facebook"
 tags: ["xamarin", "xamarin.forms", "technology", "azure", "facebook", "authentication", "functions"]
 title: "Getting a users Facebook profile after Authenticating your Xamarin app with Azure"
 
-images:
-  - /blogs/authenticating-your-xamarin-app-with-azure-and-facebook/banner.png
-featured_image: banner.png
 ---
 
 

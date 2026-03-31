@@ -11,9 +11,6 @@ slug: "building-an-android-app-part-1"
 tags: ["xamarin", "Technology", "tutorial", "xamarin.android", "material design", "fluidui", "design"]
 title: "Building a Xamarin Android app - part 1"
 
-images:
-  - /blogs/building-an-android-app-part-1/banner.png
-featured_image: banner.png
 ---
 
 

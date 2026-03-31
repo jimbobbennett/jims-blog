@@ -11,9 +11,6 @@ slug: "identifying-my-daughters-toys-using-ai"
 tags: ["azure", "Technology", "AI", "cognitive services", "Image classifier", "Porg"]
 title: "Identifying my daughters toys using AI - Part 1, creating the model"
 
-images:
-  - /blogs/identifying-my-daughters-toys-using-ai/banner.png
-featured_image: banner.png
 ---
 
 

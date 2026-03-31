@@ -11,9 +11,6 @@ slug: "xamarin-in-action-is-now-on-the-bookshelves"
 tags: ["xamarin", "book", "xamarin in action", "technology"]
 title: "Xamarin in Action is now on the bookshelves!"
 
-images:
-  - /blogs/xamarin-in-action-is-now-on-the-bookshelves/banner.png
-featured_image: banner.png
 ---
 
 

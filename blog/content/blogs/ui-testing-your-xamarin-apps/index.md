@@ -11,9 +11,6 @@ slug: "ui-testing-your-xamarin-apps"
 tags: ["xamarin", "xamarin.android", "uitest", "test", "Technology", "xamarin.ios", "book", "xamarin in action"]
 title: "Introduction to UI Testing with Xamarin"
 
-images:
-  - /blogs/ui-testing-your-xamarin-apps/banner.png
-featured_image: banner.png
 ---
 
 

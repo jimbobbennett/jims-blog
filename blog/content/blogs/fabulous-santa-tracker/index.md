@@ -11,9 +11,6 @@ slug: "fabulous-santa-tracker"
 tags: ["Technology", "xamarin", "xamarin.forms", "f#", "fabulous", "santa"]
 title: "Fabulous Santa Tracker"
 
-images:
-  - /blogs/fabulous-santa-tracker/banner.png
-featured_image: banner.png
 ---
 
 

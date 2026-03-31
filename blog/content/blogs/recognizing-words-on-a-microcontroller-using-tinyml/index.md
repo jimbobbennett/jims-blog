@@ -12,9 +12,6 @@ summary: "Learn how to train a TinyML word recognizer to run on a microcontrolle
 tags: ["technology", "AI", "IoT", "adafruit", "tinyml", "edge"]
 title: "Recognizing words on a microcontroller using TinyML"
 
-images:
-  - /blogs/recognizing-words-on-a-microcontroller-using-tinyml/banner.png
-featured_image: banner.png
 ---
 
 

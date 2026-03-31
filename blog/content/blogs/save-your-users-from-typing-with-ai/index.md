@@ -11,9 +11,6 @@ slug: "save-your-users-from-typing-with-ai"
 tags: ["Technology", "xamarin", "xamarin.forms", "AI", "cognitive services", "OCR", "Text recognition"]
 title: "Save your users from typing with AI 🤖"
 
-images:
-  - /blogs/save-your-users-from-typing-with-ai/banner.png
-featured_image: banner.png
 ---
 
 

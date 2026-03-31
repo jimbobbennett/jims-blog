@@ -11,9 +11,6 @@ slug: "im-now-a-xamarin-mvp"
 tags: ["xamarin", "evolve", "Technology", "mvp"]
 title: "I'm now a Xamarin MVP!"
 
-images:
-  - /blogs/im-now-a-xamarin-mvp/banner.png
-featured_image: banner.png
 ---
 
 
