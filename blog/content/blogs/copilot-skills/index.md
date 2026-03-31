@@ -1,6 +1,6 @@
 ---
 author: "Jim Bennett"
-date: 2026-03-16
+date: 2026-03-30
 description: "Learn how to enhance GitHub Copilot CLI with skills"
 draft: false
 tags: ["copilot", "ai"]
