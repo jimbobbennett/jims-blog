@@ -296,6 +296,9 @@ params:
 
   podcasts:
     videos:
+    - title: "AI and Developer Experience w/ Jim Bennett - Hackmamba"
+      id: Xl4guRkMcDc
+      description: "We have been talking about developer awareness for 15 years. Agent awareness is next. And nobody has figured it out yet. AI is changing how we build software but what about how we sell it? How we market it? The audience isn't just developers anymore. It might be an agent. Jim Bennett joins today's episode to dig into what that shift actually looks like in practice, why agent awareness is the new SEO, and what it even means to build for a world where nothing is deterministic. Oh, and we get into the big one, whether human connection is the last thing AI can't touch."
     - title: "Jim Bennett: Pieces for Developers and the Impact of AI tools - Imperial Security Bureau Podcast 19"
       id: Cq8C2kNjN4A
       description: Jim and Blake discuss AI and Star Wars!
