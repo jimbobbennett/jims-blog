@@ -51,6 +51,13 @@
       href="{{.Site.BaseURL }}/index.xml"
       title="{{ .Site.Title }}">
 
+{{/* Canonical URL: override with `canonical` in frontmatter for syndicated posts. */}}
+{{ with .Params.canonical }}
+<link rel="canonical" href="{{ . }}">
+{{ else }}
+<link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
+
 <!-- Clarity -->
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
