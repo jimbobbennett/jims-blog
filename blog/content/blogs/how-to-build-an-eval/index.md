@@ -1,9 +1,9 @@
 ---
 author: "Jim Bennett"
-date: 2026-06-13
-publishDate: 2026-06-13
+date: 2026-06-18
+publishDate: 2026-06-18
 description: "Most people skip straight to writing an LLM judge prompt and then wonder why their eval is useless. Here's the five-step version that borrows a trick from qualitative researchers and actually gives you something you can trust."
-draft: false
+draft: true
 slug: "how-to-build-an-eval"
 title: "How to build an eval you can actually trust"
 tags: ["ai", "evals", "llm", "observability"]

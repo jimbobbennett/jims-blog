@@ -1,9 +1,9 @@
 ---
 author: "Jim Bennett"
-date: 2026-06-13
-publishDate: 2026-06-13
+date: 2026-06-25
+publishDate: 2026-06-25
 description: "There isn't one way to run an eval on your AI app - there's a spectrum, from a dead-simple code check all the way to handing the whole job to an agent. Here's how the four methods stack up, and when to reach for each."
-draft: false
+draft: true
 slug: "four-ways-to-run-evals"
 title: "Four ways to run an eval, from a cheap unit test to a full-blown agent"
 tags: ["ai", "evals", "llm", "observability"]
