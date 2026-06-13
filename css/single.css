@@ -24,6 +24,14 @@
     margin-bottom: 1rem;
 }
 
+#single .page-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 0.5rem;
+}
+
 #single .page-content a {
     display: inline-block;
     text-decoration: none;
