@@ -1,0 +1,57 @@
+name: scheduled publish
+
+# Runs once a day. If any draft post has a publish date of today, it is flipped
+# to draft: false, committed back to main, and the blog is rebuilt and deployed.
+# This lets future posts auto-release on their scheduled date with no manual step.
+on:
+  schedule:
+    - cron: '0 7 * * *'   # 07:00 UTC daily
+  workflow_dispatch:        # allow manual runs for testing
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scheduled-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Release posts whose publish date is today
+        id: promote
+        run: bash .github/scripts/publish-scheduled.sh
+
+      - name: Commit promoted drafts
+        if: steps.promote.outputs.promoted == '1'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Auto-publish scheduled posts for $(date -u +%Y-%m-%d)"
+          git push origin HEAD:main
+
+      - name: Setup Hugo
+        if: steps.promote.outputs.rebuild == '1'
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.159.0'
+          extended: true
+
+      - name: Build
+        if: steps.promote.outputs.rebuild == '1'
+        working-directory: ./blog
+        run: hugo --minify
+
+      - name: Deploy
+        if: steps.promote.outputs.rebuild == '1'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./blog/public
