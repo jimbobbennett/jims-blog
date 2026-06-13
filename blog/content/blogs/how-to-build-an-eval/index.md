@@ -21,6 +21,8 @@ So here's the longer way round. It's five steps, and it borrows a trick from qua
 
 ![Infographic: five steps to build an eval - golden dataset, human open coding, axial coding, design evals, and test against the golden set](/blogs/how-to-build-an-eval/banner.png)
 
+*Want it to hand? [Download the infographic as a PDF](/blogs/how-to-build-an-eval/infographic.pdf).*
+
 The whole flow goes left to right, from *gather and observe* to *measure and validate*. The first half is about understanding what actually goes wrong. The second half is about building checks for it and proving they work. Skip the first half and you're just guessing in a more expensive way.
 
 ## Step 1: Gather a golden dataset

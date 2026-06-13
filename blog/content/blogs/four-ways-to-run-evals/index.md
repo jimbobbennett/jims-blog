@@ -19,6 +19,8 @@ There isn't one way to run an eval. There's a spectrum. At one end you've got a 
 
 ![Infographic: four ways to run evals on a deterministic-to-agentic spectrum - Code, LLM as a judge, Code + LLM, and Harness as a judge](/blogs/four-ways-to-run-evals/banner.png)
 
+*Want it to hand? [Download the infographic as a PDF](/blogs/four-ways-to-run-evals/infographic.pdf).*
+
 The whole thing runs left to right from *deterministic, fast and cheap* to *agentic, flexible and powerful*. As you move right you gain intelligence and nuance, and you pay for it in speed, money, and the loss of a thing that turns out to matter a lot: determinism. Run the same check twice on the left, you get the same answer twice. Do it on the right and you're at the mercy of a model having a good day.
 
 Here's the rule I keep coming back to, and I'll spoil the ending now: start as far left as you possibly can, and only move right when the question genuinely needs it.
