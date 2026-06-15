@@ -563,6 +563,11 @@ params:
     upcoming:
     previous:
       series:
+      - title: "Microsoft Build 2026"
+        videos:
+        - title: Understand and fix Agent Framework apps with observability and evals
+          id: ED7meEZlrRE
+          description: "Your AI apps are getting more complex, with multiple agents, tools, and different orchestration patterns, making them harder to understand, debug, and test. This session shows you how to visualize the decisions your LLMs are making in complex Microsoft Agent Framework applications using open standards and open source tooling, and how to use another LLM as a judge to evaluate how well your AI app is working."
       - title: "Ai Engineer World's Fair"
         videos:
         - title: Taming Rogue AI Agents with Observability-Driven Evaluation
