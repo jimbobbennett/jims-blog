@@ -27,7 +27,7 @@ The whole thing runs left to right, from *build and pre-release* over on the lef
 
 Before you write a line of code, you have to decide what the app is actually for and what a good answer even looks like. This sounds obvious and almost everyone skips it.
 
-The trap with AI is that "good" feels self-evident until you try to pin it down. A good support reply is... helpful? Polite? Correct? Grounded in the actual docs? Those are four different things, and an answer can nail one and fail the others. So this is where you turn fuzzy intentions into concrete success criteria, and start gathering the examples that show what good looks like. That collection becomes your golden dataset, which everything downstream gets measured against. I wrote a whole post on [building one of those properly](/blogs/how-to-build-an-eval), because it's the foundation the rest sits on.
+The trap with AI is that "good" feels self-evident until you try to pin it down. A good support reply is... helpful? Polite? Correct? Grounded in the actual docs? Those are four different things, and an answer can nail one and fail the others. So this is where you turn fuzzy intentions into concrete success criteria, and start gathering the examples that show what good looks like. That collection becomes your golden dataset, which everything downstream gets measured against. I wrote a whole post on [building an eval you can trust](/blogs/how-to-build-an-eval), because it's the foundation the rest sits on.
 
 ## Design
 
