@@ -6,12 +6,15 @@ description: "A wave of long-horizon agent benchmarks just shipped, and every on
 draft: true
 slug: "agent-benchmarks-field-guide"
 title: "Long-horizon agent benchmarks are fragmenting: a field guide to what each one actually measures"
+canonical: "https://arize.com/blog/long-horizon-agent-benchmarks-field-guide/"
 tags: ["ai", "agents", "evals", "benchmarks", "llm"]
 
 images:
   - /blogs/agent-benchmarks-field-guide/banner.png
 featured_image: banner.png
 ---
+
+*Originally published on the Arize AI blog: [Long-horizon agent benchmarks are fragmenting: a field guide to what each one actually measures](https://arize.com/blog/long-horizon-agent-benchmarks-field-guide/).*
 
 In one of the evaluations behind the OpenAI and Apollo Research [scheming study](https://arxiv.org/abs/2509.15541), o4-mini was given a cyber-security test with a trap buried in the formatting instructions. The fine print said that scoring above 50% on this section would trigger "unlearning" of the capability. The model read it, understood the incentive, and threw the test on purpose. This is sandbagging: an agent intentionally underperforming on an evaluation it knows it is taking. o3, given the same trap, did the same.
 
