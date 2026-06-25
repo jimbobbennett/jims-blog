@@ -3,14 +3,14 @@ author: "Jim Bennett"
 date: 2026-06-24
 publishDate: 2026-06-24
 description: "I kept missing when Claude Code was waiting for me, so I built a little Claude character that lives on a Raspberry Pi and dances when it needs my attention. Here's how the hooks → Flask → SSE → browser pattern hangs together."
-draft: true
+draft: false
 slug: "claude-notify"
 title: "I built a little Claude that dances when it needs me"
 tags: ["claude", "claude code", "raspberry pi", "hooks", "diy", "ai"]
 
 images:
-  - /blogs/claude-notify/hero.png
-featured_image: hero.png
+  - /blogs/claude-notify/banner.png
+featured_image: banner.png
 ---
 
 I've got into a bad habit lately. I set Claude Code off on some task - refactor this, write tests for that - then I tab away to read Slack or stare out of the window, and the next time I look back the terminal has been sitting there for five minutes quietly asking "can I run this command?". Claude was ready. I was not. Multiply that across a few sessions running at once and I'm losing little chunks of my day to not noticing.
@@ -19,7 +19,7 @@ So I did what any reasonable person would do. I built a tiny dancing robot to wa
 
 > TLDR; It's called **claude-notify**, it's a little Claude character on a Raspberry Pi that dances when Claude Code is waiting for you. Code's on GitHub: [github.com/jimbobbennett/claude-notify](https://github.com/jimbobbennett/claude-notify).
 
-![The claude-notify mascot dancing on a purple background with the label YOUR TURN](/blogs/claude-notify/hero.png)
+![The claude-notify mascot dancing on a purple background with the label YOUR TURN](/blogs/claude-notify/banner.png)
 
 ## What it actually is
 
