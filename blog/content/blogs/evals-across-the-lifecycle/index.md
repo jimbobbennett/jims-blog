@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-06-26
 publishDate: 2026-06-26
 description: "Most teams treat evals as a thing you do once, right before you ship. That's like writing all your tests the night before launch. Evals belong at every stage of building an AI app, and they do a different job at each one."
-draft: true
+draft: false
 slug: "evals-across-the-lifecycle"
 title: "Evals aren't a step at the end. They run the whole way through"
 tags: ["ai", "evals", "llm", "observability"]
