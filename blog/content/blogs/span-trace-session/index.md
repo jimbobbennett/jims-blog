@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-06-29
 publishDate: 2026-06-29
 description: "Span, trace, session. Three words you'll hear constantly the moment you start tracing an AI app, and they're not interchangeable. Each one is a different zoom level, and you evaluate something different at each."
-draft: true
+draft: false
 slug: "span-trace-session"
 title: "Spans, traces and sessions: the three zoom levels of an AI app"
 tags: ["ai", "evals", "llm", "observability"]
