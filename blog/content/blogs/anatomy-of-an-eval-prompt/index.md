@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-07-01
 publishDate: 2026-07-01
 description: "An LLM judge is only as good as the prompt you give it. 'Rate this from 1 to 10 on quality' is not a prompt, it's a coin toss with extra steps. Here are the four parts a judge prompt actually needs."
-draft: true
+draft: false
 slug: "anatomy-of-an-eval-prompt"
 title: "Anatomy of an eval prompt: what to actually put in it"
 tags: ["ai", "evals", "llm", "observability"]
