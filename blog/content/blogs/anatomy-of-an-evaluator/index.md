@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-07-03
 publishDate: 2026-07-03
 description: "You wrote a good judge prompt. Now something has to actually run it against your traces, fill in the data, and hand you back a result you can act on. That something is an evaluator, and it's a function from three inputs to three outputs."
-draft: true
+draft: false
 slug: "anatomy-of-an-evaluator"
 title: "Anatomy of an evaluator: what happens when your prompt meets your traces"
 tags: ["ai", "evals", "llm", "observability"]
