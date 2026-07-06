@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-07-06
 publishDate: 2026-07-06
 description: "Ask most people what an eval is for and they'll say testing - checking the app works before you ship it. That's one job out of three. Evals also monitor live traffic and act as guardrails in the request path, and they're not interchangeable."
-draft: true
+draft: false
 slug: "three-jobs-evals-do"
 title: "Evals do three jobs, not one"
 tags: ["ai", "evals", "llm", "observability"]
