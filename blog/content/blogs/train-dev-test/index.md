@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-07-08
 publishDate: 2026-07-08
 description: "If you tune an LLM judge on the same examples you use to prove it works, you've proved nothing. The fix is a trick borrowed straight from machine learning: split your labelled traces into train, dev and test, and never let them mix."
-draft: true
+draft: false
 slug: "train-dev-test"
 title: "Train, dev, test: the split that makes an LLM judge trustworthy"
 tags: ["ai", "evals", "llm", "observability"]
