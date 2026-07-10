@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-07-10
 publishDate: 2026-07-10
 description: "I reread The Phoenix Project and asked whether Gene Kim's 2013 DevOps framework still applies to AI agents. Most of it does. The parts that hold up are the parts you'd expect — and the part that aged the best is the one about Brent."
-draft: true
+draft: false
 slug: "phoenix-project-still-holds-up"
 title: "The Phoenix Project still holds up, even if you replaced all the code with agents"
 tags: ["ai", "agents", "devops", "phoenix-project", "evals", "observability"]
