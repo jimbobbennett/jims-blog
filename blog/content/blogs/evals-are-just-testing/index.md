@@ -1,9 +1,9 @@
 ---
 author: "Jim Bennett"
 date: 2026-07-11
-publishDate: 2026-07-15
+publishDate: 2026-07-11
 description: "Everyone's talking about AI evals like they're a brand new discipline. They're not. They're testing - the same loop you've run for years. Define what good looks like, test against it, and fix your definition when it turns out to be wrong. What changed isn't the loop. It's the answer key."
-draft: true
+draft: false
 slug: "evals-are-just-testing"
 title: "AI evals are just testing (with a much weirder answer key)"
 tags: ["ai", "evals", "llm", "testing", "observability"]
