@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-07-12
 publishDate: 2026-07-12
 description: "A wave of long-horizon agent benchmarks just shipped, and every one trades realism against verifiability. Whichever side it underpays is where the score leaks. A field guide to what each one actually measures, and where it gets gamed."
-draft: true
+draft: false
 slug: "agent-benchmarks-field-guide"
 title: "Long-horizon agent benchmarks are fragmenting: a field guide to what each one actually measures"
 canonical: "https://arize.com/blog/long-horizon-agent-benchmarks-field-guide/"
