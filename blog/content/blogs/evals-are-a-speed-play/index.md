@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-07-20
 publishDate: 2026-07-20
 description: "Evals and observability get sold as a way to reduce risk. That's true, and it undersells them. The real return is speed: in a non-deterministic market, the team that can answer 'is this good enough to ship?' fastest is the team that gets to revenue first. Here's the case, the data, and where Arize AX fits."
-draft: true
+draft: false
 slug: "evals-are-a-speed-play"
 title: "Evals Are a Revenue Strategy, Not a Safety Net"
 tags: ["ai", "evals", "observability", "llm", "revenue", "arize-ax"]
