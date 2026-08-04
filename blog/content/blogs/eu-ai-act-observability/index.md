@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-08-04
 publishDate: 2026-08-04
 description: "The EU AI Act's record-keeping duties ask for exactly the kind of log an observability tool already produces. Instrumenting your app is the cheapest do-it-anyway first step toward compliance, as long as you remember a trace is a claim, not a certificate."
-draft: true
+draft: false
 slug: "eu-ai-act-observability"
 title: "The EU AI Act wants a record. Your traces are already most of one."
 tags: ["ai", "eu-ai-act", "observability", "compliance", "tracing", "openinference", "arize-ax"]
