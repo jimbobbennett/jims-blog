@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-08-28
 publishDate: 2026-08-28
 description: "A skill is just another AI agent: a prompt plus a harness that runs it. That means you can trace it, eval it, and prove a change made it better instead of shipping on vibes. Here's how we quantify skill changes with Arize AX, with a real merged PR and the numbers behind it."
-draft: true
+draft: false
 slug: "quantifying-skill-changes-arize-ax"
 title: "A Skill Is Just an Agent. So Measure Your Changes."
 tags: ["ai", "agents", "skills", "evals", "observability", "arize-ax"]
