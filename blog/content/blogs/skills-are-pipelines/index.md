@@ -5,7 +5,7 @@ publishDate: 2026-09-02
 description: "Boris Cherny says to delete your CLAUDE.md, skills, and hooks every six months. That's good advice for one kind of skill and dangerous for another. Here's how to tell them apart, and why the skills that encode your pipeline are software worth keeping."
 draft: false
 slug: "skills-are-pipelines"
-title: "Skills are pipelines"
+title: "Don't delete your skills, audit them"
 tags: ["ai", "agents", "skills", "claude-code", "claude"]
 featured_image: cover.png
 image: /blogs/skills-are-pipelines/cover.png
