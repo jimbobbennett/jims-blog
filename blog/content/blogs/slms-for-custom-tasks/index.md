@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-09-08
 publishDate: 2026-09-08
 description: "A finetuned 0.8B model beat a frontier LLM on one of Shopify's tasks. That's real, and it's not a one-off. But small only wins on narrow, high-volume tasks, you only know you won if your evals prove it on your data, and it only pays if the inference savings outrun the cost of retraining as the task drifts."
-draft: true
+draft: false
 slug: "slms-for-custom-tasks"
 title: "SLMs for custom tasks: when small models beat frontier ones, and how to be sure"
 tags: ["ai", "slm", "llm", "evals", "observability", "agents"]
