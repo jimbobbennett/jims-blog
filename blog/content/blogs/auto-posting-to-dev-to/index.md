@@ -7,9 +7,8 @@ images:
   - blogs/auto-posting-to-dev-to/stream-screenshot.png
 tags: ["github", "github-actions", "docker" ,"python", "ci-cd"]
 description: Learn how to auto post markdown from GitHub to dev.to
+hero_alt: "A screenshot from teh live stream mentioned here"
 ---
-
-![A screenshot from teh live stream mentioned here](stream-screenshot.png)
 
 I've been wanting to build a tool to post markdown automatically to blogging platforms. That way I (or anyone else) can write a blog post in markdown, save it in a [GitHub](https://github.com) repo, and have it automatically posted to a blogging platform of their choice.
 

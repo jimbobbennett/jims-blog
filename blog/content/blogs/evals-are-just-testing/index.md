@@ -11,6 +11,7 @@ tags: ["ai", "evals", "llm", "testing", "observability"]
 images:
   - /blogs/evals-are-just-testing/banner.png
 featured_image: banner.png
+hero_alt: "A chiral molecule pair - two mirror-image 3D chemical structures over a left and a right hand, one pairing marked with a green tick and the other with a red cross"
 ---
 
 Years ago, before "AI" meant chatbots and before anyone said the word "eval" out loud, I spent a few months chasing a bug that didn't exist. Or rather, the bug was real - it just wasn't in my code.
@@ -18,8 +19,6 @@ Years ago, before "AI" meant chatbots and before anyone said the word "eval" out
 I was working at a cheminformatics company - software for chemists, basically - and my job was to add chiral searching to our chemical structure search. If you've not had the pleasure: chirality is when a molecule and its mirror image aren't the same thing, like your left and right hands. Same fingers, same layout, but you can't rotate one onto the other. In chemistry that difference is a big deal - one version of a molecule can be a medicine and its mirror image can do nothing, or worse. So "does this structure match that one?" suddenly has to care about handedness.
 
 My product manager did something genuinely brilliant. Instead of writing me a spec full of hand-wavy prose, they sent me hundreds of examples: this structure *should* match that one, this pair *shouldn't*. Real molecules, real expected answers. I didn't have the word for it at the time, but that was a golden dataset. And I did the obvious thing with it - I turned every example into a unit test and started making them pass.
-
-![A chiral molecule pair - two mirror-image 3D chemical structures over a left and a right hand, one pairing marked with a green tick and the other with a red cross](/blogs/evals-are-just-testing/banner.png)
 
 ## The tests were failing because the answer was wrong
 

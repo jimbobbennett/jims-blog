@@ -11,13 +11,12 @@ tags: ["ai", "evals", "llm", "observability"]
 images:
   - /blogs/three-jobs-evals-do/banner.png
 featured_image: banner.png
+hero_alt: "Infographic: the three jobs evals do - pre-release testing, production monitoring, and inline guardrails"
 ---
 
 Ask most people what an eval is for and you'll get some version of "testing". You run it before you ship to check the app works, like a unit test. That's true, and it's also about a third of the story.
 
 Evals do three different jobs, and the testing one is just the first. The same basic machinery - judge an output, score it - gets pointed at three completely different problems depending on *when* it runs and *what happens next* with the result. Treat all three as "testing" and you'll under-use the other two, which is where a lot of the value actually is.
-
-![Infographic: the three jobs evals do - pre-release testing, production monitoring, and inline guardrails](/blogs/three-jobs-evals-do/banner.png)
 
 *Want it to hand? [Download the infographic as a PDF](/blogs/three-jobs-evals-do/infographic.pdf).*
 

@@ -11,6 +11,7 @@ tags: ["claude", "claude code", "raspberry pi", "hooks", "diy", "ai"]
 images:
   - /blogs/claude-notify/banner.png
 featured_image: banner.png
+hero_alt: "The claude-notify mascot dancing on a purple background with the label YOUR TURN"
 ---
 
 I've got into a bad habit lately. I set Claude Code off on some task - refactor this, write tests for that - then I tab away to read Slack or stare out of the window, and the next time I look back the terminal has been sitting there for five minutes quietly asking "can I run this command?". Claude was ready. I was not. Multiply that across a few sessions running at once and I'm losing little chunks of my day to not noticing.
@@ -18,8 +19,6 @@ I've got into a bad habit lately. I set Claude Code off on some task - refactor 
 So I did what any reasonable person would do. I built a tiny dancing robot to watch my back.
 
 > TLDR; It's called **claude-notify**, it's a little Claude character on a Raspberry Pi that dances when Claude Code is waiting for you. Code's on GitHub: [github.com/jimbobbennett/claude-notify](https://github.com/jimbobbennett/claude-notify).
-
-![The claude-notify mascot dancing on a purple background with the label YOUR TURN](/blogs/claude-notify/banner.png)
 
 ## What it actually is
 

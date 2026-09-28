@@ -9,8 +9,6 @@ tags: ["aws", "s3", "boto"]
 description: How to generate pre-signed URLs to get and put objects into S3 buckets in Python using boto3, and avoid access denied errors with the URLs created using the `put_object` client method.
 ---
 
-![A plushie llama putting blocks into a bucket](banner.webp)
-
 > TL;DR: If your `put_object` boto3 pre-signed URLs are failing with access denied errors, add `config=Config(signature_version="s3v4")` when creating the boto3 client to get a working URL.
 
 I was recently working on some Python code to interact with S3 buckets, where I needed to be able to generate some pre-signed URLs for S3 objects. These are URLs that contain a built-in time-limited credential to allow access, meaning that you can give this URL to anyone and they can read an object, or write it without access to your AWS account or S3 bucket - they only have access to that one object.

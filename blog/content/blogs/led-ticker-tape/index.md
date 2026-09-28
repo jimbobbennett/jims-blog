@@ -7,9 +7,8 @@ images:
   - blogs/led-ticker-tape/hello-lights.png
 tags: ["led", "light", "dotnet" ,".net", "iot"]
 description: Learn how to scroll text using .NET IoT and an LED panel
+hero_alt: "An LED panel showing Hello in green"
 ---
-
-![An LED panel showing Hello in green](hello-lights.png)
 
 Anyone who knows me knows I'm a big fan of IoT and LEDs. I love using IoT devices to control lights, from the LEDs behind my desk to [smart pumpkins](https://www.youtube.com/watch?v=h5ETn4PTdQA)!
 

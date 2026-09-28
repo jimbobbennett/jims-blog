@@ -7,6 +7,7 @@ images:
   - "blogs/what-is-edge-computing/asaedge-highlevel-diagram.png"
 tags: ["ai", "iot", "edge" ,"iotedge", "cloud"]
 description: This blog post is a mind dump in the style of I didn't have time to give you a short answer, so I wrote a long blog post instead on the difference between edge computing and just using the cloud, along with the whys and hows.
+hero: false
 ---
 
 I recently had a student reach out to me with some great questions around Edge computing and how it matches to IoT, and indeed why even use the cloud with IoT. They have to write a paper on the difference between edge computing and just using the cloud, and were researching these terms and trying to understand the whys and hows.

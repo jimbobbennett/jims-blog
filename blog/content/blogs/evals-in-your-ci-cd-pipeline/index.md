@@ -11,6 +11,7 @@ tags: ["ai", "evals", "llm", "testing", "ci-cd", "observability"]
 images:
   - /blogs/evals-in-your-ci-cd-pipeline/arrange-act-eval-assert.png
 featured_image: arrange-act-eval-assert.png
+hero: false
 ---
 
 The other day I wrote that [evals are just testing](/blogs/evals-are-just-testing) - the same old loop of "decide what good looks like, check reality against it, fix your definition when it turns out to be wrong," just with a much weirder answer key. A few people replied with the obvious follow-up question, and it's a good one: OK, if evals are just tests, why aren't they running where my tests run?

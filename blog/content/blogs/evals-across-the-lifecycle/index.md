@@ -11,13 +11,12 @@ tags: ["ai", "evals", "llm", "observability"]
 images:
   - /blogs/evals-across-the-lifecycle/banner.png
 featured_image: banner.png
+hero_alt: "Infographic: evals across the lifecycle - requirements, design, implementation, testing and deployment, with where evals come in at each stage"
 ---
 
 There's a version of building an AI app that goes like this. You build the thing, you get it mostly working, and then someone says "should we evaluate it?" and you bolt some evals on at the end like a spoiler on a hatchback. It runs, the numbers look fine, you ship.
 
 That works about as well as writing all your tests the night before launch. Evals aren't a stage you do once at the end. They're something that runs the whole way through, doing a different job at each step. Get that idea straight and the rest of this falls into place.
-
-![Infographic: evals across the lifecycle - requirements, design, implementation, testing and deployment, with where evals come in at each stage](/blogs/evals-across-the-lifecycle/banner.png)
 
 *Want it to hand? [Download the infographic as a PDF](/blogs/evals-across-the-lifecycle/infographic.pdf).*
 

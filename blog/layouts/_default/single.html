@@ -34,9 +34,17 @@
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-12 col-lg-9">
         <div class="pr-lg-4">
-          {{ if .Params.image }}
+          {{- /* Hero: explicit `image`, else the page-bundle `featured_image` the list cards use.
+               Set `hero: false` to hide it (e.g. the card image is a figure mid-post).
+               `hero_alt` overrides the alt text, which defaults to the title. */ -}}
+          {{ $hero := .Params.image }}
+          {{ if and (not $hero) .Params.featured_image }}
+            {{ $hero = printf "%s%s" .RelPermalink .Params.featured_image }}
+          {{ end }}
+          {{ if eq $.Params.hero false }}{{ $hero = "" }}{{ end }}
+          {{ with $hero }}
           <div class="featured-image">
-            <img class="img-fluid" src="{{ .Params.image }}" alt="{{ .Title }}">
+            <img class="img-fluid" src="{{ . }}" alt="{{ $.Params.hero_alt | default $.Title }}">
           </div>
           {{ end }}
           <article class="page-content  p-2">

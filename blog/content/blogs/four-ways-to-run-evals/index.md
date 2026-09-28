@@ -11,13 +11,12 @@ tags: ["ai", "evals", "llm", "observability"]
 images:
   - /blogs/four-ways-to-run-evals/banner.png
 featured_image: banner.png
+hero_alt: "Infographic: four ways to run evals on a deterministic-to-agentic spectrum - Code, LLM as a judge, Code + LLM, and Harness as a judge"
 ---
 
 Someone asked me last week how you actually run an eval on an AI app. I gave the honest answer, which is "it depends", and then watched their face do the thing faces do when you give them the honest answer. So let me give the longer version, because "it depends" is true but useless on its own.
 
 There isn't one way to run an eval. There's a spectrum. At one end you've got a check so simple it's basically a unit test. At the other end you've got an agent crawling through your traces like a detective. And the interesting bit is the middle, which most people skip straight past.
-
-![Infographic: four ways to run evals on a deterministic-to-agentic spectrum - Code, LLM as a judge, Code + LLM, and Harness as a judge](/blogs/four-ways-to-run-evals/banner.png)
 
 *Want it to hand? [Download the infographic as a PDF](/blogs/four-ways-to-run-evals/infographic.pdf).*
 

@@ -11,8 +11,6 @@ images:
 featured_image: banner.png
 ---
 
-![An iRobot create with a Raspberry Pi](banner.png)
-
 iRobot, the makers of robotic vacuum cleaners also make educational robots designed for learning how to do robotics programming. I recently managed to get my hands on one of their [new Create3 robots](https://edu.irobot.com/what-we-offer/create3) as part of the Microsoft Global Hackathon, one of the cool perks of working for Microsoft.
 
 These robots are the same as the vacuum cleaners, except without the vacuum part. They have all the same sensors, with extra connectivity for you to program yourself. The beginner option is to program them in Python using their browser-based tooling that connects using bluetooth, but I wanted to do something more advanced and learn a bit about ROS!

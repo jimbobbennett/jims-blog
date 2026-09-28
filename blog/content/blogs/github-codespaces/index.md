@@ -9,8 +9,6 @@ tags: ["github", "codespaces", "vscode" ,"python", "container"]
 description: Speed up setting up a new dev environment with GitHub codespaces
 ---
 
-![VS Code running a code space](banner.png)
-
 The bane of every new developers life is getting your environment set up to be productive. And when I say new developer - I don't just mean a dev who is new to a team, but every developer who needs to work on a project they haven't worked on before.
 
 Each project has it's own dependencies, required tools, required libraries, a whole swathe of things that need to be installed, and can in some cases cause problems when projects have conflicting requirements. I certainly remember having to uninstall/reinstall different tooling versions when switching projects, sometimes multiple times a day 😱.

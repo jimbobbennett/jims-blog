@@ -11,13 +11,12 @@ tags: ["ai", "evals", "llm", "observability"]
 images:
   - /blogs/anatomy-of-an-eval-prompt/banner.png
 featured_image: banner.png
+hero_alt: "Infographic: anatomy of an eval prompt - role, criteria, rubric and examples, the four parts that make an LLM judge reliable"
 ---
 
 When people decide to use an LLM as a judge, the prompt they reach for first is almost always some flavour of "rate this response from 1 to 10 on quality". Then they're surprised when the scores are all over the place and don't agree with anything a human would say.
 
 The reason is simple. That isn't a prompt, it's a coin toss with extra steps. You haven't told the model who it's meant to be, what "quality" means, what the numbers stand for, or what a good answer looks like. It's filling in all of that itself, differently, every time you run it. A judge is only as good as the prompt behind it, and a good prompt has four parts.
-
-![Infographic: anatomy of an eval prompt - role, criteria, rubric and examples, the four parts that make an LLM judge reliable](/blogs/anatomy-of-an-eval-prompt/banner.png)
 
 *Want it to hand? [Download the infographic as a PDF](/blogs/anatomy-of-an-eval-prompt/infographic.pdf).*
 

@@ -11,6 +11,7 @@ tags: ["ai", "evals", "llm", "observability"]
 images:
   - /blogs/how-to-build-an-eval/banner.png
 featured_image: banner.png
+hero_alt: "Infographic: five steps to build an eval - golden dataset, human open coding, axial coding, design evals, and test against the golden set"
 ---
 
 Here's how most people build an eval. They open a file, write an LLM judge prompt that says something like "rate this response from 1 to 10 on helpfulness", run it over a few hundred traces, get a pile of numbers back, and then have absolutely no idea whether those numbers mean anything.
@@ -18,8 +19,6 @@ Here's how most people build an eval. They open a file, write an LLM judge promp
 I get it. It feels like progress. You've got a dashboard, you've got a metric trending, you can put it on a slide. But you've skipped the part that makes an eval worth running, which is knowing it agrees with a human. A number you can't trust is worse than no number, because at least no number doesn't lull you into thinking everything's fine.
 
 So here's the longer way round. It's five steps, and it borrows a trick from qualitative researchers - the people who code interview transcripts for a living and have been doing the "turn messy human judgement into something measurable" thing for decades.
-
-![Infographic: five steps to build an eval - golden dataset, human open coding, axial coding, design evals, and test against the golden set](/blogs/how-to-build-an-eval/banner.png)
 
 *Want it to hand? [Download the infographic as a PDF](/blogs/how-to-build-an-eval/infographic.pdf).*
 

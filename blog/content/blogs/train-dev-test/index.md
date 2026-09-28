@@ -11,13 +11,12 @@ tags: ["ai", "evals", "llm", "observability"]
 images:
   - /blogs/train-dev-test/banner.png
 featured_image: banner.png
+hero_alt: "Infographic: train, dev, test - splitting your labelled traces to build an evaluator you can trust, with roughly 10-20%, 20-30% and 50-70% of your data"
 ---
 
 Say you've built an LLM judge and you want to know if it's any good. The obvious move is to feed it some labelled examples, tweak the prompt until its scores match your labels, and then point to those matching scores as proof it works.
 
 Except you've proved nothing. You tuned the judge on those exact examples, so of course it agrees with them - you bent it until it did. It's the oldest mistake in machine learning: marking your own homework with the answer sheet open. The fix is just as old, and it carries straight over to building evals. Split your labelled traces into three piles, and never let them touch.
-
-![Infographic: train, dev, test - splitting your labelled traces to build an evaluator you can trust, with roughly 10-20%, 20-30% and 50-70% of your data](/blogs/train-dev-test/banner.png)
 
 *Want it to hand? [Download the infographic as a PDF](/blogs/train-dev-test/infographic.pdf).*
 

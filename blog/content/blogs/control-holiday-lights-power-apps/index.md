@@ -7,6 +7,7 @@ images:
   - "blogs/control-holiday-lights-power-apps/app-controlled-lights.gif"
 tags: ["iotcentral", "iot", "azure" ,"raspberrypi", "lights", "powerapps", "powerplatform"]
 description: Well this year I decided to build IoT powered holiday lights, controlled by a Power App built with no code!
+hero_alt: "Lights controlled by a power app"
 ---
 
 As the nights draw in here in the northern hemisphere, there are a number of winter celebrations that happen - and one thing they all have in common is lights.
@@ -14,8 +15,6 @@ As the nights draw in here in the northern hemisphere, there are a number of win
 In the past I've just purchased strings of lights from the nearest retailer, strung them up to a tree or around my house, and fought with remote controls or buttons to get the color I wanted.
 
 Well this year I decided to do something better and build IoT powered holiday lights, controlled by a Power App built with no code!
-
-![Lights controlled by a power app](app-controlled-lights.gif)
 
 The hardware would be based around [WS2812B programmable LED strips (also referred to as Neopixels)](https://www.amazon.com/gp/product/B07FVPN3PH), controlled by a [Raspberry Pi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w). Software wise, the Pi would run some Python code to talk to [Azure IoT Central](https://azure.microsoft.com/services/iot-central) - an IoT software as a service platform that can send commands to the Pi to turn the lights on or off. A [Power App](https://powerapps.microsoft.com/) would then be used to control IoT Central via a mobile app - written with no code! All these cloud services can be used for free, which is even better!
 

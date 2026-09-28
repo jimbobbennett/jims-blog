@@ -11,13 +11,12 @@ tags: ["ai", "evals", "llm", "observability"]
 images:
   - /blogs/span-trace-session/banner.png
 featured_image: banner.png
+hero_alt: "Infographic: span, trace and session - the three levels you trace and evaluate, from a single atomic operation to a whole multi-turn conversation"
 ---
 
 The moment you start tracing an AI app, three words turn up everywhere: span, trace, session. People sling them around as if they're obviously different, and if you're new to this you nod along while quietly wondering whether they're just three names for the same thing.
 
 They're not. They're three zoom levels on the same activity, from a single atomic step all the way out to a whole conversation. And the reason it's worth getting straight is that you evaluate something different at each level. Point an eval at the wrong zoom level and you'll get an answer to a question you didn't mean to ask.
-
-![Infographic: span, trace and session - the three levels you trace and evaluate, from a single atomic operation to a whole multi-turn conversation](/blogs/span-trace-session/banner.png)
 
 *Want it to hand? [Download the infographic as a PDF](/blogs/span-trace-session/infographic.pdf).*
 

@@ -11,8 +11,6 @@ images:
 featured_image: banner.png
 ---
 
-![An iRobot create with a Raspberry Pi](banner.png)
-
 In my [last post](../irobot-create3-connect-a-pi/) I showed how I connected a Raspberry Pi to an iRobot Crete3 robot. In this post I show how to subscribe to messages sent by the robot to the Pi using [rclpy](https://github.com/ros2/rclpy), the ROS Python library.
 
 > One downside to ROS is that the documentation needs some love. It covers in great detail how to do things, but not the why, so anything I write in this post is based off my understanding from my couple of days working with ROS, and could be completely wrong! If so, please correct me in the comments.

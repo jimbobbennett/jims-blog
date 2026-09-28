@@ -11,13 +11,12 @@ tags: ["ai", "evals", "llm", "observability"]
 images:
   - /blogs/anatomy-of-an-evaluator/banner.png
 featured_image: banner.png
+hero_alt: "Infographic: anatomy of an evaluator - data fields, eval model and output, the inputs and outputs of running an eval against your traces"
 ---
 
 Last time I pulled apart [the eval prompt](/blogs/anatomy-of-an-eval-prompt) - the role, criteria, rubric and examples you write to tell an LLM judge how to judge. But a prompt on its own doesn't do anything. Something has to take it, point it at your actual trace data, run it, and hand you back a result you can do something with.
 
 That something is an evaluator. And the cleanest way to think about it is as a function: three inputs go in, three outputs come out. The prompt is just one of the three inputs. Understanding the other moving parts is what takes you from "I wrote a clever prompt" to "I have a number on a dashboard I can trust".
-
-![Infographic: anatomy of an evaluator - data fields, eval model and output, the inputs and outputs of running an eval against your traces](/blogs/anatomy-of-an-evaluator/banner.png)
 
 *Want it to hand? [Download the infographic as a PDF](/blogs/anatomy-of-an-evaluator/infographic.pdf).*
 
