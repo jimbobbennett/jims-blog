@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-09-30
 publishDate: 2026-09-30
 description: "Anthropic says Opus 5.5 fixed Claude's writing. I tested it with an Arize AX experiment, 153 hand-labelled Claudisms and an evaluator built from those labels. The em dash is gone. The rest of the Claudisms halved."
-draft: true
+draft: false
 slug: "claude-compare"
 title: "Anthropic says it fixed Claude's writing. I ran the evals to check."
 canonical: "https://arize.com/blog/anthropic-says-it-fixed-claudes-writing/"
