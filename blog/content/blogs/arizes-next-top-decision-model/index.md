@@ -7,6 +7,7 @@ draft: true
 slug: "arizes-next-top-decision-model"
 title: "Arize's next top decision model"
 tags: ["ai", "llm", "evals", "llm-as-a-judge", "decision-models", "jev", "agents"]
+canonical: "https://arize.com/blog/decision-model-benchmark/"
 
 images:
   - /blogs/arizes-next-top-decision-model/banner.png
