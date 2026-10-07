@@ -23,7 +23,7 @@ So we held auditions.
 
 A decision model takes a question and a fixed set of options and returns a probability for each option. It doesn't write text, so there are no output tokens to pay for or wait on. That makes it cheap and fast at two jobs AI engineers care about: making a single decision inside an agent (which tool, which skill, stop or carry on), and acting as the judge that scores your traces in [Arize AX](https://arize.com/docs/ax/evaluate/jev-as-a-judge).
 
-We've written about Jev as a judge before. Laurie Voss [benchmarked it against LLM judges](https://arize.com/blog/jev-as-a-judge/), and Elizabeth Hutton looked at [what its probabilities reveal](https://arize.com/blog/jev-llm-judge-consistency/). Both posts compared Jev with LLMs, but we hadn't lined the new decision models up against each other on the same data. A spreadsheet of eight models is no fun to read, though, so we turned it into a knockout.
+We've written about Jev as a judge before. Arize's Head of Developer Relations [Laurie Voss](https://www.linkedin.com/in/seldo/) [benchmarked it against LLM judges](https://arize.com/blog/jev-as-a-judge/), and [Elizabeth Hutton](https://www.linkedin.com/in/elizabeth-hutton/) from the Arize Phoenix team looked at [what its probabilities reveal](https://arize.com/blog/jev-llm-judge-consistency/). Both posts compared Jev with LLMs, but we hadn't lined the new decision models up against each other on the same data. A spreadsheet of eight models is no fun to read, though, so we turned it into a knockout.
 
 The best decision models are now level on accuracy. They differ on where you can run them, and on whether they understand the question the way you asked it.
 
