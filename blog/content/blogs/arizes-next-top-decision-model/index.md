@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-10-08
 publishDate: 2026-10-08
 description: "Eight decision models, three challenges, one knockout bracket. We ran Jev, Kev, Liquid, Clef 27B and friends on hallucination, evaluator and routing tests in Arize AX to find the next top decision model."
-draft: true
+draft: false
 slug: "arizes-next-top-decision-model"
 title: "Arize's next top decision model"
 tags: ["ai", "llm", "evals", "llm-as-a-judge", "decision-models", "jev", "agents"]
