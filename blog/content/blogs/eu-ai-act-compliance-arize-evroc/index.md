@@ -4,7 +4,7 @@ date: 2026-10-13
 publishDate: 2026-10-13
 description: "The EU AI Act's high-risk obligations read like an engineering spec: automatic logs, retention, human oversight, monitoring and explanations. Here's how Arize and evroc map to each one, from our joint webinar."
 summary: "The EU AI Act's high-risk obligations read like an engineering spec: automatic logs, retention, human oversight, monitoring and explanations. Here's how Arize and evroc map to each one, from our joint webinar."
-draft: true
+draft: false
 slug: "eu-ai-act-compliance-arize-evroc"
 title: "EU AI Act compliance for AI agents: building the engineering foundation with Arize and evroc"
 tags: ["ai", "llm", "eu-ai-act", "compliance", "observability", "tracing", "evals", "phoenix", "evroc", "agents"]
