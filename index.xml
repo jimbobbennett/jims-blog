@@ -1,4 +1,348 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>EU AI Act compliance for AI agents: building the engineering foundation with Arize and evroc</title><link>https://jimbobbennett.dev/blogs/eu-ai-act-compliance-arize-evroc/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://jimbobbennett.dev/blogs/eu-ai-act-compliance-arize-evroc/</guid><description>&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JimBobBennett</title><link>https://jimbobbennett.dev/</link><description>Recent content on JimBobBennett</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 19 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://jimbobbennett.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Can decision models play games from screenshots?</title><link>https://jimbobbennett.dev/blogs/decision-models-play-games/</link><pubDate>Mon, 19 Oct 2026 00:00:00 +0000</pubDate><guid>https://jimbobbennett.dev/blogs/decision-models-play-games/</guid><description>&lt;p&gt;Decision models are built to answer one kind of question quickly. You give the model a prompt and a fixed list of options, and it returns a probability for each option. That makes them a good fit for a step inside an agent: pick a tool, pick a route, decide whether to stop. I &lt;a href="https://arize.com/blog/decision-model-benchmark/"&gt;recently benchmarked a number of these models&lt;/a&gt; and found them fast and effective.&lt;/p&gt;
+&lt;p&gt;Several of them now accept images too. Cloudflare&amp;rsquo;s Clef Flash, Liquid&amp;rsquo;s d1 models and OpenAI&amp;rsquo;s Decisions route all handle images, and &lt;a href="https://typesafe.ai/blog/jev-1-14"&gt;TypeSafe&amp;rsquo;s Jev 1.14&lt;/a&gt; added experimental image support.&lt;/p&gt;
+&lt;p&gt;So I asked a fun question:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If a decision model can read an image and use that to make a decision, can it play a game?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Games are a clean test. The screen gives you the information you need, the rules are fixed, the legal moves are known, and the score can tell you exactly how well the model did. The eval here is reduced to &amp;ldquo;did the model win?&amp;rdquo; or &amp;ldquo;what score did the model get?&amp;rdquo;, a deterministic check.&lt;/p&gt;
+&lt;p&gt;I built a small browser arcade with three games and ran eight models through it. I mixed decision models with LLMs, and compared how well they did with images to how well they did with raw text. Then I put them up against a deterministic game engine as a comparison.&lt;/p&gt;
+&lt;p&gt;How did they do? OK, but not great, depending on the game. I&amp;rsquo;m a terrible gamer and I was able to score way better than most of the AIs. I&amp;rsquo;ll walk through the models, the games, and the scores.&lt;/p&gt;
+&lt;h2 id="meet-the-games"&gt;Meet the games&lt;/h2&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/game-in-play-tictactoe.png" alt="Tic-tac-toe in the arcade, with two Xs on the top row and Os in the centre and bottom right"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tic-tac-toe.&lt;/strong&gt; The classic three-in-a-row game on a 3 × 3 grid. The model plays against a perfect opponent, so the best it can do is a draw. Spaces are lettered A-I so the models know which spaces are empty and can respond with the letter of the space to play.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/game-in-play-minesweeper.png" alt="Minesweeper in the arcade, with the left and centre of the board uncovered"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Minesweeper.&lt;/strong&gt; An 8 × 8 board hides 10 mines. Every opened tile shows how many mines touch it, and the aim is to open all the safe tiles without hitting a mine. If you open a cell with a mine, you lose. The rows are numbered and the columns are lettered so the model can indicate which tile to open. To avoid losing on the first square, there is always a safe square that the model can play to start.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/game-in-play-flappy.png" alt="Flappy Bird in the arcade, with the bird approaching the first pair of pipes"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Flappy Bird.&lt;/strong&gt; A bird flies forward on its own through gaps between green pipes. The only choice is when to flap, and gravity does the rest. The bird falls under gravity, unless you flap, which raises the bird up a little before gravity brings it back down. If you hit a pipe, the top of the screen, or the ground, you lose.&lt;/p&gt;
+&lt;h2 id="meet-the-contestants"&gt;Meet the contestants&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;Cloud vs Local&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://typesafe.ai/blog/jev-1-14"&gt;Jev 1.14&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Cloud&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://developers.openai.com/api/docs/guides/decisions"&gt;GPT-6 Luna Decisions&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Cloud&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://blog.cloudflare.com/clef-decision-models/"&gt;Clef Flash&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Cloud&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://docs.liquid.ai/lfm/models/decision-models"&gt;Liquid d1&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Cloud&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://huggingface.co/LiquidAI/d1-3B"&gt;Liquid d1-3B&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Local&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://huggingface.co/LiquidAI/d1-omni-600M"&gt;Liquid d1-omni-600M&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Local&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://developers.openai.com/api/docs/models/gpt-6-astra"&gt;GPT-6 Astra Responses&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Cloud&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://developers.openai.com/api/docs/models/gpt-6-luna"&gt;GPT-6 Luna Responses&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Cloud&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This model set contains six decision models, a mix of local and cloud. The remaining two are LLMs, added as a comparison. GPT-6 Luna Responses and GPT-6 Luna Decisions are the same underlying model, one version is the normal LLM, the other is OpenAI&amp;rsquo;s version that is tuned for decisions.&lt;/p&gt;
+&lt;p&gt;For each game the models were scored against a baseline using a deterministic game engine, a short piece of code written into the arcade itself, built on a standard technique:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Tic-tac-toe: minimax.&lt;/strong&gt; &lt;a href="https://en.wikipedia.org/wiki/Minimax"&gt;Minimax&lt;/a&gt; searches every possible continuation of the game and picks the move that&amp;rsquo;s best assuming the opponent also plays perfectly. Tic-tac-toe is small enough to search completely, and it&amp;rsquo;s a &lt;a href="https://en.wikipedia.org/wiki/Solved_game"&gt;solved game&lt;/a&gt;. With perfect play on both sides, every game is a draw. The same minimax player is also the models&amp;rsquo; opponent.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Minesweeper: a constraint solver.&lt;/strong&gt; It treats every revealed number as a &lt;a href="https://en.wikipedia.org/wiki/Constraint_satisfaction_problem"&gt;constraint&lt;/a&gt; on the covered tiles around it. If a clue&amp;rsquo;s mines are all accounted for, its other covered neighbours are safe. If a clue has exactly as many covered neighbours as missing mines, they&amp;rsquo;re all mines. It also compares pairs of overlapping clues. It reads only the visible board, as the models do, and if nothing is provably safe it falls back to the lowest-risk guess.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Flappy Bird: a gap-centering rule.&lt;/strong&gt; A one-line autopilot: flap if the bird is falling and more than 18 pixels below the centre of the next gap, otherwise wait. Unlike the models, it reads the exact bird and pipe positions from the game rather than the pixels.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The baselines aren&amp;rsquo;t competitors on equal terms as they have programmatic access to the game state. What they show is what a good score looks like.&lt;/p&gt;
+&lt;p&gt;As a comparison, I also did a text only version, where the models received a prompt with a description of the game state. This was to allow me to compare how the images worked against a pure text input.&lt;/p&gt;
+&lt;p&gt;TypeSafe recently released an image capable version of Jev, and was upfront that images are a work in progress. The &lt;a href="https://typesafe.ai/blog/jev-1-14"&gt;launch post&lt;/a&gt; warns that &lt;em&gt;&amp;ldquo;all models (Jev included) perform worse on multimodality over pure text.&amp;rdquo;&lt;/em&gt; These tests allow me to verify this claim.&lt;/p&gt;
+&lt;h2 id="tic-tac-toe"&gt;Tic-tac-toe&lt;/h2&gt;
+&lt;h3 id="how-i-tested-it"&gt;How I tested it&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Score:&lt;/strong&gt; 1 for a win, 0.5 for a draw, 0 for a loss, against the perfect minimax opponent. You can&amp;rsquo;t beat perfect minimax, so 0.5 per game (a draw) is the best possible result. Each model plays 10 games per input type, five as O and five as X.&lt;/p&gt;
+&lt;p&gt;Each move for the model player is a single request sent to the model. The one exception is the last move. When only one empty square is left there&amp;rsquo;s nothing to decide, so the arcade plays that square itself without calling the model, as decision models generally reject a single decision prompt.&lt;/p&gt;
+&lt;p&gt;The prompt is very explicit about the logic and describes how to play, how to win, and how to decide on the next move. If you can win, do so. If you need to block the opponent from winning, do so. Otherwise choose a square that helps you win.&lt;/p&gt;
+&lt;h4 id="image-input"&gt;Image input&lt;/h4&gt;
+&lt;p&gt;When playing using images, the arcade sends a screen shot of the current board, a fixed prompt and the list of empty squares as the decision choices. There is no conversation history, just the image to give the model a view on the current game state. It gets back one choice, and plays it.&lt;/p&gt;
+&lt;p&gt;This is a typical image of a game where the model is O. The minimax game engine has played square F, and the board image is sent to the model.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/input-image-tictactoe.jpg" alt="The Tic-tac-toe image sent to the model: a grid with X in square F and grey letters on the empty squares"&gt;&lt;/p&gt;
+&lt;p&gt;This is the prompt that goes with it. It explains the game rules, what side the model is playing, the instruction, and gives the choices based on the remaining squares.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Prompt:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Use the image as the source of the current tic-tac-toe board. X and O show occupied squares; letters label empty squares. You are playing O. Choose a legal square that wins immediately if possible, otherwise block an immediate opponent win, otherwise choose a move that preserves a draw against perfect play. Return one offered action.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Image:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[the 512 × 512 board above]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Choices:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;A: Place O in square A.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;B: Place O in square B.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;C: Place O in square C.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;D: Place O in square D.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;E: Place O in square E.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;G: Place O in square G.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;H: Place O in square H.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;I: Place O in square I.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="text-input"&gt;Text input&lt;/h4&gt;
+&lt;p&gt;The text games used the same positions with no image at all. The board state is sent as a list of rows with the Xs and Os. This is the full request for the same first decision:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Prompt:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Use the textual board state as the complete tic-tac-toe board. Rows are listed top to bottom; square letters A-I run left to right, then top to bottom. Each square is marked with X, O, or empty. A player wins by placing three of their marks in a horizontal, vertical, or diagonal line; filling the board without a line is a draw. You are playing O. Choose a legal square that wins immediately if possible, otherwise block an immediate opponent win, otherwise choose a move that preserves a draw against perfect play. Return one offered action.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;State:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Row 1: A=empty | B=empty | C=empty
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Row 2: D=empty | E=empty | F=X
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Row 3: G=empty | H=empty | I=empty
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Choices:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;A: Place O in square A.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;B: Place O in square B.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;C: Place O in square C.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;D: Place O in square D.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;E: Place O in square E.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;G: Place O in square G.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;H: Place O in square H.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;I: Place O in square I.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="results"&gt;Results&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-05-tictactoe-results.png" alt="Tic-tac-toe draws per model, image and text"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The decision models.&lt;/strong&gt; Jev 1.14 is the strongest of the decision models here. From images it drew nine of 10, losing only one game as X. From text it drew four of 10, all as O, and lost all five games as X. An interesting result that contradicts Jev&amp;rsquo;s claim that image handling is not as good as text.&lt;/p&gt;
+&lt;p&gt;After Jev it falls away quickly. Liquid d1 drew four games per input, GPT-6 Luna Decisions drew one from images and three from text, Liquid d1-3B drew one from images, and Clef Flash and Liquid d1-omni-600M drew none. Across all six decision models that&amp;rsquo;s 26 draws in 120 games.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The LLMs.&lt;/strong&gt; GPT-6 Astra Responses is the clear winner. It drew all 20 games, 10 from images and 10 from text. That&amp;rsquo;s the best result anyone can get against minimax. GPT-6 Luna Responses drew 19 of 20: nine from images and all 10 from text, with one image loss as O. Between them, the two LLMs drew 39 of 40 games. The LLMs far outperformed the decision models.&lt;/p&gt;
+&lt;h3 id="how-the-decision-models-lose"&gt;How the decision models lose&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-06-tictactoe-missed-block.png" alt="Clef Flash missing a block in Tic-tac-toe, with the probabilities it returned"&gt;&lt;/p&gt;
+&lt;p&gt;The losing pattern is nearly always the same: the opponent has two in a row and the model doesn&amp;rsquo;t block. In this image of minimax vs Clef Flash, the threat is about as visible as it gets. Clef Flash&amp;rsquo;s probabilities are close to flat, between 0.12 and 0.21, so the model isn&amp;rsquo;t confident about anything. It just happens to rank D highest. In my replay of every image-mode game, Clef Flash and Liquid d1-omni-600M missed a forced block in all 10 of their games. This isn&amp;rsquo;t a gap in the prompt, the prompt explicitly states:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Choose a legal square that wins immediately if possible, otherwise block an immediate opponent win&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Text input showed a stranger habit: picking the first square in the list. Clef Flash chose the first offered square on all 26 of its text decisions, so its games as X always opened A, then B, then D. Liquid d1-3B and Liquid d1-omni-600M did the same on all 15 of their text decisions as X. Here&amp;rsquo;s one of those moves:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Row 1: A=X | B=X | C=O
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Row 2: D=empty | E=O | F=empty
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Row 3: G=empty | H=empty | I=empty
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;choices: D, F, G, H, I
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;returned: D 0.31, G 0.25, F 0.19, H 0.14, I 0.12
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;O threatens C, E, G on the diagonal, so G was the only move that saved the game. The model put D first, which also happens to be first in the list, and minimax played G and won. In image mode the same models usually opened in the centre instead. So the input type does change &lt;em&gt;how&lt;/em&gt; they play, even when it doesn&amp;rsquo;t change the score.&lt;/p&gt;
+&lt;h3 id="prompt-wording-didnt-rescue-it"&gt;Prompt wording didn&amp;rsquo;t rescue it&lt;/h3&gt;
+&lt;p&gt;Before freezing the prompts, I ran some prompt experiments on a different set of games. A five-prompt sweep across four decision models found a &amp;ldquo;strategy&amp;rdquo; prompt that drew 7 of 24 games. In a paired check on 10 games that gap shrank to 14 draws out of 80 against 9 out of 80 for the existing prompt. Adding the explicit win-condition sentence to the text prompt left the total unchanged at 23 of 80 across all eight models. Prompt wording moved things a little. It didn&amp;rsquo;t turn a decision model into one that blocks reliably.&lt;/p&gt;
+&lt;h2 id="minesweeper"&gt;Minesweeper&lt;/h2&gt;
+&lt;h3 id="how-i-tested-it-1"&gt;How I tested it&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Score:&lt;/strong&gt; safe tiles revealed, out of 54. The board is 8 × 8 with 10 mines. Every game starts with the same guaranteed-safe opening at D4 so that models don&amp;rsquo;t lose immediately to random chance, and the score includes tiles the model got for free. A game ends at the first mine, or when the board is cleared. Each model played the same 10 boards with image input and again with text input, one request per move and the same fixed prompt every time.&lt;/p&gt;
+&lt;p&gt;On these 10 boards, the free opening of D4 alone reveals between 23 and 48 safe tiles before the model makes a single move. So the benchmark also reports &lt;strong&gt;gain over the opening&lt;/strong&gt;: the score minus what D4 gave away on that board.&lt;/p&gt;
+&lt;h4 id="image-input-1"&gt;Image input&lt;/h4&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/input-image-minesweeper.jpg" alt="The Minesweeper image sent to the model after the D4 opening, with a coordinate printed on every covered tile"&gt;&lt;/p&gt;
+&lt;p&gt;The image prints each covered tile&amp;rsquo;s coordinate on the tile itself, so the model doesn&amp;rsquo;t have to count rows and columns. This is the full request that went with it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Prompt:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Inspect the Minesweeper board image. There are 10 mines in total. White opened tiles show clue numbers: each number is the count of mines in the eight surrounding cells, including diagonals. A blank white tile has no mines in those surrounding cells. Blue tiles are covered. Use the visible clues and the total mine count to choose one covered tile that you judge safe to open. Do not choose a tile you believe contains a mine. If the image does not establish a safe tile, choose the covered tile that appears least risky. Return exactly one offered OPEN action.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Image:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[the 500 × 500 board above]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Choices (41, shuffled; each described as &amp;#34;Open covered tile &amp;lt;tile&amp;gt;.&amp;#34;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_H1, OPEN_E1, OPEN_H7, OPEN_G2, OPEN_A1, OPEN_D1, OPEN_A8
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_G3, OPEN_E8, OPEN_B7, OPEN_F5, OPEN_H8, OPEN_H2, OPEN_H6
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_F8, OPEN_C2, OPEN_H4, OPEN_B1, OPEN_F7, OPEN_C8, OPEN_E2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_C1, OPEN_G7, OPEN_A6, OPEN_H3, OPEN_H5, OPEN_G1, OPEN_F2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_B8, OPEN_D2, OPEN_F4, OPEN_F6, OPEN_A7, OPEN_G4, OPEN_G6
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_F3, OPEN_B6, OPEN_F1, OPEN_G8, OPEN_G5, OPEN_D8
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The choices are shuffled on every turn so list position can&amp;rsquo;t hint at anything.&lt;/p&gt;
+&lt;h4 id="text-input-1"&gt;Text input&lt;/h4&gt;
+&lt;p&gt;In text mode the same board arrived as a grid with a legend. This is the full request for the same first decision:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Prompt:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Read the textual Minesweeper board state. There are 10 mines in total. The grid legend describes covered, flagged, blank, and numbered tiles. A clue number is the count of mines in the eight surrounding tiles, including diagonals. Use the visible clues and total mine count to choose one covered tile that you judge safe to open. Do not choose a tile you believe contains a mine. If the clues do not establish a safe tile, choose the covered tile that appears least risky. Return exactly one offered OPEN action.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;State:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Columns are A through H; each line is the row with that number. Symbols: ? = covered tile, F = flagged tile, . = opened blank with zero neighboring mines, and a digit = opened clue showing that many mines in the eight surrounding tiles.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; A B C D E F G H
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1: ? ? ? ? ? ? ? ?
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2: 1 2 ? ? ? ? ? ?
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3: . 1 1 1 1 ? ? ?
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;4: . . . . 1 ? ? ?
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5: 1 1 1 . 2 ? ? ?
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;6: ? ? 1 . 1 ? ? ?
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7: ? ? 2 1 3 ? ? ?
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;8: ? ? ? ? ? ? ? ?
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Choices (41, shuffled; each described as &amp;#34;Open covered tile &amp;lt;tile&amp;gt;.&amp;#34;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_H1, OPEN_E1, OPEN_H7, OPEN_G2, OPEN_A1, OPEN_D1, OPEN_A8
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_G3, OPEN_E8, OPEN_B7, OPEN_F5, OPEN_H8, OPEN_H2, OPEN_H6
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_F8, OPEN_C2, OPEN_H4, OPEN_B1, OPEN_F7, OPEN_C8, OPEN_E2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_C1, OPEN_G7, OPEN_A6, OPEN_H3, OPEN_H5, OPEN_G1, OPEN_F2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_B8, OPEN_D2, OPEN_F4, OPEN_F6, OPEN_A7, OPEN_G4, OPEN_G6
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPEN_F3, OPEN_B6, OPEN_F1, OPEN_G8, OPEN_G5, OPEN_D8
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="results-1"&gt;Results&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-07-minesweeper-results.png" alt="Minesweeper safe tiles per model, split into the free opening and the model&amp;rsquo;s gain"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The decision models.&lt;/strong&gt; None of the six cleared a single board, and every one of their 120 games ended on a mine. Jev 1.14 and Clef Flash did best, both averaging 38.3 from images, which is a gain of 5.5 tiles. Liquid d1-omni-600M gained 4.7 from images and 3.4 from text. The rest gained less than three tiles from either input, so most of their score was the free opening.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The LLMs.&lt;/strong&gt; GPT-6 Astra Responses cleared all 10 boards from images and all 10 from text. That took about 14 requests per board, at roughly 6 seconds per request. I checked every one of its 279 decisions against an exact solver. Each time it opened a tile that was provably safe given the visible clues and the mine count. It never had to guess, and it never did.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-09-minesweeper-astra-sequence.png" alt="Four frames from Astra clearing a Minesweeper board"&gt;&lt;/p&gt;
+&lt;p&gt;GPT-6 Luna Responses comes next: 44.4 from images (+11.6, one board cleared) and 41.5 from text (+8.7).&lt;/p&gt;
+&lt;p&gt;The best decision model gained about a quarter of what GPT-6 Astra Responses did, and less than half of GPT-6 Luna Responses&amp;rsquo; gain. They were fast, though: under 0.8 seconds per decision, against 6 to 8 seconds for the LLMs. Fast, but wrong.&lt;/p&gt;
+&lt;h3 id="most-fatal-clicks-were-on-provable-mines"&gt;Most fatal clicks were on provable mines&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-08-minesweeper-fatal-click.png" alt="A Minesweeper frame where the model clicked a provable mine while ten tiles were provably safe"&gt;&lt;/p&gt;
+&lt;p&gt;Every decision model hit a mine in every game, and GPT-6 Luna Responses hit one in all but one. My replay of every game found that no mine hit was forced. At the moment of every fatal click, at least one tile was provably safe. Most fatal clicks were on tiles that were &lt;em&gt;provably mines&lt;/em&gt;. In the frame above, B3 shows a 1 with only one covered neighbour, C2, so C2 has to be a mine. The model opened it anyway.&lt;/p&gt;
+&lt;p&gt;This is the same failure as the missed block in Tic-tac-toe. The model can see the board, but it doesn&amp;rsquo;t make the small check the board requires. The tile labels make it easy to name the right tile, but nothing makes the model look at a tile&amp;rsquo;s neighbours first.&lt;/p&gt;
+&lt;h2 id="flappy-bird"&gt;Flappy Bird&lt;/h2&gt;
+&lt;h3 id="how-i-tested-it-2"&gt;How I tested it&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Score:&lt;/strong&gt; pipes passed. The bird moves forward on its own. FLAP gives it an upward kick, and WAIT lets gravity pull it down. Each model played the same 10 courses from images and the same 10 from text, with the same fixed prompt for each input every time. A game ends when the bird hits a pipe, the top of the screen or the ground, or after 10 minutes of real time.&lt;/p&gt;
+&lt;p&gt;Flappy Bird is the one game here that runs in real time, so I had to change the way the models are called. A single image doesn&amp;rsquo;t truly reflect the game state, you need multiple frames captured over a period of time that shows the bird&amp;rsquo;s trajectory.&lt;/p&gt;
+&lt;p&gt;Being real time also means the game cannot wait for a response from the model. In the time the game waits for a response, the bird is crashing into the ground. Instead the game is paused whilst the model makes a decision, then resumed to handle the chosen action.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-01-flappy-loop.png" alt="The Flappy Bird decision loop: physics pauses, the model gets four frames and one request, returns FLAP or WAIT, then physics resumes for 0.24 simulated seconds"&gt;&lt;/p&gt;
+&lt;p&gt;I iterated over the number of frames to capture and the time between frames to get the best result. The final setting after testing for the most effective combination sends four frames, about 0.06 simulated seconds apart, so the model makes a decision every 0.24 simulated seconds.&lt;/p&gt;
+&lt;p&gt;The game also runs at a fifth of normal speed for the models, and as in the other games there&amp;rsquo;s no conversation history and no retry. Latency costs nothing inside the game, because the game waits. That makes this an easier version of Flappy Bird than a human plays.&lt;/p&gt;
+&lt;h4 id="image-input-2"&gt;Image input&lt;/h4&gt;
+&lt;p&gt;This is a typical set of frames. The bird has reached the first pair of pipes and is dropping towards the lower one.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-04-image-input-flappy.png" alt="The four Flappy Bird frames sent to the model, about 0.06 simulated seconds apart, showing the bird falling towards the lower pipe of the first pair"&gt;&lt;/p&gt;
+&lt;p&gt;The frames are unlabelled, and there are four so the model can tell whether the bird is rising or falling, and how fast, by looking at the order of the images as they are passed in chronological order. This is the full request that went with them:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Prompt:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;You are playing Flappy Bird. The yellow bird moves forward automatically. Keep it alive by avoiding the top of the screen, the ground, and the solid green pipes; pass through the open vertical gap between each top-and-bottom pipe pair. The images are ordered from earlier to current; compare them to infer whether the bird is rising or falling, and use the latest image for its position relative to the next gap. FLAP applies one upward impulse. From level motion, one flap carries the bird to a peak about 11% of screen height above its starting point before gravity pulls it back down; the actual rise depends on its motion when it flaps. WAIT applies no impulse; gravity and forward motion continue. Choose the single action that keeps the bird clear of hazards and on a path through the next gap. Do not describe the images.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Image:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[the four frames above, oldest first]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Context:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Last applied action: WAIT, about 1.3 real seconds ago.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Choices:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FLAP: Give the bird one upward flap impulse.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;WAIT: Do not flap on this turn; gravity continues.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="text-input-2"&gt;Text input&lt;/h4&gt;
+&lt;p&gt;In text mode there&amp;rsquo;s no image. The model gets four text observations, 0.06 simulated seconds apart, oldest first. Each one gives the bird&amp;rsquo;s height and vertical speed, the last action, the distance to the next three pipes with the top, bottom and centre of each opening, and the score. That&amp;rsquo;s exact pixel coordinates, so it&amp;rsquo;s much closer to what the gap-centering rule reads than a screenshot is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Prompt:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;You are playing Flappy Bird. The bird moves forward automatically. Keep it alive by avoiding the top of the screen, the ground, and the solid pipes; pass through the open vertical gap in each top-and-bottom pipe pair. Use the textual observations in time order to judge whether the bird is rising or falling and where it is relative to the next opening. Vertical positions are measured from the top of the playfield; larger y values are lower. FLAP applies one upward impulse. From level motion, one flap carries the bird to a peak about 11% of screen height above its starting point before gravity pulls it back down; the actual rise depends on its motion when it flaps. WAIT applies no impulse; gravity and forward motion continue. Choose the single action that avoids the hazards and keeps the bird on a path through the next opening. Return one offered action.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;State:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Observations in time order, oldest first; each is spaced 0.06 simulated seconds apart:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Observation 1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bird: y=333 px from the top; vertical speed 205 px/s (falling).
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Last applied action: WAIT, 0.1 simulated seconds ago.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Upcoming pipes, nearest first: Pipe 1: 18 px ahead; opening from y=240 to y=408 px (center y=324 px). Pipe 2: 253 px ahead; opening from y=279 to y=447 px (center y=363 px). Pipe 3: 488 px ahead; opening from y=227 to y=395 px (center y=311 px)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Playfield: top of the screen y=0 px; ground y=570 px. Score: 0 pipes passed.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Observation 2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bird: y=348 px from the top; vertical speed 271 px/s (falling).
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Last applied action: WAIT, 0.1 simulated seconds ago.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Upcoming pipes, nearest first: Pipe 1: 9 px ahead; opening from y=240 to y=408 px (center y=324 px). Pipe 2: 244 px ahead; opening from y=279 to y=447 px (center y=363 px). Pipe 3: 479 px ahead; opening from y=227 to y=395 px (center y=311 px)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Playfield: top of the screen y=0 px; ground y=570 px. Score: 0 pipes passed.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Observation 3
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bird: y=368 px from the top; vertical speed 338 px/s (falling).
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Last applied action: WAIT, 0.2 simulated seconds ago.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Upcoming pipes, nearest first: Pipe 1: -1 px ahead; opening from y=240 to y=408 px (center y=324 px). Pipe 2: 234 px ahead; opening from y=279 to y=447 px (center y=363 px). Pipe 3: 469 px ahead; opening from y=227 to y=395 px (center y=311 px)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Playfield: top of the screen y=0 px; ground y=570 px. Score: 0 pipes passed.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Observation 4 (current)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bird: y=391 px from the top; vertical speed 404 px/s (falling).
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Last applied action: WAIT, 0.3 simulated seconds ago.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Upcoming pipes, nearest first: Pipe 1: -10 px ahead; opening from y=240 to y=408 px (center y=324 px). Pipe 2: 225 px ahead; opening from y=279 to y=447 px (center y=363 px). Pipe 3: 460 px ahead; opening from y=227 to y=395 px (center y=311 px)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Playfield: top of the screen y=0 px; ground y=570 px. Score: 0 pipes passed.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Context:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Last applied action: WAIT, about 1.3 real seconds ago.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Choices:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FLAP: Give the bird one upward flap impulse.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;WAIT: Do not flap on this turn; gravity continues.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="results-2"&gt;Results&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-10-flappy-results.png" alt="Pipes passed per game for the gap-centering baseline and every model, image and text input"&gt;&lt;/p&gt;
+&lt;p&gt;The gap-centering rule, my deterministic code based player, averaged &lt;strong&gt;19.3 pipes&lt;/strong&gt;, with a best of 39 and a worst of one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The decision models.&lt;/strong&gt; They barely flew at all. Liquid d1 averaged 0.5 pipes from images, with a best of two. Jev 1.14, GPT-6 Luna Decisions, Clef Flash, Liquid d1-3B and Liquid d1-omni-600M didn&amp;rsquo;t pass a single pipe from images, and no decision model passed a pipe from text.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The LLMs.&lt;/strong&gt; GPT-6 Astra Responses is the only model that really flew. It averaged &lt;strong&gt;8.4 pipes&lt;/strong&gt; from images. Its best game never crashed: it was still flying when it hit the 10-minute limit, after 140 decisions at roughly 3 seconds each, and the last frame it was sent shows 20 pipes passed, so I count it as 20. Its best game that did end in a crash passed 16.&lt;/p&gt;
+&lt;p&gt;Text didn&amp;rsquo;t help. GPT-6 Astra Responses averaged &lt;strong&gt;3.9 pipes&lt;/strong&gt; from text, with a best of 17, so it did worse with exact coordinates than with screenshots. All 10 of its text games ended in a crash, eight of them on the upper pipe. GPT-6 Luna Responses barely flew from either input: 0.5 pipes from images, with a best of two, and zero from text.&lt;/p&gt;
+&lt;h3 id="how-the-models-crash"&gt;How the models crash&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-11-flappy-actions.png" alt="FLAP and WAIT sequences for every model on one course"&gt;&lt;/p&gt;
+&lt;p&gt;Most of the decision models aren&amp;rsquo;t steering at all. They play the same, or nearly the same, sequence on every course, whatever the frames show:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Jev 1.14&lt;/strong&gt; played FLAP on every decision in every game. The bird hit the top of the screen in all 10, after five decisions.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Clef Flash&lt;/strong&gt; played FLAP, WAIT, FLAP, WAIT on every course, identical each time, and also hit the top of the screen in all 10. GPT-6 Luna Decisions mostly alternated too, with the odd extra FLAP, and hit the top of the screen in all 10.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Liquid d1-3B&lt;/strong&gt; played WAIT on every decision and fell to the ground in all 10 games, after three decisions.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Liquid d1-omni-600M&lt;/strong&gt; usually played FLAP twice and then waited, and hit the ground in eight of 10.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Flapping every other decision is too much lift at this pace and never flapping is too little, so none of these patterns is a decision about the bird. From text the decision models were even more uniform, and most of them alternated FLAP and WAIT straight into the top of the screen. The two LLMs reacted to the course, but only GPT-6 Astra Responses changed its sequence enough to steer.&lt;/p&gt;
+&lt;h2 id="so-can-decision-models-play-games"&gt;So, can decision models play games?&lt;/h2&gt;
+&lt;p&gt;Not well. The two LLMs were far better suited to these games than the six decision models.&lt;/p&gt;
+&lt;h3 id="the-llms-played-well"&gt;The LLMs played well&lt;/h3&gt;
+&lt;p&gt;GPT-6 Astra Responses drew every Tic-tac-toe game against perfect play and cleared every Minesweeper board, from screenshots and from text alike. GPT-6 Luna Responses was close behind, with 19 draws in 20 and the only other cleared board. Astra was also the only model that really flew in Flappy Bird. Both were slow, though: 6 to 8 seconds per Minesweeper decision.&lt;/p&gt;
+&lt;h3 id="the-decision-models-struggled"&gt;The decision models struggled&lt;/h3&gt;
+&lt;p&gt;Across the six of them: 26 draws in 120 Tic-tac-toe games, against 39 in 40 for the LLMs. No Minesweeper board cleared, and a best gain of 5.5 tiles against Astra&amp;rsquo;s 21.2. In Flappy Bird, five of the six never passed a pipe. They missed blocks that were plainly visible, clicked tiles the board proved were mines, defaulted to the first option in text mode, and repeated one fixed FLAP and WAIT pattern whatever the course looked like. The near-flat probabilities they returned on lost positions suggest they often weren&amp;rsquo;t really choosing at all. Jev 1.14 is the one exception: nine of 10 Tic-tac-toe draws from images, the only decision model near the ceiling in any game. But even Jev cleared no Minesweeper boards and passed no pipes.&lt;/p&gt;
+&lt;p&gt;That isn&amp;rsquo;t a verdict on decision models for the job they&amp;rsquo;re built for. They answered in well under a second, and in my &lt;a href="https://arize.com/blog/decision-model-benchmark/"&gt;earlier benchmark&lt;/a&gt; that speed made them a good fit for routing steps inside an agent. Games are a different kind of decision.&lt;/p&gt;
+&lt;h3 id="is-it-the-reasoning"&gt;Is it the reasoning?&lt;/h3&gt;
+&lt;p&gt;GPT-6 Luna is the cleanest comparison in this benchmark, because it&amp;rsquo;s the same model on two routes. Through the Responses route it drew 19 of 20 Tic-tac-toe games and gained 11.6 Minesweeper tiles from images. Through the Decisions route it drew four of 20 and gained 1.8. The obvious difference between the routes is that Responses reasons before it answers and Decisions doesn&amp;rsquo;t. So I tested that directly.&lt;/p&gt;
+&lt;h4 id="the-test"&gt;The test&lt;/h4&gt;
+&lt;p&gt;Every LLM row in this post ran with the API&amp;rsquo;s reasoning effort set to low, the server default. For this test I ran GPT-6 Luna Responses again with the effort set to none. Every call came back with zero reasoning tokens, so reasoning really was off.&lt;/p&gt;
+&lt;p&gt;Everything else stayed the same: the same 10 Tic-tac-toe games and the same 10 Minesweeper boards, from images and from text, against the same minimax and after the same opening.&lt;/p&gt;
+&lt;h4 id="the-scores"&gt;The scores&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Luna Responses, reasoning on&lt;/th&gt;
+&lt;th&gt;Luna Responses, reasoning off&lt;/th&gt;
+&lt;th&gt;Luna Decisions&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tic-tac-toe draws, image&lt;/td&gt;
+&lt;td&gt;9 of 10&lt;/td&gt;
+&lt;td&gt;7 of 10&lt;/td&gt;
+&lt;td&gt;1 of 10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Tic-tac-toe draws, text&lt;/td&gt;
+&lt;td&gt;10 of 10&lt;/td&gt;
+&lt;td&gt;4 of 10&lt;/td&gt;
+&lt;td&gt;3 of 10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Minesweeper tiles gained, image&lt;/td&gt;
+&lt;td&gt;+11.6&lt;/td&gt;
+&lt;td&gt;+5.5&lt;/td&gt;
+&lt;td&gt;+1.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Minesweeper tiles gained, text&lt;/td&gt;
+&lt;td&gt;+8.7&lt;/td&gt;
+&lt;td&gt;+2.3&lt;/td&gt;
+&lt;td&gt;+1.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Minesweeper boards cleared&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Seconds per decision&lt;/td&gt;
+&lt;td&gt;3 to 8&lt;/td&gt;
+&lt;td&gt;1.2 to 1.7&lt;/td&gt;
+&lt;td&gt;0.2 to 0.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;With reasoning off, Luna fell from 19 Tic-tac-toe draws to 11, and its Minesweeper games got much shorter: about two moves per game before it hit a mine, against 5.6 with reasoning on.&lt;/p&gt;
+&lt;h4 id="what-it-shows"&gt;What it shows&lt;/h4&gt;
+&lt;p&gt;Reasoning helps, and it&amp;rsquo;s the biggest single factor. Turning it off cost Luna eight of its 19 Tic-tac-toe draws and at least half of its Minesweeper gain from either input.&lt;/p&gt;
+&lt;p&gt;Splitting by input shows where the rest comes from. From text, Luna with reasoning off played about as badly as Luna Decisions: four draws against three, and +2.3 tiles against +1.5. From images, it kept a clear lead: seven draws against one, and +5.5 tiles against +1.8. Same model, no reasoning on either route, and the Responses route still did much better with a screenshot. So the way each route handles the image makes a difference too. Part of that could be how the answer is picked: the Responses route returns one choice, while the Decisions route returns a probability for every option and the arcade plays the highest. This test can&amp;rsquo;t separate the two.&lt;/p&gt;
+&lt;p&gt;Three cautions. It&amp;rsquo;s 10 games per input, so none of these gaps is statistically significant. Reasoning off isn&amp;rsquo;t quite the same as a single fast pass either, because Luna still took 1.2 to 1.7 seconds per decision against well under a second through Decisions. And I left Flappy Bird out, because the reasoning-off games ran at an older frame setting and can&amp;rsquo;t be compared with the Flappy Bird results above.&lt;/p&gt;
+&lt;h3 id="real-time-is-hard-for-everyone"&gt;Real time is hard for everyone&lt;/h3&gt;
+&lt;p&gt;Even with the game paused for every decision, GPT-6 Astra Responses averaged 8.4 pipes from images and 3.9 from text, against the gap-centering rule&amp;rsquo;s 19.3. Astra also needed about 2.6 seconds per decision, so this only worked because the game waited. Real-time control is still a job for code in the inner loop, with a model setting the plan around it.&lt;/p&gt;
+&lt;h3 id="images-held-up-against-text"&gt;Images held up against text&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://jimbobbennett.dev/blogs/decision-models-play-games/fig-12-image-vs-text.png" alt="Image vs text for every model across the three games"&gt;&lt;/p&gt;
+&lt;p&gt;For both kinds of model, put the three games side by side and there&amp;rsquo;s no consistent text advantage.&lt;/p&gt;
+&lt;p&gt;For the LLMs, the input barely mattered in the turn-based games. GPT-6 Astra Responses was at the ceiling with both, and GPT-6 Luna Responses drew nine against 10 and gained 11.6 tiles against 8.7. In Flappy Bird, Astra did better from images (8.4 pipes) than from text (3.9).&lt;/p&gt;
+&lt;p&gt;For the decision models, images were if anything slightly better. The six of them drew 15 Tic-tac-toe games from images and 11 from text, and five of the six gained more Minesweeper tiles from images. Jev drew nine against four and gained 5.5 tiles against 1.8, and Clef Flash gained 5.5 against 0.3. GPT-6 Luna Decisions went the other way in Tic-tac-toe, one draw against three. In Flappy Bird they scored zero or close to it from either input.&lt;/p&gt;
+&lt;p&gt;Two cautions. First, with 10 games per cell the confidence intervals overlap almost everywhere, so none of these differences are statistically significant and I&amp;rsquo;m not claiming they are. Second, the text inputs aren&amp;rsquo;t a clean &amp;ldquo;same information, no pixels&amp;rdquo; control. They spell out coordinates and symbols the model would otherwise have to read off pixels, so they&amp;rsquo;re more explicit than the images. My benchmark protocol says so: &lt;em&gt;&amp;ldquo;The model image and text conditions compare visual input with an explicit state serialization; they do not isolate an image encoder independently of text detail.&amp;rdquo;&lt;/em&gt; So the fair reading is narrow. On these three games, reading a screenshot was not the bottleneck. A model that played well did so from either input, and a model that didn&amp;rsquo;t, didn&amp;rsquo;t.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s a little at odds with TypeSafe&amp;rsquo;s warning that models do worse with images than with text. I don&amp;rsquo;t think it contradicts it. My boards are simple, high-contrast and labelled, and the games are small. A busier image, or a task where reading the picture really is the hard part, could easily flip the result.&lt;/p&gt;
+&lt;h3 id="the-baselines-draw-the-lines"&gt;The baselines draw the lines&lt;/h3&gt;
+&lt;p&gt;Minimax and the constraint solver both hit the ceiling, which shows these games are fully solvable from the visible board. The free Minesweeper opening shows that a raw score of 33 to 38 is mostly free tiles. And the Flappy Bird baseline shows what&amp;rsquo;s possible: 19.3 pipes for a one-line rule that reads the game state on every frame.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re choosing between a decision model and an LLM for a step in your agent, the principle that carries over is to measure each one against the floor as well as the ceiling. A score means very little until you know what you&amp;rsquo;d get for free and what perfect play gets. Those two numbers told me more about these models than the scores did, and they made the gap between the LLMs and the decision models impossible to miss.&lt;/p&gt;</description></item><item><title>EU AI Act compliance for AI agents: building the engineering foundation with Arize and evroc</title><link>https://jimbobbennett.dev/blogs/eu-ai-act-compliance-arize-evroc/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://jimbobbennett.dev/blogs/eu-ai-act-compliance-arize-evroc/</guid><description>&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
 &lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/zK56LzfwJ5U?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 &lt;h2 id="key-takeaways"&gt;Key takeaways&lt;/h2&gt;
