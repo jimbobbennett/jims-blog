@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-10-19
 publishDate: 2026-10-19
 description: "Decision models can now read images, so can they play games? I ran six decision models and two LLMs through Tic-tac-toe, Minesweeper and Flappy Bird from screenshots and from text, against deterministic baselines. The LLMs played well, the decision models mostly didn't, and reasoning explains a lot of the gap."
-draft: true
+draft: false
 slug: "decision-models-play-games"
 title: "Can decision models play games from screenshots?"
 tags: ["ai", "llm", "decision-models", "benchmarks", "evals", "multimodal", "games"]
