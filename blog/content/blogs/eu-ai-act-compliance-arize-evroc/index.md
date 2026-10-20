@@ -8,6 +8,7 @@ draft: false
 slug: "eu-ai-act-compliance-arize-evroc"
 title: "EU AI Act compliance for AI agents: building the engineering foundation with Arize and evroc"
 tags: ["ai", "llm", "eu-ai-act", "compliance", "observability", "tracing", "evals", "phoenix", "evroc", "agents"]
+canonical: https://arize.com/blog/eu-ai-act-compliance-ai-agents/
 
 images:
   - /blogs/eu-ai-act-compliance-arize-evroc/banner.jpg

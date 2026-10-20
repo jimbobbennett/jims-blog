@@ -7,6 +7,7 @@ draft: false
 slug: "decision-models-play-games"
 title: "Can decision models play games from screenshots?"
 tags: ["ai", "llm", "decision-models", "benchmarks", "evals", "multimodal", "games"]
+canonical: https://arize.com/blog/can-decision-models-play-games-from-screenshots/
 
 images:
   - /blogs/decision-models-play-games/banner.png
