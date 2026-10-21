@@ -1,11 +1,15 @@
 name: scheduled publish
 
-# Runs once a day. If any draft post has a publish date of today, it is flipped
+# Runs twice a day. If any draft post has a publish date of today, it is flipped
 # to draft: false, committed back to main, and the blog is rebuilt and deployed.
 # This lets future posts auto-release on their scheduled date with no manual step.
+# A post with a time in its publishDate (e.g. 2026-10-22T08:00:00-07:00) is
+# flipped by the first run but Hugo hides it until that time, so the second
+# run's rebuild is the one that makes it visible.
 on:
   schedule:
-    - cron: '0 7 * * *'   # 07:00 UTC daily
+    - cron: '0 7 * * *'   # 07:00 UTC daily (midnight PT): date-only posts
+    - cron: '5 15 * * *'  # 15:05 UTC daily (08:05 PDT): posts timed for 8am PT
   workflow_dispatch:        # allow manual runs for testing
 
 permissions:
