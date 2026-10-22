@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-10-22T08:00:00-07:00
 publishDate: 2026-10-22T08:00:00-07:00
 description: "I built a small software factory where Claude agents turn GitHub issues into released code, traced every step to Arize AX, and used the verdicts the factory already produces as labels to test and improve its own prompts before they ship."
-draft: true
+draft: false
 slug: "software-factory-tests-its-own-prompts"
 title: "How to build a software factory that tests its own prompts"
 tags: ["ai", "agents", "software-factory", "evals", "llm-as-judge", "prompt-engineering", "arize-ax"]
