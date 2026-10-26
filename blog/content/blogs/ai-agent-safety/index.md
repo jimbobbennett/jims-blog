@@ -7,6 +7,7 @@ draft: false
 slug: "ai-agent-safety"
 title: "NVIDIA proposes an AI agent kill switch in silicon after a year of sandbox escapes"
 tags: ["agents", "ai-safety", "observability", "evals", "nvidia"]
+canonical: "https://arize.com/blog/nvidia-ai-agent-kill-switch/"
 
 images:
   - /blogs/ai-agent-safety/cover.png

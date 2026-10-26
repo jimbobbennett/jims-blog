@@ -7,6 +7,7 @@ draft: false
 slug: "claude-hillclimbing"
 title: "Claude's hillclimb loop, with your traces underneath"
 tags: ["ai", "evals", "claude", "agents", "observability"]
+canonical: "https://arize.com/blog/claude-hillclimb-production-traces/"
 
 images:
   - /blogs/claude-hillclimbing/cover.png

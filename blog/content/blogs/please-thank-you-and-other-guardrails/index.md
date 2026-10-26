@@ -7,6 +7,7 @@ draft: false
 slug: "please-thank-you-and-other-guardrails"
 title: "Please, thank you, and other guardrails"
 tags: ["ai", "llm", "claude", "evals", "guardrails", "responsible-ai", "experiments"]
+canonical: "https://arize.com/blog/does-being-rude-to-ai-work/"
 
 images:
   - /blogs/please-thank-you-and-other-guardrails/banner.png

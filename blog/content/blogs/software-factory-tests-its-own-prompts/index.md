@@ -7,6 +7,7 @@ draft: false
 slug: "software-factory-tests-its-own-prompts"
 title: "How to build a software factory that tests its own prompts"
 tags: ["ai", "agents", "software-factory", "evals", "llm-as-judge", "prompt-engineering", "arize-ax"]
+canonical: "https://arize.com/blog/how-to-build-a-software-factory-that-tests-its-own-prompts/"
 images:
   - cover.png
 featured_image: cover.png
