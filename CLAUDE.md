@@ -9,14 +9,14 @@ The Hugo project lives in `blog/`, not the repo root. All Hugo commands must be 
 - Local dev server (shows drafts): `cd blog && hugo server -D`
 - Production build: `cd blog && hugo --minify`
 
-There is no test suite, no linter, and no package-manager-managed dependencies (the `package.json` in `blog/` is effectively empty). Hugo version is pinned to `0.159.0` (extended) in CI.
+There is no test suite and no linter. The only npm dependency is Wrangler (in `blog/package.json`), used for Cloudflare preview and deploy. Hugo version is pinned to `0.159.0` via the `HUGO_VERSION` build variable in Cloudflare.
 
 ## Architecture
 
-This is a Hugo static site published to `jimbobbennett.dev` via GitHub Pages. Two GitHub Actions workflows drive everything:
+This is a Hugo static site published to `jimbobbennett.dev` as a Cloudflare Worker with static assets (`blog/wrangler.jsonc`, no Worker script). Deployment is Git-driven:
 
-- `.github/workflows/gh-pages.yml` — on every push to `main` (and on PRs for build verification), runs `hugo --minify` in `blog/` and deploys `blog/public/` to GitHub Pages.
-- `.github/workflows/scheduled-publish.yml` — runs daily at 07:00 UTC. It calls `.github/scripts/publish-scheduled.sh`, which scans `blog/content/blogs/*/index.md`, finds posts whose `publishDate` (falling back to `date`) is today, flips `draft: true` → `draft: false`, commits the change back to `main`, and rebuilds + deploys. Hugo's `buildFuture` is off, so future-dated drafts stay hidden until this job runs on/after their date. **This means scheduling a post is just: set `publishDate` to a future date and `draft: true`. Do not manually flip the draft flag for scheduled posts — the action does it.**
+- **Cloudflare Workers Builds** (configured in the Cloudflare dashboard, root directory `blog`) runs `npm run build` and `npx wrangler deploy` on every push to `main`. Other branches get preview URLs via `npx wrangler versions upload`.
+- `.github/workflows/scheduled-publish.yml` — runs daily at 07:00 and 15:05 UTC. It calls `.github/scripts/publish-scheduled.sh`, which scans `blog/content/blogs/*/index.md`, finds posts whose `publishDate` (falling back to `date`) is today, flips `draft: true` → `draft: false`, and commits the change back to `main`, which triggers the Cloudflare build. For posts with a time in `publishDate`, the 15:05 run pushes an empty commit so Cloudflare rebuilds after that time. Hugo's `buildFuture` is off, so future-dated drafts stay hidden until this job runs on/after their date. **This means scheduling a post is just: set `publishDate` to a future date and `draft: true`. Do not manually flip the draft flag for scheduled posts — the action does it.**
 
 ### Content model
 
@@ -43,4 +43,4 @@ The archetype is `blog/archetypes/default.md`. Conventions enforced by templates
 
 ### Static assets
 
-Served from `blog/static/` at site root: `/css/...`, `/images/...`, `/downloads/...`, etc. The `CNAME` file at the repo root is for GitHub Pages; `blog/static/CNAME` is the one Hugo actually copies into `public/`.
+Served from `blog/static/` at site root: `/css/...`, `/images/...`, `/downloads/...`, etc.

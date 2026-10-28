@@ -17,7 +17,7 @@ Testing/linting:
 
 CI/deploy reference:
 
-- GitHub Actions workflow `.github/workflows/gh-pages.yml` builds with `cd blog && hugo --minify` and deploys `blog/public` to GitHub Pages on pushes to `main`.
+- Cloudflare Workers Builds runs `cd blog && npm run build && npx wrangler deploy` on pushes to `main` (config in `blog/wrangler.jsonc`). `.github/workflows/scheduled-publish.yml` releases dated drafts by committing to `main`.
 
 ## High-level architecture
 

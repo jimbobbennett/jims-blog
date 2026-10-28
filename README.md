@@ -11,7 +11,9 @@ hugo server -D
 
 ## Cloudflare
 
-Deployed as a Cloudflare Worker with static assets (config in `blog/wrangler.jsonc`). One-time: `cd blog && npm install && npx wrangler login`.
+Deployed as a Cloudflare Worker with static assets (config in `blog/wrangler.jsonc`). Cloudflare Workers Builds deploys every push to `main` and gives other branches preview URLs. The `scheduled publish` workflow releases dated drafts by committing to `main`, which triggers that build.
+
+To deploy by hand, one-time: `cd blog && npm install && npx wrangler login`.
 
 ```bash
 cd blog

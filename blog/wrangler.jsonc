@@ -11,10 +11,10 @@
   },
   // Gives each `wrangler versions upload` its own shareable preview URL.
   "preview_urls": true,
-  "workers_dev": true
-  // When ready to cut over from GitHub Pages, uncomment and move DNS to Cloudflare:
-  // "routes": [
-  //   { "pattern": "jimbobbennett.dev", "custom_domain": true },
-  //   { "pattern": "www.jimbobbennett.dev", "custom_domain": true }
-  // ]
+  "workers_dev": true,
+  // Custom domains. Kept here so `wrangler deploy` matches what's attached in the dashboard.
+  "routes": [
+    { "pattern": "jimbobbennett.dev", "custom_domain": true },
+    { "pattern": "www.jimbobbennett.dev", "custom_domain": true }
+  ]
 }
