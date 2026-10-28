@@ -1,2 +1,6 @@
 .DS_Store
 /blog/public
+# Cloudflare / Wrangler
+node_modules/
+.wrangler/
+.dev.vars*

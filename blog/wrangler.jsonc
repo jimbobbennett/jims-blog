@@ -1,0 +1,20 @@
+{
+  // Cloudflare Workers static-assets deployment for jimbobbennett.dev.
+  // Hugo builds into ./public; Wrangler uploads that folder as-is. No Worker script.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "jims-blog",
+  "compatibility_date": "2026-10-28",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  // Gives each `wrangler versions upload` its own shareable preview URL.
+  "preview_urls": true,
+  "workers_dev": true
+  // When ready to cut over from GitHub Pages, uncomment and move DNS to Cloudflare:
+  // "routes": [
+  //   { "pattern": "jimbobbennett.dev", "custom_domain": true },
+  //   { "pattern": "www.jimbobbennett.dev", "custom_domain": true }
+  // ]
+}
