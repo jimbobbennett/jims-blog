@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-10-29T08:00:00-07:00
 publishDate: 2026-10-29T08:00:00-07:00
 description: "Claude Code mods change what your coding agent sees, does and shows you. I toured the built-in mods, built a Halloween mod that judges every turn as a trick or a treat, then traced and evaluated it with Arize AX to find out whether it was actually right."
-draft: true
+draft: false
 slug: "claude-code-mods"
 canonical: "https://arize.com/blog/i-put-a-ghost-in-claude-code-then-i-evaluated-it/"
 title: "I put a ghost in Claude Code. Then I evaluated it"
