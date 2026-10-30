@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-10-30T08:00:00-07:00
 publishDate: 2026-10-30T08:00:00-07:00
 description: "A viral two-neuron hack turns Qwen3.5-4B into a villain. I reproduced it on my laptop and found the dangerous version is the half-strength one that still passes its capability checks. Here's what that means for AI supply chains, SBOMs, and why you need behavioural evals and guardrails."
-draft: true
+draft: false
 slug: "evil-qwen"
 title: "The evil Qwen you won't notice"
 tags: ["ai", "llm", "safety", "responsible-ai", "interpretability", "supply-chain", "evals", "guardrails"]
