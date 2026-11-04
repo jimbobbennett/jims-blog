@@ -188,6 +188,38 @@ body.dark #hero .social-heading {
     text-transform: uppercase;
 }
 
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .6rem;
+}
+
+.social-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--night-line);
+    border-radius: .4rem;
+    background: var(--night-surface);
+    color: var(--night-copy);
+    font-size: 1.15rem;
+    text-decoration: none;
+}
+
+.social-icon-link:hover,
+.social-icon-link:focus-visible {
+    border-color: var(--night-lime);
+    color: var(--night-lime);
+}
+
+.social-icon-link:focus-visible {
+    outline: 2px solid var(--night-lime);
+    outline-offset: 3px;
+}
+
 body.dark #hero .social-links {
     justify-content: flex-start;
 }

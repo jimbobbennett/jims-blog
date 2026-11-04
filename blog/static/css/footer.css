@@ -37,22 +37,22 @@ footer #social h3 {
     justify-content: center;
     width: 44px;
     height: 44px;
-    border: 1px solid var(--text-secondary-color);
+    border: 1px solid var(--night-line, #34414d);
     border-radius: .4rem;
-    background: var(--secondary-color);
-    color: var(--text-secondary-color);
+    background: var(--night-surface, #17212c);
+    color: var(--night-copy, #c2cbd1) !important;
     font-size: 1.15rem;
     text-decoration: none;
 }
 
 .social-icon-link:hover,
 .social-icon-link:focus-visible {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border-color: var(--night-lime, var(--primary-color));
+    color: var(--night-lime, var(--primary-color)) !important;
 }
 
 .social-icon-link:focus-visible {
-    outline: 2px solid var(--primary-color);
+    outline: 2px solid var(--night-lime, var(--primary-color));
     outline-offset: 3px;
 }
 
