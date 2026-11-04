@@ -26,7 +26,7 @@ body.dark header .navbar {
 }
 
 body.dark header .navbar .navbar-brand {
-    color: var(--text-color) !important;
+    color: var(--night-lime) !important;
     font-size: 1.15rem;
     font-weight: 800;
     letter-spacing: -.04em;
