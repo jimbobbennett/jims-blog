@@ -243,7 +243,7 @@ The code contains images and a model that can recognize two words, 'Stop' and 'G
 
 Select the image below to see a video of this in action.
 
-[![The badge responding to stop](https://img.youtube.com/vi/Z0XiTjXCOdk/0.jpg)](https://www.youtube.com/watch?v=Z0XiTjXCOdk)
+[![The badge responding to stop](https://img.youtube.com/vi/7TKHtzpGitU/0.jpg)](https://www.youtube.com/watch?v=7TKHtzpGitU)
 
 ### Use your own model
 
