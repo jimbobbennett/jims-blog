@@ -1,23 +1,53 @@
-<!-- <div class="container py-3" id="recent-posts">
-    <div class="h3 text-center text-secondary py-3">Recent posts</div>
-    <div class="row justify-content-center">
-        {{ range ( where .Site.RegularPages "Type" "blogs" | first 3 ) }}
-        <div class="col-lg-4 col-md-6 pt-2">
-            <div class="card h-100">
-                <div class="card-body bg-transparent p-3 shadow-sm">
-                    <a href="{{ .RelPermalink }}" class="primary-font card-title">
-                        <h5 class="card-title bg-transparent" title="{{ .Title }}">{{ .Title | truncate 25 }}</h5>
-                    </a>
-                    <div class="card-text secondary-font">
-                        <p>{{ .Summary | truncate 300}}</p>
-                    </div>
-                </div>
-                <div class="mt-auto card-footer">
-                    <span class="float-start">{{ .Date.Format "January 2, 2006" }}</span>
-                    <a href="{{ .RelPermalink }}" class="float-end btn btn-outline-info btn-sm">Read</a>
-                </div>
+{{ $posts := first 3 ((where .Site.RegularPages "Section" "blogs").ByDate.Reverse) }}
+{{ if $posts }}
+<section id="recent-posts" class="py-5">
+    <div class="container">
+        <div class="section-heading section-heading-row">
+            <div>
+                <span class="section-eyebrow">Ideas, experiments, and practical guides</span>
+                <h3>Latest from the blog</h3>
             </div>
+            <a class="section-more" href="{{ "/blogs/" | relURL }}">All posts <span aria-hidden="true">→</span></a>
         </div>
-        {{ end }}
+
+        <div class="latest-posts{{ if eq (len $posts) 1 }} latest-posts-single{{ end }}">
+            {{ range $index, $post := $posts }}
+            {{ if eq $index 0 }}
+            <article class="latest-feature">
+                {{ with .Params.featured_image }}
+                <a class="latest-image" href="{{ $post.RelPermalink }}" aria-label="Read {{ $post.Title }}">
+                    <img src="{{ printf "%s%s" $post.RelPermalink . }}" alt="">
+                </a>
+                {{ else }}
+                <a class="latest-image latest-image-placeholder" href="{{ $post.RelPermalink }}" aria-label="Read {{ $post.Title }}">Latest<br>from Jim</a>
+                {{ end }}
+                <div class="latest-feature-content">
+                    <div class="latest-meta">
+                        {{ with .Params.tags }}<span>{{ index . 0 }}</span><span class="meta-separator">·</span>{{ end }}
+                        <time datetime="{{ $post.Date.Format "2006-01-02" }}">{{ $post.Date.Format "Jan 2, 2006" }}</time>
+                    </div>
+                    <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+                    <p>{{ .Summary | plainify | htmlUnescape | truncate 220 }}</p>
+                    <a class="latest-read-more" href="{{ .RelPermalink }}">Read the post <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+            {{ else }}
+            {{ if eq $index 1 }}<div class="latest-list">{{ end }}
+                <article class="latest-list-item">
+                    <div class="latest-meta">
+                        {{ with .Params.tags }}<span>{{ index . 0 }}</span><span class="meta-separator">·</span>{{ end }}
+                        <time datetime="{{ $post.Date.Format "2006-01-02" }}">{{ $post.Date.Format "Jan 2, 2006" }}</time>
+                    </div>
+                    <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+                    <p>{{ .Summary | plainify | htmlUnescape | truncate 125 }}</p>
+                </article>
+            {{ end }}
+            {{ end }}
+            {{ if gt (len $posts) 1 }}
+            <a class="latest-archive-link" href="{{ "/blogs/" | relURL }}">Browse the archive <span aria-hidden="true">→</span></a>
+            </div>
+            {{ end }}
+        </div>
     </div>
-</div> -->
+</section>
+{{ end }}

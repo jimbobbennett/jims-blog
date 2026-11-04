@@ -3,9 +3,9 @@
     <div class="container px-3 px-sm-5 px-md-5 px-lg-5 pt-lg-3">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-7 content" id="primary-font">
-                <span class="subtitle">
-                    {{ .Site.Params.hero.intro }}
-                </span>
+                {{ with .Site.Params.hero.intro }}
+                <span class="subtitle">{{ . }}</span>
+                {{ end }}
                 <h2>
                     {{ .Site.Params.hero.title }}
                 </h2>
@@ -13,29 +13,33 @@
                     {{ .Site.Params.hero.subtitle }}
                 </h3>
                 <p class="hero-content">
+                    {{ if .Site.Params.hero.content }}
                     {{ .Site.Params.hero.content | markdownify }}
+                    {{ else }}
+                    {{ .Site.Params.about.content | plainify | htmlUnescape }}
+                    {{ end }}
                 </p>
-                <div class="col-auto h-100">
-                    <p>
-                        <img src="/images/png/Telly_44th_Winners_Badges_silver_winner.png"/>
-                    </p>
-                    <p>
-                        <img src="https://raw.githubusercontent.com/jimbobbennett/ColoredBadges/main/svg/pronouns/hehim.svg"
-                            alt="Jim uses he/him pronouns">
-                    </p>
+                <div class="hero-actions">
+                    <a class="hero-button" href="#about">More about me <span aria-hidden="true">↓</span></a>
+                    <a class="hero-secondary-link" href="#recent-posts">Read the latest posts <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="hero-awards">
+                    <span>he / him</span>
                 </div>
 
             </div>
             <div class="col-sm-12 col-md-12 col-lg-5 content">
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-9 pt-5 image px-5 px-md-5 px-lg-0 text-center">
-                        <img src="{{ .Site.Params.hero.image }}" class="img-hero-thumbnail mx-auto" alt="Jim">
+                        <div class="hero-portrait">
+                            <img src="{{ .Site.Params.hero.image }}" class="img-hero-thumbnail mx-auto" alt="Jim">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <span class="subtitle my-3 content">
+            <span class="subtitle my-3 content social-heading">
                 Find me on the internet
             </span>
             <div class="col-auto px-0 h-100 content">

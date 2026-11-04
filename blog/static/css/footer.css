@@ -11,6 +11,44 @@ footer a:hover {
   color: var(--primary-color) !important;
 }
 
+footer #social {
+    padding: 1.5rem 0 !important;
+    border-top: 1px solid var(--night-line, #34414d);
+    color: var(--text-color);
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .6rem;
+}
+
+.social-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--night-line, #34414d);
+    border-radius: .4rem;
+    background: var(--night-surface, #17212c);
+    color: var(--night-copy, #c2cbd1) !important;
+    font-size: 1.15rem;
+    text-decoration: none;
+}
+
+.social-icon-link:hover,
+.social-icon-link:focus-visible {
+    border-color: var(--night-lime, var(--primary-color));
+    color: var(--night-lime, var(--primary-color)) !important;
+}
+
+.social-icon-link:focus-visible {
+    outline: 2px solid var(--night-lime, var(--primary-color));
+    outline-offset: 3px;
+}
+
 footer .card {
     background-color: var(--secondary-color) !important;
     border-radius: .75rem;

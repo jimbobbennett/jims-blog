@@ -51,10 +51,6 @@
   }
 }
 
-header .navbar {
-    animation: fade-up 0.5s ease-in;
-}
-
 /* ToolTip */
 
 .tooltip {

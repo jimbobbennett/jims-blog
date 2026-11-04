@@ -2,9 +2,7 @@
 <meta name="description" content={{ .Site.Params.description }}>
 <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/index.css" media="all">
 <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/projects.css" media="all">
-
-<!-- fontawesome -->
-<script defer src="{{ .Site.Params.staticPath }}/fontawesome-5/all-5.15.4.js"></script>
+<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/home-night-lime.css" media="all">
 {{ end }}
 
 {{ define "title" }}
@@ -16,5 +14,4 @@
 {{- partial "sections/about.html" . -}}
 {{- partial "sections/projects.html" . -}}
 {{- partial "sections/recentBlogPosts.html" . -}}
-{{- partial "sections/social.html" . -}}
 {{ end }}

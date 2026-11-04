@@ -14,7 +14,6 @@ This site publishes HTML pages and Markdown alternatives for its content pages.
 - [Podcasts]({{ .Site.BaseURL }}podcasts/): Podcast appearances.
 - [Livestreams]({{ .Site.BaseURL }}livestreams/): Livestream appearances.
 - [Conferences]({{ .Site.BaseURL }}conferences/): Conference talks.
-- [Resume]({{ .Site.BaseURL }}resume/): Jim's resume.
 
 ## All published content pages
 
