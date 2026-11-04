@@ -65,3 +65,22 @@
     background-color: var(--primary-color) !important;
     color: var(--secondary-color) !important;
 }
+
+.infinite-scroll-controls {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.infinite-scroll-controls p {
+    color: var(--text-secondary-color);
+}
+
+.infinite-scroll-controls a {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.infinite-scroll-controls a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+}

@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/index.css" media="all">
 <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/list.css" media="all">
 <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/projects.css" media="all">
+{{ if eq .Section "blogs" }}
+<script defer src="{{ .Site.Params.staticPath }}/js/infinite-scroll.js"></script>
+{{ end }}
 {{ end }}
 
 {{ define "title" }}
@@ -11,16 +14,16 @@
 
 {{ define "main" }}
 <section id="projects">
-    <div class="container pt-5" id="list-page">
+    <div class="container pt-5">
         <div class="row justify-content-center px-3 px-md-5">
             <h1 class="text-left pb-2 content">{{.Title}}</h1>
         </div>
     </div>
 </section>
 <div class="container pt-5" id="list-page">
-    <div class="row">
+    <div class="row" {{ if eq .Section "blogs" }}data-post-grid{{ end }}>
         {{ range .Paginator.Pages }}
-        <div class="col-lg-3 col-md-6 my-3">
+        <div class="col-lg-3 col-md-6 my-3" data-post-card>
             <div class="card h-100">
                 <div class="card-head">
                     <a href="{{ .RelPermalink }}">
@@ -42,10 +45,18 @@
             </div>
         </div>
         {{ end }}
-        <div class="row justify-content-center">
+    </div>
+    {{ if eq .Section "blogs" }}
+    <div class="infinite-scroll-controls" data-scroll-controls>
+        <p role="status" aria-live="polite" data-scroll-status></p>
+        {{ with .Paginator.Next }}
+        <a class="btn btn-outline-info" href="{{ .URL }}" rel="next" data-next-page>Load more posts</a>
+        {{ end }}
+    </div>
+    {{ end }}
+        <div class="row justify-content-center" data-pagination>
             <div class="col-auto m-3">
                 {{template "_internal/pagination.html" . }}
-            </div>
         </div>
     </div>
 </div>

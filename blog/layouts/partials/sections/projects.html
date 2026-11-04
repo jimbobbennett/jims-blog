@@ -1,10 +1,13 @@
 {{ if .Site.Params.projects.enable | default false }}
 <section id="projects" class="py-5">
     <div class="container">
-        <h3 class="text-center">{{ .Site.Params.projects.title | default "Projects" }}</h3>
+        <div class="section-heading">
+            <span class="section-eyebrow">Things I've been part of</span>
+            <h3>{{ .Site.Params.projects.title | default "Projects" }}</h3>
+        </div>
         <div class="row justify-content-center px-3 px-md-5">
             {{ range .Site.Params.projects.items }}
-            <div class="col-lg-6 col-md-6 my-3 h-50">
+            <div class="col-12 col-sm-6 col-xl-3 my-3 h-50">
                 <div class="card my-3 h-100" title="{{ .title }}">
                     <div class="card-head">
                         <img class="card-img-top" src="{{ .image }}" alt="{{ .title }}">
