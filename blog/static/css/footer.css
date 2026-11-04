@@ -17,13 +17,6 @@ footer #social {
     color: var(--text-color);
 }
 
-footer #social h3 {
-    margin: 0 0 1rem;
-    color: var(--text-color) !important;
-    font-size: 1.35rem;
-    font-weight: 700;
-}
-
 .social-links {
     display: flex;
     flex-wrap: wrap;
