@@ -1,9 +1,9 @@
 ---
 author: "Jim Bennett"
-date: 2026-11-06T07:00:00-08:00
-publishDate: 2026-11-06T07:00:00-08:00
+date: 2026-11-04T12:00:00-08:00
+publishDate: 2026-11-04T12:00:00-08:00
 description: "A paper called GVS5H claims a cheap model in a manager/worker loop closes the gap to frontier models. I tested that against Opus 5.5 in my own agent, step by step: traces, evals, a dataset built from the traces and experiments, then compared pass rate, cost per solved problem and latency."
-draft: true
+draft: false
 slug: "test-new-model-in-agent"
 title: "Is the cheap model good enough? How to test a new model in your agent"
 tags: ["ai", "llm", "evals", "experiments", "datasets", "observability", "agents", "arize"]
