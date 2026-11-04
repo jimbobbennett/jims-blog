@@ -1,0 +1,23 @@
+# {{ .Site.Title }}
+
+> {{ .Site.Params.description }}
+
+This site publishes HTML pages and Markdown alternatives for its content pages.
+
+## Site resources
+
+- [Home]({{ .Site.BaseURL }}): Site introduction and navigation.
+- [Blog archive]({{ .Site.BaseURL }}blogs/): Browse all blog posts.
+- [RSS feed]({{ .Site.BaseURL }}index.xml): Full article content in RSS.
+- [Sitemap]({{ .Site.BaseURL }}sitemap.xml): Discover published URLs.
+- [Videos]({{ .Site.BaseURL }}videos/): Video series and talks.
+- [Podcasts]({{ .Site.BaseURL }}podcasts/): Podcast appearances.
+- [Livestreams]({{ .Site.BaseURL }}livestreams/): Livestream appearances.
+- [Conferences]({{ .Site.BaseURL }}conferences/): Conference talks.
+- [Resume]({{ .Site.BaseURL }}resume/): Jim's resume.
+
+## All published content pages
+
+{{ range .Site.RegularPages.ByDate.Reverse -}}
+- [{{ .Title }}]({{ with .OutputFormats.Get "MARKDOWN" }}{{ .Permalink }}{{ else }}{{ $.Permalink }}{{ end }}): {{ .Description }}
+{{ end }}

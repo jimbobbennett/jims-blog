@@ -1,11 +1,13 @@
 {
-  // Cloudflare Workers static-assets deployment for jimbobbennett.dev.
-  // Hugo builds into ./public; Wrangler uploads that folder as-is. No Worker script.
+  // Hugo builds into ./public; the Worker serves static assets and negotiates Markdown.
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "jims-blog",
+  "main": "src/index.js",
   "compatibility_date": "2026-10-28",
   "assets": {
     "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/blogs/*"],
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   },
