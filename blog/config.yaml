@@ -253,15 +253,15 @@ params:
         description: Jim Bennett joins Olivier to tell us all about IoT for beginners, a new 12 week, 24 lesson curriculum that we have built to get University and high school students ready for the fast-growing world of IoT.
 
       - title: "IoT for Beginners: Wio Terminal Hackathon - Part 1"
-        id: a22_1ZRejfw
+        id: _nY8Xrhd7wI
         description: "During this event, you will be introduced to the Internet of Things, and learn the basic concepts including building your first WioTerminal IoT project connecting to the cloud. Find out what Microsoft employees will be hacking for the annual Hackathon event later in October. Get a peek behind the curtain and stay after the event for Ask the Expert: IoT and WioTerminal Hackathon to get your questions answered from IoT experts."
 
       - title: "IoT for Beginners: Wio Terminal Hackathon - Part 2"
-        id: iKqYoOVTHLs
+        id: G2L81UGfqnI
         description: "During this event, you will be introduced to the Internet of Things, and learn the basic concepts including building your first WioTerminal IoT project connecting to the cloud. Find out what Microsoft employees will be hacking for the annual Hackathon event later in October. Get a peek behind the curtain and stay after the event for Ask the Expert: IoT and WioTerminal Hackathon to get your questions answered from IoT experts."
 
       - title: "IoT for Beginners: Wio Terminal Hackathon - Part 3"
-        id: goiwqlDwR30
+        id: sQayC7P2ERk
         description: "During this event, you will be introduced to the Internet of Things, and learn the basic concepts including building your first WioTerminal IoT project connecting to the cloud. Find out what Microsoft employees will be hacking for the annual Hackathon event later in October. Get a peek behind the curtain and stay after the event for Ask the Expert: IoT and WioTerminal Hackathon to get your questions answered from IoT experts."
 
       - title: "IoT is Fun for Everyone! (Ugly Sweater Edition)"
@@ -308,9 +308,6 @@ params:
     - title: "Free SDK generation for open source software with Jim Bennett | nickytonline"
       id: JgTiVxZGeeg
       description: "Jim Bennett, Principal Developer Advocate at liblab, joins Nick to discuss free SDK generation for open source software using liblab!"
-    - title: "Impact DevRel Podcast Ep 2: Jim Bennett | Value of DevRel from Big Tech (Microsoft) to Startups"
-      id: zG10GwxqM9A
-      description: Join Joshua Poddoku and Jim Bennett as they unravel the expectations, goals, and business value of Developer Relations across various businesses.
     - title: Coffee and Open Source Conversation - Jim Bennett
       id: NFumJv3f2JY
       description: Jim talks dev rel, career history and more wih Isaac Levin
@@ -335,23 +332,6 @@ params:
       #     image: /images/livestreams/learning-pieces-ben.png
     previous:
       series:
-      - title: Eval Engineering for AI Developers
-        videos:
-          - title: "Lesson 1 - an intro to eval engineering"
-            id: HnDnMFUTj2Y
-            description: "Get an introduction to evals to test and fix your AI applications."
-          - title: "Lesson 2 - add observability to AI"
-            id: aZz3ncrafRw
-            description: "Learn how to add observability to your AI applications."
-          - title: "Lesson 3 - failure analysis"
-            id: lCAfEF_qQgQ
-            description: "Learn how to find, analyze, and categorize AI agent failures."
-          - title: "Lesson 4 - building custom metrics"
-            id: I9jSJ5_MobA
-            description: "Learn how to write custom metrics for evals."
-          - title: "Lesson 5 - evals in your SDLC"
-            id: RMF8tT-wo8U
-            description: "Learn how evala fit into your AI SDLC."
       - title: Learning Pieces for Developers
         videos:
           - title: "Learning Pieces for Developers: JimBobBennett & Ben Dechrai"

@@ -14,7 +14,7 @@ title: "Identifying my daughters toys using AI - Part 1, creating the model"
 ---
 
 
-*Prefer to watch instead of read? - https://youtu.be/3sjInlJcpBs*
+*Prefer to watch instead of read? - https://youtu.be/TETcDLJlWR4*
 
 It's currently just after Christmas, and my 4 year old daughter has received a fair few cuddly toys from Santa. These bring her total collection up to way too many, and like most parents I have a hard time remembering all their names, especially the least favorite ones that rarely come out.
 
