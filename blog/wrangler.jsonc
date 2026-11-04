@@ -9,6 +9,7 @@
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   },
+  "previews": {},
   // Gives each `wrangler versions upload` its own shareable preview URL.
   "preview_urls": true,
   "workers_dev": true,
