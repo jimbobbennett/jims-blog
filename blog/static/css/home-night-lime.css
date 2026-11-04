@@ -19,34 +19,6 @@ body.dark #content > section {
     background: transparent;
 }
 
-body.dark header .navbar {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 18px 24px !important;
-}
-
-body.dark header .navbar .navbar-brand {
-    color: var(--night-lime) !important;
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -.04em;
-}
-
-body.dark header .navbar-nav {
-    gap: 5px;
-}
-
-body.dark header .navbar .nav-link {
-    padding: .5rem .55rem;
-    color: #d0d5da !important;
-    font-size: .84rem;
-}
-
-body.dark header .navbar .nav-link:hover,
-body.dark header .navbar .nav-link:focus {
-    color: var(--night-lime) !important;
-}
-
 body.dark #hero {
     min-height: 0;
     padding: 5rem 0 4.5rem !important;
@@ -600,15 +572,6 @@ body.dark footer {
 }
 
 @media (max-width: 991.98px) {
-    body.dark header .navbar {
-        padding-right: 1.5rem !important;
-        padding-left: 1.5rem !important;
-    }
-
-    body.dark header .navbar-nav {
-        align-items: center;
-        padding-top: .75rem;
-    }
 
     body.dark .latest-posts {
         grid-template-columns: 1fr;
