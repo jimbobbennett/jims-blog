@@ -12,7 +12,7 @@ footer a:hover {
 }
 
 footer #social {
-    padding: 3.5rem 0 !important;
+    padding: 1.5rem 0 !important;
     border-bottom: 1px solid var(--text-secondary-color);
     color: var(--text-color);
 }
