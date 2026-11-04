@@ -11,6 +11,51 @@ footer a:hover {
   color: var(--primary-color) !important;
 }
 
+footer #social {
+    padding: 3.5rem 0 !important;
+    border-bottom: 1px solid var(--text-secondary-color);
+    color: var(--text-color);
+}
+
+footer #social h3 {
+    margin: 0 0 1rem;
+    color: var(--text-color) !important;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .6rem;
+}
+
+.social-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--text-secondary-color);
+    border-radius: .4rem;
+    background: var(--secondary-color);
+    color: var(--text-secondary-color);
+    font-size: 1.15rem;
+    text-decoration: none;
+}
+
+.social-icon-link:hover,
+.social-icon-link:focus-visible {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.social-icon-link:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
 footer .card {
     background-color: var(--secondary-color) !important;
     border-radius: .75rem;
