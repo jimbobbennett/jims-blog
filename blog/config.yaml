@@ -9,6 +9,34 @@ author:
 pagination:
   pagerSize: 12
 
+mediaTypes:
+  text/markdown:
+    suffixes:
+      - md
+
+outputFormats:
+  MARKDOWN:
+    mediaType: text/markdown
+    baseName: index
+    isPlainText: true
+    isHTML: false
+    permalinkable: true
+  LLMS:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
+    isHTML: false
+    notAlternative: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - LLMS
+  page:
+    - HTML
+    - MARKDOWN
+
 markup:
   goldmark:
     renderer:
