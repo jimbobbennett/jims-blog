@@ -101,13 +101,13 @@ Anthropic, writing about [how they built their multi-agent research system](http
 
 > *"Instead of judging whether the agent followed a specific process, evaluate whether it achieved the correct final state."*
 
-Our own guide to [agent-to-agent evaluation](https://arize.com/glossary/agent-to-agent-evaluation/) argues the other way: *"Evaluate each handoff at the point of transfer, not only at the final outcome."* It makes the case that *"multi-agent failures usually are not reasoning failures. They are interface failures,"* and that debugging means you *"walk the trace forward and find the first hop where the input was sufficient and the output was not."*
+A guide from an LLM observability provider argues the other way: *"Evaluate each handoff at the point of transfer, not only at the final outcome."* It makes the case that *"multi-agent failures usually are not reasoning failures. They are interface failures,"* and that debugging means you *"walk the trace forward and find the first hop where the input was sufficient and the output was not."*
 
 The chicken shows why you need both. Checking the final state tells you *that* something went wrong: Noor's hunger bar is still at 4. Tracing each handoff tells you *where*: the chicken left Ada, the tool logged it as picked up, and it landed in Esme's inventory. The end-state check alone gives you a hungry agent and no explanation. The per-hop trace alone gives you a hop that looks successful, because the tool said so.
 
 The fix is to make each handoff check read the recipient's state, which is exactly what the colony did. In practice that means a few things:
 
-- **Trace every handoff as its own span.** The sender, the intended recipient, the payload, and what the sender's tools reported. If you can't see the hop, you can't find the first bad one. The [Arize AX tracing and evaluation guide for agents](https://arize.com/resources/ai-agent-tracing-evaluation/) covers how to structure spans, traces and sessions for this.
+- **Trace every handoff as its own span.** The sender, the intended recipient, the payload, and what the sender's tools reported. If you can't see the hop, you can't find the first bad one.
 - **Record the receipt from the other side.** The recipient's next span should show what it actually got. In the colony's terms, Noor's inventory, not Ada's tool output. For your agents that might be the file the sub-agent actually wrote, the row that landed in the database, or the ticket status after the update.
 - **Evaluate the gap between the two.** An eval that compares "sender says delivered" with "recipient state shows received" catches the chicken. One that only reads the sender's report never will.
 - **Keep the final-state check as well.** It's what tells you to go looking in the first place.
