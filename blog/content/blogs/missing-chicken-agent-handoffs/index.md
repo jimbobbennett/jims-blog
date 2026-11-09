@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-11-09T07:00:00-08:00
 publishDate: 2026-11-09T07:00:00-08:00
 description: "In a 50-agent Minecraft colony, Ada threw a chicken to Noor, Esme ate it, and the ledger nearly marked Noor as fed. Why multi-agent handoff reports are claims, not proof, and how to check the recipient's state with traces and evals."
-draft: true
+draft: false
 slug: "missing-chicken-agent-handoffs"
 title: "The missing chicken - why you need to check handoffs between AI agents"
 tags: ["ai", "llm", "agents", "multi-agent", "observability", "tracing", "evals", "games"]
