@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-11-18T07:00:00-08:00
 publishDate: 2026-11-18T07:00:00-08:00
 description: "Before LLMs we had small task models like LUIS that handed back a label and a score. Then we used one giant LLM for everything. Now DiffusionGemma, Jev, Clef and Clairic are swinging us back to specialised models, and this time they'll run on hardware you already own."
-draft: true
+draft: false
 slug: "small-models-are-back"
 title: "Small models are back, and they're coming to your devices"
 tags: ["ai", "llm", "small-models", "on-device", "system-one", "luis", "diffusion"]
