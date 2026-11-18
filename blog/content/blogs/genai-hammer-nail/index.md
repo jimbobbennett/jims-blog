@@ -2,27 +2,27 @@
 author: "Jim Bennett"
 date: 2026-09-21
 publishDate: 2026-09-21
-description: "jev looks like a shiny new decision model, but strip away the calibration and it's intent classification, a problem we solved cheaply a decade ago. Meanwhile the big vendors are retiring fast, deterministic tools like Microsoft LUIS for general LLMs and paying a token tax on every request. Match the tool to the job."
+description: "Jev looks like a shiny new decision model, but strip away the calibration and it's intent classification, a problem we solved cheaply a decade ago. Meanwhile the big vendors are retiring fast, deterministic tools like Microsoft LUIS for general LLMs and paying a token tax on every request. Match the tool to the job."
 draft: false
 slug: "genai-hammer-nail"
-title: "When everything looks like a nail: jev, intent detection, and everything old is new again"
+title: "When everything looks like a nail: Jev, intent detection, and everything old is new again"
 tags: ["ai", "llm", "intent-detection", "evals", "cost", "agents"]
 
 image: /blogs/genai-hammer-nail/cover.png
 featured_image: cover.png
 ---
 
-I've been watching a small model launch bounce around my feed this week, and it sent me down a rabbit hole thinking about how we build things now, and how we did in the past. The model is called [jev](https://www.theneuron.ai/explainer-articles/typesafe-jev-system-one-models-explained/), from a company called TypeSafe, and my first reaction was "wait, didn't we already know how to do this?"
+I've been watching a small model launch bounce around my feed this week, and it sent me down a rabbit hole thinking about how we build things now, and how we did in the past. The model is called [Jev](https://www.theneuron.ai/explainer-articles/typesafe-jev-system-one-models-explained/), from a company called TypeSafe, and my first reaction was "wait, didn't we already know how to do this?"
 
 Turns out we did. We just forgot, because we've all been holding the same shiny hammer for three years.
 
 ## The model that doesn't talk
 
-jev shipped on 15 September 2026, and TypeSafe put it in a category they're calling "System One." The pitch is simple: it doesn't generate text. You hand it a situation and a list of questions with a fixed set of allowed answers, and it hands back a typed answer for each one, with a probability attached, all in a single pass. Fraud or not fraud. Route to billing or route to support. Escalate or don't.
+Jev shipped on 15 September 2026, and TypeSafe put it in a category they're calling "System One." The pitch is simple: it doesn't generate text. You hand it a situation and a list of questions with a fixed set of allowed answers, and it hands back a typed answer for each one, with a probability attached, all in a single pass. Fraud or not fraud. Route to billing or route to support. Escalate or don't.
 
 The numbers TypeSafe quote are eye-watering: 70 to 500ms, somewhere between 40 and 200 times faster than a general LLM doing the same job, and 40 to 400 times cheaper. Those are vendor numbers with no independent benchmarks yet, so pinch of salt. But the interesting bit isn't the speed. It's the calibration. The model is trained so that a 90% really means 90% and a 55% really means 55%, which means you can actually threshold on it. As [Laurie Voss put it](https://www.linkedin.com/pulse/typesafes-jev-change-how-we-build-ai-applications-laurie-voss-tkp7c/), *"A model that's right 95% of the time but can't tell you when it's in the other 5% can't automate anything."*
 
-Strip away the calibration and the zero-shot flexibility, and jev is doing intent classification. Take some input, sort it into one of a fixed set of buckets, tell me how confident you are. That's a problem we solved cheaply and well over a decade ago.
+Strip away the calibration and the zero-shot flexibility, and Jev is doing intent classification. Take some input, sort it into one of a fixed set of buckets, tell me how confident you are. That's a problem we solved cheaply and well over a decade ago.
 
 ## The tax nobody mentions
 
@@ -38,7 +38,7 @@ The odd part is how much effort the industry now pours into clawing that money b
 
 ## The whole industry is walking the wrong way
 
-![Two opposing currents drawn as lanes on a cost axis. The drift lane, higher runtime cost, shows Microsoft LUIS, Google Dialogflow, IBM and AWS all flowing into one big LLM. The counter-current lane, lower runtime cost, shows jev, Rasa CALM, spaCy, code evals and cheap-model routing.](/blogs/genai-hammer-nail/two-currents.png)
+![Two opposing currents drawn as lanes on a cost axis. The drift lane, higher runtime cost, shows Microsoft LUIS, Google Dialogflow, IBM and AWS all flowing into one big LLM. The counter-current lane, lower runtime cost, shows Jev, Rasa CALM, spaCy, code evals and cheap-model routing.](/blogs/genai-hammer-nail/two-currents.png)
 
 It's not just that individual teams reach for the LLM by reflex. The big vendors are actively retiring the right tool for the job because the hammer is more fashionable.
 
@@ -50,7 +50,7 @@ Notice the pattern in how it's justified. The reason is almost always setup effo
 
 ## And a few people rowing the other way
 
-So jev is interesting not because it's novel, but because of when it launched. It arrived pointing straight into that current, saying purpose-built decision models still have a place. And it's not alone.
+So Jev is interesting not because it's novel, but because of when it launched. It arrived pointing straight into that current, saying purpose-built decision models still have a place. And it's not alone.
 
 [Rasa](https://rasa.com/nlu) built DIET, one of the canonical open-source intent classifiers, and their newer approach leans on language models for dialogue. But their actual advice is the sane one: *"Keep NLU where it is working well, and opt for language models when you need more powerful dialogue understanding."* Classify with the cheap deterministic thing, fall back to the LLM only when confidence is low. That's basically the whole argument of this post, coming from a vendor who sells both.
 
@@ -78,6 +78,6 @@ The failure isn't using the hammer. The hammer is brilliant. The failure is pick
 
 ## Pick the tool, not the trend
 
-That's the whole thing, really. There are two currents running in opposite directions right now. One is the whole industry quietly retiring cheap, fast, deterministic tools because the general model is what everyone's excited about. The other is a handful of people, and now a model called jev, pointing out that a lot of what we do is discrete decisions that never needed a text generator.
+That's the whole thing, really. There are two currents running in opposite directions right now. One is the whole industry quietly retiring cheap, fast, deterministic tools because the general model is what everyone's excited about. The other is a handful of people, and now a model called Jev, pointing out that a lot of what we do is discrete decisions that never needed a text generator.
 
 Every LLM call you don't make is money you don't spend, latency you don't wait for, and a non-deterministic answer you don't have to debug at 2am. And when you do need a model, you can still reach for a cheaper one. So next time you reach for the model, have a look at the problem first. If it's a nail, there are cheaper, faster, more reliable ways to hit it. Some of them have been sitting in the toolbox for over a decade.
