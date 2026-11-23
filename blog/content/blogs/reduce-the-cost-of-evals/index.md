@@ -3,7 +3,7 @@ author: "Jim Bennett"
 date: 2026-11-23T07:00:00-08:00
 publishDate: 2026-11-23T07:00:00-08:00
 description: "Engineers told me they'd stopped running evals because of the cost. I spent about $84 testing 8 ways to cut eval cost, from code checks and sampling to trimming traces, decision models and cheaper judges. Some came out 600x cheaper for similar accuracy."
-draft: true
+draft: false
 slug: "reduce-the-cost-of-evals"
 title: "8 ways to reduce the cost of evals"
 tags: ["ai", "llm", "evals", "llm-as-a-judge", "cost", "agents", "arize"]
