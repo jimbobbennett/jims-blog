@@ -226,6 +226,11 @@ params:
   
   videos:
     series:
+    - title: "CodeTV"
+      videos:
+      - title: "Control the Web with Hardware Sensors • Web Dev Challenge S3.E8"
+        id: WmQr_Yvv7-0
+        description: "Control the web with hardware sensors in this episode of the Web Dev Challenge."
     - title: "The AI Smiths"
       videos:
       - title: Why Every AI Company Needs an AI to Test Their AI
